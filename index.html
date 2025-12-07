@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transform & Elevate - IT Consulting & Leadership Development</title>
+    <title>Transform & Elevate - AI-Powered IT Consulting & Leadership</title>
     <style>
         * {
             margin: 0;
@@ -12,323 +12,574 @@
         }
         
         :root {
-            --primary: #2563eb;
-            --secondary: #7c3aed;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --accent: #06b6d4;
+            --bg-dark: #0a0a0f;
+            --bg-card: #13131a;
+            --accent-1: #00f5ff;
+            --accent-2: #7c3aed;
+            --accent-3: #ff006e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --gradient-1: linear-gradient(135deg, #00f5ff 0%, #7c3aed 100%);
+            --gradient-2: linear-gradient(135deg, #7c3aed 0%, #ff006e 100%);
+            --gradient-3: linear-gradient(135deg, #00f5ff 0%, #ff006e 100%);
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: var(--dark);
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
         
-        nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        .bg-gradient {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .bg-gradient-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-1);
+            top: -200px;
+            left: -200px;
+        }
+        
+        .bg-gradient-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-2);
+            top: 50%;
+            right: -150px;
+            animation-delay: -5s;
+        }
+        
+        .bg-gradient-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-3);
+            bottom: -100px;
+            left: 30%;
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
         }
         
         nav .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 20px;
+            padding: 20px 24px;
         }
         
         .logo {
             font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-weight: 700;
+            background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
         
         nav a {
             text-decoration: none;
-            color: var(--dark);
+            color: var(--text-secondary);
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
         }
         
         nav a:hover {
-            color: var(--primary);
+            color: var(--accent-1);
         }
         
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 100px 0;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 120px 0 80px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
         }
         
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: white;
-            color: var(--primary);
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            padding: 16px 40px;
+            background: var(--gradient-1);
+            color: var(--bg-dark);
             text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            padding: 16px 40px;
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent-1);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        
+        /* Section Styles */
+        section {
+            position: relative;
+            padding: 120px 0;
+            z-index: 1;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
             border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .services {
-            padding: 80px 0;
-            background: var(--light);
+            color: var(--accent-1);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--dark);
-        }
-        
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .service-card h3 {
-            color: var(--primary);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            letter-spacing: -1px;
         }
         
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
         }
         
-        .blog {
-            padding: 80px 0;
-        }
-        
-        .blog-grid {
+        /* Services Grid */
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
         
-        .blog-card {
-            background: white;
-            border-radius: 10px;
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .service-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 245, 255, 0.3);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .blog-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(124, 58, 237, 0.5);
         }
         
         .blog-image {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            height: 240px;
+            background: var(--gradient-2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, var(--bg-card), transparent);
         }
         
         .blog-content {
-            padding: 1.5rem;
-        }
-        
-        .blog-card h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
+            padding: 2rem;
         }
         
         .blog-meta {
-            color: #64748b;
-            font-size: 0.9rem;
+            color: var(--accent-1);
+            font-size: 0.85rem;
             margin-bottom: 1rem;
+            font-weight: 500;
         }
         
+        .blog-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .blog-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* Quiz Section */
         .quiz {
-            padding: 80px 0;
-            background: var(--light);
-        }
-        
-        .quiz-container {
-            max-width: 700px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 4rem;
+            max-width: 900px;
             margin: 0 auto;
-            background: white;
-            padding: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .quiz-question {
+        .quiz h3 {
+            font-size: 1.8rem;
             margin-bottom: 2rem;
         }
         
         .quiz-options {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 1rem;
+            margin-bottom: 2rem;
         }
         
         .quiz-option {
-            padding: 1rem;
-            background: var(--light);
-            border: 2px solid transparent;
-            border-radius: 8px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 1.05rem;
         }
         
         .quiz-option:hover {
-            border-color: var(--primary);
-            background: white;
+            border-color: var(--accent-1);
+            background: rgba(0, 245, 255, 0.05);
         }
         
-        .quiz-button {
+        .quiz-option.selected {
+            border-color: var(--accent-1);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        
+        #quiz-result {
             margin-top: 2rem;
-            padding: 12px 30px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
+            padding: 2rem;
+            background: rgba(0, 245, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 12px;
         }
         
-        .courses {
-            padding: 80px 0;
+        #quiz-result h3 {
+            color: var(--accent-1);
+            margin-bottom: 1rem;
         }
         
-        .course-grid {
+        /* Courses Grid */
+        .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
         
         .course-card {
-            background: white;
-            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 0, 110, 0.5);
         }
         
         .course-image {
             width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            height: 200px;
+            background: var(--gradient-3);
+            position: relative;
+        }
+        
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 6px 16px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
         
         .course-content {
-            padding: 1.5rem;
+            padding: 2rem;
+        }
+        
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .course-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
         
         .course-price {
-            font-size: 1.8rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin: 1rem 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
         }
         
         .buy-button {
             width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
+            padding: 14px;
+            background: var(--gradient-1);
+            color: var(--bg-dark);
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
             cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
         
         .buy-button:hover {
-            background: var(--secondary);
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.3);
         }
         
-        .contact {
-            padding: 80px 0;
-            background: var(--light);
-        }
-        
+        /* Contact Form */
         .contact-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
             font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-1);
+            background: rgba(255, 255, 255, 0.08);
         }
         
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 150px;
         }
         
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-        
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -336,48 +587,92 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
             justify-content: center;
             align-items: center;
         }
         
         .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 550px;
             width: 90%;
+            position: relative;
         }
         
         .close-modal {
-            float: right;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
             font-size: 2rem;
             cursor: pointer;
-            color: #64748b;
+            color: var(--text-secondary);
+            transition: color 0.3s;
         }
         
+        .close-modal:hover {
+            color: var(--accent-3);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        footer p {
+            color: var(--text-secondary);
+            margin: 0.5rem 0;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+            nav ul {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            nav ul {
-                flex-wrap: wrap;
-                gap: 1rem;
-                justify-content: center;
+            .services-grid,
+            .blog-grid,
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quiz {
+                padding: 2rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient bg-gradient-1"></div>
+        <div class="bg-gradient bg-gradient-2"></div>
+        <div class="bg-gradient bg-gradient-3"></div>
+    </div>
+
+    <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="logo">Transform & Elevate</div>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#blog">Blog</a></li>
+                <li><a href="#blog">Insights</a></li>
                 <li><a href="#quiz">Quiz</a></li>
                 <li><a href="#courses">Courses</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -385,171 +680,220 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <h1>Transform Your Business & Leadership</h1>
-            <p>Expert IT Consulting & Personal Development Solutions</p>
-            <a href="#contact" class="cta-button">Get Started Today</a>
-        </div>
-    </section>
-
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3>IT Consulting</h3>
-                    <p>Strategic technology solutions to optimize your business operations, cloud migration, cybersecurity, and digital transformation.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>Leadership Development</h3>
-                    <p>Executive coaching and leadership training programs designed to unlock your full potential and drive organizational success.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>Personal Growth</h3>
-                    <p>Customized personal development strategies, mindset coaching, and performance optimization for professionals.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <h3>Business Strategy</h3>
-                    <p>Data-driven business consulting to scale your operations, improve efficiency, and achieve sustainable growth.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎓</div>
-                    <h3>Training Programs</h3>
-                    <p>Comprehensive training courses in technology, leadership, and professional development for teams and individuals.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🤝</div>
-                    <h3>Team Building</h3>
-                    <p>Workshops and programs to enhance team collaboration, communication, and organizational culture.</p>
+            <div class="hero-content">
+                <h1>Transform Your Future with AI-Powered Solutions</h1>
+                <p class="subtitle">Next-generation IT consulting and leadership development powered by cutting-edge technology and human expertise</p>
+                <div class="cta-group">
+                    <a href="#contact" class="btn-primary">Get Started</a>
+                    <a href="#courses" class="btn-secondary">Explore Courses</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="blog" class="blog">
+    <!-- Services Section -->
+    <section id="services">
         <div class="container">
-            <h2 class="section-title">Latest Insights</h2>
+            <div class="section-header">
+                <span class="section-tag">What We Offer</span>
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-description">Comprehensive solutions designed to elevate your business and leadership capabilities</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🤖</span>
+                    <h3>AI-Powered IT Consulting</h3>
+                    <p>Leverage artificial intelligence and machine learning to optimize operations, automate workflows, and drive digital transformation at scale.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🎯</span>
+                    <h3>Executive Leadership</h3>
+                    <p>Data-driven leadership programs combining behavioral science with AI insights to unlock your full potential and organizational impact.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🚀</span>
+                    <h3>Personal Growth</h3>
+                    <p>Personalized development pathways using advanced analytics to identify strengths, optimize performance, and achieve breakthrough results.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">📊</span>
+                    <h3>Strategic Innovation</h3>
+                    <p>Future-proof your business with predictive analytics, market intelligence, and strategic frameworks for sustainable competitive advantage.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">⚡</span>
+                    <h3>Tech Training</h3>
+                    <p>Cutting-edge training in AI, cloud computing, cybersecurity, and emerging technologies to keep your team ahead of the curve.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🌐</span>
+                    <h3>Digital Transformation</h3>
+                    <p>End-to-end transformation services from legacy modernization to cloud-native architectures and intelligent automation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Knowledge Hub</span>
+                <h2 class="section-title">Latest Insights</h2>
+                <p class="section-description">Expert perspectives on technology, leadership, and innovation</p>
+            </div>
             <div class="blog-grid">
                 <div class="blog-card">
                     <div class="blog-image"></div>
                     <div class="blog-content">
-                        <h3>The Future of Cloud Computing in 2025</h3>
-                        <div class="blog-meta">December 5, 2025 • 5 min read</div>
-                        <p>Explore emerging trends in cloud technology and how businesses can leverage them for competitive advantage...</p>
+                        <div class="blog-meta">Dec 5, 2025 • 5 min read</div>
+                        <h3>The AI Revolution in Cloud Computing</h3>
+                        <p>Discover how artificial intelligence is reshaping cloud infrastructure and creating unprecedented opportunities for business innovation...</p>
                     </div>
                 </div>
                 <div class="blog-card">
                     <div class="blog-image"></div>
                     <div class="blog-content">
-                        <h3>5 Leadership Principles for Modern Leaders</h3>
-                        <div class="blog-meta">December 3, 2025 • 7 min read</div>
-                        <p>Discover the essential leadership qualities that drive success in today's rapidly changing business environment...</p>
+                        <div class="blog-meta">Dec 3, 2025 • 7 min read</div>
+                        <h3>Leadership in the Age of AI</h3>
+                        <p>Essential principles for leading high-performing teams in an AI-augmented workplace and navigating rapid technological change...</p>
                     </div>
                 </div>
                 <div class="blog-card">
                     <div class="blog-image"></div>
                     <div class="blog-content">
-                        <h3>Personal Development: Building Resilience</h3>
-                        <div class="blog-meta">November 28, 2025 • 6 min read</div>
-                        <p>Learn practical strategies to develop mental resilience and thrive in challenging situations...</p>
+                        <div class="blog-meta">Nov 28, 2025 • 6 min read</div>
+                        <h3>Building Resilience Through Technology</h3>
+                        <p>Practical strategies for developing mental resilience and leveraging technology to thrive in uncertain, fast-paced environments...</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="quiz" class="quiz">
+    <!-- Quiz Section -->
+    <section id="quiz">
         <div class="container">
-            <h2 class="section-title">Discover Your Leadership Style</h2>
-            <div class="quiz-container">
-                <div class="quiz-question">
-                    <h3>What's your approach to team challenges?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="selectOption(this)">A) Analyze data and create a strategic plan</div>
-                        <div class="quiz-option" onclick="selectOption(this)">B) Gather team input and collaborate on solutions</div>
-                        <div class="quiz-option" onclick="selectOption(this)">C) Take decisive action and lead by example</div>
-                        <div class="quiz-option" onclick="selectOption(this)">D) Mentor team members to solve it themselves</div>
+            <div class="section-header">
+                <span class="section-tag">Self Assessment</span>
+                <h2 class="section-title">Discover Your Leadership DNA</h2>
+                <p class="section-description">AI-powered assessment to identify your unique leadership style</p>
+            </div>
+            <div class="quiz">
+                <h3>What's your approach to team challenges?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)">
+                        <strong>A)</strong> Analyze data and create a strategic plan
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this)">
+                        <strong>B)</strong> Gather team input and collaborate on solutions
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this)">
+                        <strong>C)</strong> Take decisive action and lead by example
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this)">
+                        <strong>D)</strong> Mentor team members to solve it themselves
                     </div>
                 </div>
-                <button class="quiz-button" onclick="submitQuiz()">Get My Results</button>
-                <div id="quiz-result" style="margin-top: 2rem; display: none;">
-                    <h3 style="color: var(--primary);">Your Leadership Style: Strategic Visionary</h3>
-                    <p>You excel at long-term planning and data-driven decision making. Consider our Executive Leadership course to enhance your skills!</p>
+                <button class="btn-primary" onclick="submitQuiz()">Get My Results</button>
+                <div id="quiz-result" style="display: none;">
+                    <h3>Your Leadership Style: Strategic Visionary</h3>
+                    <p>You excel at long-term planning and data-driven decision making. Your analytical mindset combined with strategic thinking makes you a natural innovator. Consider our Executive Leadership Program to amplify your impact!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="courses" class="courses">
+    <!-- Courses Section -->
+    <section id="courses">
         <div class="container">
-            <h2 class="section-title">Featured Courses</h2>
-            <div class="course-grid">
+            <div class="section-header">
+                <span class="section-tag">Learn & Grow</span>
+                <h2 class="section-title">Premium Courses</h2>
+                <p class="section-description">Transform your career with industry-leading programs</p>
+            </div>
+            <div class="courses-grid">
                 <div class="course-card">
-                    <div class="course-image"></div>
+                    <div class="course-image">
+                        <span class="course-badge">Bestseller</span>
+                    </div>
                     <div class="course-content">
-                        <h3>Cloud Architecture Mastery</h3>
-                        <p>Comprehensive training on AWS, Azure, and GCP cloud platforms with hands-on projects.</p>
+                        <h3>AI & Cloud Architecture</h3>
+                        <p>Master AWS, Azure, and GCP with AI integration, serverless computing, and intelligent automation.</p>
                         <div class="course-price">$499</div>
-                        <button class="buy-button" onclick="openPayment('Cloud Architecture Mastery', 499)">Enroll Now</button>
+                        <button class="buy-button" onclick="openPayment('AI & Cloud Architecture', 499)">Enroll Now</button>
                     </div>
                 </div>
                 <div class="course-card">
-                    <div class="course-image"></div>
+                    <div class="course-image">
+                        <span class="course-badge">Premium</span>
+                    </div>
                     <div class="course-content">
                         <h3>Executive Leadership Program</h3>
-                        <p>Transform your leadership skills with proven frameworks and real-world case studies.</p>
+                        <p>Transform your leadership with AI-powered insights, behavioral science, and proven frameworks.</p>
                         <div class="course-price">$799</div>
                         <button class="buy-button" onclick="openPayment('Executive Leadership Program', 799)">Enroll Now</button>
                     </div>
                 </div>
                 <div class="course-card">
-                    <div class="course-image"></div>
+                    <div class="course-image">
+                        <span class="course-badge">Popular</span>
+                    </div>
                     <div class="course-content">
-                        <h3>Personal Productivity Bootcamp</h3>
-                        <p>Master time management, goal setting, and peak performance strategies.</p>
+                        <h3>Peak Performance Mastery</h3>
+                        <p>Optimize productivity, master time management, and achieve breakthrough results with science-backed methods.</p>
                         <div class="course-price">$299</div>
-                        <button class="buy-button" onclick="openPayment('Personal Productivity Bootcamp', 299)">Enroll Now</button>
+                        <button class="buy-button" onclick="openPayment('Peak Performance Mastery', 299)">Enroll Now</button>
                     </div>
                 </div>
                 <div class="course-card">
-                    <div class="course-image"></div>
+                    <div class="course-image">
+                        <span class="course-badge">Essential</span>
+                    </div>
                     <div class="course-content">
-                        <h3>Cybersecurity Fundamentals</h3>
-                        <p>Essential security practices, threat detection, and risk management for businesses.</p>
+                        <h3>AI-Powered Cybersecurity</h3>
+                        <p>Advanced security practices, threat intelligence, and AI-driven defense strategies for modern enterprises.</p>
                         <div class="course-price">$399</div>
-                        <button class="buy-button" onclick="openPayment('Cybersecurity Fundamentals', 399)">Enroll Now</button>
+                        <button class="buy-button" onclick="openPayment('AI-Powered Cybersecurity', 399)">Enroll Now</button>
                     </div>
                 </div>
                 <div class="course-card">
-                    <div class="course-image"></div>
+                    <div class="course-image">
+                        <span class="course-badge">Trending</span>
+                    </div>
                     <div class="course-content">
-                        <h3>Agile Project Management</h3>
-                        <p>Learn Scrum, Kanban, and agile methodologies to deliver projects efficiently.</p>
+                        <h3>Agile & DevOps Excellence</h3>
+                        <p>Master Scrum, Kanban, CI/CD pipelines, and modern software delivery practices.</p>
                         <div class="course-price">$349</div>
-                        <button class="buy-button" onclick="openPayment('Agile Project Management', 349)">Enroll Now</button>
+                        <button class="buy-button" onclick="openPayment('Agile & DevOps Excellence', 349)">Enroll Now</button>
                     </div>
                 </div>
                 <div class="course-card">
-                    <div class="course-image"></div>
+                    <div class="course-image">
+                        <span class="course-badge">New</span>
+                    </div>
                     <div class="course-content">
-                        <h3>Emotional Intelligence for Leaders</h3>
-                        <p>Develop self-awareness, empathy, and relationship management skills.</p>
+                        <h3>Emotional Intelligence 2.0</h3>
+                        <p>Develop self-awareness, empathy, and relationship mastery for exceptional leadership impact.</p>
                         <div class="course-price">$449</div>
-                        <button class="buy-button" onclick="openPayment('Emotional Intelligence for Leaders', 449)">Enroll Now</button>
+                        <button class="buy-button" onclick="openPayment('Emotional Intelligence 2.0', 449)">Enroll Now</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <!-- Contact Section -->
+    <section id="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <div class="section-header">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-description">Ready to transform your business? We're here to help</p>
+            </div>
             <form class="contact-form" onsubmit="handleContact(event)">
                 <div class="form-group">
                     <label>Name</label>
@@ -561,17 +905,18 @@
                 </div>
                 <div class="form-group">
                     <label>Message</label>
-                    <textarea required placeholder="How can we help you?"></textarea>
+                    <textarea required placeholder="Tell us about your project or goals..."></textarea>
                 </div>
-                <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+                <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
             </form>
         </div>
     </section>
 
+    <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closePayment()">&times;</span>
-            <h2>Complete Your Purchase</h2>
+            <h2>Complete Your Enrollment</h2>
             <div id="payment-details" style="margin: 2rem 0;"></div>
             <form onsubmit="processPayment(event)">
                 <div class="form-group">
@@ -588,15 +933,16 @@
                         <input type="text" placeholder="123" required>
                     </div>
                 </div>
-                <button type="submit" class="cta-button" style="width: 100%;">Pay Now</button>
+                <button type="submit" class="btn-primary" style="width: 100%;">Complete Payment</button>
             </form>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 Transform & Elevate. All rights reserved.</p>
-            <p>Empowering businesses and leaders to reach their full potential.</p>
+            <p>Empowering the future of business and leadership through AI and innovation.</p>
         </div>
     </footer>
 
@@ -606,11 +952,9 @@
 
         function selectOption(element) {
             document.querySelectorAll('.quiz-option').forEach(opt => {
-                opt.style.background = 'var(--light)';
-                opt.style.borderColor = 'transparent';
+                opt.classList.remove('selected');
             });
-            element.style.background = 'white';
-            element.style.borderColor = 'var(--primary)';
+            element.classList.add('selected');
         }
 
         function submitQuiz() {
@@ -621,8 +965,8 @@
             selectedCourse = course;
             coursePrice = price;
             document.getElementById('payment-details').innerHTML = `
-                <h3>${course}</h3>
-                <p style="font-size: 2rem; color: var(--primary); font-weight: bold;">$${price}</p>
+                <h3 style="margin-bottom: 1rem;">${course}</h3>
+                <p style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$${price}</p>
             `;
             document.getElementById('paymentModal').style.display = 'flex';
         }
@@ -633,13 +977,13 @@
 
         function processPayment(e) {
             e.preventDefault();
-            alert(`Payment successful! You're enrolled in ${selectedCourse}. Check your email for course access.`);
+            alert(`🎉 Payment successful! You're enrolled in ${selectedCourse}. Check your email for course access and next steps.`);
             closePayment();
         }
 
         function handleContact(e) {
             e.preventDefault();
-            alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+            alert('✅ Thank you for your message! Our team will get back to you within 24 hours.');
             e.target.reset();
         }
 
@@ -648,7 +992,7 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
