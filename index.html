@@ -795,6 +795,12 @@
             font-style: italic;
             color: var(--accent-1);
         }
+
+        .service-detail a {
+            color: var(--accent-1);
+            text-decoration: underline;
+            cursor: pointer;
+        }
         
         /* Footer */
         footer {
@@ -940,32 +946,32 @@
                 <p class="section-description">Every service is designed to deliver measurable value—no unnecessary complexity, just results that matter</p>
             </div>
             <div class="services-grid">
-                <div class="service-card" onclick="openService('service1')">
+                <div class="service-card" onclick="openService(1)">
                     <span class="service-icon">💎</span>
                     <h3>High-Value IT Solutions</h3>
                     <p>Strategic technology implementations that directly impact your bottom line. Cloud optimization, automation, and digital transformation focused on ROI, not buzzwords.</p>
                 </div>
-                <div class="service-card" onclick="openService('service2')">
+                <div class="service-card" onclick="openService(2)">
                     <span class="service-icon">🎯</span>
                     <h3>Results-Driven Leadership</h3>
                     <p>Executive coaching stripped of theory, focused on practical frameworks that create immediate impact. Build leadership capabilities that translate to measurable team performance.</p>
                 </div>
-                <div class="service-card" onclick="openService('service3')">
+                <div class="service-card" onclick="openService(3)">
                     <span class="service-icon">⚡</span>
                     <h3>Performance Optimization</h3>
                     <p>Data-backed strategies to maximize individual and organizational performance. Cut through the noise with proven methods that deliver consistent results.</p>
                 </div>
-                <div class="service-card" onclick="openService('service4')">
+                <div class="service-card" onclick="openService(4)">
                     <span class="service-icon">📈</span>
                     <h3>Strategic Growth Consulting</h3>
                     <p>Business strategy focused on sustainable, profitable growth. We help you identify high-value opportunities and execute with precision.</p>
                 </div>
-                <div class="service-card" onclick="openService('service5')">
+                <div class="service-card" onclick="openService(5)">
                     <span class="service-icon">🛡️</span>
                     <h3>Essential Tech Training</h3>
                     <p>Skills development that matters. Training programs in AI, cloud, and cybersecurity designed for immediate application and career advancement.</p>
                 </div>
-                <div class="service-card" onclick="openService('service6')">
+                <div class="service-card" onclick="openService(6)">
                     <span class="service-icon">🚀</span>
                     <h3>Efficient Transformation</h3>
                     <p>Streamlined digital transformation without the bloat. We modernize your operations efficiently, delivering value at every stage of the journey.</p>
@@ -983,7 +989,7 @@
                 <p class="section-description">No filler content. Every article delivers practical insights you can implement immediately</p>
             </div>
             <div class="blog-grid">
-                <div class="blog-card" onclick="openBlog('blog1')">
+                <div class="blog-card" onclick="openBlog(1)">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 5 min read</div>
@@ -991,7 +997,7 @@
                         <p>Practical strategies to reduce cloud spending while maintaining performance. Real examples from actual implementations.</p>
                     </div>
                 </div>
-                <div class="blog-card" onclick="openBlog('blog2')">
+                <div class="blog-card" onclick="openBlog(2)">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 7 min read</div>
@@ -999,7 +1005,7 @@
                         <p>Skip the theory. Five leadership principles that consistently improve team performance across industries.</p>
                     </div>
                 </div>
-                <div class="blog-card" onclick="openBlog('blog3')">
+                <div class="blog-card" onclick="openBlog(3)">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 6 min read</div>
@@ -1189,7 +1195,7 @@
     <!-- Service Detail Modal -->
     <div id="serviceModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeService()">&times;</span>
+            <span class="close-modal" onclick="closeModal('serviceModal')">&times;</span>
             <div id="service-detail-content" class="service-detail"></div>
         </div>
     </div>
@@ -1197,7 +1203,7 @@
     <!-- Blog Modal -->
     <div id="blogModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeBlog()">&times;</span>
+            <span class="close-modal" onclick="closeModal('blogModal')">&times;</span>
             <div id="blog-article-content" class="blog-article"></div>
         </div>
     </div>
@@ -1205,7 +1211,7 @@
     <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closePayment()">&times;</span>
+            <span class="close-modal" onclick="closeModal('paymentModal')">&times;</span>
             <h2>Invest in Value</h2>
             <div id="payment-details" style="margin: 2rem 0;"></div>
             <form onsubmit="processPayment(event)">
@@ -1237,30 +1243,348 @@
         </div>
     </footer>
 
-    <script src="content.js"></script>
     <script>
         let selectedCourse = '';
         let coursePrice = 0;
 
-        function openService(serviceId) {
-            document.getElementById('service-detail-content').innerHTML = serviceDetails[serviceId];
+        // Service content data
+        const services = {
+            1: {
+                title: "💎 High-Value IT Solutions",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Strategic technology implementations that deliver measurable ROI</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Technology should drive business value, not create complexity. Our IT solutions focus on implementations that directly impact your bottom line.</p>
+                    
+                    <h2>Core Services</h2>
+                    <h3>Cloud Optimization & Migration</h3>
+                    <ul>
+                        <li><strong>Cost Reduction:</strong> Typical savings of 30-45% through right-sizing and optimization</li>
+                        <li><strong>Performance Improvement:</strong> Architecture reviews for better response times</li>
+                        <li><strong>Migration Strategy:</strong> Phased approach minimizing risk</li>
+                    </ul>
+                    
+                    <h3>Infrastructure Automation</h3>
+                    <ul>
+                        <li><strong>CI/CD Pipelines:</strong> Automated deployment reducing release time by 60-80%</li>
+                        <li><strong>Infrastructure as Code:</strong> Terraform, CloudFormation implementations</li>
+                        <li><strong>Monitoring & Alerting:</strong> Proactive issue detection</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>SaaS Company:</strong> Reduced AWS spend from $62K to $28K monthly (55% reduction) in 60 days</p>
+                    <p><strong>Financial Services:</strong> Deployment time reduced from 4 hours to 15 minutes in 90 days</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Contact us for a free consultation →</a></p>
+                `
+            },
+            2: {
+                title: "🎯 Results-Driven Leadership",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Executive coaching focused on practical frameworks that create immediate impact</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Leadership development stripped of theory and focused on what actually works. Build capabilities that translate to measurable team performance.</p>
+                    
+                    <h2>Core Programs</h2>
+                    <h3>Executive Leadership Coaching</h3>
+                    <ul>
+                        <li><strong>1-on-1 Coaching:</strong> Bi-weekly sessions focused on real challenges</li>
+                        <li><strong>360° Feedback:</strong> Structured input from team and stakeholders</li>
+                        <li><strong>Action Plans:</strong> Specific behaviors to practice</li>
+                    </ul>
+                    
+                    <h3>Team Performance Optimization</h3>
+                    <ul>
+                        <li><strong>Team Assessment:</strong> Identify dynamics affecting performance</li>
+                        <li><strong>Communication Frameworks:</strong> Structured approaches to meetings</li>
+                        <li><strong>Goal Alignment:</strong> Ensure everyone understands priorities</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>Tech VP:</strong> Team velocity increased 35% in 3 months, reduced meeting time by 40%</p>
+                    <p><strong>Product Team:</strong> Feature delivery time reduced from 8 to 5 weeks</p>
+                    
+                    <h2>Investment</h2>
+                    <p><strong>Executive Coaching:</strong> $3,500/month (3-month minimum)</p>
+                    <p><strong>Team Program:</strong> $8,500/month (2-month minimum)</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Schedule your assessment →</a></p>
+                `
+            },
+            3: {
+                title: "⚡ Performance Optimization",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Data-backed strategies to maximize individual and organizational performance</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Performance improvement through systematic analysis and targeted interventions. Identify bottlenecks, implement solutions, measure results.</p>
+                    
+                    <h2>Core Services</h2>
+                    <h3>Individual Performance Coaching</h3>
+                    <ul>
+                        <li><strong>Productivity Assessment:</strong> Analyze how time is currently spent</li>
+                        <li><strong>Custom Systems:</strong> Build workflows that fit your role</li>
+                        <li><strong>Energy Management:</strong> Optimize work around natural patterns</li>
+                    </ul>
+                    
+                    <h3>Team Velocity Improvement</h3>
+                    <ul>
+                        <li><strong>Process Analysis:</strong> Identify waste and bottlenecks</li>
+                        <li><strong>Workflow Optimization:</strong> Streamline handoffs</li>
+                        <li><strong>Meeting Reduction:</strong> Cut unnecessary meetings by 40-60%</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>Product Manager:</strong> Reduced meeting time from 25 to 12 hours/week, 40% improvement in work-life balance</p>
+                    <p><strong>Engineering Team:</strong> Sprint velocity increased from 45 to 68 story points</p>
+                    
+                    <h2>Investment</h2>
+                    <p><strong>Individual Coaching:</strong> $2,500/month (2-month minimum)</p>
+                    <p><strong>Team Program:</strong> $6,500/month (3-month minimum)</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Request your assessment →</a></p>
+                `
+            },
+            4: {
+                title: "📈 Strategic Growth Consulting",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Business strategy focused on sustainable, profitable growth</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Strategic guidance to identify high-value growth opportunities and execute with precision. Focus on sustainable, profitable growth.</p>
+                    
+                    <h2>Core Services</h2>
+                    <h3>Growth Strategy Development</h3>
+                    <ul>
+                        <li><strong>Market Analysis:</strong> Identify underserved segments</li>
+                        <li><strong>Competitive Positioning:</strong> Define unique value proposition</li>
+                        <li><strong>Growth Modeling:</strong> Project scenarios and resources</li>
+                    </ul>
+                    
+                    <h3>Go-to-Market Strategy</h3>
+                    <ul>
+                        <li><strong>Customer Segmentation:</strong> Identify highest-value targets</li>
+                        <li><strong>Channel Strategy:</strong> Most effective acquisition channels</li>
+                        <li><strong>Pricing Strategy:</strong> Optimize for value capture</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>B2B SaaS:</strong> Revenue grew from $2M to $5M ARR in 18 months, improved CAC payback from 18 to 9 months</p>
+                    <p><strong>Professional Services:</strong> New service offering achieved $1.2M revenue in first year</p>
+                    
+                    <h2>Investment</h2>
+                    <p><strong>Growth Strategy:</strong> $8,500/month (3-month minimum)</p>
+                    <p><strong>Go-to-Market:</strong> $6,500/month (2-month minimum)</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Schedule your assessment →</a></p>
+                `
+            },
+            5: {
+                title: "🛡️ Essential Tech Training",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Skills development that matters - training designed for immediate application</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Technical training focused on practical skills you can apply immediately. Hands-on learning that advances careers and delivers value.</p>
+                    
+                    <h2>Core Training Programs</h2>
+                    <h3>Cloud Computing (AWS/Azure/GCP)</h3>
+                    <ul>
+                        <li><strong>Cloud Fundamentals:</strong> Core concepts and architecture</li>
+                        <li><strong>Cost Optimization:</strong> Practical strategies to reduce spending</li>
+                        <li><strong>Security Best Practices:</strong> Implement proper controls</li>
+                    </ul>
+                    
+                    <h3>AI & Machine Learning</h3>
+                    <ul>
+                        <li><strong>AI for Business:</strong> Practical applications</li>
+                        <li><strong>Prompt Engineering:</strong> Get better AI results</li>
+                        <li><strong>Implementation:</strong> Integrate AI into workflows</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>Tech Company:</strong> Trained 25 engineers, reduced cloud spend by $18K/month within 30 days (1,200% ROI)</p>
+                    <p><strong>Startup:</strong> Deployment time reduced from 4 hours to 15 minutes after DevOps training</p>
+                    
+                    <h2>Investment</h2>
+                    <p><strong>Public Workshops:</strong> $1,200 per person (1-2 days)</p>
+                    <p><strong>Corporate Training:</strong> $8,500 per day (up to 15 people)</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Register for a workshop →</a></p>
+                `
+            },
+            6: {
+                title: "🚀 Efficient Transformation",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Streamlined digital transformation without the bloat</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Digital transformation focused on delivering value at every stage. Modernize operations efficiently, avoiding common pitfalls.</p>
+                    
+                    <h2>Core Services</h2>
+                    <h3>Legacy System Modernization</h3>
+                    <ul>
+                        <li><strong>Assessment:</strong> Evaluate current systems</li>
+                        <li><strong>Incremental Approach:</strong> Modernize in phases</li>
+                        <li><strong>Risk Mitigation:</strong> Maintain business continuity</li>
+                    </ul>
+                    
+                    <h3>Process Digitization</h3>
+                    <ul>
+                        <li><strong>Process Mapping:</strong> Document current workflows</li>
+                        <li><strong>Optimization:</strong> Eliminate waste before automating</li>
+                        <li><strong>Implementation:</strong> Roll out with proper training</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>Manufacturing:</strong> Automated order processing, reduced time from 2 hours to 10 minutes per order, eliminated 90% of errors</p>
+                    <p><strong>Healthcare:</strong> Replaced 15-year-old system, improved check-in time by 60%, reduced IT costs by $120K annually</p>
+                    
+                    <h2>Typical Engagement</h2>
+                    <p><strong>Small Transformation:</strong> 3-4 months, $50K-150K</p>
+                    <p><strong>Medium Transformation:</strong> 6-9 months, $150K-400K</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Request transformation assessment →</a></p>
+                `
+            }
+        };
+
+        // Blog content data
+        const blogs = {
+            1: {
+                title: "Cloud ROI: Cutting Costs While Scaling",
+                meta: "5 min read • Dec 10, 2025",
+                content: `
+                    <p>Cloud costs tend to grow faster than expected. Organizations waste approximately 28% of their cloud spend. For a company spending $50,000 monthly, that's $14,000 going to waste.</p>
+                    
+                    <h2>Why Cloud Costs Spiral</h2>
+                    <p>Most companies migrate without optimizing for cloud-native architecture. Common issues:</p>
+                    <ul>
+                        <li>Running instances 24/7 when only needed during business hours</li>
+                        <li>Provisioning for peak capacity all the time</li>
+                        <li>Keeping old snapshots and unused volumes</li>
+                    </ul>
+                    
+                    <h2>Practical Cost Reduction Strategies</h2>
+                    <h3>1. Right-Size Your Instances</h3>
+                    <p><strong>Example:</strong> A client downsized from db.r5.2xlarge to db.r5.xlarge, reducing costs by $350/month per instance with no performance impact.</p>
+                    
+                    <h3>2. Use Reserved Instances</h3>
+                    <p><strong>Typical Savings:</strong> 30-40% compared to on-demand pricing</p>
+                    
+                    <h2>Real Example: SaaS Company</h2>
+                    <p><strong>Starting:</strong> $45,000/month</p>
+                    <p><strong>Results:</strong> $28,300/month (37% reduction) in 8 weeks</p>
+                    
+                    <h2>Realistic Expectations</h2>
+                    <ul>
+                        <li><strong>First 30 days:</strong> 15-25% cost reduction</li>
+                        <li><strong>60-90 days:</strong> Additional 10-20%</li>
+                        <li><strong>Total:</strong> 30-45% over 3-6 months</li>
+                    </ul>
+                `
+            },
+            2: {
+                title: "Leadership That Delivers: 5 High-Impact Principles",
+                meta: "7 min read • Dec 10, 2025",
+                content: `
+                    <p>Most leadership advice focuses on theory. This focuses on practical principles that consistently improve team performance.</p>
+                    
+                    <h2>The Gap Between Knowing and Doing</h2>
+                    <p>Everyone knows communication is important, but in practice:</p>
+                    <ul>
+                        <li>Team members don't know what success looks like</li>
+                        <li>Priorities shift without clear communication</li>
+                        <li>Feedback happens too late to be useful</li>
+                    </ul>
+                    
+                    <h2>Principle 1: Set Clear, Measurable Outcomes</h2>
+                    <p><strong>Example:</strong> Instead of "Improve deployment," try "Reduce deployment time from 4 hours to 90 minutes by Q2 end"</p>
+                    
+                    <h2>Principle 2: Remove Blockers Immediately</h2>
+                    <p><strong>Example:</strong> A team reduced blocker resolution from 3-5 days to 4 hours with daily check-ins</p>
+                    
+                    <h2>Principle 3: Give Frequent, Specific Feedback</h2>
+                    <p>Weekly 1-on-1s and immediate feedback create continuous improvement</p>
+                    
+                    <h2>Principle 4: Make Decisions Quickly</h2>
+                    <p>Forward momentum matters more than perfect decisions</p>
+                    
+                    <h2>Principle 5: Protect Focus Time</h2>
+                    <p><strong>Example:</strong> "Focus Fridays" with no meetings after 12 PM dramatically improved output</p>
+                    
+                    <h2>What to Expect</h2>
+                    <p><strong>2-4 weeks:</strong> More clarity, faster blocker resolution</p>
+                    <p><strong>2-3 months:</strong> Measurable delivery improvements</p>
+                    <p><strong>6+ months:</strong> Consistent high performance</p>
+                `
+            },
+            3: {
+                title: "Productivity Hacks That Actually Work",
+                meta: "6 min read • Dec 10, 2025",
+                content: `
+                    <p>Most productivity advice doesn't work in real environments. This focuses on practical strategies tested with professionals.</p>
+                    
+                    <h2>Strategy 1: Time Blocking</h2>
+                    <p>Block 2-3 hours daily for focused work. Protect these blocks fiercely.</p>
+                    <p><strong>Example:</strong> A product manager blocked 9-11 AM daily, completed a 6-week-pending roadmap in one month</p>
+                    
+                    <h2>Strategy 2: The Two-Minute Rule</h2>
+                    <p>If something takes less than 2 minutes, do it immediately. Prevents mental clutter buildup.</p>
+                    
+                    <h2>Strategy 3: Batch Similar Tasks</h2>
+                    <p>Group similar work to reduce context switching:</p>
+                    <ul>
+                        <li>Check email 3 times daily instead of constantly</li>
+                        <li>Schedule all 1-on-1s on the same day</li>
+                        <li>Batch administrative tasks weekly</li>
+                    </ul>
+                    
+                    <h2>Strategy 4: The "Not-To-Do" List</h2>
+                    <p>Identify tasks to stop doing, delegate, or automate</p>
+                    <p><strong>Example:</strong> An executive stopped attending 5 of 12 recurring meetings where presence wasn't essential</p>
+                    
+                    <h2>Strategy 5: Single-Tasking</h2>
+                    <p><strong>Example:</strong> A writer's article time dropped from 4 to 2.5 hours using 45-minute focus sessions</p>
+                    
+                    <h2>Realistic Expectations</h2>
+                    <p><strong>Do expect:</strong> 15-25% more meaningful work, less overwhelm, better work-life boundaries</p>
+                    <p><strong>Don't expect:</strong> Perfect productivity every day or elimination of all meetings</p>
+                `
+            }
+        };
+
+        function openService(id) {
+            const service = services[id];
+            document.getElementById('service-detail-content').innerHTML = `
+                <h1>${service.title}</h1>
+                ${service.content}
+            `;
             document.getElementById('serviceModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
-        function closeService() {
-            document.getElementById('serviceModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function openBlog(blogId) {
-            document.getElementById('blog-article-content').innerHTML = blogArticles[blogId];
+        function openBlog(id) {
+            const blog = blogs[id];
+            document.getElementById('blog-article-content').innerHTML = `
+                <h1>${blog.title}</h1>
+                <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>${blog.meta}</em></p>
+                ${blog.content}
+            `;
             document.getElementById('blogModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
-        function closeBlog() {
-            document.getElementById('blogModal').style.display = 'none';
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
@@ -1286,15 +1610,10 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function closePayment() {
-            document.getElementById('paymentModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
         function processPayment(e) {
             e.preventDefault();
             alert(`🎉 Welcome to ${selectedCourse}! You've invested in real value. Check your email for immediate access and next steps.`);
-            closePayment();
+            closeModal('paymentModal');
         }
 
         function handleContact(e) {
