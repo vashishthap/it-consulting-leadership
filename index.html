@@ -1874,10 +1874,158 @@
             }
         };
 
-        // Service Data (abbreviated)
+        // Service Data with FULL content
         const services = {
-            1: { title: "💎 High-Value IT Solutions", content: "<p>Strategic technology implementations...</p>" },
-            2: { title: "🎯 Results-Driven Leadership", content: "<p>Executive coaching...</p>" }
+            1: {
+                title: "💎 High-Value IT Solutions",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Strategic technology implementations that deliver measurable ROI</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Technology should drive business value, not create complexity. Our IT solutions focus on implementations that directly impact your bottom line.</p>
+                    
+                    <h2>Core Services</h2>
+                    <h3>Cloud Optimization & Migration</h3>
+                    <ul>
+                        <li><strong>Cost Reduction:</strong> Typical savings of 30-45% through right-sizing and optimization</li>
+                        <li><strong>Performance Improvement:</strong> Architecture reviews for better response times</li>
+                        <li><strong>Migration Strategy:</strong> Phased approach minimizing risk</li>
+                    </ul>
+                    
+                    <h3>Infrastructure Automation</h3>
+                    <ul>
+                        <li><strong>CI/CD Pipelines:</strong> Automated deployment reducing release time by 60-80%</li>
+                        <li><strong>Infrastructure as Code:</strong> Terraform, CloudFormation implementations</li>
+                        <li><strong>Monitoring & Alerting:</strong> Proactive issue detection</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>SaaS Company:</strong> Reduced AWS spend from $62K to $28K monthly (55% reduction) in 60 days</p>
+                    <p><strong>Financial Services:</strong> Deployment time reduced from 4 hours to 15 minutes in 90 days</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Contact us for a free consultation →</a></p>
+                `
+            },
+            2: {
+                title: "🎯 Results-Driven Leadership",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Executive coaching focused on practical frameworks that create immediate impact</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Leadership development stripped of theory and focused on what actually works. Build capabilities that translate to measurable team performance.</p>
+                    
+                    <h2>Core Programs</h2>
+                    <h3>Executive Leadership Coaching</h3>
+                    <ul>
+                        <li><strong>1-on-1 Coaching:</strong> Bi-weekly sessions focused on real challenges</li>
+                        <li><strong>360° Feedback:</strong> Structured input from team and stakeholders</li>
+                        <li><strong>Action Plans:</strong> Specific behaviors to practice</li>
+                    </ul>
+                    
+                    <h3>Team Performance Optimization</h3>
+                    <ul>
+                        <li><strong>Team Assessment:</strong> Identify dynamics affecting performance</li>
+                        <li><strong>Communication Frameworks:</strong> Structured approaches to meetings</li>
+                        <li><strong>Goal Alignment:</strong> Ensure everyone understands priorities</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>Tech VP:</strong> Team velocity increased 35% in 3 months, reduced meeting time by 40%</p>
+                    <p><strong>Product Team:</strong> Feature delivery time reduced from 8 to 5 weeks</p>
+                    
+                    <h2>Investment</h2>
+                    <p><strong>Executive Coaching:</strong> $3,500/month (3-month minimum)</p>
+                    <p><strong>Team Program:</strong> $8,500/month (2-month minimum)</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Schedule your assessment →</a></p>
+                `
+            },
+            3: {
+                title: "⚡ Performance Optimization",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Data-backed strategies to maximize individual and organizational performance</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Cut through the noise with proven methods that deliver consistent results. Evidence-based approaches to productivity and performance.</p>
+                    
+                    <h2>Core Services</h2>
+                    <ul>
+                        <li><strong>Productivity Systems:</strong> Time blocking, energy management, priority frameworks</li>
+                        <li><strong>Workflow Optimization:</strong> Eliminate bottlenecks and inefficiencies</li>
+                        <li><strong>Performance Metrics:</strong> Track what matters, improve systematically</li>
+                        <li><strong>Habit Formation:</strong> Build systems that compound over time</li>
+                    </ul>
+                    
+                    <h2>Real Results</h2>
+                    <p><strong>Product Manager:</strong> Reduced meeting time from 25 to 12 hours/week</p>
+                    <p><strong>Engineering Team:</strong> 30% increase in feature delivery velocity</p>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Contact us to optimize your performance →</a></p>
+                `
+            },
+            4: {
+                title: "📈 Strategic Growth Consulting",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Business strategy focused on sustainable, profitable growth</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>We help you identify high-value opportunities and execute with precision. Strategic planning that drives measurable business outcomes.</p>
+                    
+                    <h2>Core Services</h2>
+                    <ul>
+                        <li><strong>Market Analysis:</strong> Identify untapped opportunities</li>
+                        <li><strong>Growth Strategy:</strong> Develop actionable roadmaps</li>
+                        <li><strong>Execution Planning:</strong> Turn strategy into results</li>
+                        <li><strong>Performance Tracking:</strong> Monitor and optimize continuously</li>
+                    </ul>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Schedule a strategy session →</a></p>
+                `
+            },
+            5: {
+                title: "🛡️ Essential Tech Training",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Skills development that matters - designed for immediate application</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>Training programs in AI, cloud, and cybersecurity designed for immediate application and career advancement.</p>
+                    
+                    <h2>Training Areas</h2>
+                    <ul>
+                        <li><strong>Cloud Technologies:</strong> AWS, Azure, GCP certification prep</li>
+                        <li><strong>Cybersecurity:</strong> Practical security implementation</li>
+                        <li><strong>AI & Machine Learning:</strong> Applied AI for business</li>
+                        <li><strong>DevOps:</strong> CI/CD, automation, infrastructure as code</li>
+                    </ul>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#courses" onclick="closeModal('serviceModal')">View our training programs →</a></p>
+                `
+            },
+            6: {
+                title: "🚀 Efficient Transformation",
+                content: `
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Streamlined digital transformation without the bloat</em></p>
+                    
+                    <h2>What We Deliver</h2>
+                    <p>We modernize your operations efficiently, delivering value at every stage of the journey. No unnecessary complexity.</p>
+                    
+                    <h2>Core Services</h2>
+                    <ul>
+                        <li><strong>Digital Strategy:</strong> Roadmap for transformation</li>
+                        <li><strong>Process Optimization:</strong> Streamline operations</li>
+                        <li><strong>Technology Selection:</strong> Right tools for your needs</li>
+                        <li><strong>Change Management:</strong> Ensure adoption and success</li>
+                    </ul>
+                    
+                    <h2>Get Started</h2>
+                    <p><a href="#contact" onclick="closeModal('serviceModal')">Start your transformation →</a></p>
+                `
+            }
         };
 
         // Functions
