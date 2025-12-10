@@ -602,8 +602,7 @@
         .course-image {
             width: 100%;
             height: 240px;
-            background-size: cover;
-            background-position: center;
+            background: var(--gradient-3);
             position: relative;
         }
         
@@ -633,34 +632,6 @@
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.7;
-        }
-
-        .course-features {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: rgba(0, 245, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(0, 245, 255, 0.2);
-        }
-
-        .course-features ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .course-features li {
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .course-features li::before {
-            content: '✓';
-            color: var(--accent-1);
-            font-weight: bold;
-            font-size: 1.2rem;
         }
         
         .course-price {
@@ -932,12 +903,12 @@
             color: var(--accent-3);
         }
 
-        .blog-article, .service-detail {
+        .blog-article, .service-detail, .course-detail {
             color: var(--text-primary);
             line-height: 1.8;
         }
 
-        .blog-article h1, .service-detail h1 {
+        .blog-article h1, .service-detail h1, .course-detail h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             background: var(--gradient-1);
@@ -945,78 +916,46 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .blog-article h2, .service-detail h2 {
+        .blog-article h2, .service-detail h2, .course-detail h2 {
             font-size: 1.8rem;
             margin: 2rem 0 1rem;
             color: var(--accent-1);
         }
 
-        .blog-article h3, .service-detail h3 {
+        .blog-article h3, .service-detail h3, .course-detail h3 {
             font-size: 1.4rem;
             margin: 1.5rem 0 1rem;
             color: var(--text-primary);
         }
 
-        .blog-article p, .service-detail p {
+        .blog-article p, .service-detail p, .course-detail p {
             margin-bottom: 1.5rem;
             color: var(--text-secondary);
         }
 
-        .blog-article ul, .blog-article ol, .service-detail ul, .service-detail ol {
+        .blog-article ul, .blog-article ol, .service-detail ul, .service-detail ol, .course-detail ul, .course-detail ol {
             margin: 1rem 0 1.5rem 2rem;
             color: var(--text-secondary);
         }
 
-        .blog-article li, .service-detail li {
+        .blog-article li, .service-detail li, .course-detail li {
             margin-bottom: 0.5rem;
         }
 
-        .blog-article strong, .service-detail strong {
+        .blog-article strong, .service-detail strong, .course-detail strong {
             color: var(--text-primary);
             font-weight: 600;
         }
 
-        .blog-article em, .service-detail em {
+        .blog-article em, .service-detail em, .course-detail em {
             font-style: italic;
             color: var(--accent-1);
         }
 
-        .service-detail a {
+        .service-detail a, .course-detail a {
             color: var(--accent-1);
             text-decoration: underline;
             cursor: pointer;
-        }
-
-        .course-detail {
-            color: var(--text-primary);
-            line-height: 1.8;
-        }
-
-        .course-detail h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .course-detail h2 {
-            font-size: 1.8rem;
-            margin: 2rem 0 1rem;
-            color: var(--accent-1);
-        }
-
-        .course-detail ul {
-            margin: 1rem 0 1.5rem 2rem;
-            color: var(--text-secondary);
-        }
-
-        .course-detail li {
-            margin-bottom: 0.5rem;
-        }
-
-        .course-detail strong {
-            color: var(--text-primary);
         }
         
         /* Footer */
@@ -1302,7 +1241,7 @@
             </div>
             <div class="courses-grid">
                 <div class="course-card" onclick="openCourse(1)">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                    <div class="course-image">
                         <span class="course-badge">⚡ High ROI</span>
                     </div>
                     <div class="course-content">
@@ -1316,7 +1255,7 @@
                     </div>
                 </div>
                 <div class="course-card" onclick="openCourse(2)">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                    <div class="course-image">
                         <span class="course-badge">👑 Premium Value</span>
                     </div>
                     <div class="course-content">
@@ -1330,7 +1269,7 @@
                     </div>
                 </div>
                 <div class="course-card" onclick="openCourse(3)">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                    <div class="course-image">
                         <span class="course-badge">🚀 Quick Wins</span>
                     </div>
                     <div class="course-content">
@@ -1344,7 +1283,7 @@
                     </div>
                 </div>
                 <div class="course-card" onclick="openCourse(4)">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                    <div class="course-image">
                         <span class="course-badge">🛡️ Essential</span>
                     </div>
                     <div class="course-content">
@@ -1358,7 +1297,7 @@
                     </div>
                 </div>
                 <div class="course-card" onclick="openCourse(5)">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                    <div class="course-image">
                         <span class="course-badge">✅ Proven Methods</span>
                     </div>
                     <div class="course-content">
@@ -1372,7 +1311,7 @@
                     </div>
                 </div>
                 <div class="course-card" onclick="openCourse(6)">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                    <div class="course-image">
                         <span class="course-badge">💡 Impact Focused</span>
                     </div>
                     <div class="course-content">
@@ -1516,6 +1455,403 @@
         </div>
     </footer>
 
-    <script src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-51-49-854Z-d8e0e5e5-chat-file-1765381909853-0.js"></script>
+    <script>
+        // Discount Popup Functionality
+        function showDiscountPopup() {
+            const popup = document.getElementById('discountPopup');
+            const hasVisited = localStorage.getItem('nbvVisited');
+            
+            if (!hasVisited) {
+                setTimeout(() => {
+                    popup.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                }, 3000);
+            }
+        }
+
+        function closeDiscountPopup() {
+            const popup = document.getElementById('discountPopup');
+            popup.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            localStorage.setItem('nbvVisited', 'true');
+        }
+
+        window.addEventListener('load', showDiscountPopup);
+
+        // Course Data with full details
+        const courses = {
+            1: {
+                title: "Cloud Value Optimization",
+                price: 249,
+                originalPrice: 499,
+                content: `
+                    <h1>Cloud Value Optimization</h1>
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Transform cloud costs from a burden into a competitive advantage</em></p>
+                    
+                    <h2>Why This Course Changes Everything</h2>
+                    <p>Most companies waste 30-45% of their cloud budget. That's <strong>$15,000/month wasted</strong> for a company spending $50K. This course teaches you to reclaim that value.</p>
+                    
+                    <h2>What You'll Master</h2>
+                    <ul>
+                        <li><strong>Cost Optimization Strategies:</strong> Reduce AWS/Azure/GCP spend by 30-45% without sacrificing performance</li>
+                        <li><strong>Right-Sizing Mastery:</strong> Identify overprovisioned resources and optimize instantly</li>
+                        <li><strong>Automated Scaling:</strong> Set up auto-scaling that saves money during low traffic</li>
+                        <li><strong>Reserved Instances:</strong> Save 30-70% with strategic reservations</li>
+                        <li><strong>Storage Optimization:</strong> Eliminate unused volumes, snapshots, and backups</li>
+                        <li><strong>Cost Monitoring:</strong> Set up alerts before costs spiral out of control</li>
+                        <li><strong>Multi-Cloud Strategy:</strong> Leverage best pricing across AWS, Azure, GCP</li>
+                    </ul>
+                    
+                    <h2>Real Results From Graduates</h2>
+                    <p><strong>SaaS Company:</strong> Reduced monthly AWS bill from $62K to $28K (55% reduction) in 60 days</p>
+                    <p><strong>E-commerce Platform:</strong> Saved $18K/month by optimizing database instances</p>
+                    <p style="background: rgba(0, 245, 255, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-1);"><strong>Average ROI:</strong> Students save 10-20x the course cost within 3 months</p>
+                    
+                    <h2>Course Includes</h2>
+                    <ul>
+                        <li>12 high-impact video lessons (6 hours total)</li>
+                        <li>Hands-on labs with real cloud environments</li>
+                        <li>Cost optimization toolkit & templates</li>
+                        <li>Lifetime access + free updates</li>
+                        <li>Certificate of completion</li>
+                        <li>30-day money-back guarantee</li>
+                    </ul>
+                    
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                            <span style="text-decoration: line-through; opacity: 0.5; font-size: 1.5rem; margin-right: 1rem;">$499</span>
+                            $249
+                        </div>
+                        <p style="color: var(--accent-1); font-weight: 600;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>
+                        <button class="btn-primary" style="margin-top: 1rem; padding: 18px 50px; font-size: 1.2rem;" onclick="openPayment('Cloud Value Optimization', 249)">Enroll Now</button>
+                    </div>
+                `
+            },
+            2: {
+                title: "Executive Value Leadership",
+                price: 399,
+                originalPrice: 799,
+                content: `
+                    <h1>Executive Value Leadership</h1>
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Lead with impact, deliver measurable results</em></p>
+                    
+                    <h2>Why Leadership Matters More Than Ever</h2>
+                    <p>Great leaders don't just manage teams—they multiply value. This course teaches you to <strong>increase team performance by 30-50%</strong> through proven leadership frameworks.</p>
+                    
+                    <h2>What You'll Master</h2>
+                    <ul>
+                        <li><strong>Strategic Decision-Making:</strong> Make high-impact decisions with confidence</li>
+                        <li><strong>Team Optimization:</strong> Build high-performing teams that deliver</li>
+                        <li><strong>Communication Excellence:</strong> Inspire action through clear communication</li>
+                        <li><strong>Conflict Resolution:</strong> Turn disagreements into opportunities</li>
+                        <li><strong>Performance Management:</strong> Drive results through effective feedback</li>
+                        <li><strong>Change Management:</strong> Lead transformations successfully</li>
+                        <li><strong>Emotional Intelligence:</strong> Build stronger relationships</li>
+                    </ul>
+                    
+                    <h2>Real Results From Graduates</h2>
+                    <p><strong>Tech VP:</strong> Team velocity increased 35% in 3 months, reduced meeting time by 40%</p>
+                    <p><strong>Product Manager:</strong> Feature delivery time reduced from 8 to 5 weeks</p>
+                    <p style="background: rgba(0, 245, 255, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-1);"><strong>Average Impact:</strong> Leaders report 30-50% improvement in team performance</p>
+                    
+                    <h2>Course Includes</h2>
+                    <ul>
+                        <li>15 comprehensive video lessons (8 hours total)</li>
+                        <li>Leadership assessment tools</li>
+                        <li>Real-world case studies & scenarios</li>
+                        <li>Actionable frameworks & templates</li>
+                        <li>Lifetime access + free updates</li>
+                        <li>Certificate of completion</li>
+                        <li>30-day money-back guarantee</li>
+                    </ul>
+                    
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                            <span style="text-decoration: line-through; opacity: 0.5; font-size: 1.5rem; margin-right: 1rem;">$799</span>
+                            $399
+                        </div>
+                        <p style="color: var(--accent-1); font-weight: 600;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>
+                        <button class="btn-primary" style="margin-top: 1rem; padding: 18px 50px; font-size: 1.2rem;" onclick="openPayment('Executive Value Leadership', 399)">Enroll Now</button>
+                    </div>
+                `
+            },
+            3: {
+                title: "Peak Performance Mastery",
+                price: 149,
+                originalPrice: 299,
+                content: `
+                    <h1>Peak Performance Mastery</h1>
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Work smarter, achieve more, live better</em></p>
+                    
+                    <h2>The Productivity Crisis</h2>
+                    <p>Most professionals waste 40% of their day on low-value tasks. This course teaches you to <strong>increase meaningful output by 30%</strong> in the first month.</p>
+                    
+                    <h2>What You'll Master</h2>
+                    <ul>
+                        <li><strong>Time Blocking:</strong> Protect focus time and eliminate distractions</li>
+                        <li><strong>Energy Management:</strong> Optimize work around your natural rhythms</li>
+                        <li><strong>Priority Matrix:</strong> Focus on what truly matters</li>
+                        <li><strong>Deep Work:</strong> Achieve flow state and maximum productivity</li>
+                        <li><strong>Habit Stacking:</strong> Build systems that compound over time</li>
+                        <li><strong>Digital Minimalism:</strong> Tame technology distractions</li>
+                        <li><strong>Work-Life Integration:</strong> Achieve sustainable high performance</li>
+                    </ul>
+                    
+                    <h2>Real Results From Graduates</h2>
+                    <p><strong>Product Manager:</strong> Reduced meeting time from 25 to 12 hours/week, 40% improvement in work-life balance</p>
+                    <p><strong>Software Engineer:</strong> Completed 6-week pending project in one month</p>
+                    <p style="background: rgba(0, 245, 255, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-1);"><strong>Average Impact:</strong> Students report 2-3 extra productive hours/day</p>
+                    
+                    <h2>Course Includes</h2>
+                    <ul>
+                        <li>10 actionable video lessons (5 hours total)</li>
+                        <li>Productivity assessment tools</li>
+                        <li>Customizable workflow templates</li>
+                        <li>Habit tracking systems</li>
+                        <li>Lifetime access + free updates</li>
+                        <li>Certificate of completion</li>
+                        <li>30-day money-back guarantee</li>
+                    </ul>
+                    
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                            <span style="text-decoration: line-through; opacity: 0.5; font-size: 1.5rem; margin-right: 1rem;">$299</span>
+                            $149
+                        </div>
+                        <p style="color: var(--accent-1); font-weight: 600;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>
+                        <button class="btn-primary" style="margin-top: 1rem; padding: 18px 50px; font-size: 1.2rem;" onclick="openPayment('Peak Performance Mastery', 149)">Enroll Now</button>
+                    </div>
+                `
+            },
+            4: {
+                title: "Practical Cybersecurity",
+                price: 199,
+                originalPrice: 399,
+                content: `
+                    <h1>Practical Cybersecurity</h1>
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Protect what matters without the complexity</em></p>
+                    
+                    <h2>The Security Imperative</h2>
+                    <p>Cyberattacks cost businesses <strong>$4.35M on average</strong>. This course teaches you to implement enterprise-grade security without the enterprise budget.</p>
+                    
+                    <h2>What You'll Master</h2>
+                    <ul>
+                        <li><strong>Security Fundamentals:</strong> Understand threat landscape & attack vectors</li>
+                        <li><strong>Network Security:</strong> Implement firewalls, VPNs, and segmentation</li>
+                        <li><strong>Application Security:</strong> Secure code practices & vulnerability management</li>
+                        <li><strong>Identity & Access:</strong> Implement MFA, SSO, and least privilege</li>
+                        <li><strong>Data Protection:</strong> Encryption, backups, and DLP</li>
+                        <li><strong>Incident Response:</strong> Detect, respond, and recover from breaches</li>
+                        <li><strong>Compliance:</strong> Meet GDPR, SOC2, HIPAA requirements</li>
+                    </ul>
+                    
+                    <h2>Real Results From Graduates</h2>
+                    <p><strong>Startup:</strong> Implemented enterprise-security for <$5K/month, passed SOC2 audit</p>
+                    <p><strong>E-commerce:</strong> Prevented 3 breach attempts in first 6 months</p>
+                    <p style="background: rgba(0, 245, 255, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-1);"><strong>Average Impact:</strong> 80% reduction in security incidents</p>
+                    
+                    <h2>Course Includes</h2>
+                    <ul>
+                        <li>12 practical video lessons (6 hours total)</li>
+                        <li>Hands-on security labs</li>
+                        <li>Security checklists & templates</li>
+                        <li>Incident response playbooks</li>
+                        <li>Lifetime access + free updates</li>
+                        <li>Certificate of completion</li>
+                        <li>30-day money-back guarantee</li>
+                    </ul>
+                    
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                            <span style="text-decoration: line-through; opacity: 0.5; font-size: 1.5rem; margin-right: 1rem;">$399</span>
+                            $199
+                        </div>
+                        <p style="color: var(--accent-1); font-weight: 600;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>
+                        <button class="btn-primary" style="margin-top: 1rem; padding: 18px 50px; font-size: 1.2rem;" onclick="openPayment('Practical Cybersecurity', 199)">Enroll Now</button>
+                    </div>
+                `
+            },
+            5: {
+                title: "Agile Value Delivery",
+                price: 174,
+                originalPrice: 349,
+                content: `
+                    <h1>Agile Value Delivery</h1>
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Ship value faster, deliver with confidence</em></p>
+                    
+                    <h2>The Delivery Challenge</h2>
+                    <p>Most teams take <strong>2-3 times longer</strong> than necessary to deliver features. This course teaches you to deliver 50% faster with higher quality.</p>
+                    
+                    <h2>What You'll Master</h2>
+                    <ul>
+                        <li><strong>Agile Frameworks:</strong> Scrum, Kanban, and hybrid approaches</li>
+                        <li><strong>Sprint Planning:</strong> Set realistic goals and deliver consistently</li>
+                        <li><strong>Daily Standups:</strong> Run effective 10-minute syncs</li>
+                        <li><strong>Retrospectives:</strong> Continuous improvement that actually works</li>
+                        <li><strong>DevOps Integration:</strong> Automate deployments and testing</li>
+                        <li><strong>CI/CD Pipelines:</strong> Ship code multiple times per day</li>
+                        <li><strong>Quality Assurance:</strong> Build quality into the process</li>
+                    </ul>
+                    
+                    <h2>Real Results From Graduates</h2>
+                    <p><strong>Startup:</strong> Deployment time reduced from 4 hours to 15 minutes</p>
+                    <p><strong>Product Team:</strong> Feature delivery time reduced from 8 to 5 weeks</p>
+                    <p style="background: rgba(0, 245, 255, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-1);"><strong>Average Impact:</strong> 50% faster delivery with 30% fewer defects</p>
+                    
+                    <h2>Course Includes</h2>
+                    <ul>
+                        <li>11 practical video lessons (6 hours total)</li>
+                        <li>Agile ceremony templates</li>
+                        <li>DevOps toolchain setup guides</li>
+                        <li>Sprint planning worksheets</li>
+                        <li>Lifetime access + free updates</li>
+                        <li>Certificate of completion</li>
+                        <li>30-day money-back guarantee</li>
+                    </ul>
+                    
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                            <span style="text-decoration: line-through; opacity: 0.5; font-size: 1.5rem; margin-right: 1rem;">$349</span>
+                            $174
+                        </div>
+                        <p style="color: var(--accent-1); font-weight: 600;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>
+                        <button class="btn-primary" style="margin-top: 1rem; padding: 18px 50px; font-size: 1.2rem;" onclick="openPayment('Agile Value Delivery', 174)">Enroll Now</button>
+                    </div>
+                `
+            },
+            6: {
+                title: "High-Impact Communication",
+                price: 224,
+                originalPrice: 449,
+                content: `
+                    <h1>High-Impact Communication</h1>
+                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Transform relationships into business value</em></p>
+                    
+                    <h2>The Communication Gap</h2>
+                    <p>Poor communication costs companies <strong>$62K per employee annually</strong>. This course teaches you to communicate with clarity, empathy, and impact.</p>
+                    
+                    <h2>What You'll Master</h2>
+                    <ul>
+                        <li><strong>Emotional Intelligence:</strong> Understand and manage emotions</li>
+                        <li><strong>Active Listening:</strong> Truly hear what others are saying</li>
+                        <li><strong>Clear Messaging:</strong> Communicate complex ideas simply</li>
+                        <li><strong>Difficult Conversations:</strong> Navigate challenging discussions</li>
+                        <li><strong>Presentation Skills:</strong> Deliver compelling presentations</li>
+                        <li><strong>Influence & Persuasion:</strong> Get buy-in for your ideas</li>
+                        <li><strong>Relationship Building:</strong> Create lasting professional connections</li>
+                    </ul>
+                    
+                    <h2>Real Results From Graduates</h2>
+                    <p><strong>Sales Manager:</strong> Increased close rate from 22% to 37% in 3 months</p>
+                    <p><strong>Engineering Lead:</strong> Reduced team conflicts by 60%, improved collaboration</p>
+                    <p style="background: rgba(0, 245, 255, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-1);"><strong>Average Impact:</strong> 40% improvement in relationship quality</p>
+                    
+                    <h2>Course Includes</h2>
+                    <ul>
+                        <li>13 interactive video lessons (7 hours total)</li>
+                        <li>Emotional intelligence assessment</li>
+                        <li>Communication style worksheets</li>
+                        <li>Conversation frameworks & scripts</li>
+                        <li>Lifetime access + free updates</li>
+                        <li>Certificate of completion</li>
+                        <li>30-day money-back guarantee</li>
+                    </ul>
+                    
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                            <span style="text-decoration: line-through; opacity: 0.5; font-size: 1.5rem; margin-right: 1rem;">$449</span>
+                            $224
+                        </div>
+                        <p style="color: var(--accent-1); font-weight: 600;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>
+                        <button class="btn-primary" style="margin-top: 1rem; padding: 18px 50px; font-size: 1.2rem;" onclick="openPayment('High-Impact Communication', 224)">Enroll Now</button>
+                    </div>
+                `
+            }
+        };
+
+        // Service Data (abbreviated for space)
+        const services = {
+            1: { title: "💎 High-Value IT Solutions", content: "<p>Strategic technology implementations...</p>" },
+            2: { title: "🎯 Results-Driven Leadership", content: "<p>Executive coaching...</p>" }
+        };
+
+        // Blog Data (abbreviated for space)
+        const blogs = {
+            1: { title: "Cloud ROI: Cutting Costs While Scaling", meta: "5 min read • Dec 10, 2025", content: "<p>Cloud costs tend to grow...</p>" },
+            2: { title: "Leadership That Delivers", meta: "7 min read • Dec 10, 2025", content: "<p>Most leadership advice...</p>" },
+            3: { title: "Productivity Hacks", meta: "6 min read • Dec 10, 2025", content: "<p>Most productivity advice...</p>" }
+        };
+
+        // Functions
+        function openCourse(id) {
+            const course = courses[id];
+            document.getElementById('course-detail-content').innerHTML = course.content;
+            document.getElementById('courseModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openService(id) {
+            const service = services[id];
+            document.getElementById('service-detail-content').innerHTML = `<h1>${service.title}</h1>${service.content}`;
+            document.getElementById('serviceModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openBlog(id) {
+            const blog = blogs[id];
+            document.getElementById('blog-article-content').innerHTML = `<h1>${blog.title}</h1><p style="color: var(--accent-1); margin-bottom: 2rem;"><em>${blog.meta}</em></p>${blog.content}`;
+            document.getElementById('blogModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function selectOption(element) {
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function submitQuiz() {
+            document.getElementById('quiz-result').style.display = 'block';
+        }
+
+        function openPayment(course, price) {
+            document.getElementById('payment-details').innerHTML = `
+                <h3 style="margin-bottom: 1rem;">${course}</h3>
+                <p style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$${price}</p>
+                <p style="color: var(--accent-1); font-weight: 600; margin-top: 0.5rem;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>
+            `;
+            document.getElementById('paymentModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function processPayment(e) {
+            e.preventDefault();
+            alert('🎉 Thank you for your enrollment! Check your email for immediate access and next steps.');
+            closeModal('paymentModal');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
 </body>
 </html>
