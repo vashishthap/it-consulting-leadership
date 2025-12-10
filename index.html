@@ -590,17 +590,20 @@
             border-radius: 20px;
             overflow: hidden;
             transition: all 0.4s;
+            cursor: pointer;
         }
         
         .course-card:hover {
             transform: translateY(-10px);
             border-color: rgba(255, 0, 110, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.2);
         }
         
         .course-image {
             width: 100%;
-            height: 200px;
-            background: var(--gradient-3);
+            height: 240px;
+            background-size: cover;
+            background-position: center;
             position: relative;
         }
         
@@ -608,12 +611,13 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            padding: 6px 16px;
-            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 20px;
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
+            border: 1px solid var(--accent-1);
         }
         
         .course-content {
@@ -621,7 +625,7 @@
         }
         
         .course-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
         }
         
@@ -629,6 +633,34 @@
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.7;
+        }
+
+        .course-features {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 245, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .course-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .course-features li::before {
+            content: '✓';
+            color: var(--accent-1);
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         
         .course-price {
@@ -639,16 +671,23 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
         }
+
+        .price-strike {
+            text-decoration: line-through;
+            opacity: 0.5;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
         
         .buy-button {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: var(--gradient-1);
             color: var(--bg-dark);
             border: none;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -728,6 +767,125 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        
+        /* Discount Popup */
+        .discount-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .discount-popup.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .discount-content {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-1);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: popIn 0.5s ease-out;
+            box-shadow: 0 0 100px rgba(0, 245, 255, 0.3);
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .discount-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .discount-close:hover {
+            color: var(--accent-3);
+        }
+
+        .discount-badge {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient-3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .discount-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .discount-percent {
+            font-size: 5rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin: 1rem 0;
+        }
+
+        .discount-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .discount-cta {
+            padding: 18px 50px;
+            background: var(--gradient-1);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .discount-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
         }
         
         /* Modal */
@@ -828,6 +986,38 @@
             text-decoration: underline;
             cursor: pointer;
         }
+
+        .course-detail {
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .course-detail h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .course-detail h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent-1);
+        }
+
+        .course-detail ul {
+            margin: 1rem 0 1.5rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .course-detail li {
+            margin-bottom: 0.5rem;
+        }
+
+        .course-detail strong {
+            color: var(--text-primary);
+        }
         
         /* Footer */
         footer {
@@ -895,17 +1085,42 @@
                 padding: 2rem;
             }
 
-            .blog-article h1, .service-detail h1 {
+            .blog-article h1, .service-detail h1, .course-detail h1 {
                 font-size: 2rem;
             }
 
-            .blog-article h2, .service-detail h2 {
+            .blog-article h2, .service-detail h2, .course-detail h2 {
                 font-size: 1.5rem;
+            }
+
+            .discount-content {
+                padding: 2rem;
+            }
+
+            .discount-percent {
+                font-size: 4rem;
+            }
+
+            .discount-title {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Discount Popup -->
+    <div id="discountPopup" class="discount-popup">
+        <div class="discount-content">
+            <span class="discount-close" onclick="closeDiscountPopup()">&times;</span>
+            <div class="discount-badge">🎉 FIRST-TIME VISITOR SPECIAL</div>
+            <h2 class="discount-title">Welcome to Nothing But Value!</h2>
+            <div class="discount-percent">50% OFF</div>
+            <p class="discount-text">You're eligible for an exclusive <strong>50% discount</strong> on ALL our training programs! This offer is only available for first-time visitors.</p>
+            <a href="#courses" class="discount-cta" onclick="closeDiscountPopup()">Claim Your Discount Now!</a>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-secondary);">Limited time offer • Use code: <strong style="color: var(--accent-1);">FIRSTVALUE50</strong></p>
+        </div>
+    </div>
+
     <!-- Animated Background -->
     <div class="bg-animation">
         <div class="bg-gradient bg-gradient-1"></div>
@@ -1081,75 +1296,93 @@
     <section id="courses">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">High-Value Programs</span>
+                <span class="section-tag">🎉 50% OFF FOR FIRST-TIME VISITORS</span>
                 <h2 class="section-title">Invest in Real Results</h2>
                 <p class="section-description">Programs designed for maximum ROI—every hour delivers practical skills and measurable career advancement</p>
             </div>
             <div class="courses-grid">
-                <div class="course-card">
-                    <div class="course-image">
-                        <span class="course-badge">High ROI</span>
+                <div class="course-card" onclick="openCourse(1)">
+                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                        <span class="course-badge">⚡ High ROI</span>
                     </div>
                     <div class="course-content">
                         <h3>Cloud Value Optimization</h3>
-                        <p>Master AWS, Azure, and GCP with focus on cost optimization and performance. Learn to deliver 10x value from cloud investments.</p>
-                        <div class="course-price">$499</div>
-                        <button class="buy-button" onclick="openPayment('Cloud Value Optimization', 499)">Enroll Now</button>
+                        <p>Master AWS, Azure, and GCP with laser focus on cost optimization and performance. Learn to deliver 10x value from cloud investments.</p>
+                        <div class="course-price">
+                            <span class="price-strike">$499</span>
+                            $249
+                        </div>
+                        <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
-                    <div class="course-image">
-                        <span class="course-badge">Premium Value</span>
+                <div class="course-card" onclick="openCourse(2)">
+                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                        <span class="course-badge">👑 Premium Value</span>
                     </div>
                     <div class="course-content">
                         <h3>Executive Value Leadership</h3>
                         <p>Transform your leadership impact with proven frameworks. Create measurable value through strategic decision-making and team optimization.</p>
-                        <div class="course-price">$799</div>
-                        <button class="buy-button" onclick="openPayment('Executive Value Leadership', 799)">Enroll Now</button>
+                        <div class="course-price">
+                            <span class="price-strike">$799</span>
+                            $399
+                        </div>
+                        <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
-                    <div class="course-image">
-                        <span class="course-badge">Quick Wins</span>
+                <div class="course-card" onclick="openCourse(3)">
+                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                        <span class="course-badge">🚀 Quick Wins</span>
                     </div>
                     <div class="course-content">
                         <h3>Peak Performance Mastery</h3>
                         <p>Evidence-based productivity systems that deliver immediate results. Increase your output by 30% in the first month.</p>
-                        <div class="course-price">$299</div>
-                        <button class="buy-button" onclick="openPayment('Peak Performance Mastery', 299)">Enroll Now</button>
+                        <div class="course-price">
+                            <span class="price-strike">$299</span>
+                            $149
+                        </div>
+                        <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
-                    <div class="course-image">
-                        <span class="course-badge">Essential</span>
+                <div class="course-card" onclick="openCourse(4)">
+                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                        <span class="course-badge">🛡️ Essential</span>
                     </div>
                     <div class="course-content">
                         <h3>Practical Cybersecurity</h3>
                         <p>Security practices that protect real business value. Focus on high-impact defenses without unnecessary complexity.</p>
-                        <div class="course-price">$399</div>
-                        <button class="buy-button" onclick="openPayment('Practical Cybersecurity', 399)">Enroll Now</button>
+                        <div class="course-price">
+                            <span class="price-strike">$399</span>
+                            $199
+                        </div>
+                        <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
-                    <div class="course-image">
-                        <span class="course-badge">Proven Methods</span>
+                <div class="course-card" onclick="openCourse(5)">
+                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                        <span class="course-badge">✅ Proven Methods</span>
                     </div>
                     <div class="course-content">
                         <h3>Agile Value Delivery</h3>
                         <p>Agile and DevOps focused on shipping value fast. Learn to deliver projects 50% faster with higher quality.</p>
-                        <div class="course-price">$349</div>
-                        <button class="buy-button" onclick="openPayment('Agile Value Delivery', 349)">Enroll Now</button>
+                        <div class="course-price">
+                            <span class="price-strike">$349</span>
+                            $174
+                        </div>
+                        <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
-                    <div class="course-image">
-                        <span class="course-badge">Impact Focused</span>
+                <div class="course-card" onclick="openCourse(6)">
+                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-46-02-319Z-08256314-chat-image-1765381562299-0.jpg');">
+                        <span class="course-badge">💡 Impact Focused</span>
                     </div>
                     <div class="course-content">
                         <h3>High-Impact Communication</h3>
                         <p>Develop emotional intelligence and communication skills that create tangible business value and stronger relationships.</p>
-                        <div class="course-price">$449</div>
-                        <button class="buy-button" onclick="openPayment('High-Impact Communication', 449)">Enroll Now</button>
+                        <div class="course-price">
+                            <span class="price-strike">$449</span>
+                            $224
+                        </div>
+                        <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
             </div>
@@ -1239,6 +1472,14 @@
         </div>
     </div>
 
+    <!-- Course Detail Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('courseModal')">&times;</span>
+            <div id="course-detail-content" class="course-detail"></div>
+        </div>
+    </div>
+
     <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
@@ -1275,396 +1516,6 @@
         </div>
     </footer>
 
-    <script>
-        let selectedCourse = '';
-        let coursePrice = 0;
-
-        // Service content data
-        const services = {
-            1: {
-                title: "💎 High-Value IT Solutions",
-                content: `
-                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Strategic technology implementations that deliver measurable ROI</em></p>
-                    
-                    <h2>What We Deliver</h2>
-                    <p>Technology should drive business value, not create complexity. Our IT solutions focus on implementations that directly impact your bottom line.</p>
-                    
-                    <h2>Core Services</h2>
-                    <h3>Cloud Optimization & Migration</h3>
-                    <ul>
-                        <li><strong>Cost Reduction:</strong> Typical savings of 30-45% through right-sizing and optimization</li>
-                        <li><strong>Performance Improvement:</strong> Architecture reviews for better response times</li>
-                        <li><strong>Migration Strategy:</strong> Phased approach minimizing risk</li>
-                    </ul>
-                    
-                    <h3>Infrastructure Automation</h3>
-                    <ul>
-                        <li><strong>CI/CD Pipelines:</strong> Automated deployment reducing release time by 60-80%</li>
-                        <li><strong>Infrastructure as Code:</strong> Terraform, CloudFormation implementations</li>
-                        <li><strong>Monitoring & Alerting:</strong> Proactive issue detection</li>
-                    </ul>
-                    
-                    <h2>Real Results</h2>
-                    <p><strong>SaaS Company:</strong> Reduced AWS spend from $62K to $28K monthly (55% reduction) in 60 days</p>
-                    <p><strong>Financial Services:</strong> Deployment time reduced from 4 hours to 15 minutes in 90 days</p>
-                    
-                    <h2>Get Started</h2>
-                    <p><a href="#contact" onclick="closeModal('serviceModal')">Contact us for a free consultation →</a></p>
-                `
-            },
-            2: {
-                title: "🎯 Results-Driven Leadership",
-                content: `
-                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Executive coaching focused on practical frameworks that create immediate impact</em></p>
-                    
-                    <h2>What We Deliver</h2>
-                    <p>Leadership development stripped of theory and focused on what actually works. Build capabilities that translate to measurable team performance.</p>
-                    
-                    <h2>Core Programs</h2>
-                    <h3>Executive Leadership Coaching</h3>
-                    <ul>
-                        <li><strong>1-on-1 Coaching:</strong> Bi-weekly sessions focused on real challenges</li>
-                        <li><strong>360° Feedback:</strong> Structured input from team and stakeholders</li>
-                        <li><strong>Action Plans:</strong> Specific behaviors to practice</li>
-                    </ul>
-                    
-                    <h3>Team Performance Optimization</h3>
-                    <ul>
-                        <li><strong>Team Assessment:</strong> Identify dynamics affecting performance</li>
-                        <li><strong>Communication Frameworks:</strong> Structured approaches to meetings</li>
-                        <li><strong>Goal Alignment:</strong> Ensure everyone understands priorities</li>
-                    </ul>
-                    
-                    <h2>Real Results</h2>
-                    <p><strong>Tech VP:</strong> Team velocity increased 35% in 3 months, reduced meeting time by 40%</p>
-                    <p><strong>Product Team:</strong> Feature delivery time reduced from 8 to 5 weeks</p>
-                    
-                    <h2>Investment</h2>
-                    <p><strong>Executive Coaching:</strong> $3,500/month (3-month minimum)</p>
-                    <p><strong>Team Program:</strong> $8,500/month (2-month minimum)</p>
-                    
-                    <h2>Get Started</h2>
-                    <p><a href="#contact" onclick="closeModal('serviceModal')">Schedule your assessment →</a></p>
-                `
-            },
-            3: {
-                title: "⚡ Performance Optimization",
-                content: `
-                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Data-backed strategies to maximize individual and organizational performance</em></p>
-                    
-                    <h2>What We Deliver</h2>
-                    <p>Performance improvement through systematic analysis and targeted interventions. Identify bottlenecks, implement solutions, measure results.</p>
-                    
-                    <h2>Core Services</h2>
-                    <h3>Individual Performance Coaching</h3>
-                    <ul>
-                        <li><strong>Productivity Assessment:</strong> Analyze how time is currently spent</li>
-                        <li><strong>Custom Systems:</strong> Build workflows that fit your role</li>
-                        <li><strong>Energy Management:</strong> Optimize work around natural patterns</li>
-                    </ul>
-                    
-                    <h3>Team Velocity Improvement</h3>
-                    <ul>
-                        <li><strong>Process Analysis:</strong> Identify waste and bottlenecks</li>
-                        <li><strong>Workflow Optimization:</strong> Streamline handoffs</li>
-                        <li><strong>Meeting Reduction:</strong> Cut unnecessary meetings by 40-60%</li>
-                    </ul>
-                    
-                    <h2>Real Results</h2>
-                    <p><strong>Product Manager:</strong> Reduced meeting time from 25 to 12 hours/week, 40% improvement in work-life balance</p>
-                    <p><strong>Engineering Team:</strong> Sprint velocity increased from 45 to 68 story points</p>
-                    
-                    <h2>Investment</h2>
-                    <p><strong>Individual Coaching:</strong> $2,500/month (2-month minimum)</p>
-                    <p><strong>Team Program:</strong> $6,500/month (3-month minimum)</p>
-                    
-                    <h2>Get Started</h2>
-                    <p><a href="#contact" onclick="closeModal('serviceModal')">Request your assessment →</a></p>
-                `
-            },
-            4: {
-                title: "📈 Strategic Growth Consulting",
-                content: `
-                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Business strategy focused on sustainable, profitable growth</em></p>
-                    
-                    <h2>What We Deliver</h2>
-                    <p>Strategic guidance to identify high-value growth opportunities and execute with precision. Focus on sustainable, profitable growth.</p>
-                    
-                    <h2>Core Services</h2>
-                    <h3>Growth Strategy Development</h3>
-                    <ul>
-                        <li><strong>Market Analysis:</strong> Identify underserved segments</li>
-                        <li><strong>Competitive Positioning:</strong> Define unique value proposition</li>
-                        <li><strong>Growth Modeling:</strong> Project scenarios and resources</li>
-                    </ul>
-                    
-                    <h3>Go-to-Market Strategy</h3>
-                    <ul>
-                        <li><strong>Customer Segmentation:</strong> Identify highest-value targets</li>
-                        <li><strong>Channel Strategy:</strong> Most effective acquisition channels</li>
-                        <li><strong>Pricing Strategy:</strong> Optimize for value capture</li>
-                    </ul>
-                    
-                    <h2>Real Results</h2>
-                    <p><strong>B2B SaaS:</strong> Revenue grew from $2M to $5M ARR in 18 months, improved CAC payback from 18 to 9 months</p>
-                    <p><strong>Professional Services:</strong> New service offering achieved $1.2M revenue in first year</p>
-                    
-                    <h2>Investment</h2>
-                    <p><strong>Growth Strategy:</strong> $8,500/month (3-month minimum)</p>
-                    <p><strong>Go-to-Market:</strong> $6,500/month (2-month minimum)</p>
-                    
-                    <h2>Get Started</h2>
-                    <p><a href="#contact" onclick="closeModal('serviceModal')">Schedule your assessment →</a></p>
-                `
-            },
-            5: {
-                title: "🛡️ Essential Tech Training",
-                content: `
-                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Skills development that matters - training designed for immediate application</em></p>
-                    
-                    <h2>What We Deliver</h2>
-                    <p>Technical training focused on practical skills you can apply immediately. Hands-on learning that advances careers and delivers value.</p>
-                    
-                    <h2>Core Training Programs</h2>
-                    <h3>Cloud Computing (AWS/Azure/GCP)</h3>
-                    <ul>
-                        <li><strong>Cloud Fundamentals:</strong> Core concepts and architecture</li>
-                        <li><strong>Cost Optimization:</strong> Practical strategies to reduce spending</li>
-                        <li><strong>Security Best Practices:</strong> Implement proper controls</li>
-                    </ul>
-                    
-                    <h3>AI & Machine Learning</h3>
-                    <ul>
-                        <li><strong>AI for Business:</strong> Practical applications</li>
-                        <li><strong>Prompt Engineering:</strong> Get better AI results</li>
-                        <li><strong>Implementation:</strong> Integrate AI into workflows</li>
-                    </ul>
-                    
-                    <h2>Real Results</h2>
-                    <p><strong>Tech Company:</strong> Trained 25 engineers, reduced cloud spend by $18K/month within 30 days (1,200% ROI)</p>
-                    <p><strong>Startup:</strong> Deployment time reduced from 4 hours to 15 minutes after DevOps training</p>
-                    
-                    <h2>Investment</h2>
-                    <p><strong>Public Workshops:</strong> $1,200 per person (1-2 days)</p>
-                    <p><strong>Corporate Training:</strong> $8,500 per day (up to 15 people)</p>
-                    
-                    <h2>Get Started</h2>
-                    <p><a href="#contact" onclick="closeModal('serviceModal')">Register for a workshop →</a></p>
-                `
-            },
-            6: {
-                title: "🚀 Efficient Transformation",
-                content: `
-                    <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>Streamlined digital transformation without the bloat</em></p>
-                    
-                    <h2>What We Deliver</h2>
-                    <p>Digital transformation focused on delivering value at every stage. Modernize operations efficiently, avoiding common pitfalls.</p>
-                    
-                    <h2>Core Services</h2>
-                    <h3>Legacy System Modernization</h3>
-                    <ul>
-                        <li><strong>Assessment:</strong> Evaluate current systems</li>
-                        <li><strong>Incremental Approach:</strong> Modernize in phases</li>
-                        <li><strong>Risk Mitigation:</strong> Maintain business continuity</li>
-                    </ul>
-                    
-                    <h3>Process Digitization</h3>
-                    <ul>
-                        <li><strong>Process Mapping:</strong> Document current workflows</li>
-                        <li><strong>Optimization:</strong> Eliminate waste before automating</li>
-                        <li><strong>Implementation:</strong> Roll out with proper training</li>
-                    </ul>
-                    
-                    <h2>Real Results</h2>
-                    <p><strong>Manufacturing:</strong> Automated order processing, reduced time from 2 hours to 10 minutes per order, eliminated 90% of errors</p>
-                    <p><strong>Healthcare:</strong> Replaced 15-year-old system, improved check-in time by 60%, reduced IT costs by $120K annually</p>
-                    
-                    <h2>Typical Engagement</h2>
-                    <p><strong>Small Transformation:</strong> 3-4 months, $50K-150K</p>
-                    <p><strong>Medium Transformation:</strong> 6-9 months, $150K-400K</p>
-                    
-                    <h2>Get Started</h2>
-                    <p><a href="#contact" onclick="closeModal('serviceModal')">Request transformation assessment →</a></p>
-                `
-            }
-        };
-
-        // Blog content data
-        const blogs = {
-            1: {
-                title: "Cloud ROI: Cutting Costs While Scaling",
-                meta: "5 min read • Dec 10, 2025",
-                content: `
-                    <p>Cloud costs tend to grow faster than expected. Organizations waste approximately 28% of their cloud spend. For a company spending $50,000 monthly, that's $14,000 going to waste.</p>
-                    
-                    <h2>Why Cloud Costs Spiral</h2>
-                    <p>Most companies migrate without optimizing for cloud-native architecture. Common issues:</p>
-                    <ul>
-                        <li>Running instances 24/7 when only needed during business hours</li>
-                        <li>Provisioning for peak capacity all the time</li>
-                        <li>Keeping old snapshots and unused volumes</li>
-                    </ul>
-                    
-                    <h2>Practical Cost Reduction Strategies</h2>
-                    <h3>1. Right-Size Your Instances</h3>
-                    <p><strong>Example:</strong> A client downsized from db.r5.2xlarge to db.r5.xlarge, reducing costs by $350/month per instance with no performance impact.</p>
-                    
-                    <h3>2. Use Reserved Instances</h3>
-                    <p><strong>Typical Savings:</strong> 30-40% compared to on-demand pricing</p>
-                    
-                    <h2>Real Example: SaaS Company</h2>
-                    <p><strong>Starting:</strong> $45,000/month</p>
-                    <p><strong>Results:</strong> $28,300/month (37% reduction) in 8 weeks</p>
-                    
-                    <h2>Realistic Expectations</h2>
-                    <ul>
-                        <li><strong>First 30 days:</strong> 15-25% cost reduction</li>
-                        <li><strong>60-90 days:</strong> Additional 10-20%</li>
-                        <li><strong>Total:</strong> 30-45% over 3-6 months</li>
-                    </ul>
-                `
-            },
-            2: {
-                title: "Leadership That Delivers: 5 High-Impact Principles",
-                meta: "7 min read • Dec 10, 2025",
-                content: `
-                    <p>Most leadership advice focuses on theory. This focuses on practical principles that consistently improve team performance.</p>
-                    
-                    <h2>The Gap Between Knowing and Doing</h2>
-                    <p>Everyone knows communication is important, but in practice:</p>
-                    <ul>
-                        <li>Team members don't know what success looks like</li>
-                        <li>Priorities shift without clear communication</li>
-                        <li>Feedback happens too late to be useful</li>
-                    </ul>
-                    
-                    <h2>Principle 1: Set Clear, Measurable Outcomes</h2>
-                    <p><strong>Example:</strong> Instead of "Improve deployment," try "Reduce deployment time from 4 hours to 90 minutes by Q2 end"</p>
-                    
-                    <h2>Principle 2: Remove Blockers Immediately</h2>
-                    <p><strong>Example:</strong> A team reduced blocker resolution from 3-5 days to 4 hours with daily check-ins</p>
-                    
-                    <h2>Principle 3: Give Frequent, Specific Feedback</h2>
-                    <p>Weekly 1-on-1s and immediate feedback create continuous improvement</p>
-                    
-                    <h2>Principle 4: Make Decisions Quickly</h2>
-                    <p>Forward momentum matters more than perfect decisions</p>
-                    
-                    <h2>Principle 5: Protect Focus Time</h2>
-                    <p><strong>Example:</strong> "Focus Fridays" with no meetings after 12 PM dramatically improved output</p>
-                    
-                    <h2>What to Expect</h2>
-                    <p><strong>2-4 weeks:</strong> More clarity, faster blocker resolution</p>
-                    <p><strong>2-3 months:</strong> Measurable delivery improvements</p>
-                    <p><strong>6+ months:</strong> Consistent high performance</p>
-                `
-            },
-            3: {
-                title: "Productivity Hacks That Actually Work",
-                meta: "6 min read • Dec 10, 2025",
-                content: `
-                    <p>Most productivity advice doesn't work in real environments. This focuses on practical strategies tested with professionals.</p>
-                    
-                    <h2>Strategy 1: Time Blocking</h2>
-                    <p>Block 2-3 hours daily for focused work. Protect these blocks fiercely.</p>
-                    <p><strong>Example:</strong> A product manager blocked 9-11 AM daily, completed a 6-week-pending roadmap in one month</p>
-                    
-                    <h2>Strategy 2: The Two-Minute Rule</h2>
-                    <p>If something takes less than 2 minutes, do it immediately. Prevents mental clutter buildup.</p>
-                    
-                    <h2>Strategy 3: Batch Similar Tasks</h2>
-                    <p>Group similar work to reduce context switching:</p>
-                    <ul>
-                        <li>Check email 3 times daily instead of constantly</li>
-                        <li>Schedule all 1-on-1s on the same day</li>
-                        <li>Batch administrative tasks weekly</li>
-                    </ul>
-                    
-                    <h2>Strategy 4: The "Not-To-Do" List</h2>
-                    <p>Identify tasks to stop doing, delegate, or automate</p>
-                    <p><strong>Example:</strong> An executive stopped attending 5 of 12 recurring meetings where presence wasn't essential</p>
-                    
-                    <h2>Strategy 5: Single-Tasking</h2>
-                    <p><strong>Example:</strong> A writer's article time dropped from 4 to 2.5 hours using 45-minute focus sessions</p>
-                    
-                    <h2>Realistic Expectations</h2>
-                    <p><strong>Do expect:</strong> 15-25% more meaningful work, less overwhelm, better work-life boundaries</p>
-                    <p><strong>Don't expect:</strong> Perfect productivity every day or elimination of all meetings</p>
-                `
-            }
-        };
-
-        function openService(id) {
-            const service = services[id];
-            document.getElementById('service-detail-content').innerHTML = `
-                <h1>${service.title}</h1>
-                ${service.content}
-            `;
-            document.getElementById('serviceModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function openBlog(id) {
-            const blog = blogs[id];
-            document.getElementById('blog-article-content').innerHTML = `
-                <h1>${blog.title}</h1>
-                <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>${blog.meta}</em></p>
-                ${blog.content}
-            `;
-            document.getElementById('blogModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function selectOption(element) {
-            document.querySelectorAll('.quiz-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            element.classList.add('selected');
-        }
-
-        function submitQuiz() {
-            document.getElementById('quiz-result').style.display = 'block';
-        }
-
-        function openPayment(course, price) {
-            selectedCourse = course;
-            coursePrice = price;
-            document.getElementById('payment-details').innerHTML = `
-                <h3 style="margin-bottom: 1rem;">${course}</h3>
-                <p style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$${price}</p>
-            `;
-            document.getElementById('paymentModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function processPayment(e) {
-            e.preventDefault();
-            alert(`🎉 Welcome to ${selectedCourse}! You've invested in real value. Check your email for immediate access and next steps.`);
-            closeModal('paymentModal');
-        }
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-    </script>
+    <script src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T15-51-49-854Z-d8e0e5e5-chat-file-1765381909853-0.js"></script>
 </body>
 </html>
