@@ -715,6 +715,18 @@
 
         .success-message.show {
             display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Modal */
@@ -1188,21 +1200,21 @@
                 <h2 class="section-title">Let's Talk Results</h2>
                 <p class="section-description">Ready to cut through the noise and deliver real value? Let's discuss your goals</p>
             </div>
-            <form class="contact-form" action="https://formspree.io/f/xdkobpvb" method="POST" id="contactForm">
+            <form class="contact-form" action="https://formspree.io/f/mjkvvqvp" method="POST" id="contactForm">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="name" required placeholder="Your name">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" required placeholder="your@email.com">
+                    <input type="email" name="_replyto" required placeholder="your@email.com">
                 </div>
                 <div class="form-group">
                     <label>What value are you looking to create?</label>
                     <textarea name="message" required placeholder="Tell us about your goals and challenges..."></textarea>
                 </div>
                 <input type="hidden" name="_subject" value="New Contact Form Submission - Nothing But Value">
-                <input type="hidden" name="_next" value="https://nothingbutvalue.com/#contact">
+                <input type="text" name="_gotcha" style="display:none">
                 <button type="submit" class="btn-primary" style="width: 100%;">Start the Conversation</button>
                 <div class="success-message" id="successMessage">
                     <h3 style="color: var(--accent-1); margin-bottom: 0.5rem;">✅ Message Sent Successfully!</h3>
@@ -1641,21 +1653,35 @@
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
-                // Form will submit to Formspree
-                // Show success message after a brief delay
+                // Let the form submit to Formspree naturally
+                // Show success message after brief delay
                 setTimeout(function() {
                     const successMsg = document.getElementById('successMessage');
-                    if (successMsg) {
+                    if (successMsg && window.location.hash === '#contact') {
                         successMsg.classList.add('show');
-                        contactForm.reset();
                         
-                        // Hide success message after 5 seconds
+                        // Hide success message after 8 seconds
                         setTimeout(function() {
                             successMsg.classList.remove('show');
-                        }, 5000);
+                        }, 8000);
                     }
-                }, 1000);
+                }, 500);
             });
+        }
+
+        // Check if we're returning from form submission
+        if (window.location.hash === '#contact' && document.referrer.includes('formspree')) {
+            setTimeout(function() {
+                const successMsg = document.getElementById('successMessage');
+                if (successMsg) {
+                    successMsg.classList.add('show');
+                    contactForm.reset();
+                    
+                    setTimeout(function() {
+                        successMsg.classList.remove('show');
+                    }, 8000);
+                }
+            }, 500);
         }
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
