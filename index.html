@@ -359,6 +359,7 @@
             transition: all 0.4s;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .service-card::before {
@@ -746,12 +747,12 @@
             color: var(--accent-3);
         }
 
-        .blog-article {
+        .blog-article, .service-detail {
             color: var(--text-primary);
             line-height: 1.8;
         }
 
-        .blog-article h1 {
+        .blog-article h1, .service-detail h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             background: var(--gradient-1);
@@ -759,38 +760,38 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .blog-article h2 {
+        .blog-article h2, .service-detail h2 {
             font-size: 1.8rem;
             margin: 2rem 0 1rem;
             color: var(--accent-1);
         }
 
-        .blog-article h3 {
+        .blog-article h3, .service-detail h3 {
             font-size: 1.4rem;
             margin: 1.5rem 0 1rem;
             color: var(--text-primary);
         }
 
-        .blog-article p {
+        .blog-article p, .service-detail p {
             margin-bottom: 1.5rem;
             color: var(--text-secondary);
         }
 
-        .blog-article ul, .blog-article ol {
+        .blog-article ul, .blog-article ol, .service-detail ul, .service-detail ol {
             margin: 1rem 0 1.5rem 2rem;
             color: var(--text-secondary);
         }
 
-        .blog-article li {
+        .blog-article li, .service-detail li {
             margin-bottom: 0.5rem;
         }
 
-        .blog-article strong {
+        .blog-article strong, .service-detail strong {
             color: var(--text-primary);
             font-weight: 600;
         }
 
-        .blog-article em {
+        .blog-article em, .service-detail em {
             font-style: italic;
             color: var(--accent-1);
         }
@@ -861,11 +862,11 @@
                 padding: 2rem;
             }
 
-            .blog-article h1 {
+            .blog-article h1, .service-detail h1 {
                 font-size: 2rem;
             }
 
-            .blog-article h2 {
+            .blog-article h2, .service-detail h2 {
                 font-size: 1.5rem;
             }
         }
@@ -939,32 +940,32 @@
                 <p class="section-description">Every service is designed to deliver measurable value—no unnecessary complexity, just results that matter</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" onclick="openService('service1')">
                     <span class="service-icon">💎</span>
                     <h3>High-Value IT Solutions</h3>
                     <p>Strategic technology implementations that directly impact your bottom line. Cloud optimization, automation, and digital transformation focused on ROI, not buzzwords.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="openService('service2')">
                     <span class="service-icon">🎯</span>
                     <h3>Results-Driven Leadership</h3>
                     <p>Executive coaching stripped of theory, focused on practical frameworks that create immediate impact. Build leadership capabilities that translate to measurable team performance.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="openService('service3')">
                     <span class="service-icon">⚡</span>
                     <h3>Performance Optimization</h3>
                     <p>Data-backed strategies to maximize individual and organizational performance. Cut through the noise with proven methods that deliver consistent results.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="openService('service4')">
                     <span class="service-icon">📈</span>
                     <h3>Strategic Growth Consulting</h3>
                     <p>Business strategy focused on sustainable, profitable growth. We help you identify high-value opportunities and execute with precision.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="openService('service5')">
                     <span class="service-icon">🛡️</span>
                     <h3>Essential Tech Training</h3>
                     <p>Skills development that matters. Training programs in AI, cloud, and cybersecurity designed for immediate application and career advancement.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="openService('service6')">
                     <span class="service-icon">🚀</span>
                     <h3>Efficient Transformation</h3>
                     <p>Streamlined digital transformation without the bloat. We modernize your operations efficiently, delivering value at every stage of the journey.</p>
@@ -1185,6 +1186,14 @@
         </div>
     </section>
 
+    <!-- Service Detail Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeService()">&times;</span>
+            <div id="service-detail-content" class="service-detail"></div>
+        </div>
+    </div>
+
     <!-- Blog Modal -->
     <div id="blogModal" class="modal">
         <div class="modal-content">
@@ -1228,254 +1237,21 @@
         </div>
     </footer>
 
+    <script src="content.js"></script>
     <script>
         let selectedCourse = '';
         let coursePrice = 0;
 
-        const blogArticles = {
-            blog1: `
-                <h1>Cloud ROI: Cutting Costs While Scaling</h1>
-                <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>5 min read • Dec 10, 2025</em></p>
-                
-                <p>Cloud costs tend to grow faster than expected. According to Flexera's 2024 State of the Cloud Report, organizations waste approximately 28% of their cloud spend. For a company spending $50,000 monthly, that's $14,000 going to waste.</p>
-                
-                <p>Here's a practical approach to reducing cloud costs while maintaining or improving performance.</p>
-                
-                <h2>Why Cloud Costs Spiral</h2>
-                <p>Most companies migrate to the cloud without optimizing for cloud-native architecture. Common issues include:</p>
-                <ul>
-                    <li>Running instances 24/7 when they're only needed during business hours</li>
-                    <li>Provisioning for peak capacity all the time</li>
-                    <li>Keeping old snapshots and unused volumes</li>
-                    <li>Using expensive storage tiers for infrequently accessed data</li>
-                </ul>
-                
-                <h2>Practical Cost Reduction Strategies</h2>
-                
-                <h3>1. Right-Size Your Instances</h3>
-                <p><strong>The Issue:</strong> Teams often provision larger instances than needed, "just to be safe."</p>
-                <p><strong>The Approach:</strong></p>
-                <ul>
-                    <li>Monitor actual CPU and memory usage for 2-4 weeks</li>
-                    <li>Identify instances consistently using less than 40% of resources</li>
-                    <li>Test downsizing in non-production first</li>
-                    <li>Gradually adjust production instances</li>
-                </ul>
-                <p><strong>Example:</strong> A client was running database instances at 25% CPU utilization. After testing, they downsized from db.r5.2xlarge to db.r5.xlarge, reducing costs by $350/month per instance with no performance impact.</p>
-                
-                <h3>2. Use Reserved Instances for Stable Workloads</h3>
-                <p><strong>The Issue:</strong> Paying on-demand rates for workloads that run continuously.</p>
-                <p><strong>Typical Savings:</strong> 30-40% compared to on-demand pricing</p>
-                
-                <h3>3. Implement Scheduling for Non-Production</h3>
-                <p><strong>Example:</strong> A development team reduced their environment from 168 hours/week to 50 hours/week (weekdays 8 AM-6 PM), cutting those specific costs by approximately 70%.</p>
-                
-                <h2>A Realistic 60-Day Optimization Plan</h2>
-                <p><strong>Weeks 1-2:</strong> Assessment - Enable cost tracking, analyze spending patterns</p>
-                <p><strong>Weeks 3-4:</strong> Quick Wins - Delete unused resources, implement dev/test scheduling (Expected: 15-25% reduction)</p>
-                <p><strong>Weeks 5-6:</strong> Strategic Changes - Purchase reserved instances, implement storage lifecycle policies (Expected: Additional 10-20%)</p>
-                <p><strong>Weeks 7-8:</strong> Monitoring & Refinement - Set up alerts, create review process</p>
-                
-                <h2>Real Example: SaaS Company</h2>
-                <p><strong>Starting Point:</strong> Monthly spend of $45,000</p>
-                <p><strong>Results:</strong> New monthly spend of $28,300 (37% reduction) achieved in 8 weeks with no performance degradation</p>
-                
-                <h2>Realistic Expectations</h2>
-                <ul>
-                    <li><strong>First 30 days:</strong> 15-25% cost reduction from quick wins</li>
-                    <li><strong>60-90 days:</strong> Additional 10-20% from strategic optimization</li>
-                    <li><strong>Ongoing:</strong> 5-10% annual improvement from continuous optimization</li>
-                </ul>
-                <p>Total realistic savings: 30-45% over 3-6 months for most organizations.</p>
-                
-                <h2>Next Steps</h2>
-                <ol>
-                    <li>Audit current spending using your cloud provider's cost tools</li>
-                    <li>Identify quick wins (unused resources, obvious oversizing)</li>
-                    <li>Start with non-production environments</li>
-                    <li>Measure and document results</li>
-                    <li>Expand gradually to production workloads</li>
-                </ol>
-                <p>Cloud optimization is an ongoing process, not a one-time project. Start small, measure results, and expand what works.</p>
-            `,
-            blog2: `
-                <h1>Leadership That Delivers: 5 High-Impact Principles</h1>
-                <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>7 min read • Dec 10, 2025</em></p>
-                
-                <p>Most leadership advice focuses on theory. This article focuses on practical principles that consistently improve team performance, based on working with dozens of teams across different industries.</p>
-                
-                <p>These aren't revolutionary ideas—they're fundamentals that many leaders know but few consistently apply.</p>
-                
-                <h2>The Gap Between Knowing and Doing</h2>
-                <p>Everyone knows communication is important. Everyone agrees clear goals matter. But in practice:</p>
-                <ul>
-                    <li>Team members often don't know what success looks like</li>
-                    <li>Priorities shift without clear communication</li>
-                    <li>Feedback happens too late to be useful</li>
-                    <li>Problems fester because they're not discussed</li>
-                </ul>
-                <p>The difference between average and high-performing teams often comes down to consistent execution of basics.</p>
-                
-                <h2>Principle 1: Set Clear, Measurable Outcomes</h2>
-                <p><strong>The Problem:</strong> Vague goals like "improve customer satisfaction" don't give teams clear direction.</p>
-                <p><strong>Example:</strong> Instead of "Improve our deployment process," try "Reduce deployment time from 4 hours to 90 minutes by end of Q2, while maintaining zero critical bugs in production"</p>
-                <p><strong>Why It Works:</strong> Clear targets eliminate ambiguity. Teams know exactly what they're working toward and can track progress objectively.</p>
-                
-                <h2>Principle 2: Remove Blockers Immediately</h2>
-                <p><strong>The Practice:</strong></p>
-                <ul>
-                    <li>Daily check-ins on blockers (5-10 minutes)</li>
-                    <li>Commit to resolving blockers within 24 hours</li>
-                    <li>Empower team to escalate without hesitation</li>
-                    <li>Track blocker resolution time</li>
-                </ul>
-                <p><strong>Example:</strong> A development team was waiting 3-5 days for infrastructure approvals. After implementing a daily blocker review, average resolution time dropped to 4 hours. The team's velocity improved noticeably within two weeks.</p>
-                
-                <h2>Principle 3: Give Frequent, Specific Feedback</h2>
-                <p><strong>The Practice:</strong></p>
-                <ul>
-                    <li>Weekly 1-on-1s (15-30 minutes)</li>
-                    <li>Immediate positive feedback when you see good work</li>
-                    <li>Address issues within 48 hours</li>
-                    <li>Focus on specific behaviors, not personality</li>
-                </ul>
-                <p><strong>Example:</strong> Instead of "You need to communicate better," try "In yesterday's meeting, the client seemed confused about our timeline. Next time, let's prepare a visual timeline to share upfront."</p>
-                
-                <h2>Principle 4: Make Decisions Quickly</h2>
-                <p><strong>Framework:</strong></p>
-                <ul>
-                    <li><strong>Reversible decisions:</strong> Decide quickly, adjust if needed</li>
-                    <li><strong>Irreversible decisions:</strong> Take more time, gather input</li>
-                    <li><strong>No decision needed:</strong> Empower team to decide</li>
-                </ul>
-                <p><strong>Why It Works:</strong> Forward momentum matters more than perfect decisions. Most decisions can be adjusted later if needed.</p>
-                
-                <h2>Principle 5: Protect Focus Time</h2>
-                <p><strong>The Practice:</strong></p>
-                <ul>
-                    <li>Block "no meeting" time for the team</li>
-                    <li>Batch meetings when possible</li>
-                    <li>Question whether each meeting is necessary</li>
-                    <li>Default to async communication for updates</li>
-                </ul>
-                <p><strong>Example:</strong> A team implemented "Focus Fridays" with no meetings after 12 PM. Team members reported completing more meaningful work on Friday afternoons than in the previous three days combined.</p>
-                
-                <h2>Putting It Together</h2>
-                <p><strong>Month 1:</strong> Focus on clear outcomes and removing blockers</p>
-                <p><strong>Month 2:</strong> Add regular feedback with weekly 1-on-1s</p>
-                <p><strong>Month 3:</strong> Improve decision speed and protect focus time</p>
-                
-                <h2>What to Expect</h2>
-                <p><strong>Early results (2-4 weeks):</strong> Team feels more clarity, blockers resolved faster, communication improves</p>
-                <p><strong>Medium-term (2-3 months):</strong> Measurable improvement in delivery speed, fewer surprises, better morale</p>
-                <p><strong>Long-term (6+ months):</strong> Consistent high performance becomes the norm, team more self-sufficient</p>
-                
-                <h2>The Bottom Line</h2>
-                <p>High-impact leadership isn't about charisma or grand vision. It's about consistently executing fundamentals:</p>
-                <ol>
-                    <li>Clear outcomes</li>
-                    <li>Fast blocker removal</li>
-                    <li>Regular feedback</li>
-                    <li>Quick decisions</li>
-                    <li>Protected focus time</li>
-                </ol>
-                <p>Start with one principle. Build the habit. Add another. Repeat.</p>
-            `,
-            blog3: `
-                <h1>Productivity Hacks That Actually Work</h1>
-                <p style="color: var(--accent-1); margin-bottom: 2rem;"><em>6 min read • Dec 10, 2025</em></p>
-                
-                <p>Most productivity advice doesn't work in real work environments. You can't "just wake up at 5 AM" when you have young kids. You can't "eliminate all meetings" when your job requires collaboration.</p>
-                
-                <p>This article focuses on practical strategies that work within real constraints, tested with professionals across different roles and industries.</p>
-                
-                <h2>The Productivity Paradox</h2>
-                <p>The internet is full of productivity advice. Yet most people feel busier and less productive than ever. Why?</p>
-                <ul>
-                    <li>Advice assumes ideal conditions (no meetings, no interruptions)</li>
-                    <li>Strategies work for some roles but not others</li>
-                    <li>Techniques require complete lifestyle changes</li>
-                    <li>No consideration for different work styles</li>
-                </ul>
-                <p><strong>What actually helps:</strong> Small, sustainable changes that fit your actual work environment.</p>
-                
-                <h2>Strategy 1: Time Blocking (The Realistic Version)</h2>
-                <p><strong>What Actually Works:</strong> Block 2-3 hours per day for focused work, and protect those blocks fiercely.</p>
-                <p><strong>Implementation:</strong></p>
-                <ol>
-                    <li>Identify your best focus time (morning/afternoon)</li>
-                    <li>Block 2-hour chunks on your calendar</li>
-                    <li>Mark as "Busy" so others can't book over it</li>
-                    <li>Use this time for your most important work</li>
-                    <li>Let everything else fit around these blocks</li>
-                </ol>
-                <p><strong>Example:</strong> A product manager blocked 9-11 AM daily for strategic work. She moved all meetings to afternoons. In the first month, she completed a product roadmap that had been pending for six weeks.</p>
-                
-                <h2>Strategy 2: The Two-Minute Rule</h2>
-                <p><strong>The Concept:</strong> If something takes less than 2 minutes, do it immediately.</p>
-                <p><strong>Why It Works:</strong> Small tasks accumulate and create mental clutter. Clearing them immediately prevents buildup.</p>
-                <p><strong>Examples:</strong> Reply to simple emails, file documents, make quick decisions, send calendar invites, approve straightforward requests</p>
-                
-                <h2>Strategy 3: Batch Similar Tasks</h2>
-                <p><strong>The Problem:</strong> Context switching drains energy. Jumping between different types of work reduces efficiency.</p>
-                <p><strong>Examples:</strong></p>
-                <ul>
-                    <li>Check email 3 times daily instead of constantly</li>
-                    <li>Schedule all 1-on-1s on the same day</li>
-                    <li>Batch administrative tasks weekly</li>
-                    <li>Group similar meetings back-to-back</li>
-                </ul>
-                <p><strong>Why It Works:</strong> Staying in one mode (email mode, meeting mode, deep work mode) is more efficient than constantly switching.</p>
-                
-                <h2>Strategy 4: The "Not-To-Do" List</h2>
-                <p><strong>The Insight:</strong> Productivity isn't just about doing more—it's about doing less of what doesn't matter.</p>
-                <p><strong>Questions to Ask:</strong></p>
-                <ul>
-                    <li>Does this directly contribute to my key goals?</li>
-                    <li>Am I the only person who can do this?</li>
-                    <li>What happens if I don't do this?</li>
-                    <li>Can this be automated or simplified?</li>
-                </ul>
-                <p><strong>Example:</strong> An executive realized she was attending 12 recurring meetings weekly. She evaluated each one and stopped attending 5 where her presence wasn't essential.</p>
-                
-                <h2>Strategy 5: Single-Tasking</h2>
-                <p><strong>The Reality:</strong> Multitasking reduces quality and increases time to completion.</p>
-                <p><strong>The Practice:</strong> Work on one thing at a time until it's done or you hit a natural stopping point.</p>
-                <p><strong>Example:</strong> A writer struggled to finish articles while checking Slack and email. She started using 45-minute focus sessions with everything closed except her writing tool. Her writing time per article dropped from 4 hours to 2.5 hours.</p>
-                
-                <h2>Strategy 6: Energy Management Over Time Management</h2>
-                <p><strong>The Practice:</strong></p>
-                <ul>
-                    <li>Do your hardest work during your peak energy time</li>
-                    <li>Save routine tasks for low-energy periods</li>
-                    <li>Take real breaks (not just switching tasks)</li>
-                    <li>Recognize that some days you'll have less energy</li>
-                </ul>
-                <p><strong>Example:</strong> A developer realized he was most focused 10 AM-1 PM. He moved all meetings to afternoons and used mornings for coding. His bug rate decreased and feature completion improved.</p>
-                
-                <h2>Putting It Together</h2>
-                <p><strong>Week 1-2:</strong> Try time blocking - Block 2 hours daily for focused work</p>
-                <p><strong>Week 3-4:</strong> Add the two-minute rule - Handle quick tasks immediately</p>
-                <p><strong>Week 5-6:</strong> Start batching - Group similar tasks</p>
-                <p><strong>Week 7-8:</strong> Create your not-to-do list - Identify what to stop doing</p>
-                
-                <h2>Realistic Expectations</h2>
-                <p><strong>Don't expect:</strong> To suddenly work 10 hours of focused time daily, to never get distracted, to eliminate all meetings</p>
-                <p><strong>Do expect:</strong> 15-25% more meaningful work completed, less feeling of being overwhelmed, better work-life boundaries, more energy at end of day</p>
-                
-                <h2>The Bottom Line</h2>
-                <p>Productivity isn't about working more hours or following complex systems. It's about:</p>
-                <ol>
-                    <li>Protecting time for important work</li>
-                    <li>Eliminating unnecessary tasks</li>
-                    <li>Working with your natural energy</li>
-                    <li>Reducing context switching</li>
-                    <li>Doing one thing at a time</li>
-                </ol>
-                <p>Start with one strategy. Give it two weeks. If it helps, keep it. If not, try another.</p>
-                <p>The goal isn't perfect productivity—it's doing more meaningful work without burning out.</p>
-            `
-        };
+        function openService(serviceId) {
+            document.getElementById('service-detail-content').innerHTML = serviceDetails[serviceId];
+            document.getElementById('serviceModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeService() {
+            document.getElementById('serviceModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
         function openBlog(blogId) {
             document.getElementById('blog-article-content').innerHTML = blogArticles[blogId];
