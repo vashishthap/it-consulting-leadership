@@ -719,21 +719,6 @@
             animation: slideIn 0.5s ease-out;
         }
 
-        .error-message {
-            display: none;
-            padding: 1.5rem;
-            background: rgba(255, 0, 110, 0.1);
-            border: 2px solid var(--accent-3);
-            border-radius: 12px;
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-
-        .error-message.show {
-            display: block;
-            animation: slideIn 0.5s ease-out;
-        }
-
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -1216,28 +1201,24 @@
                 <h2 class="section-title">Let's Talk Results</h2>
                 <p class="section-description">Ready to cut through the noise and deliver real value? Let's discuss your goals</p>
             </div>
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" action="https://formsubmit.co/nothingbutvalue18@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Contact from Nothing But Value Website!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" name="from_name" id="name" required placeholder="Your name">
+                    <input type="text" name="name" required placeholder="Your name">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="from_email" id="email" required placeholder="your@email.com">
+                    <input type="email" name="email" required placeholder="your@email.com">
                 </div>
                 <div class="form-group">
                     <label>What value are you looking to create?</label>
-                    <textarea name="message" id="message" required placeholder="Tell us about your goals and challenges..."></textarea>
+                    <textarea name="message" required placeholder="Tell us about your goals and challenges..."></textarea>
                 </div>
-                <button type="submit" class="btn-primary" style="width: 100%;" id="submitBtn">Start the Conversation</button>
-                <div class="success-message" id="successMessage">
-                    <h3 style="color: var(--accent-1); margin-bottom: 0.5rem;">✅ Message Sent Successfully!</h3>
-                    <p style="margin: 0;">Thank you! We'll respond within 24 hours with concrete next steps.</p>
-                </div>
-                <div class="error-message" id="errorMessage">
-                    <h3 style="color: var(--accent-3); margin-bottom: 0.5rem;">❌ Oops! Something went wrong</h3>
-                    <p style="margin: 0;">Please email us directly at <a href="mailto:nothingbutvalue18@gmail.com" style="color: var(--accent-1);">nothingbutvalue18@gmail.com</a></p>
-                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Start the Conversation</button>
             </form>
         </div>
     </section>
@@ -1293,14 +1274,6 @@
             <p style="margin-top: 1rem;"><a href="mailto:nothingbutvalue18@gmail.com" style="color: var(--accent-1); text-decoration: none;">nothingbutvalue18@gmail.com</a></p>
         </div>
     </footer>
-
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init("LYpOX_tO0SZVmcTuy");
-        })();
-    </script>
 
     <script>
         let selectedCourse = '';
@@ -1673,49 +1646,6 @@
             e.preventDefault();
             alert(`🎉 Welcome to ${selectedCourse}! You've invested in real value. Check your email for immediate access and next steps.`);
             closeModal('paymentModal');
-        }
-
-        // Contact form submission using EmailJS
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const submitBtn = document.getElementById('submitBtn');
-                const successMsg = document.getElementById('successMessage');
-                const errorMsg = document.getElementById('errorMessage');
-                const originalText = submitBtn.textContent;
-                
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-                
-                // Hide any previous messages
-                successMsg.classList.remove('show');
-                errorMsg.classList.remove('show');
-                
-                emailjs.sendForm('service_zx07xj7', 'template_contact', this)
-                    .then(function() {
-                        successMsg.classList.add('show');
-                        contactForm.reset();
-                        
-                        setTimeout(() => {
-                            successMsg.classList.remove('show');
-                        }, 8000);
-                        
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    }, function(error) {
-                        console.error('EmailJS Error:', error);
-                        errorMsg.classList.add('show');
-                        
-                        setTimeout(() => {
-                            errorMsg.classList.remove('show');
-                        }, 8000);
-                        
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    });
-            });
         }
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
