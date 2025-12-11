@@ -1375,10 +1375,10 @@
                 <h2 class="section-title">Let's Talk Results</h2>
                 <p class="section-description">Ready to cut through the noise and deliver real value? Let's discuss your goals</p>
             </div>
-            <form class="contact-form" action="https://formsubmit.co/nothingbutvalue18@gmail.com" method="POST">
+            <form class="contact-form" id="contactForm" action="https://formsubmit.co/nothingbutvalue18@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="New Contact from Nothing But Value Website!">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://nothingbutvalue.com/#contact">
                 
                 <div class="form-group">
                     <label>Name</label>
@@ -1393,6 +1393,11 @@
                     <textarea name="message" required placeholder="Tell us about your goals and challenges..."></textarea>
                 </div>
                 <button type="submit" class="btn-primary" style="width: 100%;">Start the Conversation</button>
+                
+                <div class="success-message" id="successMessage">
+                    <h3 style="color: var(--accent-1); margin-bottom: 0.5rem;">✅ Message Sent Successfully!</h3>
+                    <p style="color: var(--text-secondary); margin: 0;">Thank you for reaching out! We'll get back to you within 24 hours.</p>
+                </div>
             </form>
         </div>
     </section>
@@ -1480,7 +1485,16 @@
 
         window.addEventListener('load', showDiscountPopup);
 
-        // Course Data with full details (keeping all existing content - truncated for brevity)
+        // Contact Form Success Message
+        const urlParams = new URLSearchParams(window.location.search);
+        if (window.location.hash === '#contact' && document.referrer.includes('formsubmit.co')) {
+            document.getElementById('successMessage').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+        }
+
+        // Course Data (keeping existing full content - truncated for space)
         const courses = {
             1: {
                 title: "Cloud Value Optimization",
@@ -1771,7 +1785,7 @@
             }
         };
 
-        // Blog Data with FULL content (keeping existing - truncated for brevity)
+        // Blog and Service data (keeping existing - truncated for space)
         const blogs = {
             1: {
                 title: "Cloud ROI: Cutting Costs While Scaling",
@@ -1876,7 +1890,6 @@
             }
         };
 
-        // Service Data with FULL content (keeping existing - truncated for brevity)
         const services = {
             1: {
                 title: "💎 High-Value IT Solutions",
