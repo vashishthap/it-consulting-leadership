@@ -6,27 +6,6 @@
     <title>Nothing But Value - Pure Excellence in IT & Leadership</title>
     <link rel="icon" type="image/png" href="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-07T12-46-02-281Z-52394c78-chat-image-1765111562261-0.jpg">
     
-    <!-- Botsonic AI Chatbot -->
-    <script>
-      (function (w, d, s, o, f, js, fjs) {
-        w["botsonic_widget"] = o;
-        w[o] =
-          w[o] ||
-          function () {
-            (w[o].q = w[o].q || []).push(arguments);
-          };
-        (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
-        js.id = o;
-        js.src = f;
-        js.async = 1;
-        fjs.parentNode.insertBefore(js, fjs);
-      })(window, document, "script", "Botsonic", "https://widget.botsonic.com/CDN/botsonic.min.js");
-      Botsonic("init", {
-        serviceBaseUrl: "https://api-bot.writesonic.com",
-        token: "db88401d-f44b-4fa0-931f-e194f67aaaa1",
-      });
-    </script>
-    
     <style>
         * {
             margin: 0;
@@ -1308,105 +1287,6 @@
             box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
         }
         
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto;
-            padding: 2rem;
-        }
-        
-        .modal-content {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 900px;
-            width: 100%;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-            z-index: 10;
-        }
-        
-        .close-modal:hover {
-            color: var(--accent-3);
-        }
-
-        .blog-article, .service-detail, .course-detail {
-            color: var(--text-primary);
-            line-height: 1.8;
-        }
-
-        .blog-article h1, .service-detail h1, .course-detail h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .blog-article h2, .service-detail h2, .course-detail h2 {
-            font-size: 1.8rem;
-            margin: 2rem 0 1rem;
-            color: var(--accent-1);
-        }
-
-        .blog-article h3, .service-detail h3, .course-detail h3 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 1rem;
-            color: var(--text-primary);
-        }
-
-        .blog-article p, .service-detail p, .course-detail p {
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .blog-article ul, .blog-article ol, .service-detail ul, .service-detail ol, .course-detail ul, .course-detail ol {
-            margin: 1rem 0 1.5rem 2rem;
-            color: var(--text-secondary);
-        }
-
-        .blog-article li, .service-detail li, .course-detail li {
-            margin-bottom: 0.5rem;
-        }
-
-        .blog-article strong, .service-detail strong, .course-detail strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .blog-article em, .service-detail em, .course-detail em {
-            font-style: italic;
-            color: var(--accent-1);
-        }
-
-        .service-detail a, .course-detail a {
-            color: var(--accent-1);
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        
         /* Footer */
         footer {
             background: var(--bg-card);
@@ -1467,18 +1347,6 @@
             .logo-image {
                 width: 35px;
                 height: 35px;
-            }
-
-            .modal-content {
-                padding: 2rem;
-            }
-
-            .blog-article h1, .service-detail h1, .course-detail h1 {
-                font-size: 2rem;
-            }
-
-            .blog-article h2, .service-detail h2, .course-detail h2 {
-                font-size: 1.5rem;
             }
 
             .discount-content {
@@ -1707,32 +1575,32 @@
                 <p class="section-description">Every service is designed to deliver measurable value—no unnecessary complexity, just results that matter</p>
             </div>
             <div class="services-grid">
-                <div class="service-card" onclick="openService(1)">
+                <div class="service-card">
                     <span class="service-icon">💎</span>
                     <h3>High-Value IT Solutions</h3>
                     <p>Strategic technology implementations that directly impact your bottom line. Cloud optimization, automation, and digital transformation focused on ROI, not buzzwords.</p>
                 </div>
-                <div class="service-card" onclick="openService(2)">
+                <div class="service-card">
                     <span class="service-icon">🎯</span>
                     <h3>Results-Driven Leadership</h3>
                     <p>Executive coaching stripped of theory, focused on practical frameworks that create immediate impact. Build leadership capabilities that translate to measurable team performance.</p>
                 </div>
-                <div class="service-card" onclick="openService(3)">
+                <div class="service-card">
                     <span class="service-icon">⚡</span>
                     <h3>Performance Optimization</h3>
                     <p>Data-backed strategies to maximize individual and organizational performance. Cut through the noise with proven methods that deliver consistent results.</p>
                 </div>
-                <div class="service-card" onclick="openService(4)">
+                <div class="service-card">
                     <span class="service-icon">📈</span>
                     <h3>Strategic Growth Consulting</h3>
                     <p>Business strategy focused on sustainable, profitable growth. We help you identify high-value opportunities and execute with precision.</p>
                 </div>
-                <div class="service-card" onclick="openService(5)">
+                <div class="service-card">
                     <span class="service-icon">🛡️</span>
                     <h3>Essential Tech Training</h3>
                     <p>Skills development that matters. Training programs in AI, cloud, and cybersecurity designed for immediate application and career advancement.</p>
                 </div>
-                <div class="service-card" onclick="openService(6)">
+                <div class="service-card">
                     <span class="service-icon">🚀</span>
                     <h3>Efficient Transformation</h3>
                     <p>Streamlined digital transformation without the bloat. We modernize your operations efficiently, delivering value at every stage of the journey.</p>
@@ -1750,7 +1618,7 @@
                 <p class="section-description">No filler content. Every article delivers practical insights you can implement immediately</p>
             </div>
             <div class="blog-grid">
-                <div class="blog-card" onclick="openBlog(1)">
+                <div class="blog-card">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 5 min read</div>
@@ -1758,7 +1626,7 @@
                         <p>Practical strategies to reduce cloud spending while maintaining performance. Real examples from actual implementations.</p>
                     </div>
                 </div>
-                <div class="blog-card" onclick="openBlog(2)">
+                <div class="blog-card">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 7 min read</div>
@@ -1766,7 +1634,7 @@
                         <p>Skip the theory. Five leadership principles that consistently improve team performance across industries.</p>
                     </div>
                 </div>
-                <div class="blog-card" onclick="openBlog(3)">
+                <div class="blog-card">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 6 min read</div>
@@ -1818,7 +1686,7 @@
                 <p class="section-description">Programs designed for maximum ROI—every hour delivers practical skills and measurable career advancement</p>
             </div>
             <div class="courses-grid">
-                <div class="course-card" onclick="openCourse(1)">
+                <div class="course-card">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T17-08-57-843Z-fc42bfcb-chat-image-1765386537824-1.jpg');">
                         <span class="course-badge">⚡ High ROI</span>
                     </div>
@@ -1832,7 +1700,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card" onclick="openCourse(2)">
+                <div class="course-card">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T17-08-57-630Z-c537a258-chat-image-1765386537610-0.jpg');">
                         <span class="course-badge">👑 Premium Value</span>
                     </div>
@@ -1846,7 +1714,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card" onclick="openCourse(3)">
+                <div class="course-card">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-082Z-734cdf76-chat-image-1765385984063-1.jpg');">
                         <span class="course-badge">🚀 Quick Wins</span>
                     </div>
@@ -1860,7 +1728,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card" onclick="openCourse(4)">
+                <div class="course-card">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-268Z-e47d6019-chat-image-1765385984249-2.jpg');">
                         <span class="course-badge">🛡️ Essential</span>
                     </div>
@@ -1874,7 +1742,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card" onclick="openCourse(5)">
+                <div class="course-card">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-440Z-624650c9-chat-image-1765385984421-3.jpg');">
                         <span class="course-badge">✅ Proven Methods</span>
                     </div>
@@ -1888,9 +1756,9 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card" onclick="openCourse(6)">
+                <div class="course-card">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-43-836Z-203282df-chat-image-1765385983817-0.jpg');">
-                        <span class="course-badge">💡 Impact Focused</span>
+                        <span class="="course-badge">💡 Impact Focused</span>
                     </div>
                     <div class="course-content">
                         <h3>High-Impact Communication</h3>
@@ -1982,56 +1850,6 @@
         </div>
     </section>
 
-    <!-- Service Detail Modal -->
-    <div id="serviceModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('serviceModal')">&times;</span>
-            <div id="service-detail-content" class="service-detail"></div>
-        </div>
-    </div>
-
-    <!-- Blog Modal -->
-    <div id="blogModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('blogModal')">&times;</span>
-            <div id="blog-article-content" class="blog-article"></div>
-        </div>
-    </div>
-
-    <!-- Course Detail Modal -->
-    <div id="courseModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('courseModal')">&times;</span>
-            <div id="course-detail-content" class="course-detail"></div>
-        </div>
-    </div>
-
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('paymentModal')">&times;</span>
-            <h2>Invest in Value</h2>
-            <div id="payment-details" style="margin: 2rem 0;"></div>
-            <form onsubmit="processPayment(event)">
-                <div class="form-group">
-                    <label>Card Number</label>
-                    <input type="text" placeholder="1234 5678 9012 3456" required>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label>Expiry</label>
-                        <input type="text" placeholder="MM/YY" required>
-                    </div>
-                    <div class="form-group">
-                        <label>CVV</label>
-                        <input type="text" placeholder="123" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-primary" style="width: 100%;">Complete Enrollment</button>
-            </form>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -2042,13 +1860,33 @@
         </div>
     </footer>
 
+    <!-- Botsonic AI Chatbot Script -->
+    <script>
+      (function (w, d, s, o, f, js, fjs) {
+        w["botsonic_widget"] = o;
+        w[o] =
+          w[o] ||
+          function () {
+            (w[o].q = w[o].q || []).push(arguments);
+          };
+        (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
+        js.id = o;
+        js.src = f;
+        js.async = 1;
+        fjs.parentNode.insertBefore(js, fjs);
+      })(window, document, "script", "Botsonic", "https://widget.botsonic.com/CDN/botsonic.min.js");
+      Botsonic("init", {
+        serviceBaseUrl: "https://api-bot.writesonic.com",
+        token: "db88401d-f44b-4fa0-931f-e194f67aaaa1",
+      });
+    </script>
+
     <script>
         // Quiz Prompt System
         function showQuizPrompts() {
             const hasSeenPopup = localStorage.getItem('nbvQuizPopupSeen');
             const hasSeenBanner = localStorage.getItem('nbvQuizBannerSeen');
             
-            // Show popup modal after 8 seconds if not seen before
             if (!hasSeenPopup) {
                 setTimeout(() => {
                     document.getElementById('quizPopupModal').classList.add('show');
@@ -2056,7 +1894,6 @@
                 }, 8000);
             }
             
-            // Show bottom banner after 15 seconds if not seen before
             if (!hasSeenBanner) {
                 setTimeout(() => {
                     document.getElementById('quizPromptBanner').classList.add('show');
@@ -2349,19 +2186,7 @@
 
         window.addEventListener('load', showDiscountPopup);
 
-        // Course/Blog/Service data (truncated for space)
-        const courses = {1:{title:"Cloud Value Optimization",price:249,originalPrice:499,content:`<h1>Cloud Value Optimization</h1><p>Content...</p>`},2:{title:"Executive Value Leadership",price:399,originalPrice:799,content:`<h1>Executive Value Leadership</h1><p>Content...</p>`},3:{title:"Peak Performance Mastery",price:149,originalPrice:299,content:`<h1>Peak Performance Mastery</h1><p>Content...</p>`},4:{title:"Practical Cybersecurity",price:199,originalPrice:399,content:`<h1>Practical Cybersecurity</h1><p>Content...</p>`},5:{title:"Agile Value Delivery",price:174,originalPrice:349,content:`<h1>Agile Value Delivery</h1><p>Content...</p>`},6:{title:"High-Impact Communication",price:224,originalPrice:449,content:`<h1>High-Impact Communication</h1><p>Content...</p>`}};
-        const blogs = {1:{title:"Cloud ROI",content:`<h1>Cloud ROI</h1><p>Content...</p>`},2:{title:"Leadership",content:`<h1>Leadership</h1><p>Content...</p>`},3:{title:"Productivity",content:`<h1>Productivity</h1><p>Content...</p>`}};
-        const services = {1:{title:"💎 High-Value IT Solutions",content:`<p>Content...</p>`},2:{title:"🎯 Results-Driven Leadership",content:`<p>Content...</p>`},3:{title:"⚡ Performance Optimization",content:`<p>Content...</p>`},4:{title:"📈 Strategic Growth Consulting",content:`<p>Content...</p>`},5:{title:"🛡️ Essential Tech Training",content:`<p>Content...</p>`},6:{title:"🚀 Efficient Transformation",content:`<p>Content...</p>`}};
-
-        function openCourse(id){const course=courses[id];document.getElementById('course-detail-content').innerHTML=course.content;document.getElementById('courseModal').style.display='flex';document.body.style.overflow='hidden';}
-        function openService(id){const service=services[id];document.getElementById('service-detail-content').innerHTML=`<h1>${service.title}</h1>${service.content}`;document.getElementById('serviceModal').style.display='flex';document.body.style.overflow='hidden';}
-        function openBlog(id){const blog=blogs[id];document.getElementById('blog-article-content').innerHTML=blog.content;document.getElementById('blogModal').style.display='flex';document.body.style.overflow='hidden';}
-        function closeModal(modalId){document.getElementById(modalId).style.display='none';document.body.style.overflow='auto';}
-        function openPayment(course,price){document.getElementById('payment-details').innerHTML=`<h3 style="margin-bottom: 1rem;">${course}</h3><p style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$${price}</p><p style="color: var(--accent-1); font-weight: 600; margin-top: 0.5rem;">🎉 50% OFF FIRST-TIME VISITOR DISCOUNT</p>`;document.getElementById('paymentModal').style.display='flex';document.body.style.overflow='hidden';}
-        function processPayment(e){e.preventDefault();alert('🎉 Thank you for your enrollment! Check your email for immediate access and next steps.');closeModal('paymentModal');}
         document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(this.getAttribute('href'));if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}});});
-        window.onclick=function(event){if(event.target.classList.contains('modal')){event.target.style.display='none';document.body.style.overflow='auto';}}
     </script>
 </body>
 </html>
