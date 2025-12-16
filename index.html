@@ -91,6 +91,209 @@
             66% { transform: translate(-30px, 30px) scale(0.9); }
         }
 
+        /* Detail Modal Styles */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 4000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .detail-modal.show {
+            display: flex;
+        }
+
+        .detail-modal-content {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-1);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            animation: slideUp 0.5s ease-out;
+            box-shadow: 0 0 100px rgba(0, 245, 255, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .detail-modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-modal-close:hover {
+            color: var(--accent-3);
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-modal-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .detail-modal-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .detail-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .detail-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-1);
+        }
+
+        .detail-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-list li {
+            padding: 1rem 1.5rem;
+            background: rgba(0, 245, 255, 0.05);
+            border-left: 3px solid var(--accent-1);
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .detail-list li::before {
+            content: "✓";
+            color: var(--accent-1);
+            font-weight: bold;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .detail-price-box {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border: 2px solid var(--accent-1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .detail-price {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .detail-price-strike {
+            text-decoration: line-through;
+            opacity: 0.5;
+            font-size: 1.8rem;
+            margin-right: 1rem;
+        }
+
+        .detail-cta-button {
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient-1);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .detail-cta-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
+        }
+
+        .detail-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .detail-feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .detail-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-feature-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-1);
+        }
+
+        .detail-feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
         /* Quiz Prompt Banner */
         .quiz-prompt-banner {
             position: fixed;
@@ -1447,10 +1650,30 @@
                 padding: 14px 30px;
                 font-size: 1rem;
             }
+
+            .detail-modal-content {
+                padding: 2rem;
+            }
+
+            .detail-modal-title {
+                font-size: 2rem;
+            }
+
+            .detail-features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Detail Modal (for Services and Courses) -->
+    <div id="detailModal" class="detail-modal">
+        <div class="detail-modal-content">
+            <span class="detail-modal-close" onclick="closeDetailModal()">&times;</span>
+            <div id="detailModalBody"></div>
+        </div>
+    </div>
+
     <!-- Quiz Popup Modal -->
     <div id="quizPopupModal" class="quiz-popup-modal">
         <div class="quiz-popup-content">
@@ -1572,32 +1795,32 @@
                 <p class="section-description">Every service is designed to deliver measurable value—no unnecessary complexity, just results that matter</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" onclick="showServiceDetail('it-solutions')">
                     <span class="service-icon">💎</span>
                     <h3>High-Value IT Solutions</h3>
                     <p>Strategic technology implementations that directly impact your bottom line. Cloud optimization, automation, and digital transformation focused on ROI, not buzzwords.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="showServiceDetail('leadership')">
                     <span class="service-icon">🎯</span>
                     <h3>Results-Driven Leadership</h3>
                     <p>Executive coaching stripped of theory, focused on practical frameworks that create immediate impact. Build leadership capabilities that translate to measurable team performance.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="showServiceDetail('performance')">
                     <span class="service-icon">⚡</span>
                     <h3>Performance Optimization</h3>
                     <p>Data-backed strategies to maximize individual and organizational performance. Cut through the noise with proven methods that deliver consistent results.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="showServiceDetail('growth')">
                     <span class="service-icon">📈</span>
                     <h3>Strategic Growth Consulting</h3>
                     <p>Business strategy focused on sustainable, profitable growth. We help you identify high-value opportunities and execute with precision.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="showServiceDetail('training')">
                     <span class="service-icon">🛡️</span>
                     <h3>Essential Tech Training</h3>
                     <p>Skills development that matters. Training programs in AI, cloud, and cybersecurity designed for immediate application and career advancement.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="showServiceDetail('transformation')">
                     <span class="service-icon">🚀</span>
                     <h3>Efficient Transformation</h3>
                     <p>Streamlined digital transformation without the bloat. We modernize your operations efficiently, delivering value at every stage of the journey.</p>
@@ -1683,7 +1906,7 @@
                 <p class="section-description">Programs designed for maximum ROI—every hour delivers practical skills and measurable career advancement</p>
             </div>
             <div class="courses-grid">
-                <div class="course-card">
+                <div class="course-card" onclick="showCourseDetail('cloud')">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T17-08-57-843Z-fc42bfcb-chat-image-1765386537824-1.jpg');">
                         <span class="course-badge">⚡ High ROI</span>
                     </div>
@@ -1697,7 +1920,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showCourseDetail('leadership')">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T17-08-57-630Z-c537a258-chat-image-1765386537610-0.jpg');">
                         <span class="course-badge">👑 Premium Value</span>
                     </div>
@@ -1711,7 +1934,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showCourseDetail('performance')">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-082Z-734cdf76-chat-image-1765385984063-1.jpg');">
                         <span class="course-badge">🚀 Quick Wins</span>
                     </div>
@@ -1725,7 +1948,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showCourseDetail('cybersecurity')">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-268Z-e47d6019-chat-image-1765385984249-2.jpg');">
                         <span class="course-badge">🛡️ Essential</span>
                     </div>
@@ -1739,7 +1962,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showCourseDetail('agile')">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-440Z-624650c9-chat-image-1765385984421-3.jpg');">
                         <span class="course-badge">✅ Proven Methods</span>
                     </div>
@@ -1753,7 +1976,7 @@
                         <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showCourseDetail('communication')">
                     <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-43-836Z-203282df-chat-image-1765385983817-0.jpg');">
                         <span class="course-badge">💡 Impact Focused</span>
                     </div>
@@ -1878,312 +2101,6 @@
       });
     </script>
 
-    <script>
-        // Quiz Prompt System
-        function showQuizPrompts() {
-            const hasSeenPopup = localStorage.getItem('nbvQuizPopupSeen');
-            const hasSeenBanner = localStorage.getItem('nbvQuizBannerSeen');
-            
-            if (!hasSeenPopup) {
-                setTimeout(() => {
-                    document.getElementById('quizPopupModal').classList.add('show');
-                    document.body.style.overflow = 'hidden';
-                }, 8000);
-            }
-            
-            if (!hasSeenBanner) {
-                setTimeout(() => {
-                    document.getElementById('quizPromptBanner').classList.add('show');
-                }, 15000);
-            }
-        }
-
-        function closeQuizPopup() {
-            document.getElementById('quizPopupModal').classList.remove('show');
-            document.body.style.overflow = 'auto';
-            localStorage.setItem('nbvQuizPopupSeen', 'true');
-        }
-
-        function closeBanner() {
-            document.getElementById('quizPromptBanner').classList.remove('show');
-            localStorage.setItem('nbvQuizBannerSeen', 'true');
-        }
-
-        function startQuizFromPopup() {
-            closeQuizPopup();
-            scrollToQuiz();
-        }
-
-        function startQuizFromBanner() {
-            closeBanner();
-            scrollToQuiz();
-        }
-
-        function scrollToQuiz() {
-            const quizSection = document.getElementById('quiz');
-            quizSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Interactive Quiz System
-        const quizQuestions = [
-            {
-                question: "When facing a complex problem, what's your first instinct?",
-                options: [
-                    { text: "Analyze data and create a detailed plan", value: "A", trait: "analytical" },
-                    { text: "Brainstorm with the team for diverse perspectives", value: "B", trait: "collaborative" },
-                    { text: "Take immediate action and adjust as you go", value: "C", trait: "action-oriented" },
-                    { text: "Research best practices and learn from experts", value: "D", trait: "learning-focused" }
-                ]
-            },
-            {
-                question: "How do you prefer to measure success?",
-                options: [
-                    { text: "Clear metrics and quantifiable results", value: "A", trait: "data-driven" },
-                    { text: "Team satisfaction and collaboration quality", value: "B", trait: "people-focused" },
-                    { text: "Speed of execution and tangible outcomes", value: "C", trait: "results-driven" },
-                    { text: "Long-term growth and skill development", value: "D", trait: "growth-oriented" }
-                ]
-            },
-            {
-                question: "In a high-pressure situation, you typically:",
-                options: [
-                    { text: "Stay calm and methodically work through the issue", value: "A", trait: "systematic" },
-                    { text: "Rally the team and leverage collective strength", value: "B", trait: "team-builder" },
-                    { text: "Make quick decisions and lead by example", value: "C", trait: "decisive" },
-                    { text: "View it as a learning opportunity for improvement", value: "D", trait: "adaptive" }
-                ]
-            },
-            {
-                question: "What energizes you most at work?",
-                options: [
-                    { text: "Solving complex technical or strategic challenges", value: "A", trait: "problem-solver" },
-                    { text: "Building strong relationships and team dynamics", value: "B", trait: "connector" },
-                    { text: "Achieving ambitious goals and seeing impact", value: "C", trait: "achiever" },
-                    { text: "Mastering new skills and expanding capabilities", value: "D", trait: "learner" }
-                ]
-            },
-            {
-                question: "Your ideal work environment is:",
-                options: [
-                    { text: "Structured with clear processes and objectives", value: "A", trait: "organized" },
-                    { text: "Collaborative with open communication", value: "B", trait: "social" },
-                    { text: "Fast-paced with autonomy and ownership", value: "C", trait: "independent" },
-                    { text: "Dynamic with continuous learning opportunities", value: "D", trait: "evolving" }
-                ]
-            }
-        ];
-
-        const personalityProfiles = {
-            "A": {
-                type: "Strategic Architect",
-                icon: "🎯",
-                description: "You excel at systematic thinking and data-driven decision-making. Your analytical mind transforms complex challenges into structured solutions.",
-                traits: [
-                    { label: "Core Strength", value: "Strategic Planning & Analysis" },
-                    { label: "Work Style", value: "Methodical & Data-Driven" },
-                    { label: "Value Creation", value: "Optimization & Efficiency" },
-                    { label: "Growth Area", value: "Rapid Execution & Adaptability" }
-                ],
-                recommendedCourse: {
-                    title: "Cloud Value Optimization",
-                    reason: "Perfect for your analytical mindset - learn to optimize cloud costs through data-driven strategies and systematic approaches."
-                }
-            },
-            "B": {
-                type: "Collaborative Catalyst",
-                icon: "🤝",
-                description: "You thrive on building connections and leveraging collective intelligence. Your strength lies in creating high-performing teams and fostering collaboration.",
-                traits: [
-                    { label: "Core Strength", value: "Team Building & Collaboration" },
-                    { label: "Work Style", value: "People-Focused & Inclusive" },
-                    { label: "Value Creation", value: "Synergy & Engagement" },
-                    { label: "Growth Area", value: "Individual Accountability" }
-                ],
-                recommendedCourse: {
-                    title: "Executive Value Leadership",
-                    reason: "Amplify your natural people skills with proven frameworks for leading high-impact teams and driving measurable results."
-                }
-            },
-            "C": {
-                type: "Action-Driven Executor",
-                icon: "⚡",
-                description: "You're a natural doer who turns vision into reality. Your bias for action and decisive leadership creates momentum and delivers results fast.",
-                traits: [
-                    { label: "Core Strength", value: "Execution & Results Delivery" },
-                    { label: "Work Style", value: "Fast-Paced & Decisive" },
-                    { label: "Value Creation", value: "Speed & Impact" },
-                    { label: "Growth Area", value: "Strategic Planning" }
-                ],
-                recommendedCourse: {
-                    title: "Agile Value Delivery",
-                    reason: "Channel your action-oriented nature into structured agile methodologies that deliver value 50% faster with higher quality."
-                }
-            },
-            "D": {
-                type: "Growth-Focused Innovator",
-                icon: "🚀",
-                description: "You're driven by continuous improvement and skill mastery. Your learning mindset and adaptability make you a catalyst for innovation and transformation.",
-                traits: [
-                    { label: "Core Strength", value: "Learning & Innovation" },
-                    { label: "Work Style", value: "Adaptive & Curious" },
-                    { label: "Value Creation", value: "Capability Building" },
-                    { label: "Growth Area", value: "Immediate Execution" }
-                ],
-                recommendedCourse: {
-                    title: "Peak Performance Mastery",
-                    reason: "Accelerate your growth with evidence-based productivity systems that compound your learning and maximize output."
-                }
-            }
-        };
-
-        let currentQuestion = 0;
-        let answers = [];
-
-        function initQuiz() {
-            renderQuestion(0);
-        }
-
-        function renderQuestion(index) {
-            const question = quizQuestions[index];
-            const container = document.getElementById('quizQuestions');
-            
-            container.innerHTML = `
-                <div class="quiz-question">
-                    <h4>Question ${index + 1} of ${quizQuestions.length}</h4>
-                    <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-primary);">${question.question}</p>
-                    <div class="quiz-options">
-                        ${question.options.map((opt, i) => `
-                            <div class="quiz-option" onclick="selectAnswer(${index}, '${opt.value}', this)">
-                                <div class="quiz-option-letter">${opt.value}</div>
-                                <span>${opt.text}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function selectAnswer(questionIndex, value, element) {
-            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
-            
-            answers[questionIndex] = value;
-            updateProgress();
-            
-            setTimeout(() => {
-                if (questionIndex < quizQuestions.length - 1) {
-                    currentQuestion = questionIndex + 1;
-                    renderQuestion(currentQuestion);
-                    updateProgress();
-                } else {
-                    document.getElementById('quizSubmitBtn').style.display = 'block';
-                }
-            }, 500);
-        }
-
-        function updateProgress() {
-            const dots = document.querySelectorAll('.progress-dot');
-            dots.forEach((dot, index) => {
-                dot.classList.remove('active', 'completed');
-                if (index < currentQuestion) {
-                    dot.classList.add('completed');
-                } else if (index === currentQuestion) {
-                    dot.classList.add('active');
-                }
-            });
-        }
-
-        function calculateResults() {
-            const counts = {};
-            answers.forEach(answer => {
-                counts[answer] = (counts[answer] || 0) + 1;
-            });
-            
-            const dominantType = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-            const profile = personalityProfiles[dominantType];
-            
-            const resultDiv = document.getElementById('quiz-result');
-            resultDiv.innerHTML = `
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">${profile.icon}</div>
-                    <h3>You are a ${profile.type}!</h3>
-                    <div class="personality-type">${dominantType}-Type Personality</div>
-                </div>
-                
-                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">${profile.description}</p>
-                
-                <div class="traits">
-                    ${profile.traits.map(trait => `
-                        <div class="trait">
-                            <strong>${trait.label}</strong>
-                            <p style="margin: 0; color: var(--text-secondary);">${trait.value}</p>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <div class="recommended-course">
-                    <h4>🎓 Recommended Course for You</h4>
-                    <h3 style="color: var(--accent-1); margin: 1rem 0;">${profile.recommendedCourse.title}</h3>
-                    <p style="margin: 0;">${profile.recommendedCourse.reason}</p>
-                    <a href="#courses" class="btn-primary" style="margin-top: 1.5rem; display: inline-block; text-decoration: none;">View Course Details →</a>
-                </div>
-            `;
-            
-            resultDiv.classList.add('show');
-            document.getElementById('quizSubmitBtn').style.display = 'none';
-            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        window.addEventListener('load', () => {
-            initQuiz();
-            showQuizPrompts();
-        });
-
-        // Contact Form Handler
-        function handleSubmit(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            const subject = encodeURIComponent('New Contact from Nothing But Value Website');
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-            const mailtoLink = `mailto:nothingbutvalue18@gmail.com?subject=${subject}&body=${body}`;
-            
-            window.location.href = mailtoLink;
-            
-            document.getElementById('successMessage').classList.add('show');
-            document.getElementById('contactForm').reset();
-            
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.remove('show');
-            }, 5000);
-        }
-
-        // Discount Popup
-        function showDiscountPopup() {
-            const popup = document.getElementById('discountPopup');
-            const hasVisited = localStorage.getItem('nbvVisited');
-            
-            if (!hasVisited) {
-                setTimeout(() => {
-                    popup.classList.add('show');
-                    document.body.style.overflow = 'hidden';
-                }, 3000);
-            }
-        }
-
-        function closeDiscountPopup() {
-            const popup = document.getElementById('discountPopup');
-            popup.classList.remove('show');
-            document.body.style.overflow = 'auto';
-            localStorage.setItem('nbvVisited', 'true');
-        }
-
-        window.addEventListener('load', showDiscountPopup);
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(this.getAttribute('href'));if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}});});
-    </script>
+    <script src="https://nothingbutvalue.com/scripts.js"></script>
 </body>
 </html>
