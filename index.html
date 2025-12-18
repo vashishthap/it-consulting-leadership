@@ -177,6 +177,22 @@
             line-height: 1.6;
         }
 
+        .detail-modal-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-modal-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-1);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
         .detail-section {
             margin-bottom: 2.5rem;
         }
@@ -1666,7 +1682,7 @@
     </style>
 </head>
 <body>
-    <!-- Detail Modal (for Services and Courses) -->
+    <!-- Detail Modal (for Services, Courses, and Blogs) -->
     <div id="detailModal" class="detail-modal">
         <div class="detail-modal-content">
             <span class="detail-modal-close" onclick="closeDetailModal()">&times;</span>
@@ -1838,7 +1854,7 @@
                 <p class="section-description">No filler content. Every article delivers practical insights you can implement immediately</p>
             </div>
             <div class="blog-grid">
-                <div class="blog-card">
+                <div class="blog-card" onclick="showBlogDetail('cloud-roi')">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 5 min read</div>
@@ -1846,7 +1862,7 @@
                         <p>Practical strategies to reduce cloud spending while maintaining performance. Real examples from actual implementations.</p>
                     </div>
                 </div>
-                <div class="blog-card">
+                <div class="blog-card" onclick="showBlogDetail('leadership-principles')">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 7 min read</div>
@@ -1854,11 +1870,11 @@
                         <p>Skip the theory. Five leadership principles that consistently improve team performance across industries.</p>
                     </div>
                 </div>
-                <div class="blog-card">
+                <div class="blog-card" onclick="showBlogDetail('productivity-hacks')">
                     <div class="blog-image"></div>
                     <div class="blog-content">
                         <div class="blog-meta">Dec 10, 2025 • 6 min read</div>
-                        <p>Productivity Hacks That Actually Work</h3>
+                        <h3>Productivity Hacks That Actually Work</h3>
                         <p>Practical productivity strategies tested with professionals. Increase output without working longer hours.</p>
                     </div>
                 </div>
@@ -2112,6 +2128,13 @@ const serviceDetails={
 'transformation':{icon:'🚀',title:'Efficient Transformation',subtitle:'Streamlined digital transformation that delivers value at every stage',description:'Digital transformation without the bloat. We modernize your operations efficiently, focusing on quick wins while building toward long-term transformation goals.',features:[{icon:'🎯',title:'Transformation Roadmap',description:'Clear path from current to future state'},{icon:'⚡',title:'Quick Wins',description:'Deliver value in weeks, not years'},{icon:'👥',title:'Change Management',description:'Ensure adoption and minimize resistance'},{icon:'📊',title:'Value Tracking',description:'Measure ROI at every milestone'}],benefits:['Faster transformation timelines','Reduced transformation costs','Higher adoption rates','Measurable business impact','Sustainable organizational change'],cta:'Begin Transformation Journey'}
 };
 
+// Blog Details Data - NEW ADDITION
+const blogDetails={
+'cloud-roi':{icon:'☁️',title:'Cloud ROI: Cutting Costs While Scaling',date:'Dec 10, 2025',readTime:'5 min read',author:'Nothing But Value Team',category:'Cloud Computing',intro:'Cloud costs spiraling out of control? You\'re not alone. Most organizations overspend on cloud by 30-50%. Here\'s how to fix it without sacrificing performance.',sections:[{heading:'The Cloud Cost Crisis',content:'Organizations are migrating to the cloud faster than ever, but many are shocked by their monthly bills. The promise of "pay only for what you use" often translates to "pay for what you forgot to turn off." We\'ve seen companies spending $500K+ annually on unused resources.'},{heading:'5 Immediate Cost-Cutting Strategies',points:['Right-size your instances: Most VMs are oversized by 40-60%. Use monitoring data to match resources to actual usage.','Implement auto-scaling: Scale down during off-peak hours. A simple schedule can save 30% instantly.','Reserved instances for predictable workloads: Commit to 1-3 year terms for 40-70% savings on stable workloads.','Delete orphaned resources: Unattached volumes, old snapshots, and forgotten load balancers add up fast.','Use spot instances for non-critical workloads: Save up to 90% on compute for batch processing and dev/test.']},{heading:'Real-World Example',content:'A SaaS company we worked with was spending $180K/month on AWS. After a 2-week optimization sprint, we reduced their bill to $95K/month—a 47% reduction—while actually improving performance through better architecture.'},{heading:'The Performance Paradox',content:'Here\'s the counterintuitive truth: optimizing for cost often improves performance. Why? Because it forces you to understand your actual resource needs, eliminate waste, and architect more efficiently.'},{heading:'Tools That Actually Help',points:['AWS Cost Explorer & Trusted Advisor','Azure Cost Management + Advisor','GCP Recommender','Third-party: CloudHealth, Spot.io, Kubecost']},{heading:'Action Plan',content:'Start with the low-hanging fruit: 1) Run a cost audit this week, 2) Implement auto-scaling for dev/test environments, 3) Set up billing alerts, 4) Schedule monthly cost reviews. These four steps alone typically save 20-30%.'}],keyTakeaways:['Cloud optimization is ongoing, not one-time','Most savings come from behavioral changes, not just technical fixes','Performance and cost optimization go hand-in-hand','Start small, measure everything, iterate quickly'],cta:'Want help optimizing your cloud costs? Our Cloud Value Optimization course teaches you everything you need to know.'},
+'leadership-principles':{icon:'🎯',title:'Leadership That Delivers: 5 High-Impact Principles',date:'Dec 10, 2025',readTime:'7 min read',author:'Nothing But Value Team',category:'Leadership',intro:'Forget the leadership theory. These five principles consistently drive measurable team performance improvements across industries. We\'ve seen them work in startups, Fortune 500s, and everything in between.',sections:[{heading:'Principle 1: Clarity Over Consensus',content:'Great leaders provide crystal-clear direction. They don\'t wait for everyone to agree—they make decisions, communicate them clearly, and move forward. Consensus is nice; clarity is essential. Teams perform best when they know exactly what success looks like and why it matters.'},{heading:'Principle 2: Accountability With Support',content:'Hold people accountable for results, but give them the support they need to succeed. This means: clear expectations, regular check-ins, removing blockers, and celebrating wins. Accountability without support is just blame. Support without accountability is just hope.'},{heading:'Principle 3: Feedback as Fuel',content:'The best teams have a culture of continuous feedback—both giving and receiving. Not annual reviews, but daily micro-feedback. "That presentation was excellent because..." or "Next time, try this approach..." Make feedback specific, timely, and actionable.'},{heading:'Principle 4: Delegate Outcomes, Not Tasks',content:'Stop micromanaging. Instead of saying "Send me a report by Friday," say "We need to reduce customer churn by 15% this quarter. What\'s your plan?" Give people ownership of outcomes, not just tasks. This builds capability and frees your time for strategic work.'},{heading:'Principle 5: Model the Behavior',content:'Your team watches everything you do. If you want them to be punctual, be punctual. If you want them to communicate clearly, communicate clearly. If you want them to take ownership, take ownership. Leadership is caught, not taught.'}],realWorldImpact:'A VP we coached implemented these five principles with her 50-person team. Within 90 days: project delivery improved by 35%, employee engagement scores jumped 28 points, and voluntary turnover dropped to near zero.',keyTakeaways:['Leadership is about results, not popularity','Clarity and accountability drive performance','Feedback should be continuous, not annual','Delegate outcomes to build capability','Your behavior sets the standard'],cta:'Master these principles and more in our Executive Value Leadership program.'},
+'productivity-hacks':{icon:'⚡',title:'Productivity Hacks That Actually Work',date:'Dec 10, 2025',readTime:'6 min read',author:'Nothing But Value Team',category:'Productivity',intro:'Tired of productivity advice that sounds good but doesn\'t work? These strategies are battle-tested by thousands of professionals. They\'re simple, practical, and deliver measurable results.',sections:[{heading:'The 2-Minute Rule',content:'If something takes less than 2 minutes, do it immediately. Don\'t add it to your to-do list, don\'t schedule it, just do it. This prevents small tasks from piling up and cluttering your mental space. Respond to that quick email now. File that document now. Make that quick call now.'},{heading:'Time Blocking (The Right Way)',content:'Most people time-block wrong. They schedule every minute, then feel like failures when life happens. Instead: block 3-4 hours for deep work, leave 2-3 hours unscheduled for meetings and interruptions, and protect your deep work blocks fiercely. This is realistic and sustainable.'},{heading:'The Energy Audit',content:'Track your energy levels for one week. When are you most focused? Most creative? Most social? Then schedule your work accordingly. Do your hardest thinking during peak energy hours. Save admin work for low-energy times. This simple shift can double your effective output.'},{heading:'Single-Tasking Sprints',content:'Multitasking is a myth. Instead, work in focused 25-50 minute sprints on ONE thing. No email, no Slack, no phone. Just one task. Take a 5-10 minute break, then repeat. You\'ll accomplish more in 3 focused hours than 8 distracted ones.'},{heading:'The Weekly Review',content:'Spend 30 minutes every Friday reviewing your week. What worked? What didn\'t? What will you do differently next week? This reflection turns experience into learning and prevents you from repeating the same mistakes.'}],scientificBacking:'These aren\'t just tips—they\'re backed by research in cognitive psychology and behavioral science. Studies show that focused work produces 5x better results than distracted work, and energy management beats time management every time.',practicalImplementation:'Start with ONE hack this week. Master it. Then add another. Trying to implement everything at once is a recipe for failure. Small, consistent changes compound into massive results.',keyTakeaways:['Do 2-minute tasks immediately','Time-block realistically, not perfectly','Match tasks to your energy levels','Single-task in focused sprints','Review and adjust weekly'],cta:'Learn the complete productivity system in our Peak Performance Mastery course.'}
+};
+
 // Course Details Data - PART 2 OF JAVASCRIPT  
 const courseDetails={
 'cloud':{icon:'☁️',title:'Cloud Value Optimization Masterclass',subtitle:'Master AWS, Azure & GCP cost optimization - Deliver 10x ROI',price:'$249',originalPrice:'$499',duration:'8-10 hours',level:'Intermediate to Advanced',description:'Learn to optimize cloud costs across AWS, Azure, and GCP. This comprehensive course teaches you proven strategies to reduce cloud spending by 30-50% while maintaining or improving performance.',modules:['Cloud Cost Fundamentals & Pricing Models','AWS Cost Optimization (EC2, S3, RDS, Lambda)','Azure Cost Management & Optimization','GCP Cost Control & Best Practices','Multi-Cloud Cost Strategies','Advanced Optimization Techniques','Real-World Case Studies','Implementation & Action Plan'],features:[{icon:'🎓',title:'31 Video Lessons',description:'Comprehensive video content'},{icon:'📚',title:'Downloadable Resources',description:'Templates, checklists, calculators'},{icon:'💼',title:'Real Case Studies',description:'Learn from actual implementations'},{icon:'🏆',title:'Certificate',description:'Completion certificate included'}],benefits:['Reduce cloud costs by 30-50%','Master all three major cloud platforms','Learn from real-world case studies','Get practical tools and templates','Lifetime access to all materials','Free updates as platforms evolve'],cta:'Enroll Now - $249'},
@@ -2121,6 +2144,36 @@ const courseDetails={
 'agile':{icon:'✅',title:'Agile Value Delivery',subtitle:'Ship value fast - Deliver projects 50% faster with higher quality',price:'$174',originalPrice:'$349',duration:'7-9 hours',level:'All Levels',description:'Master Agile and DevOps methodologies focused on rapid value delivery. Learn to ship projects 50% faster while maintaining or improving quality.',modules:['Agile Fundamentals & Mindset','Scrum Framework Mastery','Kanban & Lean Principles','DevOps & CI/CD','Agile Planning & Estimation','Team Collaboration & Communication','Metrics & Continuous Improvement','Scaling Agile'],features:[{icon:'🚀',title:'28 Video Lessons',description:'Complete Agile training'},{icon:'📊',title:'Agile Templates',description:'Ready-to-use frameworks'},{icon:'💼',title:'Real Projects',description:'Actual implementation examples'},{icon:'🏆',title:'Certification',description:'Agile practitioner certificate'}],benefits:['50% faster project delivery','Higher quality outcomes','Better team collaboration','Increased customer satisfaction','Reduced project risk','Career advancement opportunities'],cta:'Enroll Now - $174'},
 'communication':{icon:'💡',title:'High-Impact Communication',subtitle:'Create tangible business value through better communication',price:'$224',originalPrice:'$449',duration:'8-10 hours',level:'All Levels',description:'Develop emotional intelligence and communication skills that create measurable business impact. Learn to influence, persuade, and build stronger professional relationships.',modules:['Communication Fundamentals','Emotional Intelligence','Persuasion & Influence','Difficult Conversations','Presentation Skills','Written Communication','Cross-Cultural Communication','Building Relationships'],features:[{icon:'🎤',title:'32 Video Lessons',description:'Comprehensive communication training'},{icon:'📝',title:'Communication Templates',description:'Proven frameworks'},{icon:'🎯',title:'Practice Scenarios',description:'Real-world situations'},{icon:'📜',title:'Certificate',description:'Communication mastery certificate'}],benefits:['Better stakeholder relationships','Increased influence and persuasion','Improved team collaboration','Enhanced leadership presence','Career advancement','Lifetime access to materials'],cta:'Enroll Now - $224'}
 };
+
+// Blog Modal Function - NEW ADDITION
+function showBlogDetail(e){const t=blogDetails[e];if(!t)return;let s=`
+<div class="detail-modal-header">
+<div class="detail-modal-icon">${t.icon}</div>
+<h2 class="detail-modal-title">${t.title}</h2>
+<div class="detail-modal-meta">
+<div class="detail-modal-meta-item">📅 ${t.date}</div>
+<div class="detail-modal-meta-item">⏱️ ${t.readTime}</div>
+<div class="detail-modal-meta-item">✍️ ${t.author}</div>
+<div class="detail-modal-meta-item">📂 ${t.category}</div>
+</div>
+</div>
+<div class="detail-section">
+<p style="font-size:1.15rem;font-weight:600;color:var(--text-primary)">${t.intro}</p>
+</div>`;t.sections.forEach(e=>{s+=`<div class="detail-section"><h3>${e.heading}</h3>`,e.content&&(s+=`<p>${e.content}</p>`),e.points&&(s+=`<ul class="detail-list">${e.points.map(e=>`<li>${e}</li>`).join("")}</ul>`),s+="</div>"}),t.realWorldImpact&&(s+=`<div class="detail-section" style="background:rgba(0,245,255,0.05);padding:2rem;border-radius:12px;border-left:3px solid var(--accent-1)"><h3>💼 Real-World Impact</h3><p>${t.realWorldImpact}</p></div>`),t.scientificBacking&&(s+=`<div class="detail-section" style="background:rgba(124,58,237,0.05);padding:2rem;border-radius:12px;border-left:3px solid var(--accent-2)"><h3>🔬 Scientific Backing</h3><p>${t.scientificBacking}</p></div>`),t.practicalImplementation&&(s+=`<div class="detail-section" style="background:rgba(255,0,110,0.05);padding:2rem;border-radius:12px;border-left:3px solid var(--accent-3)"><h3>🎯 Practical Implementation</h3><p>${t.practicalImplementation}</p></div>`),s+=`
+<div class="detail-section">
+<h3>Key Takeaways</h3>
+<ul class="detail-list">
+${t.keyTakeaways.map(e=>`<li>${e}</li>`).join("")}
+</ul>
+</div>
+<div class="detail-section">
+<div style="background:linear-gradient(135deg,rgba(0,245,255,0.1) 0%,rgba(124,58,237,0.1) 100%);border:2px solid var(--accent-1);border-radius:16px;padding:2rem;text-align:center">
+<h3 style="color:var(--accent-1);margin-bottom:1rem">📚 Want to Learn More?</h3>
+<p style="margin-bottom:1.5rem">${t.cta}</p>
+<a href="#courses" class="detail-cta-button" onclick="closeDetailModal()">View Our Courses</a>
+</div>
+</div>
+`,document.getElementById("detailModalBody").innerHTML=s,document.getElementById("detailModal").classList.add("show"),document.body.style.overflow="hidden"}
 
 // Modal Functions - PART 3 OF JAVASCRIPT
 function showServiceDetail(e){const t=serviceDetails[e];if(!t)return;document.getElementById("detailModalBody").innerHTML=`
