@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nothing But Value - Pure Excellence in IT & Leadership</title>
-    <link rel="icon" type="image/png" href="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-07T12-46-02-281Z-52394c78-chat-image-1765111562261-0.jpg">
+    <title>AI Transformation Partners for IT Services | Nothing But Value</title>
+    <meta name="description" content="We help IT service providers join the 5% of AI projects that succeed. Strategy, implementation, and training for measurable ROI.">
+    <meta name="keywords" content="AI transformation, IT services, AI consulting, AI strategy, AI implementation, managed services AI">
     
     <style>
         * {
@@ -14,605 +15,27 @@
         }
         
         :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: #13131a;
-            --accent-1: #00f5ff;
-            --accent-2: #7c3aed;
-            --accent-3: #ff006e;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --gradient-1: linear-gradient(135deg, #00f5ff 0%, #7c3aed 100%);
-            --gradient-2: linear-gradient(135deg, #7c3aed 0%, #ff006e 100%);
-            --gradient-3: linear-gradient(135deg, #00f5ff 0%, #ff006e 100%);
+            --cyan: #00f5ff;
+            --purple: #7c3aed;
+            --pink: #ff006e;
+            --dark: #0a0a0f;
+            --dark-alt: #1a1a2e;
+            --text: #ffffff;
+            --text-muted: #888888;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-        
-        .bg-gradient {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .bg-gradient-1 {
-            width: 600px;
-            height: 600px;
-            background: var(--accent-1);
-            top: -200px;
-            left: -200px;
-        }
-        
-        .bg-gradient-2 {
-            width: 500px;
-            height: 500px;
-            background: var(--accent-2);
-            top: 50%;
-            right: -150px;
-            animation-delay: -5s;
-        }
-        
-        .bg-gradient-3 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-3);
-            bottom: -100px;
-            left: 30%;
-            animation-delay: -10s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-30px, 30px) scale(0.9); }
-        }
-
-        /* Detail Modal Styles */
-        .detail-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 4000;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            overflow-y: auto;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .detail-modal.show {
-            display: flex;
-        }
-
-        .detail-modal-content {
-            background: var(--bg-card);
-            border: 2px solid var(--accent-1);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 900px;
-            width: 100%;
-            position: relative;
-            animation: slideUp 0.5s ease-out;
-            box-shadow: 0 0 100px rgba(0, 245, 255, 0.3);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .detail-modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 2.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-            z-index: 10;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .detail-modal-close:hover {
-            color: var(--accent-3);
-            transform: rotate(90deg);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .detail-modal-header {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .detail-modal-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .detail-modal-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .detail-modal-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .detail-modal-meta {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .detail-modal-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-1);
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .detail-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .detail-section h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--accent-1);
-        }
-
-        .detail-section p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 1rem;
-        }
-
-        .detail-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .detail-list li {
-            padding: 1rem 1.5rem;
-            background: rgba(0, 245, 255, 0.05);
-            border-left: 3px solid var(--accent-1);
-            margin-bottom: 0.75rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .detail-list li::before {
-            content: "✓";
-            color: var(--accent-1);
-            font-weight: bold;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .detail-price-box {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-            border: 2px solid var(--accent-1);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .detail-price {
-            font-size: 3rem;
-            font-weight: 900;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .detail-price-strike {
-            text-decoration: line-through;
-            opacity: 0.5;
-            font-size: 1.8rem;
-            margin-right: 1rem;
-        }
-
-        .detail-cta-button {
-            width: 100%;
-            padding: 18px;
-            background: var(--gradient-1);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1rem;
-        }
-
-        .detail-cta-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
-        }
-
-        .detail-features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .detail-feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .detail-feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .detail-feature-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-1);
-        }
-
-        .detail-feature-card p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        /* Quiz Prompt Banner */
-        .quiz-prompt-banner {
-            position: fixed;
-            bottom: -300px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.95) 0%, rgba(124, 58, 237, 0.95) 100%);
-            backdrop-filter: blur(20px);
-            padding: 1.2rem 2rem;
-            border-radius: 16px 16px 0 0;
-            box-shadow: 0 -10px 40px rgba(0, 245, 255, 0.3);
-            z-index: 2500;
-            max-width: 600px;
-            width: 90%;
-            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .quiz-prompt-banner.show {
-            bottom: 0;
-        }
-
-        .quiz-prompt-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .quiz-prompt-icon {
-            font-size: 2.5rem;
-            animation: bounce 2s infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .quiz-prompt-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .quiz-prompt-text h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-            color: var(--bg-dark);
-            font-weight: 800;
-        }
-
-        .quiz-prompt-text p {
-            font-size: 0.85rem;
-            color: rgba(10, 10, 15, 0.8);
-            margin: 0;
-        }
-
-        .quiz-prompt-actions {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .quiz-prompt-btn {
-            padding: 10px 24px;
-            background: var(--bg-dark);
-            color: var(--accent-1);
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .quiz-prompt-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .quiz-prompt-close {
-            background: transparent;
-            color: var(--bg-dark);
-            font-size: 1.8rem;
-            cursor: pointer;
-            padding: 0.25rem;
-            transition: all 0.3s;
-            border: none;
-            line-height: 1;
-        }
-
-        .quiz-prompt-close:hover {
-            transform: rotate(90deg);
-            opacity: 0.7;
-        }
-
-        /* Floating Quiz Button */
-        .floating-quiz-btn {
-            position: fixed;
-            bottom: 110px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
-            z-index: 2000;
-            transition: all 0.3s;
-            animation: pulse-ring 2s infinite;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .floating-quiz-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 50px rgba(0, 245, 255, 0.6);
-        }
-
-        @keyframes pulse-ring {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(0, 245, 255, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 245, 255, 0);
-            }
-        }
-
-        .floating-quiz-tooltip {
-            position: absolute;
-            right: 85px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            padding: 12px 20px;
-            border-radius: 8px;
-            white-space: nowrap;
-            font-size: 0.9rem;
-            font-weight: 600;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            border: 1px solid rgba(0, 245, 255, 0.3);
-        }
-
-        .floating-quiz-btn:hover .floating-quiz-tooltip {
-            opacity: 1;
-        }
-
-        /* Quiz Popup Modal */
-        .quiz-popup-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 3500;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease-out;
-            padding: 1rem;
-        }
-
-        .quiz-popup-modal.show {
-            display: flex;
-        }
-
-        .quiz-popup-content {
-            background: var(--bg-card);
-            border: 2px solid var(--accent-1);
-            border-radius: 24px;
-            padding: 2.5rem;
-            max-width: 550px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            animation: slideUp 0.5s ease-out;
-            box-shadow: 0 0 100px rgba(0, 245, 255, 0.3);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .quiz-popup-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-        }
-
-        .quiz-popup-close:hover {
-            color: var(--accent-3);
-        }
-
-        .quiz-popup-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            animation: bounce 2s infinite;
-        }
-
-        .quiz-popup-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .quiz-popup-text {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .quiz-popup-benefits {
-            text-align: left;
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: rgba(0, 245, 255, 0.05);
-            border-radius: 12px;
-            border-left: 3px solid var(--accent-1);
-            list-style: none;
-        }
-
-        .quiz-popup-benefits li {
-            margin-bottom: 0.75rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            font-size: 0.95rem;
-        }
-
-        .quiz-popup-benefits li::before {
-            content: "✓";
-            color: var(--accent-1);
-            font-weight: bold;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .quiz-popup-cta {
-            padding: 16px 40px;
-            background: var(--gradient-1);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .quiz-popup-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
-        }
-
-        .quiz-popup-skip {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            cursor: pointer;
-            text-decoration: underline;
-            transition: color 0.3s;
-        }
-
-        .quiz-popup-skip:hover {
-            color: var(--accent-1);
+            padding: 0 20px;
         }
         
         /* Navigation */
@@ -620,1183 +43,991 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.1);
         }
         
         nav .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 24px;
+            padding: 1rem 20px;
         }
         
-        .logo-container {
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
             display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .logo-image {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
-        }
-        
-        nav ul {
-            display: flex;
+            gap: 2rem;
             list-style: none;
-            gap: 2.5rem;
         }
         
-        nav a {
+        .nav-links a {
+            color: var(--text);
             text-decoration: none;
-            color: var(--text-secondary);
+            transition: color 0.3s;
             font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            position: relative;
         }
         
-        nav a:hover {
-            color: var(--accent-1);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-1);
-            transition: width 0.3s;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
+        .nav-links a:hover {
+            color: var(--cyan);
         }
         
         /* Hero Section */
         .hero {
-            position: relative;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 0 80px;
-        }
-        
-        .hero-content {
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-alt) 100%);
             position: relative;
-            z-index: 1;
+            overflow: hidden;
         }
         
-        .hero-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            animation: pulse 3s ease-in-out infinite;
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 245, 255, 0.1) 0%, transparent 70%);
+            top: -250px;
+            right: -250px;
+            animation: pulse 4s ease-in-out infinite;
         }
         
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
         
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-1);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -2px;
+            background-clip: text;
         }
         
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        .hero h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--text);
+            margin-bottom: 1.5rem;
         }
         
-        .cta-group {
+        .tagline {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .stats-row {
             display: flex;
-            gap: 1.5rem;
             justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
             flex-wrap: wrap;
         }
         
-        .btn-primary {
-            padding: 16px 40px;
-            background: var(--gradient-1);
-            color: var(--bg-dark);
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.05rem;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s;
-        }
-        
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-        
-        .btn-secondary {
-            padding: 16px 40px;
-            background: transparent;
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.05rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .btn-secondary:hover {
-            border-color: var(--accent-1);
-            background: rgba(0, 245, 255, 0.1);
-        }
-        
-        /* Video Showcase Section */
-        .video-showcase {
-            position: relative;
-            padding: 80px 0;
-            z-index: 1;
-        }
-        
-        .video-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 3rem;
+        .stat {
             text-align: center;
         }
         
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 16px;
-            background: rgba(0, 0, 0, 0.3);
-            margin-top: 2rem;
-            border: 2px solid rgba(0, 245, 255, 0.2);
+        .stat-number {
+            display: block;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .video-wrapper iframe,
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .stat-label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--cyan);
+            color: var(--dark);
         }
         
         /* Section Styles */
         section {
-            position: relative;
-            padding: 80px 0;
-            z-index: 1;
+            padding: 80px 20px;
         }
         
-        .section-header {
+        section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
             text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-tag {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 50px;
-            color: var(--accent-1);
-            font-size: 0.9rem;
-            font-weight: 600;
             margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-        
-        .section-description {
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
             font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+        
+        /* Crisis Section */
+        .crisis-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-alt) 100%);
+        }
+        
+        .crisis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .crisis-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .crisis-card.opportunity {
+            border-color: rgba(0, 245, 255, 0.3);
+            background: rgba(0, 245, 255, 0.05);
+        }
+        
+        .crisis-card.crisis {
+            border-color: rgba(255, 0, 110, 0.3);
+            background: rgba(255, 0, 110, 0.05);
+        }
+        
+        .crisis-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .crisis-card.opportunity h3 {
+            color: var(--cyan);
+        }
+        
+        .crisis-card.crisis h3 {
+            color: var(--pink);
+        }
+        
+        .crisis-list {
+            list-style: none;
+        }
+        
+        .crisis-list li {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .crisis-list .icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .crisis-list strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+        
+        .crisis-list p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .crisis-question {
+            text-align: center;
+            background: rgba(124, 58, 237, 0.1);
+            border: 2px solid var(--purple);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 800px;
             margin: 0 auto;
         }
         
-        /* Services Grid */
+        .crisis-question h3 {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .crisis-question p {
+            color: var(--cyan);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* Framework Section */
+        .framework-visual {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .framework-bar {
+            display: flex;
+            height: 80px;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .bar-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .bar-segment:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        
+        .bar-segment.people {
+            background: linear-gradient(135deg, var(--cyan), #00d4e6);
+        }
+        
+        .bar-segment.tech {
+            background: linear-gradient(135deg, var(--purple), #9d5cf2);
+        }
+        
+        .bar-segment.ai {
+            background: linear-gradient(135deg, var(--pink), #ff3385);
+        }
+        
+        .percentage {
+            font-size: 1.5rem;
+        }
+        
+        .label {
+            font-size: 0.8rem;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .solution-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .solution-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .solution-card p {
+            color: var(--text-muted);
+        }
+        
+        /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-top: 3rem;
         }
         
         .service-card {
-            background: var(--bg-card);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
+            padding: 2rem;
+            transition: all 0.3s;
             cursor: pointer;
         }
         
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .service-card:hover::before {
-            opacity: 0.05;
-        }
-        
         .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 245, 255, 0.3);
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
         }
         
         .service-icon {
             font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
+            margin-bottom: 1rem;
         }
         
         .service-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
+            color: var(--text);
         }
         
-        .service-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
+        .service-price {
+            color: var(--cyan);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 1rem 0;
         }
         
-        /* Blog Grid */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2.5rem;
+        .service-card > p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
         }
         
-        .blog-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s;
-            cursor: pointer;
+        .service-features {
+            list-style: none;
+            text-align: left;
+            margin: 1.5rem 0;
         }
         
-        .blog-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(124, 58, 237, 0.5);
-        }
-        
-        .blog-image {
-            width: 100%;
-            height: 240px;
-            background: var(--gradient-2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .blog-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to top, var(--bg-card), transparent);
-        }
-        
-        .blog-content {
-            padding: 2rem;
-        }
-        
-        .blog-meta {
-            color: var(--accent-1);
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-        
-        .blog-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
-        
-        .blog-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-        
-        /* Social Media Section */
-        .social-section {
-            background: var(--bg-card);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .social-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-primary);
-            display: block;
-        }
-        
-        .social-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-1);
-            background: rgba(0, 245, 255, 0.05);
-        }
-        
-        .social-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-        
-        .social-card h3 {
-            font-size: 1.2rem;
+        .service-features li {
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
         }
         
-        .social-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
         }
         
-        .social-stats {
+        .btn-learn-more {
+            background: transparent;
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
             margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.85rem;
-            color: var(--accent-1);
+        }
+        
+        .btn-learn-more:hover {
+            background: var(--cyan);
+            color: var(--dark);
+        }
+        
+        /* Use Cases Section */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s;
             font-weight: 600;
         }
         
-        /* Interactive Quiz Section */
-        .quiz {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 4rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .quiz-intro {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .quiz-intro h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .quiz-intro p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .quiz-question {
-            margin-bottom: 3rem;
-        }
-
-        .quiz-question h4 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-1);
+        .tab:hover, .tab.active {
+            background: var(--cyan);
+            color: var(--dark);
+            border-color: var(--cyan);
         }
         
-        .quiz-options {
-            display: grid;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .quiz-option {
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .quiz-option-letter {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0, 245, 255, 0.1);
-            border: 2px solid rgba(0, 245, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        
-        .quiz-option:hover {
-            border-color: var(--accent-1);
-            background: rgba(0, 245, 255, 0.05);
-            transform: translateX(5px);
-        }
-        
-        .quiz-option.selected {
-            border-color: var(--accent-1);
-            background: rgba(0, 245, 255, 0.1);
-        }
-
-        .quiz-option.selected .quiz-option-letter {
-            background: var(--accent-1);
-            color: var(--bg-dark);
-            border-color: var(--accent-1);
-        }
-
-        .quiz-progress {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: all 0.3s;
-        }
-
-        .progress-dot.active {
-            background: var(--accent-1);
-            width: 30px;
-            border-radius: 6px;
-        }
-
-        .progress-dot.completed {
-            background: var(--accent-2);
-        }
-        
-        #quiz-result {
-            margin-top: 2rem;
-            padding: 3rem;
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-            border: 2px solid rgba(0, 245, 255, 0.3);
-            border-radius: 16px;
+        .tab-content {
             display: none;
         }
-
-        #quiz-result.show {
+        
+        .tab-content.active {
             display: block;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
-        #quiz-result h3 {
-            color: var(--accent-1);
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        #quiz-result .personality-type {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--gradient-1);
-            color: var(--bg-dark);
-            border-radius: 50px;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        #quiz-result .traits {
+        .use-case-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        #quiz-result .trait {
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-1);
-        }
-
-        #quiz-result .trait strong {
-            color: var(--accent-1);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        #quiz-result .recommended-course {
-            margin-top: 2rem;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            border: 1px solid rgba(0, 245, 255, 0.2);
-        }
-
-        #quiz-result .recommended-course h4 {
-            color: var(--accent-1);
-            margin-bottom: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
         
-        /* Courses Grid */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-        
-        .course-card {
-            background: var(--bg-card);
+        .use-case-card {
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s;
-            cursor: pointer;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 0, 110, 0.5);
-            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.2);
-        }
-        
-        .course-image {
-            width: 100%;
-            height: 240px;
-            background: var(--gradient-3);
-            position: relative;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .course-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 8px 20px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid var(--accent-1);
-        }
-        
-        .course-content {
             padding: 2rem;
+            transition: all 0.3s;
         }
         
-        .course-card h3 {
-            font-size: 1.6rem;
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+        }
+        
+        .use-case-card h3 {
+            font-size: 1.3rem;
             margin-bottom: 1rem;
+            color: var(--text);
         }
         
-        .course-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-        
-        .course-price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .use-case-desc {
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
-
-        .price-strike {
-            text-decoration: line-through;
-            opacity: 0.5;
-            font-size: 1.5rem;
-            margin-right: 1rem;
+        
+        .use-case-roi {
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .buy-button {
-            width: 100%;
-            padding: 16px;
-            background: var(--gradient-1);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 12px;
+        .roi-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .roi-value {
+            color: var(--cyan);
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        /* ROI Calculator */
+        .calculator-section {
+            background: linear-gradient(135deg, var(--dark-alt) 0%, var(--dark) 100%);
+        }
+        
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+        
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .input-group label {
+            display: block;
+            color: var(--text);
+            margin-bottom: 0.5rem;
             font-weight: 600;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+        
+        .btn-calculate {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border: none;
+            border-radius: 50px;
+            color: var(--dark);
+            font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
         }
         
-        .buy-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.3);
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+        
+        .calculator-results {
+            margin-top: 3rem;
+        }
+        
+        .calculator-results h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+        
+        .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-card.highlight {
+            border-color: var(--cyan);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        
+        .result-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .result-breakdown {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+        
+        .testimonial-text {
+            color: var(--text);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+        
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--cyan);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            line-height: 1.8;
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-toggle {
+            color: var(--cyan);
+            font-size: 1.5rem;
         }
         
         /* Contact Form */
         .contact-form {
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
-            background: var(--bg-card);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 3rem;
         }
         
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.75rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--text-primary);
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 14px 18px;
+            padding: 1rem;
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
             font-size: 1rem;
-            transition: all 0.3s;
             font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--accent-1);
-            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--cyan);
         }
         
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .success-message {
-            display: none;
-            padding: 1.5rem;
-            background: rgba(0, 245, 255, 0.1);
-            border: 2px solid var(--accent-1);
-            border-radius: 12px;
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-
-        .success-message.show {
-            display: block;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        /* Discount Popup */
-        .discount-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .btn-submit {
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .discount-popup.show {
-            display: flex;
-        }
-
-        .discount-content {
-            background: var(--bg-card);
-            border: 2px solid var(--accent-1);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            animation: popIn 0.5s ease-out;
-            box-shadow: 0 0 100px rgba(0, 245, 255, 0.3);
-        }
-
-        @keyframes popIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .discount-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-        }
-
-        .discount-close:hover {
-            color: var(--accent-3);
-        }
-
-        .discount-badge {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--gradient-3);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .discount-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .discount-percent {
-            font-size: 5rem;
-            font-weight: 900;
-            background: var(--gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-            margin: 1rem 0;
-        }
-
-        .discount-text {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        .discount-cta {
-            padding: 18px 50px;
-            background: var(--gradient-1);
-            color: var(--bg-dark);
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
             border: none;
-            border-radius: 12px;
+            border-radius: 50px;
+            color: var(--dark);
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
         }
-
-        .discount-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.4);
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
         }
         
         /* Footer */
         footer {
-            background: var(--bg-card);
+            background: var(--dark-alt);
+            padding: 3rem 20px 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--cyan);
+        }
+        
+        .footer-bottom {
             text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        footer p {
-            color: var(--text-secondary);
-            margin: 0.5rem 0;
-        }
-        
-        .footer-logo {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            opacity: 0.7;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .services-grid,
-            .blog-grid,
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .quiz {
-                padding: 2rem;
-            }
-            
-            .contact-form {
-                padding: 2rem;
-            }
-            
-            .video-container {
-                padding: 2rem;
-            }
-            
-            .hero-logo {
-                width: 80px;
-                height: 80px;
-            }
-            
-            .logo-image {
-                width: 35px;
-                height: 35px;
-            }
-
-            .discount-content {
-                padding: 2rem;
-            }
-
-            .discount-percent {
-                font-size: 4rem;
-            }
-
-            .discount-title {
-                font-size: 2rem;
-            }
-
-            #quiz-result .traits {
-                grid-template-columns: 1fr;
-            }
-
-            .quiz-prompt-banner {
-                padding: 1rem;
-                max-width: 95%;
-                bottom: -250px;
-            }
-
-            .quiz-prompt-content {
-                flex-direction: column;
-                gap: 0.75rem;
-            }
-
-            .quiz-prompt-icon {
-                font-size: 2rem;
-            }
-
-            .quiz-prompt-text {
-                text-align: center;
-            }
-
-            .quiz-prompt-text h4 {
-                font-size: 1rem;
-            }
-
-            .quiz-prompt-text p {
-                font-size: 0.8rem;
-            }
-
-            .quiz-prompt-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .quiz-prompt-btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-                flex: 1;
-            }
-
-            .quiz-prompt-close {
-                font-size: 1.5rem;
-            }
-
-            .floating-quiz-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
-                bottom: 90px;
-                right: 20px;
-            }
-
-            .floating-quiz-tooltip {
+            .nav-links {
                 display: none;
             }
-
-            .quiz-popup-content {
-                padding: 2rem 1.5rem;
+            
+            .stats-row {
+                gap: 1.5rem;
             }
-
-            .quiz-popup-icon {
-                font-size: 3rem;
+            
+            .cta-buttons {
+                flex-direction: column;
             }
-
-            .quiz-popup-title {
-                font-size: 1.5rem;
-            }
-
-            .quiz-popup-text {
-                font-size: 0.95rem;
-            }
-
-            .quiz-popup-benefits {
-                padding: 1rem;
-            }
-
-            .quiz-popup-benefits li {
-                font-size: 0.9rem;
-            }
-
-            .quiz-popup-cta {
-                padding: 14px 30px;
-                font-size: 1rem;
-            }
-
-            .detail-modal-content {
-                padding: 2rem;
-            }
-
-            .detail-modal-title {
-                font-size: 2rem;
-            }
-
-            .detail-features-grid {
+            
+            .calculator-inputs {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
-    <!-- Detail Modal (for Services, Courses, and Blogs) -->
-    <div id="detailModal" class="detail-modal">
-        <div class="detail-modal-content">
-            <span class="detail-modal-close" onclick="closeDetailModal()">&times;</span>
-            <div id="detailModalBody"></div>
-        </div>
-    </div>
-
-    <!-- Quiz Popup Modal -->
-    <div id="quizPopupModal" class="quiz-popup-modal">
-        <div class="quiz-popup-content">
-            <span class="quiz-popup-close" onclick="closeQuizPopup()">&times;</span>
-            <div class="quiz-popup-icon">🧠</div>
-            <h2 class="quiz-popup-title">Discover Your Professional DNA</h2>
-            <p class="quiz-popup-text">Take our 2-minute personality assessment to unlock personalized insights about your leadership style and optimal growth path.</p>
-            
-            <ul class="quiz-popup-benefits">
-                <li>Reveal your unique value multiplier archetype</li>
-                <li>Get personalized course recommendations</li>
-                <li>Understand your core strengths & growth areas</li>
-                <li>Join 10,000+ professionals who've discovered their profile</li>
-            </ul>
-
-            <button class="quiz-popup-cta" onclick="startQuizFromPopup()">🚀 Take the Free Assessment</button>
-            <p class="quiz-popup-skip" onclick="closeQuizPopup()">Maybe later</p>
-        </div>
-    </div>
-
-    <!-- Quiz Prompt Banner (Bottom) -->
-    <div id="quizPromptBanner" class="quiz-prompt-banner">
-        <div class="quiz-prompt-content">
-            <div class="quiz-prompt-icon">🧠</div>
-            <div class="quiz-prompt-text">
-                <h4>Discover Your Value Multiplier!</h4>
-                <p>Take our 2-min quiz to unlock your professional DNA</p>
-            </div>
-            <div class="quiz-prompt-actions">
-                <button class="quiz-prompt-btn" onclick="startQuizFromBanner()">Take Quiz</button>
-                <span class="quiz-prompt-close" onclick="closeBanner()">×</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating Quiz Button -->
-    <div class="floating-quiz-btn" onclick="scrollToQuiz()">
-        🧠
-        <div class="floating-quiz-tooltip">Take the Quiz!</div>
-    </div>
-
-    <!-- Discount Popup -->
-    <div id="discountPopup" class="discount-popup">
-        <div class="discount-content">
-            <span class="discount-close" onclick="closeDiscountPopup()">&times;</span>
-            <div class="discount-badge">🎉 FIRST-TIME VISITOR SPECIAL</div>
-            <h2 class="discount-title">Welcome to Nothing But Value!</h2>
-            <div class="discount-percent">50% OFF</div>
-            <p class="discount-text">You're eligible for an exclusive <strong>50% discount</strong> on ALL our training programs! This offer is only available for first-time visitors.</p>
-            <a href="#courses" class="discount-cta" onclick="closeDiscountPopup()">Claim Your Discount Now!</a>
-            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-secondary);">Limited time offer • Use code: <strong style="color: var(--accent-1);">FIRSTVALUE50</strong></p>
-        </div>
-    </div>
-
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <div class="bg-gradient bg-gradient-1"></div>
-        <div class="bg-gradient bg-gradient-2"></div>
-        <div class="bg-gradient bg-gradient-3"></div>
-    </div>
-
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <div class="logo-container">
-                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-07T12-46-02-281Z-52394c78-chat-image-1765111562261-0.jpg" alt="NBV Logo" class="logo-image">
-                <div class="logo-text">Nothing But Value</div>
-            </div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#video">Watch</a></li>
-                <li><a href="#services">Value</a></li>
-                <li><a href="#blog">Insights</a></li>
-                <li><a href="#courses">Programs</a></li>
-                <li><a href="#social">Connect</a></li>
+            <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-07T12-46-02-281Z-52394c78-chat-image-1765111562261-0.jpg" alt="Nothing But Value" class="logo">
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#roi-calculator">ROI Calculator</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-07T12-46-02-281Z-52394c78-chat-image-1765111562261-0.jpg" alt="Nothing But Value" class="hero-logo">
-                <h1>Nothing But Value</h1>
-                <p class="subtitle">Pure expertise. Zero fluff. Maximum impact. We deliver tangible results through focused IT consulting and leadership development that drives real business outcomes.</p>
-                <div class="cta-group">
-                    <a href="#video" class="btn-primary">Watch Our Story</a>
-                    <a href="#courses" class="btn-secondary">View Programs</a>
+            <h1>AI Transformation Partners</h1>
+            <h2>For IT Services Companies</h2>
+            
+            <p class="tagline">
+                While 95% of AI projects fail, we help IT service providers 
+                join the 5% that succeed—turning pilots into profit.
+            </p>
+            
+            <div class="stats-row">
+                <div class="stat">
+                    <span class="stat-number">$738B</span>
+                    <span class="stat-label">AI Market by 2030</span>
                 </div>
+                <div class="stat">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">AI Projects Fail</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">5%</span>
+                    <span class="stat-label">We Help You Join</span>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#roi-calculator" class="btn-primary">Calculate Your AI ROI</a>
+                <a href="#services" class="btn-secondary">Explore Services</a>
             </div>
         </div>
     </section>
 
-    <!-- Video Showcase Section -->
-    <section id="video" class="video-showcase">
+    <!-- Crisis Section -->
+    <section class="crisis-section">
         <div class="container">
-            <div class="video-container">
-                <div class="section-header" style="margin-bottom: 0;">
-                    <span class="section-tag">Our Story</span>
-                    <h2 class="section-title" style="font-size: 2.5rem;">See Value in Action</h2>
-                    <p class="section-description">Discover how we help businesses and leaders achieve breakthrough results</p>
+            <h2>The IT Services AI Crisis</h2>
+            <p class="section-subtitle">Your industry is at a crossroads</p>
+            
+            <div class="crisis-grid">
+                <div class="crisis-card opportunity">
+                    <h3>The Opportunity</h3>
+                    <ul class="crisis-list">
+                        <li>
+                            <span class="icon">📈</span>
+                            <div>
+                                <strong>$738B Global AI Market</strong>
+                                <p>Explosive growth by 2030</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">📊</span>
+                            <div>
+                                <strong>82% Exploring AI</strong>
+                                <p>Companies actively implementing</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">🎯</span>
+                            <div>
+                                <strong>Trusted Advisors</strong>
+                                <p>IT services perfectly positioned</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/8jsQQEqzjTA" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                <div class="crisis-card crisis">
+                    <h3>The Crisis</h3>
+                    <ul class="crisis-list">
+                        <li>
+                            <span class="icon">❌</span>
+                            <div>
+                                <strong>95% See NO ROI</strong>
+                                <p>AI initiatives fail to deliver</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">❌</span>
+                            <div>
+                                <strong>30% Abandoned</strong>
+                                <p>Projects die after POC</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">❌</span>
+                            <div>
+                                <strong>53% Lack Skills</strong>
+                                <p>No AI talent in-house</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="crisis-question">
+                <h3>"How do we transform with AI without becoming another failure statistic?"</h3>
+                <p>We have the answer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section>
+        <div class="container">
+            <h2>The 70-20-10 Framework</h2>
+            <p class="section-subtitle">Why we succeed where others fail</p>
+            
+            <div class="framework-visual">
+                <div class="framework-bar">
+                    <div class="bar-segment people" style="width: 70%">
+                        <span class="percentage">70%</span>
+                        <span class="label">People & Process</span>
+                    </div>
+                    <div class="bar-segment tech" style="width: 20%">
+                        <span class="percentage">20%</span>
+                        <span class="label">Technology</span>
+                    </div>
+                    <div class="bar-segment ai" style="width: 10%">
+                        <span class="percentage">10%</span>
+                        <span class="label">AI Models</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="icon-large">👥</div>
+                    <h3>70% People Focus</h3>
+                    <p>Change management, training, and workflow redesign—what others ignore</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon-large">🔧</div>
+                    <h3>20% Technology</h3>
+                    <p>Data governance, architecture, and integration done right</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon-large">🤖</div>
+                    <h3>10% AI Models</h3>
+                    <p>The right algorithms for the right problems</p>
                 </div>
             </div>
         </div>
@@ -1805,532 +1036,559 @@
     <!-- Services Section -->
     <section id="services">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Pure Value Delivery</span>
-                <h2 class="section-title">What We Deliver</h2>
-                <p class="section-description">Every service is designed to deliver measurable value—no unnecessary complexity, just results that matter</p>
-            </div>
+            <h2>Our Services</h2>
+            <p class="section-subtitle">Comprehensive AI transformation for IT services</p>
+            
             <div class="services-grid">
-                <div class="service-card" onclick="showServiceDetail('it-solutions')">
-                    <span class="service-icon">💎</span>
-                    <h3>High-Value IT Solutions</h3>
-                    <p>Strategic technology implementations that directly impact your bottom line. Cloud optimization, automation, and digital transformation focused on ROI, not buzzwords.</p>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>AI Readiness Audit</h3>
+                    <p class="service-price">$12K - $25K</p>
+                    <p>Comprehensive assessment across 5 pillars with actionable roadmap</p>
+                    <ul class="service-features">
+                        <li>AI Maturity Scorecard</li>
+                        <li>Use Case Prioritization</li>
+                        <li>90-Day Action Plan</li>
+                        <li>2-3 Week Delivery</li>
+                    </ul>
+                    <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
                 </div>
-                <div class="service-card" onclick="showServiceDetail('leadership')">
-                    <span class="service-icon">🎯</span>
-                    <h3>Results-Driven Leadership</h3>
-                    <p>Executive coaching stripped of theory, focused on practical frameworks that create immediate impact. Build leadership capabilities that translate to measurable team performance.</p>
-                </div>
-                <div class="service-card" onclick="showServiceDetail('performance')">
-                    <span class="service-icon">⚡</span>
-                    <h3>Performance Optimization</h3>
-                    <p>Data-backed strategies to maximize individual and organizational performance. Cut through the noise with proven methods that deliver consistent results.</p>
-                </div>
-                <div class="service-card" onclick="showServiceDetail('growth')">
-                    <span class="service-icon">📈</span>
-                    <h3>Strategic Growth Consulting</h3>
-                    <p>Business strategy focused on sustainable, profitable growth. We help you identify high-value opportunities and execute with precision.</p>
-                </div>
-                <div class="service-card" onclick="showServiceDetail('training')">
-                    <span class="service-icon">🛡️</span>
-                    <h3>Essential Tech Training</h3>
-                    <p>Skills development that matters. Training programs in AI, cloud, and cybersecurity designed for immediate application and career advancement.</p>
-                </div>
-                <div class="service-card" onclick="showServiceDetail('transformation')">
-                    <span class="service-icon">🚀</span>
-                    <h3>Efficient Transformation</h3>
-                    <p>Streamlined digital transformation without the bloat. We modernize your operations efficiently, delivering value at every stage of the journey.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Value-Packed Insights</span>
-                <h2 class="section-title">Actionable Knowledge</h2>
-                <p class="section-description">No filler content. Every article delivers practical insights you can implement immediately</p>
-            </div>
-            <div class="blog-grid">
-                <div class="blog-card" onclick="showBlogDetail('cloud-roi')">
-                    <div class="blog-image"></div>
-                    <div class="blog-content">
-                        <div class="blog-meta">Dec 10, 2025 • 5 min read</div>
-                        <h3>Cloud ROI: Cutting Costs While Scaling</h3>
-                        <p>Practical strategies to reduce cloud spending while maintaining performance. Real examples from actual implementations.</p>
-                    </div>
-                </div>
-                <div class="blog-card" onclick="showBlogDetail('leadership-principles')">
-                    <div class="blog-image"></div>
-                    <div class="blog-content">
-                        <div class="blog-meta">Dec 10, 2025 • 7 min read</div>
-                        <h3>Leadership That Delivers: 5 High-Impact Principles</h3>
-                        <p>Skip the theory. Five leadership principles that consistently improve team performance across industries.</p>
-                    </div>
-                </div>
-                <div class="blog-card" onclick="showBlogDetail('productivity-hacks')">
-                    <div class="blog-image"></div>
-                    <div class="blog-content">
-                        <div class="blog-meta">Dec 10, 2025 • 6 min read</div>
-                        <h3>Productivity Hacks That Actually Work</h3>
-                        <p>Practical productivity strategies tested with professionals. Increase output without working longer hours.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Quiz Section -->
-    <section id="quiz">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">🧠 Psychological Assessment</span>
-                <h2 class="section-title">Discover Your Value Multiplier</h2>
-                <p class="section-description">Take our interactive personality assessment to uncover your unique strengths and optimal growth path</p>
-            </div>
-            <div class="quiz">
-                <div class="quiz-intro">
-                    <h3>🎯 Your Professional DNA Analysis</h3>
-                    <p>Answer 5 quick questions to reveal your leadership archetype, work style, and personalized course recommendations</p>
-                </div>
-
-                <div class="quiz-progress" id="quizProgress">
-                    <div class="progress-dot active"></div>
-                    <div class="progress-dot"></div>
-                    <div class="progress-dot"></div>
-                    <div class="progress-dot"></div>
-                    <div class="progress-dot"></div>
-                </div>
-
-                <div id="quizQuestions"></div>
-
-                <button class="btn-primary" id="quizSubmitBtn" style="width: 100%; display: none;" onclick="calculateResults()">🔮 Reveal My Profile</button>
                 
-                <div id="quiz-result"></div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Quick-Win AI Pilot</h3>
+                    <p class="service-price">$25K - $45K</p>
+                    <p>Prove ROI in 6-8 weeks with one high-impact AI workflow</p>
+                    <ul class="service-features">
+                        <li>Production AI Solution</li>
+                        <li>Team Training</li>
+                        <li>Measurable ROI</li>
+                        <li>6-8 Week Timeline</li>
+                    </ul>
+                    <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Function Transformation</h3>
+                    <p class="service-price">$75K - $150K</p>
+                    <p>AI-enable an entire department in 3-6 months</p>
+                    <ul class="service-features">
+                        <li>2-4 AI Workflows</li>
+                        <li>Data Governance</li>
+                        <li>Change Management</li>
+                        <li>3-6 Month Program</li>
+                    </ul>
+                    <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>AI Training Programs</h3>
+                    <p class="service-price">$5K - $25K</p>
+                    <p>Build AI-ready workforce from executives to practitioners</p>
+                    <ul class="service-features">
+                        <li>Executive Literacy</li>
+                        <li>Manager Enablement</li>
+                        <li>Practitioner Certification</li>
+                        <li>Custom Programs</li>
+                    </ul>
+                    <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Fractional AI Leadership</h3>
+                    <p class="service-price">$8K - $35K/mo</p>
+                    <p>Ongoing strategic partnership and AI oversight</p>
+                    <ul class="service-features">
+                        <li>AI Advisor</li>
+                        <li>Fractional Director</li>
+                        <li>Fractional VP</li>
+                        <li>6-12 Month Retainer</li>
+                    </ul>
+                    <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Data Readiness</h3>
+                    <p class="service-price">$30K - $75K</p>
+                    <p>Fix your data foundation before building AI</p>
+                    <ul class="service-features">
+                        <li>Data Quality Audit</li>
+                        <li>Governance Framework</li>
+                        <li>Pipeline Design</li>
+                        <li>6-10 Week Program</li>
+                    </ul>
+                    <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Courses Section -->
-    <section id="courses">
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="crisis-section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">🎉 50% OFF FOR FIRST-TIME VISITORS</span>
-                <h2 class="section-title">Invest in Real Results</h2>
-                <p class="section-description">Programs designed for maximum ROI—every hour delivers practical skills and measurable career advancement</p>
+            <h2>AI Use Cases for IT Services</h2>
+            <p class="section-subtitle">Real transformations, measurable results</p>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('internal')">Internal Operations</button>
+                <button class="tab" onclick="showTab('client')">Client Delivery</button>
+                <button class="tab" onclick="showTab('revenue')">New Revenue</button>
             </div>
-            <div class="courses-grid">
-                <div class="course-card" onclick="showCourseDetail('cloud')">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T17-08-57-843Z-fc42bfcb-chat-image-1765386537824-1.jpg');">
-                        <span class="course-badge">⚡ High ROI</span>
-                    </div>
-                    <div class="course-content">
-                        <h3>Cloud Value Optimization</h3>
-                        <p>Master AWS, Azure, and GCP with laser focus on cost optimization and performance. Learn to deliver 10x value from cloud investments.</p>
-                        <div class="course-price">
-                            <span class="price-strike">$499</span>
-                            $249
+            
+            <div id="internal" class="tab-content active">
+                <div class="use-case-grid">
+                    <div class="use-case-card">
+                        <h3>🎫 Service Desk Automation</h3>
+                        <p class="use-case-desc">AI-powered ticket triage, routing, and L1/L2 responses</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">ROI:</span>
+                            <span class="roi-value">30-50% ticket deflection</span>
                         </div>
-                        <button class="buy-button">View Full Details →</button>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <h3>📝 Documentation Generation</h3>
+                        <p class="use-case-desc">Auto-generate runbooks, knowledge base articles, meeting notes</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">ROI:</span>
+                            <span class="roi-value">60% faster documentation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <h3>💼 Proposal Automation</h3>
+                        <p class="use-case-desc">RFP response and proposal generation from templates</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">ROI:</span>
+                            <span class="roi-value">3x faster proposals</span>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <h3>👥 Resource Optimization</h3>
+                        <p class="use-case-desc">AI-driven resource allocation and capacity planning</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">ROI:</span>
+                            <span class="roi-value">20% better utilization</span>
+                        </div>
                     </div>
                 </div>
-                <div class="course-card" onclick="showCourseDetail('leadership')">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T17-08-57-630Z-c537a258-chat-image-1765386537610-0.jpg');">
-                        <span class="course-badge">👑 Premium Value</span>
-                    </div>
-                    <div class="course-content">
-                        <h3>Executive Value Leadership</h3>
-                        <p>Transform your leadership impact with proven frameworks. Create measurable value through strategic decision-making and team optimization.</p>
-                        <div class="course-price">
-                            <span class="price-strike">$799</span>
-                            $399
+            </div>
+            
+            <div id="client" class="tab-content">
+                <div class="use-case-grid">
+                    <div class="use-case-card">
+                        <h3>🔧 Predictive Maintenance</h3>
+                        <p class="use-case-desc">Proactive monitoring and automated remediation</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Value:</span>
+                            <span class="roi-value">Premium pricing, reduced churn</span>
                         </div>
-                        <button class="buy-button">View Full Details →</button>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <h3>⚡ Professional Services</h3>
+                        <p class="use-case-desc">Code generation, testing automation, migration planning</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Value:</span>
+                            <span class="roi-value">40% faster delivery</span>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <h3>📊 Client Reporting</h3>
+                        <p class="use-case-desc">Automated dashboards and insight generation</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Value:</span>
+                            <span class="roi-value">Upsell opportunities</span>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <h3>🛡️ Security Enhancement</h3>
+                        <p class="use-case-desc">AI-driven threat detection and response</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Value:</span>
+                            <span class="roi-value">Differentiated offering</span>
+                        </div>
                     </div>
                 </div>
-                <div class="course-card" onclick="showCourseDetail('performance')">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-082Z-734cdf76-chat-image-1765385984063-1.jpg');">
-                        <span class="course-badge">🚀 Quick Wins</span>
-                    </div>
-                    <div class="course-content">
-                        <h3>Peak Performance Mastery</h3>
-                        <p>Evidence-based productivity systems that deliver immediate results. Increase your output by 30% in the first month.</p>
-                        <div class="course-price">
-                            <span class="price-strike">$299</span>
-                            $149
+            </div>
+            
+            <div id="revenue" class="tab-content">
+                <div class="use-case-grid">
+                    <div class="use-case-card">
+                        <h3>💡 AI Consulting</h3>
+                        <p class="use-case-desc">Readiness assessments, strategy, implementation for clients</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Revenue:</span>
+                            <span class="roi-value">$50K-$200K per client</span>
                         </div>
-                        <button class="buy-button">View Full Details →</button>
                     </div>
-                </div>
-                <div class="course-card" onclick="showCourseDetail('cybersecurity')">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-268Z-e47d6019-chat-image-1765385984249-2.jpg');">
-                        <span class="course-badge">🛡️ Essential</span>
-                    </div>
-                    <div class="course-content">
-                        <h3>Practical Cybersecurity</h3>
-                        <p>Security practices that protect real business value. Focus on high-impact defenses without unnecessary complexity.</p>
-                        <div class="course-price">
-                            <span class="price-strike">$399</span>
-                            $199
+                    
+                    <div class="use-case-card">
+                        <h3>🤖 AI-Powered MSP</h3>
+                        <p class="use-case-desc">AI-enhanced NOC/SOC and intelligent automation</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Revenue:</span>
+                            <span class="roi-value">20-40% premium pricing</span>
                         </div>
-                        <button class="buy-button">View Full Details →</button>
                     </div>
-                </div>
-                <div class="course-card" onclick="showCourseDetail('agile')">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-44-440Z-624650c9-chat-image-1765385984421-3.jpg');">
-                        <span class="course-badge">✅ Proven Methods</span>
-                    </div>
-                    <div class="course-content">
-                        <h3>Agile Value Delivery</h3>
-                        <p>Agile and DevOps focused on shipping value fast. Learn to deliver projects 50% faster with higher quality.</p>
-                        <div class="course-price">
-                            <span class="price-strike">$349</span>
-                            $174
+                    
+                    <div class="use-case-card">
+                        <h3>🏥 Industry Solutions</h3>
+                        <p class="use-case-desc">Vertical-specific AI (healthcare, finance, manufacturing)</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Revenue:</span>
+                            <span class="roi-value">$100K-$500K per solution</span>
                         </div>
-                        <button class="buy-button">View Full Details →</button>
                     </div>
-                </div>
-                <div class="course-card" onclick="showCourseDetail('communication')">
-                    <div class="course-image" style="background-image: url('https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-10T16-59-43-836Z-203282df-chat-image-1765385983817-0.jpg');">
-                        <span class="course-badge">💡 Impact Focused</span>
-                    </div>
-                    <div class="course-content">
-                        <h3>High-Impact Communication</h3>
-                        <p>Develop emotional intelligence and communication skills that create tangible business value and stronger relationships.</p>
-                        <div class="course-price">
-                            <span class="price-strike">$449</span>
-                            $224
+                    
+                    <div class="use-case-card">
+                        <h3>🎓 AI Training Services</h3>
+                        <p class="use-case-desc">Deliver AI literacy and upskilling to client teams</p>
+                        <div class="use-case-roi">
+                            <span class="roi-label">Revenue:</span>
+                            <span class="roi-value">$5K-$25K per program</span>
                         </div>
-                        <button class="buy-button">View Full Details →</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Media Section -->
-    <section id="social" class="social-section">
+    <!-- ROI Calculator -->
+    <section id="roi-calculator" class="calculator-section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Join Our Community</span>
-                <h2 class="section-title">Connect With Us</h2>
-                <p class="section-description">Follow us for daily value-packed insights, tips, and real-world success stories</p>
-            </div>
-            <div class="social-grid">
-                <a href="https://youtube.com/@yourchannel" target="_blank" class="social-card">
-                    <span class="social-icon">📺</span>
-                    <h3>YouTube</h3>
-                    <p>Video tutorials & insights</p>
-                    <div class="social-stats">Watch Now</div>
-                </a>
-                <a href="https://linkedin.com/company/yourcompany" target="_blank" class="social-card">
-                    <span class="social-icon">💼</span>
-                    <h3>LinkedIn</h3>
-                    <p>Professional insights</p>
-                    <div class="social-stats">Follow Us</div>
-                </a>
-                <a href="https://twitter.com/yourhandle" target="_blank" class="social-card">
-                    <span class="social-icon">🐦</span>
-                    <h3>Twitter/X</h3>
-                    <p>Quick tips & updates</p>
-                    <div class="social-stats">Follow</div>
-                </a>
-                <a href="https://instagram.com/yourhandle" target="_blank" class="social-card">
-                    <span class="social-icon">📸</span>
-                    <h3>Instagram</h3>
-                    <p>Behind the scenes</p>
-                    <div class="social-stats">Follow</div>
-                </a>
+            <h2>Calculate Your AI ROI</h2>
+            <p class="section-subtitle">See what AI transformation could mean for your business</p>
+            
+            <div class="calculator-container">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label>Annual Revenue ($)</label>
+                        <input type="number" id="revenue" placeholder="20000000" value="20000000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Number of Employees</label>
+                        <input type="number" id="employees" placeholder="100" value="100">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Average Hourly Rate ($)</label>
+                        <input type="number" id="hourly-rate" placeholder="75" value="75">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Monthly Support Tickets</label>
+                        <input type="number" id="tickets" placeholder="500" value="500">
+                    </div>
+                </div>
+                
+                <button class="btn-calculate" onclick="calculateROI()">Calculate ROI</button>
+                
+                <div class="calculator-results" id="results" style="display: none;">
+                    <h3>Your Potential AI ROI</h3>
+                    
+                    <div class="result-card">
+                        <div class="result-label">Annual Cost Savings</div>
+                        <div class="result-value" id="savings">$0</div>
+                        <div class="result-breakdown">
+                            • Service desk automation: <span id="desk-savings">$0</span><br>
+                            • Documentation efficiency: <span id="doc-savings">$0</span><br>
+                            • Resource optimization: <span id="resource-savings">$0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-label">New Revenue Potential</div>
+                        <div class="result-value" id="new-revenue">$0</div>
+                        <div class="result-breakdown">
+                            • AI consulting services<br>
+                            • Premium AI-powered offerings<br>
+                            • Industry-specific solutions
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-label">Investment Required</div>
+                        <div class="result-value" id="investment">$0</div>
+                        <div class="result-breakdown">
+                            Year 1 transformation program
+                        </div>
+                    </div>
+                    
+                    <div class="result-card highlight">
+                        <div class="result-label">Net ROI (Year 1)</div>
+                        <div class="result-value" id="net-roi">0%</div>
+                        <div class="result-breakdown">
+                            Payback period: <span id="payback">0</span> months
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="location.href='#contact'" style="width: 100%; margin-top: 2rem;">
+                        Get Your Custom Assessment →
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <p class="section-subtitle">Real results from real IT services companies</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "We went from AI confusion to AI confidence in 90 days. They didn't just give us a strategy deck—they rolled up their sleeves and helped us implement. We now have 3 AI workflows in production saving us 200+ hours per month."
+                    </p>
+                    <div class="testimonial-author">Sarah Chen</div>
+                    <div class="testimonial-role">CTO, Mid-Market MSP ($15M revenue)</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Finally, an AI partner who understands IT services. They understood our margins, our client relationships, and our operational challenges. They helped us build AI solutions that actually work for IT services companies."
+                    </p>
+                    <div class="testimonial-author">Michael Rodriguez</div>
+                    <div class="testimonial-role">CEO, Systems Integrator ($25M revenue)</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "ROI in 8 weeks—we were skeptical, but they delivered. Their AI-powered triage system now handles 40% of L1 tickets automatically. Our team is happier, our clients are happier, and we're saving $120K annually."
+                    </p>
+                    <div class="testimonial-author">Jennifer Park</div>
+                    <div class="testimonial-role">VP Operations, IT Consultancy ($8M revenue)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="crisis-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know</p>
+            
+            <div class="faq-container">
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        We're already using some AI tools. Do we still need you?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Most IT services companies have experimented with AI (ChatGPT, Copilot, etc.) but struggle to move from experimentation to transformation. We help you identify high-ROI use cases beyond the obvious, integrate AI into your core workflows, build governance & best practices, scale AI across your organization, and develop client-facing AI offerings.
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        How is this different from hiring an AI developer?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        AI developers build tools. We transform organizations. Our focus is 70% change management, training, and process redesign, 20% data governance, architecture, and integration, and 10% AI models & algorithms. We help you figure out what to build and how to adopt it—then partner with your team (or ours) to build it.
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        What if we don't have good data?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        60% of AI projects fail due to poor data quality—which is exactly why we start with a data readiness assessment. We'll audit your current data landscape, identify gaps & quality issues, design a data governance framework, create a roadmap to AI-ready data, and implement quick wins while you improve data quality.
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        How long until we see ROI?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Quick wins in 6-8 weeks. Our approach: Weeks 1-2 assess & prioritize, Weeks 3-8 implement first pilot, Week 8 measure & report ROI, Months 3-6 scale to additional use cases. Typical clients see 3-6 month payback on total investment.
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        Can you help us build AI services for our clients?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. This is one of our core offerings. We help you design AI service offerings (consulting, managed services, solutions), price & package AI services, train your team to deliver, create sales enablement materials, and support initial client engagements. Many clients generate $50K-$200K in new AI revenue within 12 months.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
     <section id="contact">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Start Creating Value</span>
-                <h2 class="section-title">Let's Talk Results</h2>
-                <p class="section-description">Ready to cut through the noise and deliver real value? Let's discuss your goals</p>
-            </div>
-            <div class="contact-form">
-                <p style="margin-bottom: 2rem; text-align: center; color: var(--accent-1); font-weight: 600;">
-                    📧 Email us directly at: <a href="mailto:nothingbutvalue18@gmail.com" style="color: var(--accent-1); text-decoration: underline;">nothingbutvalue18@gmail.com</a>
-                </p>
-                <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
-                    Or use the form below and we'll get back to you within 24 hours:
-                </p>
-                <form id="contactForm" onsubmit="handleSubmit(event)" style="margin-top: 2rem;">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" id="name" required placeholder="Your name">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" id="email" required placeholder="your@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label>What value are you looking to create?</label>
-                        <textarea name="message" id="message" required placeholder="Tell us about your goals and challenges..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width: 100%;">Start the Conversation</button>
-                    
-                    <div class="success-message" id="successMessage">
-                        <h3 style="color: var(--accent-1); margin-bottom: 0.5rem;">✅ Message Sent Successfully!</h3>
-                        <p style="color: var(--text-secondary); margin: 0;">Thank you for reaching out! We'll get back to you within 24 hours.</p>
-                    </div>
-                </form>
-            </div>
+            <h2>Let's Transform Your Business</h2>
+            <p class="section-subtitle">Schedule your free discovery call</p>
+            
+            <form class="contact-form" action="https://formsubmit.co/nothingbutvalue18@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New AI Transformation Inquiry">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://vashishthap.github.io/it-consulting-leadership/thank-you.html">
+                
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" name="company">
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label>Annual Revenue</label>
+                    <input type="text" name="revenue" placeholder="e.g., $20M">
+                </div>
+                
+                <div class="form-group">
+                    <label>Number of Employees</label>
+                    <input type="number" name="employees" placeholder="e.g., 100">
+                </div>
+                
+                <div class="form-group">
+                    <label>What are you interested in? *</label>
+                    <textarea name="message" required placeholder="Tell us about your AI goals and challenges..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-07T12-46-02-281Z-52394c78-chat-image-1765111562261-0.jpg" alt="NBV Logo" class="footer-logo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Nothing But Value</h3>
+                <p>AI Transformation Partners for IT Services</p>
+                <p>Turning pilots into profit since 2025</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#services">AI Readiness Audit</a>
+                <a href="#services">Quick-Win Pilots</a>
+                <a href="#services">Function Transformation</a>
+                <a href="#services">AI Training</a>
+                <a href="#services">Fractional Leadership</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="#roi-calculator">ROI Calculator</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: nothingbutvalue18@gmail.com</p>
+                <p>Web: www.nothingbutvalue.com</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
             <p>&copy; 2025 Nothing But Value. All rights reserved.</p>
-            <p>Delivering pure value through focused expertise and measurable results.</p>
-            <p style="margin-top: 1rem;"><a href="mailto:nothingbutvalue18@gmail.com" style="color: var(--accent-1); text-decoration: none;">nothingbutvalue18@gmail.com</a></p>
         </div>
     </footer>
 
-    <!-- Botsonic AI Chatbot Script -->
     <script>
-      (function (w, d, s, o, f, js, fjs) {
-        w["botsonic_widget"] = o;
-        w[o] =
-          w[o] ||
-          function () {
-            (w[o].q = w[o].q || []).push(arguments);
-          };
-        (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
-        js.id = o;
-        js.src = f;
-        js.async = 1;
-        fjs.parentNode.insertBefore(js, fjs);
-      })(window, document, "script", "Botsonic", "https://widget.botsonic.com/CDN/botsonic.min.js");
-      Botsonic("init", {
-        serviceBaseUrl: "https://api-bot.writesonic.com",
-        token: "db88401d-f44b-4fa0-931f-e194f67aaaa1",
-      });
-    </script>
-
-    <script>
-// Service Details Data - PART 1 OF JAVASCRIPT
-const serviceDetails={
-'it-solutions':{icon:'💎',title:'High-Value IT Solutions',subtitle:'Strategic technology implementations that directly impact your bottom line',description:'We deliver enterprise-grade IT solutions focused on measurable ROI. Our approach combines cutting-edge technology with business acumen to create solutions that don\'t just work—they drive growth.',features:[{icon:'☁️',title:'Cloud Optimization',description:'Reduce cloud costs by 30-50% while improving performance'},{icon:'🤖',title:'Automation',description:'Automate repetitive tasks and free up your team for strategic work'},{icon:'📊',title:'Data Analytics',description:'Turn data into actionable insights that drive decisions'},{icon:'🔄',title:'System Integration',description:'Seamlessly connect your tools and systems'}],benefits:['30-50% reduction in IT operational costs','Improved system reliability and uptime','Faster time-to-market for new features','Enhanced security and compliance','Scalable infrastructure that grows with you'],cta:'Schedule Free Consultation'},
-'leadership':{icon:'🎯',title:'Results-Driven Leadership',subtitle:'Executive coaching focused on practical frameworks that create immediate impact',description:'Transform your leadership approach with proven methodologies that translate directly to team performance. We strip away the theory and focus on what actually works in real business environments.',features:[{icon:'👥',title:'Team Performance',description:'Build high-performing teams that consistently deliver'},{icon:'🎯',title:'Strategic Thinking',description:'Develop frameworks for better decision-making'},{icon:'💬',title:'Communication',description:'Master the art of influential communication'},{icon:'📈',title:'Change Management',description:'Lead organizational change effectively'}],benefits:['Measurable improvement in team productivity','Better employee engagement and retention','Faster decision-making processes','Improved cross-functional collaboration','Enhanced leadership presence and influence'],cta:'Book Leadership Assessment'},
-'performance':{icon:'⚡',title:'Performance Optimization',subtitle:'Data-backed strategies to maximize individual and organizational performance',description:'Cut through the noise with proven performance optimization methods. We use data and behavioral science to create sustainable improvements in how your organization operates.',features:[{icon:'📊',title:'Performance Metrics',description:'Establish meaningful KPIs that drive behavior'},{icon:'🔍',title:'Process Analysis',description:'Identify and eliminate bottlenecks'},{icon:'🎯',title:'Goal Setting',description:'Create aligned, achievable objectives'},{icon:'💪',title:'Capability Building',description:'Develop skills that compound over time'}],benefits:['25-40% improvement in operational efficiency','Reduced waste and redundancy','Better resource allocation','Increased employee satisfaction','Sustainable performance gains'],cta:'Start Performance Audit'},
-'growth':{icon:'📈',title:'Strategic Growth Consulting',subtitle:'Business strategy focused on sustainable, profitable growth',description:'We help you identify and execute on high-value growth opportunities. Our approach combines market analysis, competitive intelligence, and execution planning to drive sustainable expansion.',features:[{icon:'🎯',title:'Market Analysis',description:'Identify untapped opportunities in your market'},{icon:'💡',title:'Innovation Strategy',description:'Develop new products and services'},{icon:'🤝',title:'Partnership Development',description:'Build strategic alliances that accelerate growth'},{icon:'📊',title:'Growth Metrics',description:'Track and optimize your growth engines'}],benefits:['Clear roadmap for sustainable growth','Reduced risk in expansion initiatives','Better capital allocation decisions','Faster market penetration','Improved competitive positioning'],cta:'Explore Growth Opportunities'},
-'training':{icon:'🛡️',title:'Essential Tech Training',subtitle:'Skills development designed for immediate application and career advancement',description:'Practical training programs that focus on skills that matter. We teach AI, cloud, cybersecurity, and other critical technologies with a focus on real-world application.',features:[{icon:'🤖',title:'AI & Machine Learning',description:'Practical AI implementation for business'},{icon:'☁️',title:'Cloud Technologies',description:'AWS, Azure, GCP mastery'},{icon:'🔒',title:'Cybersecurity',description:'Protect your organization from threats'},{icon:'📱',title:'Modern Development',description:'Latest frameworks and best practices'}],benefits:['Immediately applicable skills','Industry-recognized certifications','Career advancement opportunities','Hands-on project experience','Lifetime access to materials'],cta:'View Training Programs'},
-'transformation':{icon:'🚀',title:'Efficient Transformation',subtitle:'Streamlined digital transformation that delivers value at every stage',description:'Digital transformation without the bloat. We modernize your operations efficiently, focusing on quick wins while building toward long-term transformation goals.',features:[{icon:'🎯',title:'Transformation Roadmap',description:'Clear path from current to future state'},{icon:'⚡',title:'Quick Wins',description:'Deliver value in weeks, not years'},{icon:'👥',title:'Change Management',description:'Ensure adoption and minimize resistance'},{icon:'📊',title:'Value Tracking',description:'Measure ROI at every milestone'}],benefits:['Faster transformation timelines','Reduced transformation costs','Higher adoption rates','Measurable business impact','Sustainable organizational change'],cta:'Begin Transformation Journey'}
-};
-
-// Blog Details Data - NEW ADDITION
-const blogDetails={
-'cloud-roi':{icon:'☁️',title:'Cloud ROI: Cutting Costs While Scaling',date:'Dec 10, 2025',readTime:'5 min read',author:'Nothing But Value Team',category:'Cloud Computing',intro:'Cloud costs spiraling out of control? You\'re not alone. Most organizations overspend on cloud by 30-50%. Here\'s how to fix it without sacrificing performance.',sections:[{heading:'The Cloud Cost Crisis',content:'Organizations are migrating to the cloud faster than ever, but many are shocked by their monthly bills. The promise of "pay only for what you use" often translates to "pay for what you forgot to turn off." We\'ve seen companies spending $500K+ annually on unused resources.'},{heading:'5 Immediate Cost-Cutting Strategies',points:['Right-size your instances: Most VMs are oversized by 40-60%. Use monitoring data to match resources to actual usage.','Implement auto-scaling: Scale down during off-peak hours. A simple schedule can save 30% instantly.','Reserved instances for predictable workloads: Commit to 1-3 year terms for 40-70% savings on stable workloads.','Delete orphaned resources: Unattached volumes, old snapshots, and forgotten load balancers add up fast.','Use spot instances for non-critical workloads: Save up to 90% on compute for batch processing and dev/test.']},{heading:'Real-World Example',content:'A SaaS company we worked with was spending $180K/month on AWS. After a 2-week optimization sprint, we reduced their bill to $95K/month—a 47% reduction—while actually improving performance through better architecture.'},{heading:'The Performance Paradox',content:'Here\'s the counterintuitive truth: optimizing for cost often improves performance. Why? Because it forces you to understand your actual resource needs, eliminate waste, and architect more efficiently.'},{heading:'Tools That Actually Help',points:['AWS Cost Explorer & Trusted Advisor','Azure Cost Management + Advisor','GCP Recommender','Third-party: CloudHealth, Spot.io, Kubecost']},{heading:'Action Plan',content:'Start with the low-hanging fruit: 1) Run a cost audit this week, 2) Implement auto-scaling for dev/test environments, 3) Set up billing alerts, 4) Schedule monthly cost reviews. These four steps alone typically save 20-30%.'}],keyTakeaways:['Cloud optimization is ongoing, not one-time','Most savings come from behavioral changes, not just technical fixes','Performance and cost optimization go hand-in-hand','Start small, measure everything, iterate quickly'],cta:'Want help optimizing your cloud costs? Our Cloud Value Optimization course teaches you everything you need to know.'},
-'leadership-principles':{icon:'🎯',title:'Leadership That Delivers: 5 High-Impact Principles',date:'Dec 10, 2025',readTime:'7 min read',author:'Nothing But Value Team',category:'Leadership',intro:'Forget the leadership theory. These five principles consistently drive measurable team performance improvements across industries. We\'ve seen them work in startups, Fortune 500s, and everything in between.',sections:[{heading:'Principle 1: Clarity Over Consensus',content:'Great leaders provide crystal-clear direction. They don\'t wait for everyone to agree—they make decisions, communicate them clearly, and move forward. Consensus is nice; clarity is essential. Teams perform best when they know exactly what success looks like and why it matters.'},{heading:'Principle 2: Accountability With Support',content:'Hold people accountable for results, but give them the support they need to succeed. This means: clear expectations, regular check-ins, removing blockers, and celebrating wins. Accountability without support is just blame. Support without accountability is just hope.'},{heading:'Principle 3: Feedback as Fuel',content:'The best teams have a culture of continuous feedback—both giving and receiving. Not annual reviews, but daily micro-feedback. "That presentation was excellent because..." or "Next time, try this approach..." Make feedback specific, timely, and actionable.'},{heading:'Principle 4: Delegate Outcomes, Not Tasks',content:'Stop micromanaging. Instead of saying "Send me a report by Friday," say "We need to reduce customer churn by 15% this quarter. What\'s your plan?" Give people ownership of outcomes, not just tasks. This builds capability and frees your time for strategic work.'},{heading:'Principle 5: Model the Behavior',content:'Your team watches everything you do. If you want them to be punctual, be punctual. If you want them to communicate clearly, communicate clearly. If you want them to take ownership, take ownership. Leadership is caught, not taught.'}],realWorldImpact:'A VP we coached implemented these five principles with her 50-person team. Within 90 days: project delivery improved by 35%, employee engagement scores jumped 28 points, and voluntary turnover dropped to near zero.',keyTakeaways:['Leadership is about results, not popularity','Clarity and accountability drive performance','Feedback should be continuous, not annual','Delegate outcomes to build capability','Your behavior sets the standard'],cta:'Master these principles and more in our Executive Value Leadership program.'},
-'productivity-hacks':{icon:'⚡',title:'Productivity Hacks That Actually Work',date:'Dec 10, 2025',readTime:'6 min read',author:'Nothing But Value Team',category:'Productivity',intro:'Tired of productivity advice that sounds good but doesn\'t work? These strategies are battle-tested by thousands of professionals. They\'re simple, practical, and deliver measurable results.',sections:[{heading:'The 2-Minute Rule',content:'If something takes less than 2 minutes, do it immediately. Don\'t add it to your to-do list, don\'t schedule it, just do it. This prevents small tasks from piling up and cluttering your mental space. Respond to that quick email now. File that document now. Make that quick call now.'},{heading:'Time Blocking (The Right Way)',content:'Most people time-block wrong. They schedule every minute, then feel like failures when life happens. Instead: block 3-4 hours for deep work, leave 2-3 hours unscheduled for meetings and interruptions, and protect your deep work blocks fiercely. This is realistic and sustainable.'},{heading:'The Energy Audit',content:'Track your energy levels for one week. When are you most focused? Most creative? Most social? Then schedule your work accordingly. Do your hardest thinking during peak energy hours. Save admin work for low-energy times. This simple shift can double your effective output.'},{heading:'Single-Tasking Sprints',content:'Multitasking is a myth. Instead, work in focused 25-50 minute sprints on ONE thing. No email, no Slack, no phone. Just one task. Take a 5-10 minute break, then repeat. You\'ll accomplish more in 3 focused hours than 8 distracted ones.'},{heading:'The Weekly Review',content:'Spend 30 minutes every Friday reviewing your week. What worked? What didn\'t? What will you do differently next week? This reflection turns experience into learning and prevents you from repeating the same mistakes.'}],scientificBacking:'These aren\'t just tips—they\'re backed by research in cognitive psychology and behavioral science. Studies show that focused work produces 5x better results than distracted work, and energy management beats time management every time.',practicalImplementation:'Start with ONE hack this week. Master it. Then add another. Trying to implement everything at once is a recipe for failure. Small, consistent changes compound into massive results.',keyTakeaways:['Do 2-minute tasks immediately','Time-block realistically, not perfectly','Match tasks to your energy levels','Single-task in focused sprints','Review and adjust weekly'],cta:'Learn the complete productivity system in our Peak Performance Mastery course.'}
-};
-
-// Course Details Data - PART 2 OF JAVASCRIPT  
-const courseDetails={
-'cloud':{icon:'☁️',title:'Cloud Value Optimization Masterclass',subtitle:'Master AWS, Azure & GCP cost optimization - Deliver 10x ROI',price:'$249',originalPrice:'$499',duration:'8-10 hours',level:'Intermediate to Advanced',description:'Learn to optimize cloud costs across AWS, Azure, and GCP. This comprehensive course teaches you proven strategies to reduce cloud spending by 30-50% while maintaining or improving performance.',modules:['Cloud Cost Fundamentals & Pricing Models','AWS Cost Optimization (EC2, S3, RDS, Lambda)','Azure Cost Management & Optimization','GCP Cost Control & Best Practices','Multi-Cloud Cost Strategies','Advanced Optimization Techniques','Real-World Case Studies','Implementation & Action Plan'],features:[{icon:'🎓',title:'31 Video Lessons',description:'Comprehensive video content'},{icon:'📚',title:'Downloadable Resources',description:'Templates, checklists, calculators'},{icon:'💼',title:'Real Case Studies',description:'Learn from actual implementations'},{icon:'🏆',title:'Certificate',description:'Completion certificate included'}],benefits:['Reduce cloud costs by 30-50%','Master all three major cloud platforms','Learn from real-world case studies','Get practical tools and templates','Lifetime access to all materials','Free updates as platforms evolve'],cta:'Enroll Now - $249'},
-'leadership':{icon:'👑',title:'Executive Value Leadership',subtitle:'Transform your leadership impact with proven frameworks',price:'$399',originalPrice:'$799',duration:'12-15 hours',level:'All Levels',description:'Develop executive-level leadership skills that create measurable business impact. Learn frameworks used by Fortune 500 leaders to drive team performance and organizational success.',modules:['Leadership Fundamentals & Self-Assessment','Strategic Decision-Making Frameworks','High-Performance Team Building','Influential Communication','Change Leadership & Management','Conflict Resolution & Negotiation','Executive Presence & Personal Brand','Leadership in Action'],features:[{icon:'🎯',title:'40+ Video Lessons',description:'In-depth leadership training'},{icon:'📊',title:'Assessment Tools',description:'Evaluate your leadership style'},{icon:'💬',title:'Case Studies',description:'Real leadership scenarios'},{icon:'🎓',title:'Certification',description:'Executive leadership certificate'}],benefits:['Measurable team performance improvement','Enhanced decision-making capabilities','Better stakeholder management','Increased leadership confidence','Career advancement opportunities','Lifetime community access'],cta:'Enroll Now - $399'},
-'performance':{icon:'⚡',title:'Peak Performance Mastery',subtitle:'Evidence-based productivity systems that deliver immediate results',price:'$149',originalPrice:'$299',duration:'6-8 hours',level:'All Levels',description:'Master productivity systems backed by behavioral science. Learn to increase your output by 30% in the first month through proven techniques and sustainable habits.',modules:['Performance Psychology & Mindset','Time Management Mastery','Energy Management & Focus','Productivity Systems & Tools','Habit Formation & Behavior Change','Deep Work & Flow States','Stress Management & Resilience','30-Day Performance Sprint'],features:[{icon:'📱',title:'25 Video Lessons',description:'Actionable productivity training'},{icon:'📋',title:'Productivity Templates',description:'Ready-to-use systems'},{icon:'📊',title:'Tracking Tools',description:'Measure your progress'},{icon:'🎯',title:'30-Day Challenge',description:'Guided implementation'}],benefits:['30% increase in productivity (first month)','Better work-life balance','Reduced stress and burnout','Sustainable performance habits','Improved focus and concentration','Lifetime access to updates'],cta:'Enroll Now - $149'},
-'cybersecurity':{icon:'🛡️',title:'Practical Cybersecurity',subtitle:'Security practices that protect real business value',price:'$199',originalPrice:'$399',duration:'8-10 hours',level:'Beginner to Intermediate',description:'Learn practical cybersecurity that protects your business without unnecessary complexity. Focus on high-impact defenses and real-world threat mitigation.',modules:['Cybersecurity Fundamentals','Threat Landscape & Risk Assessment','Network Security Essentials','Application Security','Data Protection & Privacy','Incident Response & Recovery','Security Compliance','Building Security Culture'],features:[{icon:'🔒',title:'30 Video Lessons',description:'Comprehensive security training'},{icon:'📋',title:'Security Checklists',description:'Practical implementation guides'},{icon:'🎯',title:'Hands-On Labs',description:'Practice in safe environments'},{icon:'📜',title:'Certificate',description:'Security certification'}],benefits:['Protect your business from threats','Reduce security risk significantly','Compliance with regulations','Practical, actionable knowledge','Career advancement in security','Lifetime access to materials'],cta:'Enroll Now - $199'},
-'agile':{icon:'✅',title:'Agile Value Delivery',subtitle:'Ship value fast - Deliver projects 50% faster with higher quality',price:'$174',originalPrice:'$349',duration:'7-9 hours',level:'All Levels',description:'Master Agile and DevOps methodologies focused on rapid value delivery. Learn to ship projects 50% faster while maintaining or improving quality.',modules:['Agile Fundamentals & Mindset','Scrum Framework Mastery','Kanban & Lean Principles','DevOps & CI/CD','Agile Planning & Estimation','Team Collaboration & Communication','Metrics & Continuous Improvement','Scaling Agile'],features:[{icon:'🚀',title:'28 Video Lessons',description:'Complete Agile training'},{icon:'📊',title:'Agile Templates',description:'Ready-to-use frameworks'},{icon:'💼',title:'Real Projects',description:'Actual implementation examples'},{icon:'🏆',title:'Certification',description:'Agile practitioner certificate'}],benefits:['50% faster project delivery','Higher quality outcomes','Better team collaboration','Increased customer satisfaction','Reduced project risk','Career advancement opportunities'],cta:'Enroll Now - $174'},
-'communication':{icon:'💡',title:'High-Impact Communication',subtitle:'Create tangible business value through better communication',price:'$224',originalPrice:'$449',duration:'8-10 hours',level:'All Levels',description:'Develop emotional intelligence and communication skills that create measurable business impact. Learn to influence, persuade, and build stronger professional relationships.',modules:['Communication Fundamentals','Emotional Intelligence','Persuasion & Influence','Difficult Conversations','Presentation Skills','Written Communication','Cross-Cultural Communication','Building Relationships'],features:[{icon:'🎤',title:'32 Video Lessons',description:'Comprehensive communication training'},{icon:'📝',title:'Communication Templates',description:'Proven frameworks'},{icon:'🎯',title:'Practice Scenarios',description:'Real-world situations'},{icon:'📜',title:'Certificate',description:'Communication mastery certificate'}],benefits:['Better stakeholder relationships','Increased influence and persuasion','Improved team collaboration','Enhanced leadership presence','Career advancement','Lifetime access to materials'],cta:'Enroll Now - $224'}
-};
-
-// Blog Modal Function - NEW ADDITION
-function showBlogDetail(e){const t=blogDetails[e];if(!t)return;let s=`
-<div class="detail-modal-header">
-<div class="detail-modal-icon">${t.icon}</div>
-<h2 class="detail-modal-title">${t.title}</h2>
-<div class="detail-modal-meta">
-<div class="detail-modal-meta-item">📅 ${t.date}</div>
-<div class="detail-modal-meta-item">⏱️ ${t.readTime}</div>
-<div class="detail-modal-meta-item">✍️ ${t.author}</div>
-<div class="detail-modal-meta-item">📂 ${t.category}</div>
-</div>
-</div>
-<div class="detail-section">
-<p style="font-size:1.15rem;font-weight:600;color:var(--text-primary)">${t.intro}</p>
-</div>`;t.sections.forEach(e=>{s+=`<div class="detail-section"><h3>${e.heading}</h3>`,e.content&&(s+=`<p>${e.content}</p>`),e.points&&(s+=`<ul class="detail-list">${e.points.map(e=>`<li>${e}</li>`).join("")}</ul>`),s+="</div>"}),t.realWorldImpact&&(s+=`<div class="detail-section" style="background:rgba(0,245,255,0.05);padding:2rem;border-radius:12px;border-left:3px solid var(--accent-1)"><h3>💼 Real-World Impact</h3><p>${t.realWorldImpact}</p></div>`),t.scientificBacking&&(s+=`<div class="detail-section" style="background:rgba(124,58,237,0.05);padding:2rem;border-radius:12px;border-left:3px solid var(--accent-2)"><h3>🔬 Scientific Backing</h3><p>${t.scientificBacking}</p></div>`),t.practicalImplementation&&(s+=`<div class="detail-section" style="background:rgba(255,0,110,0.05);padding:2rem;border-radius:12px;border-left:3px solid var(--accent-3)"><h3>🎯 Practical Implementation</h3><p>${t.practicalImplementation}</p></div>`),s+=`
-<div class="detail-section">
-<h3>Key Takeaways</h3>
-<ul class="detail-list">
-${t.keyTakeaways.map(e=>`<li>${e}</li>`).join("")}
-</ul>
-</div>
-<div class="detail-section">
-<div style="background:linear-gradient(135deg,rgba(0,245,255,0.1) 0%,rgba(124,58,237,0.1) 100%);border:2px solid var(--accent-1);border-radius:16px;padding:2rem;text-align:center">
-<h3 style="color:var(--accent-1);margin-bottom:1rem">📚 Want to Learn More?</h3>
-<p style="margin-bottom:1.5rem">${t.cta}</p>
-<a href="#courses" class="detail-cta-button" onclick="closeDetailModal()">View Our Courses</a>
-</div>
-</div>
-`,document.getElementById("detailModalBody").innerHTML=s,document.getElementById("detailModal").classList.add("show"),document.body.style.overflow="hidden"}
-
-// Modal Functions - PART 3 OF JAVASCRIPT
-function showServiceDetail(e){const t=serviceDetails[e];if(!t)return;document.getElementById("detailModalBody").innerHTML=`
-<div class="detail-modal-header">
-<div class="detail-modal-icon">${t.icon}</div>
-<h2 class="detail-modal-title">${t.title}</h2>
-<p class="detail-modal-subtitle">${t.subtitle}</p>
-</div>
-<div class="detail-section">
-<h3>Overview</h3>
-<p>${t.description}</p>
-</div>
-<div class="detail-section">
-<h3>What We Offer</h3>
-<div class="detail-features-grid">
-${t.features.map(e=>`
-<div class="detail-feature-card">
-<div class="detail-feature-icon">${e.icon}</div>
-<h4>${e.title}</h4>
-<p>${e.description}</p>
-</div>
-`).join("")}
-</div>
-</div>
-<div class="detail-section">
-<h3>Key Benefits</h3>
-<ul class="detail-list">
-${t.benefits.map(e=>`<li>${e}</li>`).join("")}
-</ul>
-</div>
-<div class="detail-section">
-<button class="detail-cta-button" onclick="contactUs()">${t.cta}</button>
-</div>
-`,document.getElementById("detailModal").classList.add("show"),document.body.style.overflow="hidden"}
-
-function showCourseDetail(e){const t=courseDetails[e];if(!t)return;document.getElementById("detailModalBody").innerHTML=`
-<div class="detail-modal-header">
-<div class="detail-modal-icon">${t.icon}</div>
-<h2 class="detail-modal-title">${t.title}</h2>
-<p class="detail-modal-subtitle">${t.subtitle}</p>
-</div>
-<div class="detail-price-box">
-<div class="detail-price">
-<span class="detail-price-strike">${t.originalPrice}</span>
-${t.price}
-</div>
-<p style="margin:0;color:var(--text-secondary)">
-${t.duration} • ${t.level}
-</p>
-</div>
-<div class="detail-section">
-<h3>What You'll Learn</h3>
-<p>${t.description}</p>
-</div>
-<div class="detail-section">
-<h3>Course Modules</h3>
-<ul class="detail-list">
-${t.modules.map(e=>`<li>${e}</li>`).join("")}
-</ul>
-</div>
-<div class="detail-section">
-<h3>What's Included</h3>
-<div class="detail-features-grid">
-${t.features.map(e=>`
-<div class="detail-feature-card">
-<div class="detail-feature-icon">${e.icon}</div>
-<h4>${e.title}</h4>
-<p>${e.description}</p>
-</div>
-`).join("")}
-</div>
-</div>
-<div class="detail-section">
-<h3>Key Benefits</h3>
-<ul class="detail-list">
-${t.benefits.map(e=>`<li>${e}</li>`).join("")}
-</ul>
-</div>
-<div class="detail-section">
-<button class="detail-cta-button" onclick="enrollCourse('${e}')">${t.cta}</button>
-<p style="text-align:center;margin-top:1rem;color:var(--text-secondary);font-size:0.9rem">
-💳 Secure payment • 30-day money-back guarantee • Lifetime access
-</p>
-</div>
-`,document.getElementById("detailModal").classList.add("show"),document.body.style.overflow="hidden"}
-
-function closeDetailModal(){document.getElementById("detailModal").classList.remove("show"),document.body.style.overflow="auto"}
-function contactUs(){closeDetailModal(),document.getElementById("contact").scrollIntoView({behavior:"smooth"})}
-function enrollCourse(e){closeDetailModal(),alert("Course enrollment coming soon! For now, please contact us to enroll."),document.getElementById("contact").scrollIntoView({behavior:"smooth"})}
-
-// Quiz System - PART 4 OF JAVASCRIPT
-const quizQuestions=[{question:"When facing a complex problem, what's your first instinct?",options:[{text:"Analyze data and create a detailed plan",value:"A",trait:"analytical"},{text:"Brainstorm with the team for diverse perspectives",value:"B",trait:"collaborative"},{text:"Take immediate action and adjust as you go",value:"C",trait:"action-oriented"},{text:"Research best practices and learn from experts",value:"D",trait:"learning-focused"}]},{question:"How do you prefer to measure success?",options:[{text:"Clear metrics and quantifiable results",value:"A",trait:"data-driven"},{text:"Team satisfaction and collaboration quality",value:"B",trait:"people-focused"},{text:"Speed of execution and tangible outcomes",value:"C",trait:"results-driven"},{text:"Long-term growth and skill development",value:"D",trait:"growth-oriented"}]},{question:"In a high-pressure situation, you typically:",options:[{text:"Stay calm and methodically work through the issue",value:"A",trait:"systematic"},{text:"Rally the team and leverage collective strength",value:"B",trait:"team-builder"},{text:"Make quick decisions and lead by example",value:"C",trait:"decisive"},{text:"View it as a learning opportunity for improvement",value:"D",trait:"adaptive"}]},{question:"What energizes you most at work?",options:[{text:"Solving complex technical or strategic challenges",value:"A",trait:"problem-solver"},{text:"Building strong relationships and team dynamics",value:"B",trait:"connector"},{text:"Achieving ambitious goals and seeing impact",value:"C",trait:"achiever"},{text:"Mastering new skills and expanding capabilities",value:"D",trait:"learner"}]},{question:"Your ideal work environment is:",options:[{text:"Structured with clear processes and objectives",value:"A",trait:"organized"},{text:"Collaborative with open communication",value:"B",trait:"social"},{text:"Fast-paced with autonomy and ownership",value:"C",trait:"independent"},{text:"Dynamic with continuous learning opportunities",value:"D",trait:"evolving"}]}];
-
-const personalityProfiles={A:{type:"Strategic Architect",icon:"🎯",description:"You excel at systematic thinking and data-driven decision-making. Your analytical mind transforms complex challenges into structured solutions.",traits:[{label:"Core Strength",value:"Strategic Planning & Analysis"},{label:"Work Style",value:"Methodical & Data-Driven"},{label:"Value Creation",value:"Optimization & Efficiency"},{label:"Growth Area",value:"Rapid Execution & Adaptability"}],recommendedCourse:{title:"Cloud Value Optimization",reason:"Perfect for your analytical mindset - learn to optimize cloud costs through data-driven strategies and systematic approaches."}},B:{type:"Collaborative Catalyst",icon:"🤝",description:"You thrive on building connections and leveraging collective intelligence. Your strength lies in creating high-performing teams and fostering collaboration.",traits:[{label:"Core Strength",value:"Team Building & Collaboration"},{label:"Work Style",value:"People-Focused & Inclusive"},{label:"Value Creation",value:"Synergy & Engagement"},{label:"Growth Area",value:"Individual Accountability"}],recommendedCourse:{title:"Executive Value Leadership",reason:"Amplify your natural people skills with proven frameworks for leading high-impact teams and driving measurable results."}},C:{type:"Action-Driven Executor",icon:"⚡",description:"You're a natural doer who turns vision into reality. Your bias for action and decisive leadership creates momentum and delivers results fast.",traits:[{label:"Core Strength",value:"Execution & Results Delivery"},{label:"Work Style",value:"Fast-Paced & Decisive"},{label:"Value Creation",value:"Speed & Impact"},{label:"Growth Area",value:"Strategic Planning"}],recommendedCourse:{title:"Agile Value Delivery",reason:"Channel your action-oriented nature into structured agile methodologies that deliver value 50% faster with higher quality."}},D:{type:"Growth-Focused Innovator",icon:"🚀",description:"You're driven by continuous improvement and skill mastery. Your learning mindset and adaptability make you a catalyst for innovation and transformation.",traits:[{label:"Core Strength",value:"Learning & Innovation"},{label:"Work Style",value:"Adaptive & Curious"},{label:"Value Creation",value:"Capability Building"},{label:"Growth Area",value:"Immediate Execution"}],recommendedCourse:{title:"Peak Performance Mastery",reason:"Accelerate your growth with evidence-based productivity systems that compound your learning and maximize output."}}};
-
-let currentQuestion=0,answers=[];
-function initQuiz(){renderQuestion(0)}
-function renderQuestion(e){const t=quizQuestions[e];document.getElementById("quizQuestions").innerHTML=`
-<div class="quiz-question">
-<h4>Question ${e+1} of ${quizQuestions.length}</h4>
-<p style="font-size:1.2rem;margin-bottom:2rem;color:var(--text-primary)">${t.question}</p>
-<div class="quiz-options">
-${t.options.map((t,s)=>`
-<div class="quiz-option" onclick="selectAnswer(${e},'${t.value}',this)">
-<div class="quiz-option-letter">${t.value}</div>
-<span>${t.text}</span>
-</div>
-`).join("")}
-</div>
-</div>
-`}
-
-function selectAnswer(e,t,s){document.querySelectorAll(".quiz-option").forEach(e=>e.classList.remove("selected")),s.classList.add("selected"),answers[e]=t,updateProgress(),setTimeout(()=>{e<quizQuestions.length-1?(currentQuestion=e+1,renderQuestion(currentQuestion),updateProgress()):document.getElementById("quizSubmitBtn").style.display="block"},500)}
-
-function updateProgress(){document.querySelectorAll(".progress-dot").forEach((e,t)=>{e.classList.remove("active","completed"),t<currentQuestion?e.classList.add("completed"):t===currentQuestion&&e.classList.add("active")})}
-
-function calculateResults(){const e={};answers.forEach(t=>{e[t]=(e[t]||0)+1});const t=Object.keys(e).reduce((t,s)=>e[t]>e[s]?t:s),s=personalityProfiles[t],o=document.getElementById("quiz-result");o.innerHTML=`
-<div style="text-align:center;margin-bottom:2rem">
-<div style="font-size:4rem;margin-bottom:1rem">${s.icon}</div>
-<h3>You are a ${s.type}!</h3>
-<div class="personality-type">${t}-Type Personality</div>
-</div>
-<p style="font-size:1.1rem;line-height:1.8;margin-bottom:2rem">${s.description}</p>
-<div class="traits">
-${s.traits.map(e=>`
-<div class="trait">
-<strong>${e.label}</strong>
-<p style="margin:0;color:var(--text-secondary)">${e.value}</p>
-</div>
-`).join("")}
-</div>
-<div class="recommended-course">
-<h4>🎓 Recommended Course for You</h4>
-<h3 style="color:var(--accent-1);margin:1rem 0">${s.recommendedCourse.title}</h3>
-<p style="margin:0">${s.recommendedCourse.reason}</p>
-<a href="#courses" class="btn-primary" style="margin-top:1.5rem;display:inline-block;text-decoration:none">View Course Details →</a>
-</div>
-`,o.classList.add("show"),document.getElementById("quizSubmitBtn").style.display="none",o.scrollIntoView({behavior:"smooth",block:"nearest"})}
-
-// Popup & Banner Functions - PART 5 OF JAVASCRIPT
-function showQuizPrompts(){localStorage.getItem("nbvQuizPopupSeen")||setTimeout(()=>{document.getElementById("quizPopupModal").classList.add("show"),document.body.style.overflow="hidden"},8e3),localStorage.getItem("nbvQuizBannerSeen")||setTimeout(()=>{document.getElementById("quizPromptBanner").classList.add("show")},15e3)}
-function closeQuizPopup(){document.getElementById("quizPopupModal").classList.remove("show"),document.body.style.overflow="auto",localStorage.setItem("nbvQuizPopupSeen","true")}
-function closeBanner(){document.getElementById("quizPromptBanner").classList.remove("show"),localStorage.setItem("nbvQuizBannerSeen","true")}
-function startQuizFromPopup(){closeQuizPopup(),scrollToQuiz()}
-function startQuizFromBanner(){closeBanner(),scrollToQuiz()}
-function scrollToQuiz(){document.getElementById("quiz").scrollIntoView({behavior:"smooth",block:"start"})}
-
-function handleSubmit(e){e.preventDefault();const t=document.getElementById("name").value,s=document.getElementById("email").value,o=document.getElementById("message").value,n=encodeURIComponent("New Contact from Nothing But Value Website"),i=encodeURIComponent(`Name: ${t}\nEmail: ${s}\n\nMessage:\n${o}`);window.location.href=`mailto:nothingbutvalue18@gmail.com?subject=${n}&body=${i}`,document.getElementById("successMessage").classList.add("show"),document.getElementById("contactForm").reset(),setTimeout(()=>{document.getElementById("successMessage").classList.remove("show")},5e3)}
-
-function showDiscountPopup(){const e=document.getElementById("discountPopup");localStorage.getItem("nbvVisited")||setTimeout(()=>{e.classList.add("show"),document.body.style.overflow="hidden"},3e3)}
-function closeDiscountPopup(){document.getElementById("discountPopup").classList.remove("show"),document.body.style.overflow="auto",localStorage.setItem("nbvVisited","true")}
-
-// Event Listeners - PART 6 OF JAVASCRIPT
-window.addEventListener("load",()=>{initQuiz(),showQuizPrompts(),showDiscountPopup()});
-document.addEventListener("click",function(e){document.getElementById("detailModal")===e.target&&closeDetailModal()});
-document.addEventListener("keydown",function(e){"Escape"===e.key&&(closeDetailModal(),closeQuizPopup(),closeDiscountPopup())});
-document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();const t=document.querySelector(this.getAttribute("href"));t&&t.scrollIntoView({behavior:"smooth",block:"start"})})});
+        // Tab Switching
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // ROI Calculator
+        function calculateROI() {
+            const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+            const employees = parseFloat(document.getElementById('employees').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
+            const tickets = parseFloat(document.getElementById('tickets').value) || 0;
+            
+            // Calculate savings
+            const deskSavings = tickets * 12 * 0.4 * 0.5 * hourlyRate;
+            const docSavings = employees * 0.3 * 10 * 52 * hourlyRate * 0.6;
+            const resourceSavings = employees * 0.2 * 40 * 52 * hourlyRate * 0.2;
+            
+            const totalSavings = deskSavings + docSavings + resourceSavings;
+            
+            // Calculate new revenue (conservative 5%)
+            const newRevenue = revenue * 0.05;
+            
+            // Calculate investment based on company size
+            let investment;
+            if (employees < 50) investment = 75000;
+            else if (employees < 250) investment = 200000;
+            else investment = 400000;
+            
+            // Calculate ROI
+            const totalValue = totalSavings + newRevenue;
+            const netROI = ((totalValue - investment) / investment * 100).toFixed(0);
+            const payback = (investment / (totalValue / 12)).toFixed(1);
+            
+            // Display results
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('savings').textContent = '$' + totalSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('desk-savings').textContent = '$' + deskSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('doc-savings').textContent = '$' + docSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('resource-savings').textContent = '$' + resourceSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('new-revenue').textContent = '$' + newRevenue.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('investment').textContent = '$' + investment.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('net-roi').textContent = netROI + '%';
+            document.getElementById('payback').textContent = payback;
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            element.classList.toggle('active');
+            const toggle = element.querySelector('.faq-toggle');
+            toggle.textContent = element.classList.contains('active') ? '−' : '+';
+        }
     </script>
 </body>
 </html>
