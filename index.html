@@ -7,6 +7,10 @@
     <meta name="description" content="95% of AI projects fail. We're the 5% that deliver. Fortune 500 AI executives helping SME IT services ride the AI supercycle.">
     <meta name="keywords" content="AI transformation SME, IT services AI, AI consulting small business, AI strategy mid-market">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg">
+    <link rel="apple-touch-icon" href="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg">
+    
     <style>
         * {
             margin: 0;
@@ -56,9 +60,19 @@
             padding: 1rem 20px;
         }
         
+        /* Enhanced Logo Styling */
         .logo {
-            height: 50px;
+            height: 60px;
             width: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 6px 25px rgba(124, 58, 237, 0.5);
         }
         
         .nav-links {
@@ -770,6 +784,10 @@
             .calculator-inputs {
                 grid-template-columns: 1fr;
             }
+            
+            .logo {
+                height: 50px;
+            }
         }
         
         /* Smooth Scroll */
@@ -782,7 +800,7 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-07T12-46-02-281Z-52394c78-chat-image-1765111562261-0.jpg" alt="Nothing But Value" class="logo">
+            <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Nothing But Value - AI Transformation" class="logo">
             <ul class="nav-links">
                 <li><a href="#why-us">Why Us</a></li>
                 <li><a href="#services">Services</a></li>
@@ -793,7 +811,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section - REDESIGNED FOR MAXIMUM IMPACT -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <!-- Pattern Interrupt Hook -->
@@ -811,7 +829,7 @@
                 </span>
             </h1>
             
-            <!-- Subheadline - Problem Agitation -->
+            <!-- Subheadline -->
             <h2 style="font-size: clamp(1.3rem, 3vw, 2rem); color: var(--text-muted); font-weight: 400; margin-bottom: 2rem; line-height: 1.4;">
                 Big consultancies charge <span style="color: var(--pink); font-weight: 700;">$500K-$2M</span> and send junior staff.<br>
                 We bring <span style="color: var(--cyan); font-weight: 700;">Fortune 500 AI executives</span> to SMEs for <span style="color: var(--cyan); font-weight: 700;">1/5th the cost.</span>
@@ -825,8 +843,8 @@
                 </p>
             </div>
             
-            <!-- Social Proof Stats -->
-            <div class="stats-row" style="margin: 2.5rem 0;">
+            <!-- Stats -->
+            <div class="stats-row">
                 <div class="stat">
                     <span class="stat-number">$180B</span>
                     <span class="stat-label">SME AI Market by 2030</span>
@@ -851,9 +869,8 @@
                 </a>
             </div>
             
-            <!-- Urgency Box - Supercycle -->
+            <!-- Supercycle Box -->
             <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.2), rgba(124, 58, 237, 0.2)); border: 3px solid var(--pink); border-radius: 20px; padding: 2.5rem; max-width: 850px; margin: 0 auto; box-shadow: 0 20px 60px rgba(255, 0, 110, 0.3); position: relative; overflow: hidden;">
-                <!-- Animated background pulse -->
                 <div style="position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 245, 255, 0.1) 0%, transparent 70%); animation: pulse 3s ease-in-out infinite;"></div>
                 
                 <div style="position: relative; z-index: 1;">
@@ -900,14 +917,13 @@
         </div>
     </section>
 
-    <!-- Challenge + Solution Section -->
+    <!-- Challenge Solution Section -->
     <section class="challenge-solution">
         <div class="container">
             <h2>The SME AI Gap</h2>
             <p class="section-subtitle">The challenges SMEs face—and how we solve them</p>
             
             <div class="challenge-grid">
-                <!-- Challenges -->
                 <div class="challenge-card">
                     <h3>❌ The Challenges</h3>
                     <ul class="challenge-list">
@@ -942,7 +958,6 @@
                     </ul>
                 </div>
                 
-                <!-- Our Solutions -->
                 <div class="solution-card-alt">
                     <h3>✅ How We Solve It</h3>
                     <ul class="challenge-list">
@@ -980,7 +995,7 @@
         </div>
     </section>
 
-    <!-- Why Us Section - Crisp & Punchy -->
+    <!-- Why Us Section -->
     <section id="why-us">
         <div class="container">
             <h2>Why SMEs Choose Us</h2>
@@ -1026,7 +1041,7 @@
         </div>
     </section>
 
-    <!-- Services Section - Value Focused -->
+    <!-- Services Section -->
     <section id="services">
         <div class="container">
             <h2>Our Services</h2>
@@ -1518,29 +1533,23 @@
             const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
             const tickets = parseFloat(document.getElementById('tickets').value) || 0;
             
-            // Calculate savings
             const deskSavings = tickets * 12 * 0.4 * 0.5 * hourlyRate;
             const docSavings = employees * 0.3 * 10 * 52 * hourlyRate * 0.6;
             const resourceSavings = employees * 0.2 * 40 * 52 * hourlyRate * 0.2;
             
             const totalSavings = deskSavings + docSavings + resourceSavings;
-            
-            // Calculate new revenue (conservative 5%)
             const newRevenue = revenue * 0.05;
             
-            // Calculate investment based on company size (SME-focused)
             let investment;
             if (employees < 50) investment = 50000;
             else if (employees < 100) investment = 100000;
             else if (employees < 250) investment = 150000;
             else investment = 200000;
             
-            // Calculate ROI
             const totalValue = totalSavings + newRevenue;
             const netROI = ((totalValue - investment) / investment * 100).toFixed(0);
             const payback = (investment / (totalValue / 12)).toFixed(1);
             
-            // Display results
             document.getElementById('results').style.display = 'block';
             document.getElementById('savings').textContent = '$' + totalSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
             document.getElementById('desk-savings').textContent = '$' + deskSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
@@ -1551,7 +1560,6 @@
             document.getElementById('net-roi').textContent = netROI + '%';
             document.getElementById('payback').textContent = payback;
             
-            // Scroll to results
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         
