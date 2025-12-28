@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Transformation for SME IT Services | Nothing But Value</title>
-    <meta name="description" content="Corporate-experienced AI executives helping SME IT services companies ride the AI supercycle. Enterprise expertise at SME-friendly pricing.">
+    <title>Enterprise AI Expertise for SME IT Services | Nothing But Value</title>
+    <meta name="description" content="Fortune 500 AI executives helping SME IT services ride the AI supercycle. Enterprise expertise without enterprise fees.">
     <meta name="keywords" content="AI transformation SME, IT services AI, AI consulting small business, AI strategy mid-market">
     
     <style>
@@ -85,7 +85,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px 80px;
+            padding: 120px 20px 60px;
             background: linear-gradient(135deg, var(--dark) 0%, var(--dark-alt) 100%);
             position: relative;
             overflow: hidden;
@@ -108,25 +108,27 @@
         }
         
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
         }
         
         .hero h2 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
             color: var(--text);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
         }
         
         .tagline {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-muted);
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto 3rem;
             line-height: 1.8;
         }
@@ -135,7 +137,7 @@
             display: flex;
             justify-content: center;
             gap: 3rem;
-            margin: 3rem 0;
+            margin: 2.5rem 0;
             flex-wrap: wrap;
         }
         
@@ -145,7 +147,7 @@
         
         .stat-number {
             display: block;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 800;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             -webkit-background-clip: text;
@@ -156,7 +158,7 @@
         .stat-label {
             display: block;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-top: 0.5rem;
         }
         
@@ -198,15 +200,41 @@
             color: var(--dark);
         }
         
+        /* Supercycle CTA Box */
+        .supercycle-cta {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), rgba(124, 58, 237, 0.15));
+            border: 2px solid var(--cyan);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.2);
+        }
+        
+        .supercycle-cta h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        
+        .supercycle-cta p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
         /* Section Styles */
         section {
             padding: 80px 20px;
         }
         
         section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2rem, 4vw, 2.8rem);
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -216,226 +244,123 @@
         .section-subtitle {
             text-align: center;
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 3rem;
         }
         
-        /* Crisis Section */
-        .crisis-section {
+        /* Challenge Solution Section */
+        .challenge-solution {
             background: linear-gradient(135deg, var(--dark) 0%, var(--dark-alt) 100%);
         }
         
-        .crisis-grid {
+        .challenge-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
         
-        .crisis-card {
-            background: rgba(255, 255, 255, 0.02);
+        .challenge-card {
+            background: rgba(255, 0, 110, 0.05);
+            border: 1px solid rgba(255, 0, 110, 0.3);
             border-radius: 20px;
             padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .crisis-card.opportunity {
-            border-color: rgba(0, 245, 255, 0.3);
+        .solution-card-alt {
             background: rgba(0, 245, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
         }
         
-        .crisis-card.crisis {
-            border-color: rgba(255, 0, 110, 0.3);
-            background: rgba(255, 0, 110, 0.05);
-        }
-        
-        .crisis-card h3 {
-            font-size: 1.5rem;
+        .challenge-card h3, .solution-card-alt h3 {
+            font-size: 1.4rem;
             margin-bottom: 1.5rem;
         }
         
-        .crisis-card.opportunity h3 {
-            color: var(--cyan);
-        }
-        
-        .crisis-card.crisis h3 {
+        .challenge-card h3 {
             color: var(--pink);
         }
         
-        .crisis-list {
+        .solution-card-alt h3 {
+            color: var(--cyan);
+        }
+        
+        .challenge-list {
             list-style: none;
         }
         
-        .crisis-list li {
+        .challenge-list li {
             display: flex;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+            align-items: flex-start;
         }
         
-        .crisis-list .icon {
-            font-size: 2rem;
+        .challenge-list .icon {
+            font-size: 1.5rem;
             flex-shrink: 0;
+            margin-top: 0.2rem;
         }
         
-        .crisis-list strong {
+        .challenge-list strong {
             display: block;
             color: var(--text);
             margin-bottom: 0.3rem;
+            font-size: 1.05rem;
         }
         
-        .crisis-list p {
+        .challenge-list p {
             color: var(--text-muted);
             font-size: 0.9rem;
+            line-height: 1.6;
         }
         
-        .crisis-question {
-            text-align: center;
-            background: rgba(124, 58, 237, 0.1);
-            border: 2px solid var(--purple);
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .crisis-question h3 {
-            font-size: 1.5rem;
-            color: var(--text);
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-        
-        .crisis-question p {
-            color: var(--cyan);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        
-        /* Why Us Section */
-        .why-us-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .why-us-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .why-us-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--cyan);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
-        }
-        
-        .icon-large {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .why-us-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-        
-        .why-us-card p {
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-        
-        /* Framework Section */
-        .framework-visual {
-            max-width: 800px;
-            margin: 3rem auto;
-        }
-        
-        .framework-bar {
-            display: flex;
-            height: 80px;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .bar-segment {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark);
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .bar-segment:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
-        
-        .bar-segment.people {
-            background: linear-gradient(135deg, var(--cyan), #00d4e6);
-        }
-        
-        .bar-segment.tech {
-            background: linear-gradient(135deg, var(--purple), #9d5cf2);
-        }
-        
-        .bar-segment.ai {
-            background: linear-gradient(135deg, var(--pink), #ff3385);
-        }
-        
-        .percentage {
-            font-size: 1.5rem;
-        }
-        
-        .label {
-            font-size: 0.8rem;
-        }
-        
-        .solution-grid {
+        /* Why Us Section - Compact */
+        .why-us-compact {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
         }
         
-        .solution-card {
+        .why-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
+            border-radius: 15px;
+            padding: 1.5rem;
             transition: all 0.3s;
+            text-align: center;
         }
         
-        .solution-card:hover {
-            transform: translateY(-5px);
+        .why-card:hover {
+            transform: translateY(-3px);
             border-color: var(--cyan);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 245, 255, 0.15);
         }
         
-        .solution-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--text);
+        .why-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
         }
         
-        .solution-card p {
+        .why-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--cyan);
+        }
+        
+        .why-card p {
             color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
         
-        /* Services Section */
+        /* Services Section - Value Focused */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -461,27 +386,32 @@
         }
         
         .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
             color: var(--text);
         }
         
-        .service-price {
+        .service-value {
             color: var(--cyan);
-            font-size: 1.3rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 700;
             margin: 1rem 0;
+            padding: 0.8rem;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid var(--cyan);
         }
         
         .service-card > p {
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
         }
         
         .service-features {
             list-style: none;
             text-align: left;
-            margin: 1.5rem 0;
+            margin: 1.2rem 0;
         }
         
         .service-features li {
@@ -489,6 +419,7 @@
             margin-bottom: 0.5rem;
             padding-left: 1.5rem;
             position: relative;
+            font-size: 0.9rem;
         }
         
         .service-features li::before {
@@ -496,6 +427,15 @@
             position: absolute;
             left: 0;
             color: var(--cyan);
+            font-weight: bold;
+        }
+        
+        .service-investment {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .btn-learn-more {
@@ -867,6 +807,10 @@
             .calculator-inputs {
                 grid-template-columns: 1fr;
             }
+            
+            .supercycle-cta {
+                padding: 2rem 1.5rem;
+            }
         }
         
         /* Smooth Scroll */
@@ -893,320 +837,269 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>AI Transformation for SME IT Services</h1>
-            <h2>Corporate Experience. SME Focus. Supercycle Ready.</h2>
+            <h1>Fortune 500 AI Expertise.<br>Built for SME IT Services.</h1>
+            <h2>Enterprise-Grade Transformation. Mid-Market Pricing. Zero Compromise.</h2>
             
             <p class="tagline">
-                We're corporate-experienced IT and AI transformation executives bringing 
-                enterprise-grade expertise to SMEs—helping you ride the AI supercycle 
-                without the enterprise price tag.
+                We're corporate AI executives who've led transformations at the world's largest companies. 
+                Now we're bringing that firepower to SMEs ready to dominate the AI supercycle.
             </p>
             
             <div class="stats-row">
                 <div class="stat">
-                    <span class="stat-number">$738B</span>
-                    <span class="stat-label">AI Market by 2030</span>
+                    <span class="stat-number">$180B</span>
+                    <span class="stat-label">SME AI Market by 2030</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">95%</span>
-                    <span class="stat-label">AI Projects Fail</span>
+                    <span class="stat-number">73%</span>
+                    <span class="stat-label">SMEs Lack AI Strategy</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">SMEs</span>
-                    <span class="stat-label">Our Exclusive Focus</span>
+                    <span class="stat-number">5X</span>
+                    <span class="stat-label">ROI for Early Adopters</span>
                 </div>
             </div>
             
             <div class="cta-buttons">
-                <a href="#roi-calculator" class="btn-primary">Calculate Your AI ROI</a>
-                <a href="#services" class="btn-secondary">Explore Services</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Section -->
-    <section id="why-us">
-        <div class="container">
-            <h2>Why SMEs Choose Us</h2>
-            <p class="section-subtitle">Corporate expertise meets SME accessibility</p>
-            
-            <div class="why-us-grid">
-                <div class="why-us-card">
-                    <div class="icon-large">🎯</div>
-                    <h3>Corporate-Experienced Team</h3>
-                    <p>
-                        We've led AI transformations at Fortune 500 companies and global enterprises. 
-                        Now we're bringing that expertise to SMEs who deserve the same quality guidance 
-                        without the enterprise consulting fees.
-                    </p>
-                </div>
-                
-                <div class="why-us-card">
-                    <div class="icon-large">💼</div>
-                    <h3>SME-Focused Approach</h3>
-                    <p>
-                        We understand SME realities: tighter budgets, smaller teams, faster decisions. 
-                        Our methodologies are adapted specifically for companies with 50-250 employees 
-                        and $5M-$50M revenue.
-                    </p>
-                </div>
-                
-                <div class="why-us-card">
-                    <div class="icon-large">🚀</div>
-                    <h3>Ride the AI Supercycle</h3>
-                    <p>
-                        The AI revolution is the biggest business transformation since the internet. 
-                        We help SME IT services companies position themselves as AI leaders, 
-                        not followers—capturing market share while competitors hesitate.
-                    </p>
-                </div>
-                
-                <div class="why-us-card">
-                    <div class="icon-large">💰</div>
-                    <h3>Enterprise Quality, SME Pricing</h3>
-                    <p>
-                        McKinsey charges $500K-$2M for AI transformation. We deliver the same quality 
-                        for $50K-$350K—because we're lean, focused, and committed to making AI 
-                        accessible to mid-market companies.
-                    </p>
-                </div>
-                
-                <div class="why-us-card">
-                    <div class="icon-large">📊</div>
-                    <h3>ROI-Obsessed Methodology</h3>
-                    <p>
-                        Every engagement starts with clear success metrics. We focus on measurable 
-                        outcomes: time saved, costs reduced, revenue generated. No fluff, no hype—
-                        just results that impact your bottom line.
-                    </p>
-                </div>
-                
-                <div class="why-us-card">
-                    <div class="icon-large">🤝</div>
-                    <h3>Hands-On Partnership</h3>
-                    <p>
-                        We're not a big firm that sends junior consultants. You work directly with 
-                        experienced executives who've been in your shoes. We're partners in your 
-                        success, not just vendors delivering a report.
-                    </p>
-                </div>
+                <a href="#contact" class="btn-primary">Book Free Strategy Call</a>
+                <a href="#roi-calculator" class="btn-secondary">Calculate Your ROI</a>
             </div>
             
-            <div style="text-align: center; margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(124, 58, 237, 0.1)); border-radius: 20px; border: 1px solid rgba(0, 245, 255, 0.3);">
-                <h3 style="color: var(--text); margin-bottom: 1rem; font-size: 1.8rem;">
-                    The AI Supercycle is Here. Are You Ready?
-                </h3>
-                <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; max-width: 700px; margin: 0 auto 2rem;">
-                    While 95% of AI projects fail, we help SME IT services companies join the 5% that succeed—
-                    with proven methodologies, hands-on guidance, and pricing that makes sense for your business.
+            <!-- Supercycle CTA - Now on First Screen -->
+            <div class="supercycle-cta">
+                <h3>🚀 The AI Supercycle is Here. Your Move.</h3>
+                <p>
+                    While 95% of AI projects fail and big consultancies charge $500K-$2M, 
+                    we deliver Fortune 500-grade transformation for $50K-$200K. 
+                    <strong style="color: var(--cyan);">SME-focused. Battle-tested. Results-driven.</strong>
                 </p>
                 <a href="#contact" class="btn-primary" style="display: inline-block; text-decoration: none;">
-                    Schedule Free Discovery Call →
+                    Join the 5% That Succeed →
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Crisis Section -->
-    <section class="crisis-section">
+    <!-- Challenge + Solution Section -->
+    <section class="challenge-solution">
         <div class="container">
-            <h2>The SME AI Challenge</h2>
-            <p class="section-subtitle">Why most SMEs struggle with AI transformation</p>
+            <h2>The SME AI Gap</h2>
+            <p class="section-subtitle">The challenges SMEs face—and how we solve them</p>
             
-            <div class="crisis-grid">
-                <div class="crisis-card opportunity">
-                    <h3>The Opportunity</h3>
-                    <ul class="crisis-list">
+            <div class="challenge-grid">
+                <!-- Challenges -->
+                <div class="challenge-card">
+                    <h3>❌ The Challenges</h3>
+                    <ul class="challenge-list">
                         <li>
-                            <span class="icon">📈</span>
+                            <span class="icon">💸</span>
                             <div>
-                                <strong>$738B AI Market</strong>
-                                <p>Massive growth opportunity for early adopters</p>
+                                <strong>Can't Afford Big Firms</strong>
+                                <p>McKinsey/Deloitte charge $500K-$2M+ for AI transformation—out of reach for most SMEs</p>
                             </div>
                         </li>
                         <li>
                             <span class="icon">🎯</span>
                             <div>
-                                <strong>SME Advantage</strong>
-                                <p>Faster decisions, leaner operations, agile implementation</p>
+                                <strong>No Internal Expertise</strong>
+                                <p>73% of SMEs lack AI strategy; 53% cite lack of skills as top barrier</p>
                             </div>
                         </li>
                         <li>
-                            <span class="icon">💼</span>
+                            <span class="icon">⚠️</span>
                             <div>
-                                <strong>Client Demand</strong>
-                                <p>Your clients are asking for AI solutions—now</p>
+                                <strong>High Failure Risk</strong>
+                                <p>95% of AI initiatives see no ROI; 30% abandoned after POC</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">⏰</span>
+                            <div>
+                                <strong>Falling Behind Fast</strong>
+                                <p>Competitors adopting AI gain 20-40% efficiency advantage</p>
                             </div>
                         </li>
                     </ul>
                 </div>
                 
-                <div class="crisis-card crisis">
-                    <h3>The Challenge</h3>
-                    <ul class="crisis-list">
+                <!-- Our Solutions -->
+                <div class="solution-card-alt">
+                    <h3>✅ How We Solve It</h3>
+                    <ul class="challenge-list">
                         <li>
-                            <span class="icon">❌</span>
+                            <span class="icon">💰</span>
                             <div>
-                                <strong>Can't Afford Big Firms</strong>
-                                <p>McKinsey/Deloitte charge $500K-$2M+</p>
+                                <strong>Enterprise Quality, SME Pricing</strong>
+                                <p>Same expertise as big firms at 1/5th the cost—$50K-$200K vs $500K-$2M</p>
                             </div>
                         </li>
                         <li>
-                            <span class="icon">❌</span>
+                            <span class="icon">🎓</span>
                             <div>
-                                <strong>Lack Internal Expertise</strong>
-                                <p>53% cite lack of AI skills as top barrier</p>
+                                <strong>Fortune 500 Experience</strong>
+                                <p>We've led AI at the world's largest companies—now exclusively for SMEs</p>
                             </div>
                         </li>
                         <li>
-                            <span class="icon">❌</span>
+                            <span class="icon">📊</span>
                             <div>
-                                <strong>Risk of Failure</strong>
-                                <p>95% of AI initiatives see no ROI</p>
+                                <strong>Proven 70-20-10 Framework</strong>
+                                <p>Focus on people (70%), not just tech—why we succeed where others fail</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">⚡</span>
+                            <div>
+                                <strong>Quick Wins in 6-8 Weeks</strong>
+                                <p>Prove ROI fast with pilot projects; 3-6 month payback on full transformation</p>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="crisis-question">
-                <h3>"How do we access enterprise-grade AI expertise without the enterprise price tag?"</h3>
-                <p>That's exactly why we exist.</p>
-            </div>
         </div>
     </section>
 
-    <!-- Framework Section -->
-    <section>
+    <!-- Why Us Section - Crisp & Punchy -->
+    <section id="why-us">
         <div class="container">
-            <h2>The 70-20-10 Framework</h2>
-            <p class="section-subtitle">Why we succeed where others fail</p>
+            <h2>Why SMEs Choose Us</h2>
+            <p class="section-subtitle">Six reasons we're different</p>
             
-            <div class="framework-visual">
-                <div class="framework-bar">
-                    <div class="bar-segment people" style="width: 70%">
-                        <span class="percentage">70%</span>
-                        <span class="label">People & Process</span>
-                    </div>
-                    <div class="bar-segment tech" style="width: 20%">
-                        <span class="percentage">20%</span>
-                        <span class="label">Technology</span>
-                    </div>
-                    <div class="bar-segment ai" style="width: 10%">
-                        <span class="percentage">10%</span>
-                        <span class="label">AI Models</span>
-                    </div>
+            <div class="why-us-compact">
+                <div class="why-card">
+                    <div class="icon">🏆</div>
+                    <h3>Fortune 500 Pedigree</h3>
+                    <p>Led AI at global enterprises. Now exclusively serving SMEs.</p>
                 </div>
-            </div>
-            
-            <div class="solution-grid">
-                <div class="solution-card">
-                    <div class="icon-large">👥</div>
-                    <h3>70% People Focus</h3>
-                    <p>Change management, training, and workflow redesign—what big firms overlook but we prioritize</p>
+                
+                <div class="why-card">
+                    <div class="icon">💼</div>
+                    <h3>SME-Only Focus</h3>
+                    <p>We understand your constraints, speed, and decision-making.</p>
                 </div>
-                <div class="solution-card">
-                    <div class="icon-large">🔧</div>
-                    <h3>20% Technology</h3>
-                    <p>Data governance, architecture, and integration done right—enterprise-grade for SMEs</p>
+                
+                <div class="why-card">
+                    <div class="icon">💰</div>
+                    <h3>1/5th the Cost</h3>
+                    <p>Enterprise expertise without enterprise fees. Period.</p>
                 </div>
-                <div class="solution-card">
-                    <div class="icon-large">🤖</div>
-                    <h3>10% AI Models</h3>
-                    <p>The right algorithms for the right problems—practical, not experimental</p>
+                
+                <div class="why-card">
+                    <div class="icon">⚡</div>
+                    <h3>Fast Results</h3>
+                    <p>ROI in 6-8 weeks. Full payback in 3-6 months.</p>
+                </div>
+                
+                <div class="why-card">
+                    <div class="icon">🎯</div>
+                    <h3>Hands-On Partners</h3>
+                    <p>You work with executives, not junior consultants.</p>
+                </div>
+                
+                <div class="why-card">
+                    <div class="icon">📈</div>
+                    <h3>ROI-Obsessed</h3>
+                    <p>Every dollar tracked. Every outcome measured.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Section - Value Focused -->
     <section id="services">
         <div class="container">
-            <h2>Our Services for SMEs</h2>
-            <p class="section-subtitle">Comprehensive AI transformation at SME-friendly pricing</p>
+            <h2>Our Services</h2>
+            <p class="section-subtitle">Value-driven transformation for SME IT services</p>
             
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">🔍</div>
                     <h3>AI Readiness Audit</h3>
-                    <p class="service-price">$10K - $20K</p>
-                    <p>Comprehensive assessment across 5 pillars with actionable roadmap</p>
+                    <div class="service-value">VALUE: Know exactly where you stand & what to do next</div>
+                    <p>Comprehensive 5-pillar assessment with prioritized roadmap</p>
                     <ul class="service-features">
-                        <li>AI Maturity Scorecard</li>
-                        <li>Use Case Prioritization</li>
-                        <li>90-Day Action Plan</li>
-                        <li>2-3 Week Delivery</li>
+                        <li>AI Maturity Scorecard (0-100)</li>
+                        <li>Quick-win opportunities identified</li>
+                        <li>90-day action plan with ROI projections</li>
+                        <li>Data readiness assessment</li>
                     </ul>
+                    <div class="service-investment">Investment: $10K-$20K | Timeline: 2-3 weeks</div>
                     <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">🚀</div>
-                    <h3>Quick-Win AI Pilot</h3>
-                    <p class="service-price">$20K - $40K</p>
-                    <p>Prove ROI in 6-8 weeks with one high-impact AI workflow</p>
+                    <h3>Quick-Win Pilot</h3>
+                    <div class="service-value">VALUE: Prove ROI fast with measurable results</div>
+                    <p>One high-impact AI workflow in production—6-8 weeks</p>
                     <ul class="service-features">
-                        <li>Production AI Solution</li>
-                        <li>Team Training</li>
-                        <li>Measurable ROI</li>
-                        <li>6-8 Week Timeline</li>
+                        <li>30-50% efficiency gain on target process</li>
+                        <li>Production-ready AI solution deployed</li>
+                        <li>Team trained & confident</li>
+                        <li>ROI report with hard numbers</li>
                     </ul>
+                    <div class="service-investment">Investment: $20K-$40K | Timeline: 6-8 weeks</div>
                     <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
                     <h3>Department Transformation</h3>
-                    <p class="service-price">$60K - $120K</p>
-                    <p>AI-enable an entire department in 3-6 months</p>
+                    <div class="service-value">VALUE: AI-power an entire function for competitive advantage</div>
+                    <p>Transform service desk, sales, or ops with 2-4 AI workflows</p>
                     <ul class="service-features">
-                        <li>2-4 AI Workflows</li>
-                        <li>Data Governance</li>
-                        <li>Change Management</li>
-                        <li>3-6 Month Program</li>
+                        <li>$100K-$300K annual cost savings</li>
+                        <li>20-40% productivity improvement</li>
+                        <li>Data governance framework</li>
+                        <li>Change management & training</li>
                     </ul>
+                    <div class="service-investment">Investment: $60K-$120K | Timeline: 3-6 months</div>
                     <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">🎓</div>
                     <h3>AI Training Programs</h3>
-                    <p class="service-price">$5K - $20K</p>
-                    <p>Build AI-ready workforce from executives to practitioners</p>
+                    <div class="service-value">VALUE: Build internal AI capability that lasts</div>
+                    <p>Executive to practitioner training—turn skeptics into champions</p>
                     <ul class="service-features">
-                        <li>Executive Literacy</li>
-                        <li>Manager Enablement</li>
-                        <li>Practitioner Certification</li>
-                        <li>Custom Programs</li>
+                        <li>Executive AI literacy (strategy & ROI)</li>
+                        <li>Manager enablement (opportunity ID)</li>
+                        <li>Practitioner certification (hands-on)</li>
+                        <li>Custom programs for your needs</li>
                     </ul>
+                    <div class="service-investment">Investment: $5K-$20K | Timeline: 1-3 days</div>
                     <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">🤝</div>
                     <h3>Fractional AI Leadership</h3>
-                    <p class="service-price">$6K - $25K/mo</p>
-                    <p>Ongoing strategic partnership and AI oversight</p>
+                    <div class="service-value">VALUE: Your outsourced AI executive on demand</div>
+                    <p>Ongoing strategic guidance & hands-on oversight</p>
                     <ul class="service-features">
-                        <li>AI Advisor</li>
-                        <li>Fractional Director</li>
-                        <li>Strategic Guidance</li>
-                        <li>6-12 Month Retainer</li>
+                        <li>Monthly strategy sessions</li>
+                        <li>Initiative oversight & course correction</li>
+                        <li>Vendor evaluation & negotiation</li>
+                        <li>Team coaching & mentoring</li>
                     </ul>
+                    <div class="service-investment">Investment: $6K-$25K/mo | Commitment: 6-12 months</div>
                     <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">📊</div>
                     <h3>Data Readiness</h3>
-                    <p class="service-price">$25K - $60K</p>
-                    <p>Fix your data foundation before building AI</p>
+                    <div class="service-value">VALUE: Fix your foundation before building AI</div>
+                    <p>60% of AI projects fail due to bad data—we fix that first</p>
                     <ul class="service-features">
-                        <li>Data Quality Audit</li>
-                        <li>Governance Framework</li>
-                        <li>Pipeline Design</li>
-                        <li>6-10 Week Program</li>
+                        <li>Data quality audit & gap analysis</li>
+                        <li>Governance framework design</li>
+                        <li>Pipeline architecture blueprint</li>
+                        <li>Quick wins while improving data</li>
                     </ul>
+                    <div class="service-investment">Investment: $25K-$60K | Timeline: 6-10 weeks</div>
                     <button class="btn-learn-more" onclick="location.href='#contact'">Get Started →</button>
                 </div>
             </div>
@@ -1214,7 +1107,7 @@
     </section>
 
     <!-- Use Cases Section -->
-    <section id="use-cases" class="crisis-section">
+    <section id="use-cases" class="challenge-solution">
         <div class="container">
             <h2>AI Use Cases for SME IT Services</h2>
             <p class="section-subtitle">Real transformations, measurable results</p>
@@ -1231,8 +1124,8 @@
                         <h3>🎫 Service Desk Automation</h3>
                         <p class="use-case-desc">AI-powered ticket triage, routing, and L1/L2 responses</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">ROI:</span>
-                            <span class="roi-value">30-50% ticket deflection</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">30-50% ticket deflection, $80K-$150K savings</span>
                         </div>
                     </div>
                     
@@ -1240,8 +1133,8 @@
                         <h3>📝 Documentation Generation</h3>
                         <p class="use-case-desc">Auto-generate runbooks, knowledge base articles, meeting notes</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">ROI:</span>
-                            <span class="roi-value">60% faster documentation</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">60% faster, $50K-$100K time savings</span>
                         </div>
                     </div>
                     
@@ -1249,8 +1142,8 @@
                         <h3>💼 Proposal Automation</h3>
                         <p class="use-case-desc">RFP response and proposal generation from templates</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">ROI:</span>
-                            <span class="roi-value">3x faster proposals</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">3x faster, 25% higher win rates</span>
                         </div>
                     </div>
                     
@@ -1258,8 +1151,8 @@
                         <h3>👥 Resource Optimization</h3>
                         <p class="use-case-desc">AI-driven resource allocation and capacity planning</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">ROI:</span>
-                            <span class="roi-value">20% better utilization</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">20% better utilization, $100K+ revenue impact</span>
                         </div>
                     </div>
                 </div>
@@ -1271,8 +1164,8 @@
                         <h3>🔧 Predictive Maintenance</h3>
                         <p class="use-case-desc">Proactive monitoring and automated remediation</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Value:</span>
-                            <span class="roi-value">Premium pricing, reduced churn</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">Premium pricing, 15-25% churn reduction</span>
                         </div>
                     </div>
                     
@@ -1280,8 +1173,8 @@
                         <h3>⚡ Professional Services</h3>
                         <p class="use-case-desc">Code generation, testing automation, migration planning</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Value:</span>
-                            <span class="roi-value">40% faster delivery</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">40% faster delivery, 15% margin improvement</span>
                         </div>
                     </div>
                     
@@ -1289,8 +1182,8 @@
                         <h3>📊 Client Reporting</h3>
                         <p class="use-case-desc">Automated dashboards and insight generation</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Value:</span>
-                            <span class="roi-value">Upsell opportunities</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">Upsell opportunities, client retention boost</span>
                         </div>
                     </div>
                     
@@ -1298,8 +1191,8 @@
                         <h3>🛡️ Security Enhancement</h3>
                         <p class="use-case-desc">AI-driven threat detection and response</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Value:</span>
-                            <span class="roi-value">Differentiated offering</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">Differentiated offering, premium positioning</span>
                         </div>
                     </div>
                 </div>
@@ -1311,8 +1204,8 @@
                         <h3>💡 AI Consulting</h3>
                         <p class="use-case-desc">Readiness assessments, strategy, implementation for clients</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Revenue:</span>
-                            <span class="roi-value">$50K-$200K per client</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">$50K-$200K per client, new revenue stream</span>
                         </div>
                     </div>
                     
@@ -1320,8 +1213,8 @@
                         <h3>🤖 AI-Powered MSP</h3>
                         <p class="use-case-desc">AI-enhanced NOC/SOC and intelligent automation</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Revenue:</span>
-                            <span class="roi-value">20-40% premium pricing</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">20-40% premium pricing on services</span>
                         </div>
                     </div>
                     
@@ -1329,8 +1222,8 @@
                         <h3>🏥 Industry Solutions</h3>
                         <p class="use-case-desc">Vertical-specific AI (healthcare, finance, manufacturing)</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Revenue:</span>
-                            <span class="roi-value">$100K-$500K per solution</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">$100K-$500K per solution package</span>
                         </div>
                     </div>
                     
@@ -1338,8 +1231,8 @@
                         <h3>🎓 AI Training Services</h3>
                         <p class="use-case-desc">Deliver AI literacy and upskilling to client teams</p>
                         <div class="use-case-roi">
-                            <span class="roi-label">Revenue:</span>
-                            <span class="roi-value">$5K-$25K per program</span>
+                            <span class="roi-label">VALUE:</span>
+                            <span class="roi-value">$5K-$25K per program, recurring revenue</span>
                         </div>
                     </div>
                 </div>
@@ -1426,7 +1319,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="crisis-section">
+    <section class="challenge-solution">
         <div class="container">
             <h2>Frequently Asked Questions</h2>
             <p class="section-subtitle">Everything SMEs need to know</p>
@@ -1438,27 +1331,17 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        We bring the same corporate experience as big firms (Fortune 500 backgrounds) but we're exclusively focused on SMEs. You get enterprise-grade expertise at 1/5th the cost, with hands-on involvement from experienced executives (not junior consultants), and methodologies specifically adapted for companies with 50-250 employees.
+                        We bring the same Fortune 500 experience as big firms but we're exclusively focused on SMEs. You get enterprise-grade expertise at 1/5th the cost ($50K-$200K vs $500K-$2M), with hands-on involvement from experienced executives (not junior consultants), and methodologies specifically adapted for companies with 50-250 employees.
                     </div>
                 </div>
                 
                 <div class="faq-item" onclick="toggleFAQ(this)">
                     <div class="faq-question">
-                        What makes you different from AI developers or agencies?
+                        What's your corporate background?
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        AI developers build tools. We transform organizations. Our focus is 70% change management and people enablement, 20% data governance and architecture, and only 10% AI models. We help you figure out what to build, how to adopt it, and how to measure success—then partner with your team (or ours) to implement it.
-                    </div>
-                </div>
-                
-                <div class="faq-item" onclick="toggleFAQ(this)">
-                    <div class="faq-question">
-                        Our data is messy. Can we still do AI?
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Absolutely. 60% of AI projects fail due to poor data quality—which is exactly why we start with a data readiness assessment. We'll audit your data landscape, identify gaps, design a governance framework, and create a roadmap to AI-ready data. We can also implement quick wins while you improve data quality in parallel.
+                        Our team has led IT and AI transformations at Fortune 500 companies, global enterprises, and high-growth tech firms. We've managed multi-million dollar budgets, led teams of 50+ people, and delivered enterprise-scale AI implementations. Now we're bringing that expertise exclusively to SMEs who deserve the same quality guidance.
                     </div>
                 </div>
                 
@@ -1474,6 +1357,16 @@
                 
                 <div class="faq-item" onclick="toggleFAQ(this)">
                     <div class="faq-question">
+                        Our data is messy. Can we still do AI?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. 60% of AI projects fail due to poor data quality—which is exactly why we start with a data readiness assessment. We'll audit your data landscape, identify gaps, design a governance framework, and create a roadmap to AI-ready data. We can also implement quick wins while you improve data quality in parallel.
+                    </div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
                         Can you help us build AI services for our clients?
                         <span class="faq-toggle">+</span>
                     </div>
@@ -1484,11 +1377,11 @@
                 
                 <div class="faq-item" onclick="toggleFAQ(this)">
                     <div class="faq-question">
-                        What's your corporate experience background?
+                        What makes you different from AI developers or agencies?
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        Our team has led IT and AI transformations at Fortune 500 companies, global enterprises, and high-growth tech firms. We've managed multi-million dollar budgets, led teams of 50+ people, and delivered enterprise-scale AI implementations. Now we're bringing that expertise to SMEs who deserve the same quality guidance.
+                        AI developers build tools. We transform organizations. Our focus is 70% change management and people enablement, 20% data governance and architecture, and only 10% AI models. We help you figure out what to build, how to adopt it, and how to measure success—then partner with your team (or ours) to implement it.
                     </div>
                 </div>
             </div>
@@ -1499,7 +1392,7 @@
     <section id="contact">
         <div class="container">
             <h2>Ready to Ride the AI Supercycle?</h2>
-            <p class="section-subtitle">Schedule your free discovery call with our corporate-experienced team</p>
+            <p class="section-subtitle">Book your free strategy call with Fortune 500 AI executives</p>
             
             <form class="contact-form" action="https://formsubmit.co/nothingbutvalue18@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="New SME AI Transformation Inquiry">
@@ -1541,7 +1434,7 @@
                     <textarea name="message" required placeholder="Tell us about your AI transformation goals and challenges..."></textarea>
                 </div>
                 
-                <button type="submit" class="btn-submit">Send Message</button>
+                <button type="submit" class="btn-submit">Book Free Strategy Call</button>
             </form>
         </div>
     </section>
@@ -1551,8 +1444,8 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Nothing But Value</h3>
-                <p>AI Transformation for SME IT Services</p>
-                <p>Corporate Experience. SME Focus. Supercycle Ready.</p>
+                <p>Fortune 500 AI Expertise for SME IT Services</p>
+                <p>Enterprise-Grade Transformation. Mid-Market Pricing.</p>
             </div>
             
             <div class="footer-section">
