@@ -1,0 +1,12 @@
+# GitHub Pages Configuration
+include:
+  - sitemap.xml
+  - robots.txt
+
+# Ensure proper MIME types
+defaults:
+  -
+    scope:
+      path: "sitemap.xml"
+    values:
+      sitemap: true
