@@ -1,12 +1,5 @@
-# GitHub Pages Configuration
-include:
-  - sitemap.xml
-  - robots.txt
+plugins:
+  - jekyll-sitemap
 
-# Ensure proper MIME types
-defaults:
-  -
-    scope:
-      path: "sitemap.xml"
-    values:
-      sitemap: true
+url: "https://vashishthap.github.io"
+baseurl: "/it-consulting-leadership"
