@@ -1,5 +1,19 @@
-plugins:
-  - jekyll-sitemap
-
+# Site settings
+title: "Nothing But Value"
+description: "Fortune 500 AI Expertise for SME IT Services"
 url: "https://vashishthap.github.io"
 baseurl: "/it-consulting-leadership"
+
+# Build settings
+markdown: kramdown
+
+# Include these files
+include:
+  - _pages
+
+# Exclude these files
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
