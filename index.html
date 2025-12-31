@@ -46,18 +46,38 @@
             --gradient-success: linear-gradient(135deg, #00ff88 0%, #00d9ff 100%);
         }
         
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--dark);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--gradient-accent);
+            z-index: 9999;
+            transition: width 0.1s;
         }
         
         /* Sticky CTA Bar */
@@ -136,10 +156,6 @@
             gap: 1rem;
             cursor: pointer;
             transition: all 0.3s;
-        }
-        
-        .logo-container:hover {
-            transform: translateX(5px);
         }
         
         .logo {
@@ -222,17 +238,51 @@
             color: var(--primary);
         }
         
-        /* Hero Section - MAXIMUM IMPACT */
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        /* Hero Section - FIXED */
         .hero {
-            min-height: 100vh;
+            min-height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 140px 20px 80px;
+            padding: 140px 20px 40px;
             background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 100%);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            width: 100%;
         }
         
         .hero::before {
@@ -244,6 +294,7 @@
             top: -400px;
             right: -400px;
             animation: pulse 6s ease-in-out infinite;
+            z-index: 0;
         }
         
         .hero::after {
@@ -255,19 +306,21 @@
             bottom: -300px;
             left: -300px;
             animation: pulse 8s ease-in-out infinite reverse;
+            z-index: 0;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+        .hero .container {
+            max-width: 1100px;
+            position: relative;
+            z-index: 1;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        .hero .container > * {
+            position: relative;
+            z-index: 1;
         }
-        
-        /* Alert Box - Pattern Interrupt */
+                
+        /* Alert Box */
         .alert-box {
             background: linear-gradient(135deg, rgba(255, 51, 102, 0.2), rgba(255, 149, 0, 0.2));
             border: 3px solid var(--accent);
@@ -277,14 +330,7 @@
             display: inline-block;
             animation: shake 0.5s ease-in-out;
             box-shadow: 0 10px 40px rgba(255, 51, 102, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            max-width: 100%;
         }
         
         .alert-box p {
@@ -301,20 +347,7 @@
             font-weight: 900;
             margin-bottom: 1.5rem;
             line-height: 1.1;
-            position: relative;
-            z-index: 1;
             animation: fadeInUp 0.8s ease-out;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         .gradient-text {
@@ -330,8 +363,6 @@
             margin-bottom: 2rem;
             font-weight: 400;
             line-height: 1.5;
-            position: relative;
-            z-index: 1;
             animation: fadeInUp 1s ease-out;
         }
         
@@ -348,14 +379,13 @@
         .value-prop-box {
             background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1));
             border-left: 5px solid var(--primary);
-            padding: 2rem 2.5rem;
+            padding: 2rem;
             border-radius: 15px;
             margin-bottom: 2.5rem;
-            max-width: 900px;
+            max-width: 100%;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
-            position: relative;
-            z-index: 1;
             animation: fadeInUp 1.2s ease-out;
             box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
         }
@@ -370,11 +400,9 @@
         .stats-row {
             display: flex;
             justify-content: center;
-            gap: 4rem;
+            gap: 3rem;
             margin: 3rem 0;
             flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
             animation: fadeInUp 1.4s ease-out;
         }
         
@@ -395,7 +423,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
         }
         
         .stat-label {
@@ -412,8 +439,6 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 2rem;
-            position: relative;
-            z-index: 1;
             animation: fadeInUp 1.6s ease-out;
         }
         
@@ -469,18 +494,25 @@
             box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
         }
         
-        /* Supercycle Box */
+        /* Supercycle Section - SEPARATE SECTION */
+        .supercycle-section {
+            background: radial-gradient(ellipse at bottom, #1a1a2e 0%, #0a0a0f 100%);
+            padding: 60px 20px;
+            position: relative;
+            overflow: visible;
+        }
+        
         .supercycle-box {
             background: linear-gradient(135deg, rgba(255, 51, 102, 0.15), rgba(124, 58, 237, 0.15));
             border: 4px solid var(--accent);
             border-radius: 25px;
-            padding: 3rem;
-            max-width: 900px;
-            margin: 3rem auto 0;
+            padding: 2.5rem;
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
             box-shadow: 0 20px 60px rgba(255, 51, 102, 0.4);
             position: relative;
             overflow: hidden;
-            z-index: 1;
             animation: fadeInUp 1.8s ease-out;
         }
         
@@ -493,53 +525,59 @@
             height: 200%;
             background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
             animation: pulse 4s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
         }
         
         .supercycle-content {
             position: relative;
             z-index: 1;
+            width: 100%;
         }
         
         .supercycle-header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
         
         .supercycle-header span {
-            font-size: 4rem;
+            font-size: 3rem;
             animation: float 3s ease-in-out infinite;
         }
         
         .supercycle-header h3 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--text);
             margin: 0;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            text-align: center;
         }
         
         .supercycle-text {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-size: clamp(1rem, 2vw, 1.3rem);
             color: var(--text);
             line-height: 1.8;
             margin-bottom: 2rem;
+            text-align: center;
         }
         
         .supercycle-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
         }
         
         .supercycle-feature {
             text-align: center;
-            padding: 1.5rem;
+            padding: 1.5rem 1rem;
             background: rgba(0, 0, 0, 0.4);
             border-radius: 15px;
             border: 2px solid rgba(0, 217, 255, 0.2);
@@ -553,20 +591,20 @@
         }
         
         .supercycle-feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
         }
         
         .supercycle-feature-title {
             color: var(--primary);
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
         
         .supercycle-feature-desc {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         
         .supercycle-cta {
@@ -576,17 +614,27 @@
         .supercycle-urgency {
             color: var(--accent);
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             animation: pulse 2s ease-in-out infinite;
         }
         
-        /* Section Styles */
+        /* Section Base Styles */
         section {
             padding: 100px 20px;
             position: relative;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        section:nth-child(even) {
+            background: linear-gradient(180deg, var(--dark) 0%, var(--dark-alt) 100%);
+        }
+        
+        section:nth-child(odd) {
+            background: var(--dark);
         }
         
         section h2 {
@@ -608,21 +656,13 @@
             font-weight: 500;
         }
         
-        /* Alternating Section Backgrounds */
-        section:nth-child(even) {
-            background: linear-gradient(180deg, var(--dark) 0%, var(--dark-alt) 100%);
-        }
-        
-        section:nth-child(odd) {
-            background: var(--dark);
-        }
-                
-        /* Challenge/Solution Cards - HIGH CONTRAST */
+        /* Challenge/Solution Cards */
         .challenge-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
+            width: 100%;
         }
         
         .challenge-card {
@@ -633,6 +673,7 @@
             transition: all 0.4s;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
         .challenge-card::before {
@@ -659,6 +700,7 @@
             transition: all 0.4s;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
         .solution-card-alt::before {
@@ -730,12 +772,13 @@
             line-height: 1.7;
         }
         
-        /* Why Us Cards - TRUST BUILDING */
+        /* Why Us Cards */
         .why-us-compact {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
+            width: 100%;
         }
         
         .why-card {
@@ -747,6 +790,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
         .why-card::before {
@@ -800,13 +844,14 @@
             position: relative;
             z-index: 1;
         }
-        
-        /* Services Grid - VALUE FOCUSED */
+                
+        /* Services Grid */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
+            width: 100%;
         }
         
         .service-card {
@@ -818,6 +863,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
         .service-card::after {
@@ -939,7 +985,7 @@
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
         }
         
-        /* Tabs - INTERACTIVE */
+        /* Tabs */
         .tabs {
             display: flex;
             justify-content: center;
@@ -978,19 +1024,15 @@
             animation: fadeIn 0.5s ease-out;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         .tab-content.active {
             display: block;
         }
         
         .use-case-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
+            width: 100%;
         }
         
         .use-case-card {
@@ -999,6 +1041,7 @@
             border-radius: 20px;
             padding: 2rem;
             transition: all 0.4s;
+            width: 100%;
         }
         
         .use-case-card:hover {
@@ -1038,7 +1081,7 @@
             font-size: 1.1rem;
         }
         
-        /* ROI Calculator - ENGAGEMENT TOOL */
+        /* ROI Calculator */
         .calculator-section {
             background: linear-gradient(135deg, var(--dark-alt) 0%, var(--dark) 50%, var(--dark-alt) 100%);
         }
@@ -1165,7 +1208,7 @@
             line-height: 2;
         }
         
-        /* FAQ - TRUST BUILDING */
+        /* FAQ */
         .faq-container {
             max-width: 900px;
             margin: 0 auto;
@@ -1224,7 +1267,7 @@
             transform: rotate(45deg);
         }
         
-        /* Contact Form - CONVERSION FOCUSED */
+        /* Contact Form */
         .contact-form {
             max-width: 700px;
             margin: 0 auto;
@@ -1339,329 +1382,6 @@
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .stats-row {
-                gap: 2rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-            }
-            
-            .calculator-inputs {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo {
-                height: 50px;
-            }
-            
-            .logo-text {
-                font-size: 1rem;
-            }
-            
-            .logo-tagline {
-                font-size: 0.75rem;
-            }
-            
-            .sticky-cta-content {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .logo-separator,
-            .logo-tagline {
-                display: none;
-            }
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Scroll Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: var(--gradient-accent);
-            z-index: 9999;
-            transition: width 0.1s;
-        }
-                /* Container Fix - Prevent Overflow */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
-            overflow-x: hidden;
-        }
-        
-        section {
-            padding: 100px 20px;
-            position: relative;
-            overflow-x: hidden;
-            width: 100%;
-        }
-        
-        /* Hero Section Fix */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 140px 20px 80px;
-            background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 100%);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-        
-        .hero .container {
-            max-width: 1100px;
-        }
-        
-        /* Supercycle Box - FIXED */
-        .supercycle-box {
-            background: linear-gradient(135deg, rgba(255, 51, 102, 0.15), rgba(124, 58, 237, 0.15));
-            border: 4px solid var(--accent);
-            border-radius: 25px;
-            padding: 2.5rem;
-            max-width: 100%;
-            width: 100%;
-            margin: 3rem auto 0;
-            box-shadow: 0 20px 60px rgba(255, 51, 102, 0.4);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: fadeInUp 1.8s ease-out;
-        }
-        
-        .supercycle-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-        
-        .supercycle-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .supercycle-header span {
-            font-size: 3rem;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .supercycle-header h3 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: var(--text);
-            margin: 0;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-        
-        .supercycle-text {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: var(--text);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        
-        .supercycle-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-        
-        .supercycle-feature {
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            border: 2px solid rgba(0, 217, 255, 0.2);
-            transition: all 0.3s;
-        }
-        
-        .supercycle-feature:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-        }
-        
-        .supercycle-feature-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .supercycle-feature-title {
-            color: var(--primary);
-            font-weight: 800;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .supercycle-feature-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        
-        .supercycle-cta {
-            text-align: center;
-        }
-        
-        .supercycle-urgency {
-            color: var(--accent);
-            font-weight: 800;
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        /* Services Grid - FIXED WIDTH */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            width: 100%;
-        }
-        
-        .service-card {
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-alt) 100%);
-            border: 2px solid rgba(124, 58, 237, 0.3);
-            border-radius: 25px;
-            padding: 2rem;
-            transition: all 0.4s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        /* Challenge Grid - FIXED WIDTH */
-        .challenge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            width: 100%;
-        }
-        
-        .challenge-card,
-        .solution-card-alt {
-            width: 100%;
-            max-width: 100%;
-            overflow: hidden;
-        }
-        
-        /* Why Us Cards - FIXED WIDTH */
-        .why-us-compact {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            width: 100%;
-        }
-        
-        .why-card {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        /* Use Cases - FIXED WIDTH */
-        .use-case-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            width: 100%;
-        }
-        
-        .use-case-card {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        /* Stats Row - FIXED */
-        .stats-row {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1.4s ease-out;
-            width: 100%;
-        }
-        
-        /* Value Prop Box - FIXED */
-        .value-prop-box {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1));
-            border-left: 5px solid var(--primary);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2.5rem;
-            max-width: 100%;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1.2s ease-out;
-            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
-        }
-        
-        /* Alert Box - FIXED */
-        .alert-box {
-            background: linear-gradient(135deg, rgba(255, 51, 102, 0.2), rgba(255, 149, 0, 0.2));
-            border: 3px solid var(--accent);
-            border-radius: 20px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 2rem;
-            display: inline-block;
-            animation: shake 0.5s ease-in-out;
-            box-shadow: 0 10px 40px rgba(255, 51, 102, 0.3);
-            position: relative;
-            z-index: 1;
-            max-width: 100%;
-        }
-        
-        /* CTA Buttons - FIXED */
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1.6s ease-out;
-            width: 100%;
-        }
-        
-        /* Responsive Fixes */
         @media (max-width: 1024px) {
             .supercycle-box {
                 padding: 2rem;
@@ -1678,21 +1398,24 @@
         }
         
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
             .container {
                 padding: 0 15px;
             }
             
             .hero {
-                padding: 120px 15px 60px;
+                padding: 120px 15px 40px;
+            }
+            
+            .supercycle-section {
+                padding: 40px 15px;
             }
             
             .supercycle-box {
                 padding: 1.5rem;
-                margin: 2rem auto 0;
-            }
-            
-            .supercycle-header {
-                gap: 0.5rem;
             }
             
             .supercycle-header span {
@@ -1726,16 +1449,38 @@
                 grid-template-columns: 1fr;
             }
             
-            .alert-box {
-                padding: 1rem 1.5rem;
+            .calculator-inputs {
+                grid-template-columns: 1fr;
             }
             
-            .value-prop-box {
-                padding: 1.5rem;
+            .logo {
+                height: 50px;
+            }
+            
+            .logo-text {
+                font-size: 1rem;
+            }
+            
+            .logo-tagline {
+                font-size: 0.75rem;
+            }
+            
+            .sticky-cta-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            section {
+                padding: 80px 15px;
             }
         }
         
         @media (max-width: 480px) {
+            .logo-separator,
+            .logo-tagline {
+                display: none;
+            }
+            
             .supercycle-box {
                 padding: 1.5rem 1rem;
             }
@@ -1748,21 +1493,9 @@
                 font-size: 0.9rem;
             }
             
-            .logo-separator,
-            .logo-tagline {
-                display: none;
+            section {
+                padding: 60px 15px;
             }
-        }
-        
-        /* Global Overflow Fix */
-        body {
-            overflow-x: hidden;
-            width: 100%;
-        }
-        
-        html {
-            overflow-x: hidden;
-            width: 100%;
         }
     </style>
 </head>
@@ -1852,51 +1585,11 @@
                     💰 Calculate Your ROI
                 </a>
             </div>
-            
-            <!-- Supercycle Box -->
-            <div class="supercycle-box">
-                <div class="supercycle-content">
-                    <div class="supercycle-header">
-                        <span>🚀</span>
-                        <h3>The AI Supercycle is Here</h3>
-                    </div>
-                    
-                    <p class="supercycle-text">
-                        While your competitors hesitate, <strong style="color: var(--primary);">early adopters are capturing 20-40% efficiency gains</strong> 
-                        and launching premium AI services. The window is closing.
-                    </p>
-                    
-                    <div class="supercycle-features">
-                        <div class="supercycle-feature">
-                            <div class="supercycle-feature-icon">⚡</div>
-                            <div class="supercycle-feature-title">Quick Wins</div>
-                            <div class="supercycle-feature-desc">ROI in 6-8 weeks</div>
-                        </div>
-                        <div class="supercycle-feature">
-                            <div class="supercycle-feature-icon">💰</div>
-                            <div class="supercycle-feature-title">SME Pricing</div>
-                            <div class="supercycle-feature-desc">$50K-$200K not $2M</div>
-                        </div>
-                        <div class="supercycle-feature">
-                            <div class="supercycle-feature-icon">🏆</div>
-                            <div class="supercycle-feature-title">Fortune 500</div>
-                            <div class="supercycle-feature-desc">Executives, not juniors</div>
-                        </div>
-                    </div>
-                    
-                    <div class="supercycle-cta">
-                        <p class="supercycle-urgency">
-                            ⏰ Limited Spots: We Only Take 3 New Clients Per Quarter
-                        </p>
-                        <a href="#contact" class="btn-primary" style="display: inline-block; text-decoration: none;">
-                            Claim Your Spot Now →
-                        </a>
-                    </div>
-                </div>
-        </section>
+        </div>
+    </section>
 
-    <!-- Supercycle Transition Section -->
-    <section style="background: radial-gradient(ellipse at bottom, #1a1a2e 0%, #0a0a0f 100%); padding: 60px 20px;">
+    <!-- Supercycle Section - SEPARATE -->
+    <section class="supercycle-section">
         <div class="container">
             <div class="supercycle-box">
                 <div class="supercycle-content">
@@ -1942,7 +1635,7 @@
     </section>
 
     <!-- Challenge Solution Section -->
-    <section style="padding-top: 120px; margin-top: 0;">
+    <section>
         <div class="container">
             <h2>The SME AI Gap</h2>
             <p class="section-subtitle">The challenges SMEs face—and how we solve them</p>
@@ -2064,7 +1757,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Services Section -->
     <section id="services">
         <div class="container">
@@ -2376,7 +2069,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- FAQ -->
     <section>
         <div class="container">
@@ -2662,7 +2355,7 @@
             });
         });
 
-        // Add hover sound effect (optional - can be removed)
+        // Add hover effects
         document.querySelectorAll('.btn-primary, .btn-secondary, .btn-learn-more, .btn-calculate, .btn-submit').forEach(button => {
             button.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-3px) scale(1.02)';
@@ -2672,42 +2365,12 @@
             });
         });
 
-        // Parallax effect for hero background
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero && scrolled < window.innerHeight) {
-                hero.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
-            }
-        });
-
-        // Add pulse animation to CTA buttons
-        setInterval(function() {
-            const ctaButtons = document.querySelectorAll('.btn-primary');
-            ctaButtons.forEach(btn => {
-                btn.style.animation = 'none';
-                setTimeout(() => {
-                    btn.style.animation = 'pulse 1s ease-in-out';
-                }, 10);
-            });
-        }, 5000);
-
-        // Track scroll depth for analytics (optional)
+        // Track scroll depth
         let maxScroll = 0;
         window.addEventListener('scroll', function() {
             const scrollPercentage = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             if (scrollPercentage > maxScroll) {
                 maxScroll = scrollPercentage;
-                // You can send this to analytics
-                if (maxScroll > 25 && maxScroll < 30) {
-                    console.log('User scrolled 25%');
-                } else if (maxScroll > 50 && maxScroll < 55) {
-                    console.log('User scrolled 50%');
-                } else if (maxScroll > 75 && maxScroll < 80) {
-                    console.log('User scrolled 75%');
-                } else if (maxScroll > 90) {
-                    console.log('User scrolled to bottom');
-                }
             }
         });
     </script>
