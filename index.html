@@ -2694,7 +2694,138 @@
 			</div>
         </div>
     </section>
+<!-- Resources Section -->
+<section id="resources" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); padding: 6rem 0;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Free Resources</h2>
+        <p class="section-subtitle" style="text-align: center; margin-bottom: 4rem;">
+            Tools and assessments to accelerate your AI transformation
+        </p>
+        
+        <div style="max-width: 900px; margin: 0 auto;">
+            <!-- AI Readiness Assessment Card -->
+            <div style="background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 30px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); margin-bottom: 2rem;">
+                <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem;">🎯</div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 2rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            AI Readiness Assessment
+                        </h3>
+                        <p style="color: #a0a0b0; font-size: 1.1rem; margin: 0;">
+                            Discover your AI maturity score and get personalized recommendations
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #00d9ff; font-weight: 800;">25</div>
+                        <div style="color: #a0a0b0; font-size: 0.9rem;">Questions</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #00ff88; font-weight: 800;">5</div>
+                        <div style="color: #a0a0b0; font-size: 0.9rem;">Pillars</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #ff3366; font-weight: 800;">10</div>
+                        <div style="color: #a0a0b0; font-size: 0.9rem;">Minutes</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #7c3aed; font-weight: 800;">FREE</div>
+                        <div style="color: #a0a0b0; font-size: 0.9rem;">Basic Report</div>
+                    </div>
+                </div>
+                
+                <button onclick="startAssessment()" style="width: 100%; padding: 1.5rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 1.3rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4); transition: all 0.3s;">
+                    Start Free Assessment →
+                </button>
+                
+                <p style="text-align: center; color: #a0a0b0; font-size: 0.9rem; margin-top: 1rem;">
+                    ✨ Instant results • No credit card required • 2,500+ assessments completed
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- Assessment Modal -->
+<div id="assessmentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 10000; overflow-y: auto; padding: 2rem;">
+    <div style="max-width: 800px; margin: 0 auto; background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 30px; padding: 3rem; position: relative;">
+        
+        <!-- Close Button -->
+        <button onclick="closeAssessment()" style="position: absolute; top: 1.5rem; right: 1.5rem; background: transparent; border: none; color: #fff; font-size: 2rem; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+            ×
+        </button>
+        
+        <!-- Progress Bar -->
+        <div style="margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span style="color: #a0a0b0; font-size: 0.9rem;">Progress</span>
+                <span id="progressText" style="color: #00d9ff; font-weight: 700;">0%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden;">
+                <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #00d9ff 0%, #7c3aed 100%); transition: width 0.3s;"></div>
+            </div>
+        </div>
+        
+        <!-- Email Capture (Step 0) -->
+        <div id="emailCapture" style="text-align: center;">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Get Your AI Readiness Score
+            </h2>
+            <p style="color: #a0a0b0; font-size: 1.1rem; margin-bottom: 2rem;">
+                Enter your details to start the assessment
+            </p>
+            
+            <div style="text-align: left; max-width: 500px; margin: 0 auto;">
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; color: #fff; margin-bottom: 0.5rem; font-weight: 700;">Name *</label>
+                    <input type="text" id="userName" placeholder="John Doe" style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #fff; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; color: #fff; margin-bottom: 0.5rem; font-weight: 700;">Email *</label>
+                    <input type="email" id="userEmail" placeholder="john@company.com" style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #fff; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; color: #fff; margin-bottom: 0.5rem; font-weight: 700;">Company *</label>
+                    <input type="text" id="userCompany" placeholder="Acme IT Services" style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #fff; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; color: #fff; margin-bottom: 0.5rem; font-weight: 700;">Role</label>
+                    <select id="userRole" style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #fff; font-size: 1rem;">
+                        <option value="">Select your role</option>
+                        <option value="CEO/Founder">CEO/Founder</option>
+                        <option value="CTO/CIO">CTO/CIO</option>
+                        <option value="IT Director">IT Director</option>
+                        <option value="Operations Manager">Operations Manager</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <button onclick="startQuestions()" style="width: 100%; padding: 1.5rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 1.2rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4); transition: all 0.3s;">
+                    Start Assessment →
+                </button>
+                
+                <p style="text-align: center; color: #a0a0b0; font-size: 0.85rem; margin-top: 1rem;">
+                    🔒 Your information is secure and will never be shared
+                </p>
+            </div>
+        </div>
+        
+        <!-- Questions Container -->
+        <div id="questionsContainer" style="display: none;">
+            <div id="currentQuestion"></div>
+        </div>
+        
+        <!-- Results Container -->
+        <div id="resultsContainer" style="display: none;">
+            <!-- Results will be inserted here -->
+        </div>
+    </div>
+</div>
     <!-- Footer -->
     <footer>
         <div class="footer-content">
