@@ -3260,59 +3260,393 @@ function sendToZohoCRM(userData, score, pillars) {
         </div>
     </section>
 <!-- Resources Section -->
-<section id="resources" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); padding: 6rem 0;">
-    <div class="container">
-        <h2 style="text-align: center; margin-bottom: 1rem;">Free Resources</h2>
-        <p class="section-subtitle" style="text-align: center; margin-bottom: 4rem;">
-            Tools and assessments to accelerate your AI transformation
-        </p>
+<!-- Resources Section - Eye-Catching Design -->
+<section id="resources" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); padding: 8rem 0; position: relative; overflow: hidden;">
+    
+    <!-- Animated Background Blobs -->
+    <div style="position: absolute; top: -10%; left: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(80px); animation: float 8s ease-in-out infinite;"></div>
+    <div style="position: absolute; bottom: -10%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(100px); animation: float 10s ease-in-out infinite reverse;"></div>
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(255, 51, 102, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(90px); animation: pulse 6s ease-in-out infinite;"></div>
+    
+    <div class="container" style="position: relative; z-index: 1;">
         
-        <div style="max-width: 900px; margin: 0 auto;">
-            <!-- AI Readiness Assessment Card -->
-            <div style="background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 30px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); margin-bottom: 2rem;">
-                <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
-                    <div style="font-size: 4rem;">🎯</div>
-                    <div style="flex: 1;">
-                        <h3 style="font-size: 2rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                            AI Readiness Assessment
-                        </h3>
-                        <p style="color: #a0a0b0; font-size: 1.1rem; margin: 0;">
-                            Discover your AI maturity score and get personalized recommendations
-                        </p>
+        <!-- Section Header -->
+        <div style="text-align: center; margin-bottom: 5rem;">
+            <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 50px; margin-bottom: 2rem; animation: glow 2s ease-in-out infinite;">
+                <span style="font-size: 1.5rem;">🎁</span>
+                <span style="color: #00d9ff; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2px;">Free Resources</span>
+            </div>
+            
+            <h2 style="font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.1;">
+                <span style="background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 50%, #ff3366 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 3s ease infinite;">
+                    Accelerate Your AI Journey
+                </span>
+            </h2>
+            
+            <p style="color: #a0a0b0; font-size: 1.4rem; max-width: 750px; margin: 0 auto; line-height: 1.8;">
+                Interactive tools and expert insights to transform your business with AI
+            </p>
+        </div>
+        
+        <!-- Featured Resource Card - AI Readiness Assessment -->
+        <div style="max-width: 1200px; margin: 0 auto 5rem;">
+            <div style="background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border-radius: 40px; padding: 0; position: relative; overflow: hidden; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7);">
+                
+                <!-- Animated Border -->
+                <div style="position: absolute; inset: 0; border-radius: 40px; padding: 3px; background: linear-gradient(135deg, #00d9ff, #7c3aed, #ff3366, #00d9ff); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: rotateBorder 4s linear infinite;"></div>
+                
+                <div style="position: relative; padding: 4rem;">
+                    
+                    <!-- Popular Badge -->
+                    <div style="position: absolute; top: 2rem; right: 2rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); padding: 0.75rem 1.5rem; border-radius: 50px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.5); animation: bounce 2s ease-in-out infinite;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.2rem;">⭐</span>
+                            <span style="color: white; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Most Popular</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;">
+                        
+                        <!-- Left Column - Content -->
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                                <div style="font-size: 6rem; line-height: 1; filter: drop-shadow(0 10px 40px rgba(0, 217, 255, 0.6)); animation: float 3s ease-in-out infinite;">
+                                    🎯
+                                </div>
+                                <div>
+                                    <h3 style="font-size: 3rem; margin-bottom: 0.75rem; font-weight: 900; line-height: 1.1;">
+                                        <span style="background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                            AI Readiness Assessment
+                                        </span>
+                                    </h3>
+                                    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                                        <span style="color: #00d9ff; font-size: 1rem; font-weight: 700;">⚡ Interactive</span>
+                                        <span style="color: #a0a0b0;">•</span>
+                                        <span style="color: #00ff88; font-size: 1rem; font-weight: 700;">⏱️ 10 Minutes</span>
+                                        <span style="color: #a0a0b0;">•</span>
+                                        <span style="color: #ff9500; font-size: 1rem; font-weight: 700;">📊 Instant Results</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p style="color: #c0c0d0; font-size: 1.25rem; line-height: 1.8; margin-bottom: 3rem;">
+                                Discover your AI maturity score across <strong style="color: #00d9ff;">5 critical pillars</strong> and get a personalized roadmap to transformation success.
+                            </p>
+                            
+                            <!-- Stats Grid -->
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem;">
+                                <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 217, 255, 0.05)); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#00d9ff'; this.style.boxShadow='0 15px 40px rgba(0, 217, 255, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='rgba(0, 217, 255, 0.3)'; this.style.boxShadow='none'">
+                                    <div style="font-size: 2.5rem; color: #00d9ff; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);">25</div>
+                                    <div style="color: #a0a0b0; font-size: 0.9rem; font-weight: 600;">Questions</div>
+                                </div>
+                                
+                                <div style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0.05)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#00ff88'; this.style.boxShadow='0 15px 40px rgba(0, 255, 136, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='rgba(0, 255, 136, 0.3)'; this.style.boxShadow='none'">
+                                    <div style="font-size: 2.5rem; color: #00ff88; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);">5</div>
+                                    <div style="color: #a0a0b0; font-size: 0.9rem; font-weight: 600;">Pillars</div>
+                                </div>
+                                
+                                <div style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(124, 58, 237, 0.05)); border: 2px solid rgba(124, 58, 237, 0.3); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#7c3aed'; this.style.boxShadow='0 15px 40px rgba(124, 58, 237, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='rgba(124, 58, 237, 0.3)'; this.style.boxShadow='none'">
+                                    <div style="font-size: 2.5rem; color: #7c3aed; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);">10</div>
+                                    <div style="color: #a0a0b0; font-size: 0.9rem; font-weight: 600;">Minutes</div>
+                                </div>
+                                
+                                <div style="background: linear-gradient(135deg, rgba(255, 51, 102, 0.1), rgba(255, 51, 102, 0.05)); border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#ff3366'; this.style.boxShadow='0 15px 40px rgba(255, 51, 102, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='rgba(255, 51, 102, 0.3)'; this.style.boxShadow='none'">
+                                    <div style="font-size: 2.5rem; color: #ff3366; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 0 0 20px rgba(255, 51, 102, 0.5);">FREE</div>
+                                    <div style="color: #a0a0b0; font-size: 0.9rem; font-weight: 600;">Basic Report</div>
+                                </div>
+                            </div>
+                            
+                            <!-- CTA Button -->
+                            <button onclick="startAssessment()" style="width: 100%; padding: 2rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 60px; color: white; font-weight: 900; font-size: 1.5rem; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 20px 60px rgba(255, 51, 102, 0.6); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'; this.style.boxShadow='0 25px 70px rgba(255, 51, 102, 0.8)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 20px 60px rgba(255, 51, 102, 0.6)'">
+                                <span style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                                    <span>Start Free Assessment</span>
+                                    <span style="font-size: 1.8rem;">→</span>
+                                </span>
+                                <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); animation: shimmer 2.5s infinite;"></div>
+                            </button>
+                            
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #00d9ff; font-size: 1.2rem;">✨</span>
+                                    <span style="color: #a0a0b0; font-size: 0.95rem;"><strong style="color: #00d9ff;">2,847</strong> completed</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #00ff88; font-size: 1.2rem;">⭐</span>
+                                    <span style="color: #a0a0b0; font-size: 0.95rem;"><strong style="color: #00ff88;">4.9/5</strong> rating</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #7c3aed; font-size: 1.2rem;">🔒</span>
+                                    <span style="color: #a0a0b0; font-size: 0.95rem;">No credit card</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - Visual Preview -->
+                        <div style="position: relative;">
+                            <div style="background: rgba(0, 0, 0, 0.4); border: 3px solid rgba(0, 217, 255, 0.3); border-radius: 30px; padding: 2.5rem; backdrop-filter: blur(20px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6); position: relative; overflow: hidden;">
+                                
+                                <!-- Animated gradient overlay -->
+                                <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(124, 58, 237, 0.05)); opacity: 0.5; animation: pulse 3s ease-in-out infinite;"></div>
+                                
+                                <div style="position: relative; z-index: 1;">
+                                    <!-- Score Circle -->
+                                    <div style="text-align: center; margin-bottom: 2.5rem;">
+                                        <div style="width: 220px; height: 220px; margin: 0 auto; border-radius: 50%; background: conic-gradient(#00d9ff 0% 75%, rgba(255, 255, 255, 0.1) 75% 100%); display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 60px rgba(0, 217, 255, 0.4); animation: rotateScore 8s linear infinite;">
+                                            <div style="width: 185px; height: 185px; border-radius: 50%; background: linear-gradient(135deg, #151521, #1a1a2e); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);">
+                                                <div style="font-size: 4rem; font-weight: 900; background: linear-gradient(135deg, #00d9ff, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">75</div>
+                                                <div style="color: #a0a0b0; font-size: 1rem; font-weight: 700;">/ 100</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Pillar Progress Bars -->
+                                    <div>
+                                        <div style="margin-bottom: 1.25rem;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                                <span style="color: #fff; font-size: 0.95rem; font-weight: 700;">Strategy</span>
+                                                <span style="color: #00d9ff; font-weight: 900; font-size: 1.1rem;">85%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);">
+                                                <div style="width: 85%; height: 100%; background: linear-gradient(90deg, #00d9ff, #00ff88); box-shadow: 0 0 15px rgba(0, 217, 255, 0.6); animation: fillBar 2s ease-out;"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="margin-bottom: 1.25rem;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                                <span style="color: #fff; font-size: 0.95rem; font-weight: 700;">Data</span>
+                                                <span style="color: #7c3aed; font-weight: 900; font-size: 1.1rem;">72%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);">
+                                                <div style="width: 72%; height: 100%; background: linear-gradient(90deg, #7c3aed, #00d9ff); box-shadow: 0 0 15px rgba(124, 58, 237, 0.6); animation: fillBar 2s ease-out 0.2s backwards;"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="margin-bottom: 1.25rem;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                                <span style="color: #fff; font-size: 0.95rem; font-weight: 700;">Technology</span>
+                                                <span style="color: #ff9500; font-weight: 900; font-size: 1.1rem;">68%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);">
+                                                <div style="width: 68%; height: 100%; background: linear-gradient(90deg, #ff9500, #ff3366); box-shadow: 0 0 15px rgba(255, 149, 0, 0.6); animation: fillBar 2s ease-out 0.4s backwards;"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                                <span style="color: #fff; font-size: 0.95rem; font-weight: 700;">People</span>
+                                                <span style="color: #00ff88; font-weight: 900; font-size: 1.1rem;">78%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);">
+                                                <div style="width: 78%; height: 100%; background: linear-gradient(90deg, #00ff88, #00d9ff); box-shadow: 0 0 15px rgba(0, 255, 136, 0.6); animation: fillBar 2s ease-out 0.6s backwards;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Floating Badges -->
+                            <div style="position: absolute; top: -15px; right: -15px; background: linear-gradient(135deg, #00ff88 0%, #00d9ff 100%); padding: 1rem 1.5rem; border-radius: 20px; box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5); animation: float 3s ease-in-out infinite;">
+                                <div style="font-size: 1.8rem; font-weight: 900; color: #0a0a0f;">✓</div>
+                            </div>
+                            
+                            <div style="position: absolute; bottom: -15px; left: -15px; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); padding: 0.75rem 1.5rem; border-radius: 15px; box-shadow: 0 15px 40px rgba(255, 51, 102, 0.5); animation: float 3s ease-in-out infinite 1.5s;">
+                                <div style="font-size: 0.9rem; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: 1px;">INSTANT</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; color: #00d9ff; font-weight: 800;">25</div>
-                        <div style="color: #a0a0b0; font-size: 0.9rem;">Questions</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; color: #00ff88; font-weight: 800;">5</div>
-                        <div style="color: #a0a0b0; font-size: 0.9rem;">Pillars</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; color: #ff3366; font-weight: 800;">10</div>
-                        <div style="color: #a0a0b0; font-size: 0.9rem;">Minutes</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; color: #7c3aed; font-weight: 800;">FREE</div>
-                        <div style="color: #a0a0b0; font-size: 0.9rem;">Basic Report</div>
-                    </div>
-                </div>
-                
-                <button onclick="startAssessment()" style="width: 100%; padding: 1.5rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 1.3rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4); transition: all 0.3s;">
-                    Start Free Assessment →
-                </button>
-                
-                <p style="text-align: center; color: #a0a0b0; font-size: 0.9rem; margin-top: 1rem;">
-                    ✨ Instant results • No credit card required • 2,500+ assessments completed
-                </p>
             </div>
         </div>
+        
+        <!-- Additional Resources Grid -->
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; font-weight: 900;">
+                <span style="background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    More Free Resources
+                </span>
+            </h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;">
+                
+                <!-- Resource Card 1 - ROI Calculator -->
+                <div style="background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border: 2px solid rgba(0, 217, 255, 0.2); border-radius: 30px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-15px)'; this.style.borderColor='#00d9ff'; this.style.boxShadow='0 25px 70px rgba(0, 217, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(0, 217, 255, 0.2)'; this.style.boxShadow='none'">
+                    
+                    <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, transparent 70%); border-radius: 50%; filter: blur(40px);"></div>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 10px 30px rgba(0, 217, 255, 0.4));">💰</div>
+                        <h4 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff; font-weight: 900;">AI ROI Calculator</h4>
+                        <p style="color: #a0a0b0; font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                            Calculate your potential savings and revenue impact from AI transformation in minutes.
+                        </p>
+                        
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+                            <span style="padding: 0.6rem 1.2rem; background: rgba(0, 217, 255, 0.1); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 25px; color: #00d9ff; font-size: 0.9rem; font-weight: 700;">⚡ Interactive</span>
+                            <span style="padding: 0.6rem 1.2rem; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 25px; color: #00ff88; font-size: 0.9rem; font-weight: 700;">⏱️ 5 min</span>
+                        </div>
+                        
+                        <button style="width: 100%; padding: 1.2rem; background: transparent; border: 3px solid #00d9ff; border-radius: 50px; color: #00d9ff; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.background='#00d9ff'; this.style.color='#0a0a0f'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='transparent'; this.style.color='#00d9ff'; this.style.transform='scale(1)'">
+                            Calculate ROI →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Resource Card 2 - Playbook -->
+                <div style="background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border: 2px solid rgba(124, 58, 237, 0.2); border-radius: 30px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-15px)'; this.style.borderColor='#7c3aed'; this.style.boxShadow='0 25px 70px rgba(124, 58, 237, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(124, 58, 237, 0.2)'; this.style.boxShadow='none'">
+                    
+                    <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%); border-radius: 50%; filter: blur(40px);"></div>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 10px 30px rgba(124, 58, 237, 0.4));">📚</div>
+                        <h4 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff; font-weight: 900;">SME AI Playbook</h4>
+                        <p style="color: #a0a0b0; font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                            Complete 90-day transformation guide with proven frameworks and use cases.
+                        </p>
+                        
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+                            <span style="padding: 0.6rem 1.2rem; background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 25px; color: #7c3aed; font-size: 0.9rem; font-weight: 700;">📄 PDF Guide</span>
+                            <span style="padding: 0.6rem 1.2rem; background: rgba(255, 149, 0, 0.1); border: 1px solid rgba(255, 149, 0, 0.3); border-radius: 25px; color: #ff9500; font-size: 0.9rem; font-weight: 700;">📖 45 pages</span>
+                        </div>
+                        
+                        <button style="width: 100%; padding: 1.2rem; background: transparent; border: 3px solid #7c3aed; border-radius: 50px; color: #7c3aed; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.background='#7c3aed'; this.style.color='#fff'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='transparent'; this.style.color='#7c3aed'; this.style.transform='scale(1)'">
+                            Download Free →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Resource Card 3 - Webinar -->
+                <div style="background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border: 2px solid rgba(255, 51, 102, 0.2); border-radius: 30px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-15px)'; this.style.borderColor='#ff3366'; this.style.boxShadow='0 25px 70px rgba(255, 51, 102, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255, 51, 102, 0.2)'; this.style.boxShadow='none'">
+                    
+                    <!-- Live Badge -->
+                    <div style="position: absolute; top: 1.5rem; right: 1.5rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); padding: 0.6rem 1.2rem; border-radius: 25px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.5); animation: pulse 2s ease-in-out infinite;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 8px; height: 8px; background: white; border-radius: 50%; animation: blink 1.5s ease-in-out infinite;"></div>
+                            <span style="color: white; font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Live</span>
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255, 51, 102, 0.2) 0%, transparent 70%); border-radius: 50%; filter: blur(40px);"></div>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 10px 30px rgba(255, 51, 102, 0.4));">🎥</div>
+                        <h4 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff; font-weight: 900;">AI Quick Wins Webinar</h4>
+                        <p style="color: #a0a0b0; font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                            Join our live session: 3 AI use cases you can implement in 30 days.
+                        </p>
+                        
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+                            <span style="padding: 0.6rem 1.2rem; background: rgba(255, 51, 102, 0.1); border: 1px solid rgba(255, 51, 102, 0.3); border-radius: 25px; color: #ff3366; font-size: 0.9rem; font-weight: 700;">🔴 Live Session</span>
+                            <span style="padding: 0.6rem 1.2rem; background: rgba(0, 217, 255, 0.1); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 25px; color: #00d9ff; font-size: 0.9rem; font-weight: 700;">⏱️ 45 min</span>
+                        </div>
+                        
+                        <button style="width: 100%; padding: 1.2rem; background: transparent; border: 3px solid #ff3366; border-radius: 50px; color: #ff3366; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.background='#ff3366'; this.style.color='#fff'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='transparent'; this.style.color='#ff3366'; this.style.transform='scale(1)'">
+                            Register Now →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </section>
 
+<!-- Add CSS Animations -->
+<style>
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-25px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(0, 217, 255, 0.6); }
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+@keyframes fillBar {
+    from { width: 0%; }
+}
+
+@keyframes rotateScore {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes rotateBorder {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #resources h2 {
+        font-size: 3rem !important;
+    }
+    
+    #resources .container > div > div > div {
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #resources {
+        padding: 5rem 0 !important;
+    }
+    
+    #resources h2 {
+        font-size: 2.5rem !important;
+    }
+    
+    #resources h3 {
+        font-size: 2rem !important;
+    }
+    
+    .resource-card-featured > div {
+        padding: 2rem !important;
+    }
+    
+    #resources button {
+        font-size: 1.2rem !important;
+        padding: 1.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #resources h2 {
+        font-size: 2rem !important;
+    }
+    
+    #resources .container > div:first-child > div:first-child {
+        padding: 0.5rem 1.5rem !important;
+        font-size: 0.85rem !important;
+    }
+}
+</style>
 <!-- Assessment Modal -->
 <div id="assessmentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 10000; overflow-y: auto; padding: 2rem;">
     <div style="max-width: 800px; margin: 0 auto; background: linear-gradient(135deg, #151521 0%, #1a1a2e 100%); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 30px; padding: 3rem; position: relative;">
