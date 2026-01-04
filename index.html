@@ -1499,6 +1499,570 @@
         }
     </style>
 </head>
+<script>
+// Assessment Data
+const assessmentQuestions = [
+    // PILLAR 1: STRATEGY (5 questions)
+    {
+        pillar: "Strategy",
+        question: "Does your company have a documented AI strategy?",
+        options: [
+            { text: "Yes, comprehensive and board-approved", score: 5 },
+            { text: "Yes, but still in draft form", score: 3 },
+            { text: "We're working on it", score: 1 },
+            { text: "No, not yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "How many AI use cases have you identified for your business?",
+        options: [
+            { text: "10+ use cases with clear ROI", score: 5 },
+            { text: "5-10 use cases", score: 3 },
+            { text: "1-5 use cases", score: 1 },
+            { text: "None yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "What's your primary AI transformation goal?",
+        options: [
+            { text: "Clear, measurable goals aligned with business strategy", score: 5 },
+            { text: "General goals defined", score: 3 },
+            { text: "Still exploring possibilities", score: 1 },
+            { text: "No specific goals yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "Do you have executive buy-in for AI initiatives?",
+        options: [
+            { text: "Yes, CEO/Board are champions", score: 5 },
+            { text: "Yes, from some executives", score: 3 },
+            { text: "Working on getting buy-in", score: 1 },
+            { text: "No executive support yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "Have you allocated budget for AI transformation?",
+        options: [
+            { text: "Yes, dedicated multi-year budget", score: 5 },
+            { text: "Yes, annual budget approved", score: 3 },
+            { text: "Budget under discussion", score: 1 },
+            { text: "No budget allocated", score: 0 }
+        ]
+    },
+    
+    // PILLAR 2: DATA (5 questions)
+    {
+        pillar: "Data",
+        question: "What percentage of your data is structured and accessible?",
+        options: [
+            { text: "80%+ is structured and AI-ready", score: 5 },
+            { text: "50-80% is structured", score: 3 },
+            { text: "20-50% is structured", score: 1 },
+            { text: "Less than 20%", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "Do you have a data governance framework in place?",
+        options: [
+            { text: "Yes, comprehensive and enforced", score: 5 },
+            { text: "Yes, but needs improvement", score: 3 },
+            { text: "Basic policies only", score: 1 },
+            { text: "No formal governance", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "How would you rate your data quality?",
+        options: [
+            { text: "Excellent - clean, accurate, complete", score: 5 },
+            { text: "Good - mostly reliable", score: 3 },
+            { text: "Fair - some quality issues", score: 1 },
+            { text: "Poor - significant issues", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "Can you easily access data across different systems?",
+        options: [
+            { text: "Yes, fully integrated data platform", score: 5 },
+            { text: "Yes, with some manual work", score: 3 },
+            { text: "Difficult, data is siloed", score: 1 },
+            { text: "No, major integration challenges", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "Do you have data security and privacy controls?",
+        options: [
+            { text: "Yes, comprehensive and compliant", score: 5 },
+            { text: "Yes, basic controls in place", score: 3 },
+            { text: "Minimal controls", score: 1 },
+            { text: "No formal controls", score: 0 }
+        ]
+    },
+    
+    // PILLAR 3: TECHNOLOGY (5 questions)
+    {
+        pillar: "Technology",
+        question: "What's your current AI technology maturity?",
+        options: [
+            { text: "Advanced - multiple AI solutions in production", score: 5 },
+            { text: "Intermediate - pilot projects running", score: 3 },
+            { text: "Beginner - exploring options", score: 1 },
+            { text: "None - no AI technology yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "Do you have cloud infrastructure for AI workloads?",
+        options: [
+            { text: "Yes, scalable cloud platform ready", score: 5 },
+            { text: "Yes, basic cloud infrastructure", score: 3 },
+            { text: "Planning cloud migration", score: 1 },
+            { text: "No cloud infrastructure", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "How do you approach AI tool selection?",
+        options: [
+            { text: "Rigorous evaluation process with clear criteria", score: 5 },
+            { text: "Basic evaluation process", score: 3 },
+            { text: "Ad-hoc selection", score: 1 },
+            { text: "Haven't selected any tools yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "Do you have API integrations for AI tools?",
+        options: [
+            { text: "Yes, comprehensive API strategy", score: 5 },
+            { text: "Yes, some integrations", score: 3 },
+            { text: "Planning integrations", score: 1 },
+            { text: "No integrations", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "How do you handle AI model deployment?",
+        options: [
+            { text: "Automated CI/CD pipeline", score: 5 },
+            { text: "Manual but documented process", score: 3 },
+            { text: "Ad-hoc deployment", score: 1 },
+            { text: "Haven't deployed any models", score: 0 }
+        ]
+    },
+    
+    // PILLAR 4: PEOPLE (5 questions)
+    {
+        pillar: "People",
+        question: "What's your team's AI skill level?",
+        options: [
+            { text: "Advanced - dedicated AI team", score: 5 },
+            { text: "Intermediate - some AI skills", score: 3 },
+            { text: "Beginner - basic awareness", score: 1 },
+            { text: "No AI skills yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "Do you have an AI training program?",
+        options: [
+            { text: "Yes, comprehensive ongoing training", score: 5 },
+            { text: "Yes, basic training provided", score: 3 },
+            { text: "Planning to implement", score: 1 },
+            { text: "No training program", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "How is your team's attitude toward AI?",
+        options: [
+            { text: "Enthusiastic - actively embracing", score: 5 },
+            { text: "Positive - open to learning", score: 3 },
+            { text: "Neutral - wait and see", score: 1 },
+            { text: "Resistant - concerned about jobs", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "Do you have dedicated AI roles?",
+        options: [
+            { text: "Yes, multiple AI specialists", score: 5 },
+            { text: "Yes, one AI lead", score: 3 },
+            { text: "No, but planning to hire", score: 1 },
+            { text: "No dedicated roles", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "How do you handle change management for AI?",
+        options: [
+            { text: "Structured change management program", score: 5 },
+            { text: "Basic change management", score: 3 },
+            { text: "Informal approach", score: 1 },
+            { text: "No change management", score: 0 }
+        ]
+    },
+    
+    // PILLAR 5: GOVERNANCE (5 questions)
+    {
+        pillar: "Governance",
+        question: "Do you have AI ethics and governance policies?",
+        options: [
+            { text: "Yes, comprehensive policies enforced", score: 5 },
+            { text: "Yes, basic policies in place", score: 3 },
+            { text: "Policies in development", score: 1 },
+            { text: "No policies yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "How do you measure AI project success?",
+        options: [
+            { text: "Clear KPIs and ROI tracking", score: 5 },
+            { text: "Basic metrics defined", score: 3 },
+            { text: "Informal tracking", score: 1 },
+            { text: "No measurement framework", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "Do you have an AI steering committee?",
+        options: [
+            { text: "Yes, meets regularly with clear mandate", score: 5 },
+            { text: "Yes, informal oversight", score: 3 },
+            { text: "Planning to establish", score: 1 },
+            { text: "No governance structure", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "How do you handle AI risk management?",
+        options: [
+            { text: "Comprehensive risk framework", score: 5 },
+            { text: "Basic risk assessment", score: 3 },
+            { text: "Informal risk consideration", score: 1 },
+            { text: "No risk management", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "Do you have AI compliance processes?",
+        options: [
+            { text: "Yes, full compliance program", score: 5 },
+            { text: "Yes, basic compliance", score: 3 },
+            { text: "Compliance in progress", score: 1 },
+            { text: "No compliance processes", score: 0 }
+        ]
+    }
+];
+
+let currentQuestionIndex = 0;
+let answers = [];
+let userData = {};
+
+function startAssessment() {
+    document.getElementById('assessmentModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeAssessment() {
+    document.getElementById('assessmentModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    currentQuestionIndex = 0;
+    answers = [];
+}
+
+function startQuestions() {
+    // Validate email capture
+    const name = document.getElementById('userName').value.trim();
+    const email = document.getElementById('userEmail').value.trim();
+    const company = document.getElementById('userCompany').value.trim();
+    const role = document.getElementById('userRole').value;
+    
+    if (!name || !email || !company) {
+        alert('Please fill in all required fields');
+        return;
+    }
+    
+    if (!email.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    userData = { name, email, company, role };
+    
+    // Hide email capture, show questions
+    document.getElementById('emailCapture').style.display = 'none';
+    document.getElementById('questionsContainer').style.display = 'block';
+    
+    showQuestion();
+}
+
+function showQuestion() {
+    const question = assessmentQuestions[currentQuestionIndex];
+    const progress = ((currentQuestionIndex + 1) / assessmentQuestions.length * 100).toFixed(0);
+    
+    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('progressText').textContent = progress + '%';
+    
+    let html = `
+        <div style="margin-bottom: 2rem;">
+            <div style="color: #00d9ff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                ${question.pillar} • Question ${currentQuestionIndex + 1} of ${assessmentQuestions.length}
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: #fff;">
+                ${question.question}
+            </h3>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+    `;
+    
+    question.options.forEach((option, index) => {
+        html += `
+            <button onclick="selectAnswer(${option.score})" style="width: 100%; padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: #fff; font-size: 1rem; text-align: left; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.05)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.05)'">
+                ${option.text}
+            </button>
+        `;
+    });
+    
+    html += `</div>`;
+    
+    if (currentQuestionIndex > 0) {
+        html += `
+            <button onclick="previousQuestion()" style="margin-top: 2rem; padding: 1rem 2rem; background: transparent; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: #fff; font-weight: 700; cursor: pointer; transition: all 0.3s;">
+                ← Previous Question
+            </button>
+        `;
+    }
+    
+    document.getElementById('currentQuestion').innerHTML = html;
+}
+
+function selectAnswer(score) {
+    answers[currentQuestionIndex] = {
+        pillar: assessmentQuestions[currentQuestionIndex].pillar,
+        score: score
+    };
+    
+    currentQuestionIndex++;
+    
+    if (currentQuestionIndex < assessmentQuestions.length) {
+        showQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        showQuestion();
+    }
+}
+
+function showResults() {
+    // Calculate scores
+    const pillarScores = {
+        'Strategy': 0,
+        'Data': 0,
+        'Technology': 0,
+        'People': 0,
+        'Governance': 0
+    };
+    
+    const pillarCounts = {
+        'Strategy': 0,
+        'Data': 0,
+        'Technology': 0,
+        'People': 0,
+        'Governance': 0
+    };
+    
+    answers.forEach(answer => {
+        pillarScores[answer.pillar] += answer.score;
+        pillarCounts[answer.pillar]++;
+    });
+    
+    // Calculate percentages
+    const pillarPercentages = {};
+    Object.keys(pillarScores).forEach(pillar => {
+        const maxScore = pillarCounts[pillar] * 5;
+        pillarPercentages[pillar] = Math.round((pillarScores[pillar] / maxScore) * 100);
+    });
+    
+    const totalScore = Object.values(pillarPercentages).reduce((a, b) => a + b, 0) / 5;
+    const roundedScore = Math.round(totalScore);
+    
+    // Determine maturity level
+    let maturityLevel, maturityColor, maturityDescription;
+    if (roundedScore >= 80) {
+        maturityLevel = "Advanced";
+        maturityColor = "#00ff88";
+        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
+    } else if (roundedScore >= 60) {
+        maturityLevel = "Intermediate";
+        maturityColor = "#00d9ff";
+        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
+    } else if (roundedScore >= 40) {
+        maturityLevel = "Developing";
+        maturityColor = "#ff9500";
+        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
+    } else {
+        maturityLevel = "Beginner";
+        maturityColor = "#ff3366";
+        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
+    }
+    
+    // Hide questions, show results
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'block';
+    
+    let html = `
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Your AI Readiness Score
+            </h2>
+            
+            <div style="font-size: 5rem; font-weight: 900; color: ${maturityColor}; margin: 2rem 0;">
+                ${roundedScore}/100
+            </div>
+            
+            <div style="display: inline-block; padding: 0.75rem 2rem; background: ${maturityColor}22; border: 2px solid ${maturityColor}; border-radius: 50px; color: ${maturityColor}; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">
+                ${maturityLevel}
+            </div>
+            
+            <p style="color: #a0a0b0; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                ${maturityDescription}
+            </p>
+        </div>
+        
+        <div style="background: rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #fff;">Your Pillar Breakdown</h3>
+    `;
+    
+    Object.keys(pillarPercentages).forEach(pillar => {
+        const score = pillarPercentages[pillar];
+        let color;
+        if (score >= 80) color = "#00ff88";
+        else if (score >= 60) color = "#00d9ff";
+        else if (score >= 40) color = "#ff9500";
+        else color = "#ff3366";
+        
+        html += `
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: #fff; font-weight: 700;">${pillar}</span>
+                    <span style="color: ${color}; font-weight: 700;">${score}%</span>
+                </div>
+                <div style="width: 100%; height: 12px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden;">
+                    <div style="width: ${score}%; height: 100%; background: ${color}; transition: width 1s;"></div>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += `
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(255, 51, 102, 0.1), rgba(255, 149, 0, 0.1)); border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #fff;">🎁 Unlock Your Premium Report</h3>
+            <p style="color: #a0a0b0; margin-bottom: 1.5rem;">
+                Get a detailed 15-page analysis with:
+            </p>
+            <ul style="color: #a0a0b0; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                <li>Custom 90-day transformation roadmap</li>
+                <li>Prioritized use cases with ROI projections</li>
+                <li>Benchmarking vs industry peers</li>
+                <li>Implementation timeline & budget</li>
+                <li>Risk analysis & mitigation strategies</li>
+            </ul>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                <button onclick="upgradeToPremium(97)" style="padding: 1.2rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 15px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s;">
+                    Premium Report<br>
+                    <span style="font-size: 1.5rem; font-weight: 900;">$97</span>
+                </button>
+                
+                <button onclick="upgradeToPremium(297)" style="padding: 1.2rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); border: none; border-radius: 15px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s; position: relative;">
+                    <div style="position: absolute; top: -10px; right: -10px; background: #00ff88; color: #0a0a0f; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 900;">POPULAR</div>
+                    Premium + Consult<br>
+                    <span style="font-size: 1.5rem; font-weight: 900;">$297</span><br>
+                    <span style="font-size: 0.85rem; opacity: 0.9;">+ 60-min strategy call</span>
+                </button>
+                
+                <button onclick="upgradeToPremium(997)" style="padding: 1.2rem; background: linear-gradient(135deg, #7c3aed 0%, #ff3366 100%); border: none; border-radius: 15px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s;">
+                    Enterprise<br>
+                    <span style="font-size: 1.5rem; font-weight: 900;">$997</span><br>
+                    <span style="font-size: 0.85rem; opacity: 0.9;">+ Team workshop</span>
+                </button>
+            </div>
+            
+            <p style="text-align: center; color: #a0a0b0; font-size: 0.85rem;">
+                ⚡ Limited: Only 10 premium slots available this month
+            </p>
+        </div>
+        
+        <div style="text-align: center;">
+            <button onclick="downloadFreeReport()" style="width: 100%; padding: 1.5rem; background: transparent; border: 2px solid #00d9ff; border-radius: 50px; color: #00d9ff; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; margin-bottom: 1rem;">
+                📥 Download Free Summary (1-Page PDF)
+            </button>
+            
+            <p style="color: #a0a0b0; font-size: 0.9rem;">
+                We'll email your results to: <strong style="color: #00d9ff;">${userData.email}</strong>
+            </p>
+        </div>
+    `;
+    
+    document.getElementById('resultsContainer').innerHTML = html;
+    
+    // Send data to Zoho CRM
+    sendToZohoCRM(userData, roundedScore, pillarPercentages);
+}
+
+function upgradeToPremium(price) {
+    // Redirect to payment page or show payment modal
+    alert(`Upgrade to Premium ($${price}) - Payment integration coming soon!\n\nFor now, please contact us at contact@nothingbutvalue.com`);
+    
+    // TODO: Integrate with Stripe
+    // window.location.href = `/checkout?plan=premium&price=${price}&email=${userData.email}`;
+}
+
+function downloadFreeReport() {
+    alert('Free report will be emailed to: ' + userData.email + '\n\nCheck your inbox in 5 minutes!');
+    
+    // TODO: Generate and email PDF report
+    // For now, close modal
+    closeAssessment();
+}
+
+function sendToZohoCRM(userData, score, pillars) {
+    // Send assessment data to Zoho CRM
+    // This would integrate with your Zoho CRM API
+    
+    console.log('Sending to Zoho CRM:', {
+        name: userData.name,
+        email: userData.email,
+        company: userData.company,
+        role: userData.role,
+        aiReadinessScore: score,
+        strategyScore: pillars.Strategy,
+        dataScore: pillars.Data,
+        technologyScore: pillars.Technology,
+        peopleScore: pillars.People,
+        governanceScore: pillars.Governance
+    });
+    
+    // TODO: Actual Zoho CRM API call
+}
+</script>
 <body>
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
