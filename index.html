@@ -130,7 +130,33 @@
             transform: scale(1.05);
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
         }
-        
+               /* New Header Styles */
+        body {
+            padding-top: 90px;
+        }
+
+        @media (max-width: 900px) {
+            #desktopNav {
+                display: none !important;
+            }
+            
+            #mobileMenuBtn {
+                display: block !important;
+            }
+            
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding-top: 70px;
+            }
+        }
+
+        /* Navigation */
+        nav { 
         /* Navigation */
         nav {
             position: fixed;
