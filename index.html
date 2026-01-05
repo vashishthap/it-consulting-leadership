@@ -22,7 +22,6 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg">
-    
     <style>
         * {
             margin: 0;
@@ -1390,14 +1389,106 @@
                 padding: 60px 15px;
             }
         }
-		</style>
-    <!-- Your existing styles -->
-    <style>
-        /* All your existing CSS */
-    </style>
-    
-    <!-- ADD THIS NEW BLOCK HERE -->
-    <style>
+        
+        /* ========================================
+           DESKTOP SINGLE ROW LAYOUT - FORCE NO WRAPPING
+           ======================================== */
+        
+        /* Hero Value Props - 4 cards in single row */
+        @media (min-width: 769px) {
+            .hero > div > div > div:nth-child(5) {
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 2rem !important;
+            }
+            
+            /* Services Grid - Horizontal scroll for 6 cards */
+            .services-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                gap: 2rem !important;
+                padding-bottom: 1rem !important;
+                scroll-snap-type: x mandatory !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+            
+            .service-card {
+                min-width: 350px !important;
+                max-width: 350px !important;
+                flex-shrink: 0 !important;
+                scroll-snap-align: start !important;
+            }
+            
+            /* Why Us Cards - Horizontal scroll for 6 cards */
+            .why-us-compact {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                gap: 2rem !important;
+                padding-bottom: 1rem !important;
+                scroll-snap-type: x mandatory !important;
+            }
+            
+            .why-card {
+                min-width: 280px !important;
+                max-width: 280px !important;
+                flex-shrink: 0 !important;
+                scroll-snap-align: start !important;
+            }
+            
+            /* Challenge/Solution - 2 cards side by side */
+            .challenge-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            /* Use Cases - 4 cards in single row */
+            .use-case-grid {
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 2rem !important;
+            }
+            
+            .use-case-card {
+                min-width: 0 !important;
+            }
+            
+            /* Resources - 3 cards in single row */
+            #resources > div > div:nth-child(3) > div {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 2.5rem !important;
+            }
+            
+            /* Scrollbar Styling for Horizontal Scroll Sections */
+            .services-grid::-webkit-scrollbar,
+            .why-us-compact::-webkit-scrollbar {
+                height: 8px;
+            }
+            
+            .services-grid::-webkit-scrollbar-track,
+            .why-us-compact::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                margin: 0 1rem;
+            }
+            
+            .services-grid::-webkit-scrollbar-thumb,
+            .why-us-compact::-webkit-scrollbar-thumb {
+                background: linear-gradient(90deg, #00d9ff, #7c3aed);
+                border-radius: 10px;
+            }
+            
+            .services-grid::-webkit-scrollbar-thumb:hover,
+            .why-us-compact::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(90deg, #00f5ff, #9d5aff);
+            }
+        }
+</style>
         /* Desktop Card Layout - Optimized */
         
         .hero > div > div > div:nth-child(5) {
