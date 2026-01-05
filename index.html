@@ -4606,11 +4606,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-        // Scroll Progress Bar
-    <script>
-        // Scroll Progress Bar
-        window.addEventListener('scroll', function() {
-            const scrollProgress = document.getElementById('scrollProgress');
+// Scroll Progress Bar
+window.addEventListener('scroll', function() {
+           const scrollProgress = document.getElementById('scrollProgress');
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrollPercentage = (scrollTop / scrollHeight) * 100;
