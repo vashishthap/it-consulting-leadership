@@ -3934,22 +3934,35 @@ function sendToZohoCRM(userData, score, pillars) {
         </div>
     </footer>
     <script>
-       // Mobile menu toggle - CORRECTED VERSION
+// Mobile Menu Toggle - FIXED VERSION
 function toggleMobileMenu() {
+    console.log('toggleMobileMenu called'); // Debug log
+    
     const mobileMenu = document.getElementById('mobileMenu');
     const body = document.body;
     
-    if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
-        // Open menu
+    if (!mobileMenu) {
+        console.error('Mobile menu element not found!');
+        return;
+    }
+    
+    const isVisible = mobileMenu.style.display === 'block';
+    
+    console.log('Menu currently visible:', isVisible); // Debug log
+    
+    if (!isVisible) {
+        // OPEN MENU
+        console.log('Opening menu...');
         mobileMenu.style.display = 'block';
-        setTimeout(() => {
+        setTimeout(function() {
             mobileMenu.style.opacity = '1';
         }, 10);
         body.style.overflow = 'hidden';
     } else {
-        // Close menu
+        // CLOSE MENU
+        console.log('Closing menu...');
         mobileMenu.style.opacity = '0';
-        setTimeout(() => {
+        setTimeout(function() {
             mobileMenu.style.display = 'none';
             body.style.overflow = 'auto';
         }, 300);
