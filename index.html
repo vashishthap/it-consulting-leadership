@@ -4623,27 +4623,45 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-       // Tab Switching - FIXED
-	function showTab(tabName, clickedElement) {
-    // Hide all tab contents
-    const contents = document.querySelectorAll('.tab-content');
-    contents.forEach(content => content.classList.remove('active'));
+     // Tab Switching - WORKING VERSION
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Tab system initializing...');
     
-    // Remove active class from all tabs
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
+    const tabButtons = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
     
-    // Show selected tab content
-    const selectedContent = document.getElementById(tabName);
-    if (selectedContent) {
-        selectedContent.classList.add('active');
-    }
+    console.log('Found tabs:', tabButtons.length);
+    console.log('Found content sections:', tabContents.length);
     
-    // Add active class to clicked tab
-    if (clickedElement) {
-        clickedElement.classList.add('active');
-    }
-}
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+            console.log('Clicked tab:', tabName);
+            
+            // Remove active from all tabs
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Remove active from all content
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none'; // Force hide
+            });
+            
+            // Add active to clicked tab
+            this.classList.add('active');
+            
+            // Show corresponding content
+            const targetContent = document.getElementById(tabName);
+            if (targetContent) {
+                targetContent.classList.add('active');
+                targetContent.style.display = 'block'; // Force show
+                console.log('Showing content for:', tabName);
+            } else {
+                console.error('Content not found for:', tabName);
+            }
+        });
+    });
+});
         
         // ROI Calculator
         function calculateROI() {
