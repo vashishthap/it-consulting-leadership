@@ -2173,28 +2173,6 @@ function sendToZohoCRM(userData, score, pillars) {
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="logo-container">
-                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Nothing But Value - AI Transformation for SME IT Services" class="logo">
-                <div class="logo-text-container">
-                    <span class="logo-text">NOTHING BUT VALUE</span>
-                    <span class="logo-separator">|</span>
-                    <span class="logo-tagline">Big Firm Expertise. Small Firm Agility.</span>
-                </div>
-            </div>
-            <ul class="nav-links">
-				<li><a href="#resources">Resources</a><li>
-                <li><a href="#why-us">Why Us</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#use-cases">Use Cases</a></li>
-                <li><a href="#roi-calculator">ROI Calculator</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <!-- Hero Section -->
 <section class="hero" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); position: relative; overflow: hidden; padding: 8rem 0 6rem;">
     
@@ -4036,7 +4014,28 @@ function sendToZohoCRM(userData, score, pillars) {
             <p>&copy; 2025 Nothing But Value. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const body = document.body;
+            
+            if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
+                mobileMenu.style.display = 'block';
+                setTimeout(() => {
+                    mobileMenu.style.opacity = '1';
+                }, 10);
+                body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.style.opacity = '0';
+                setTimeout(() => {
+                    mobileMenu.style.display = 'none';
+                }, 300);
+                body.style.overflow = 'auto';
+            }
+        }
 
+        // Scroll Progress Bar
     <script>
         // Scroll Progress Bar
         window.addEventListener('scroll', function() {
