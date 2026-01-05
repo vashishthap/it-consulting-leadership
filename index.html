@@ -130,12 +130,48 @@
             transform: scale(1.05);
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
         }
-               /* New Header Styles */
+                   /* Header Styles - New */
         body {
             padding-top: 90px;
         }
 
-        @media (max-width: 900px) {
+        /* Laptop/Tablet - Reduce spacing */
+        @media (max-width: 1280px) {
+            #desktopNav {
+                gap: 1.5rem !important;
+            }
+            
+            #desktopNav a {
+                font-size: 0.9rem !important;
+            }
+            
+            #desktopNav a[href="#contact"] {
+                padding: 0.7rem 1.5rem !important;
+                font-size: 0.85rem !important;
+            }
+        }
+
+        /* Smaller Laptop - Further reduce */
+        @media (max-width: 1100px) {
+            #desktopNav {
+                gap: 1.2rem !important;
+            }
+            
+            #desktopNav a {
+                font-size: 0.85rem !important;
+            }
+            
+            #desktopNav a[href="#contact"] {
+                padding: 0.6rem 1.2rem !important;
+            }
+            
+            #mainHeader .container {
+                padding: 0 1.5rem !important;
+            }
+        }
+
+        /* Switch to Mobile Menu */
+        @media (max-width: 1024px) {
             #desktopNav {
                 display: none !important;
             }
@@ -149,12 +185,36 @@
             }
         }
 
+        /* Mobile - Smaller Logo */
         @media (max-width: 640px) {
+            #mainHeader img {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            
+            #mainHeader nav > a > div > div:first-child {
+                font-size: 1.1rem !important;
+            }
+            
+            #mainHeader nav > a > div > div:last-child {
+                font-size: 0.65rem !important;
+            }
+            
             body {
                 padding-top: 70px;
             }
         }
 
+        /* Very Small Mobile - Hide Tagline */
+        @media (max-width: 480px) {
+            #mainHeader nav > a > div > div:last-child {
+                display: none !important;
+            }
+            
+            #mainHeader nav > a {
+                gap: 0.5rem !important;
+            }
+        }
              /* Navigation */
         nav {
             position: fixed;
