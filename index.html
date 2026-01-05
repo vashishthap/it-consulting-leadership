@@ -2297,102 +2297,125 @@ function sendToZohoCRM(userData, score, pillars) {
 }
 </script>
 <body>
-   <!-- NEW HEADER - OPTIMIZED FOR ALL SCREEN SIZES -->
-<header id="mainHeader" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">
+ <!-- CORRECTED HEADER -->
+<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 217, 255, 0.1); padding: 0;">
     <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
-        <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 0;">
             
-            <!-- Logo -->
-            <a href="#" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Nothing But Value Logo" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(0, 217, 255, 0.3); box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);">
+            <!-- Logo & Brand -->
+            <a href="#" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; flex-shrink: 0;">
+                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Nothing But Value" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(0, 217, 255, 0.3);">
                 <div>
-                    <div style="font-size: 1.3rem; font-weight: 900; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; white-space: nowrap;">
+                    <div style="font-size: 1.25rem; font-weight: 900; background: linear-gradient(135deg, #00d9ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; white-space: nowrap; line-height: 1.2;">
                         NOTHING BUT VALUE
                     </div>
-                    <div style="font-size: 0.75rem; color: #a0a0b0; font-weight: 600; letter-spacing: 1px; white-space: nowrap;">
+                    <div style="font-size: 0.75rem; color: #a0a0b0; font-weight: 600; white-space: nowrap;">
                         Big Firm Expertise. Small Firm Agility.
                     </div>
                 </div>
             </a>
             
             <!-- Desktop Navigation -->
-            <div id="desktopNav" style="display: flex; align-items: center; gap: 2rem;">
-                <a href="#why-us" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                    Why Us
-                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                </a>
-                
-                <a href="#services" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                    Services
-                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                </a>
-                
-                <a href="#use-cases" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                    Use Cases
-                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                </a>
-                
-                <a href="#resources" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                    Resources
-                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                </a>
-                
-                <a href="#roi-calculator" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                    ROI Calc
-                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                </a>
-                
-                <!-- CTA Button -->
-                <a href="#contact" style="padding: 0.8rem 1.8rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 0.9rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4); transition: all 0.3s; display: inline-block; white-space: nowrap;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 40px rgba(255, 51, 102, 0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(255, 51, 102, 0.4)'">
-                    Contact
-                </a>
-            </div>
+            <nav id="desktopNav" style="display: flex; align-items: center; gap: 1.5rem;">
+                <a href="#why-us" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; white-space: nowrap; padding: 0.5rem 0;">Why Us</a>
+                <a href="#services" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; white-space: nowrap; padding: 0.5rem 0;">Services</a>
+                <a href="#use-cases" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; white-space: nowrap; padding: 0.5rem 0;">Use Cases</a>
+                <a href="#resources" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; white-space: nowrap; padding: 0.5rem 0;">Resources</a>
+                <a href="#roi-calculator" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; white-space: nowrap; padding: 0.5rem 0;">ROI Calc</a>
+                <a href="#contact" style="background: linear-gradient(135deg, #ff006e, #7c3aed); color: white; padding: 0.75rem 1.75rem; border-radius: 50px; font-weight: 700; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3); white-space: nowrap; font-size: 0.95rem;">CONTACT</a>
+            </nav>
             
             <!-- Mobile Menu Button -->
-            <button id="mobileMenuBtn" onclick="toggleMobileMenu()" style="display: none; background: transparent; border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 12px; padding: 0.75rem; cursor: pointer; transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.borderColor='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.borderColor='rgba(0, 217, 255, 0.3)'; this.style.background='transparent'">
-                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
-                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
-                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
+            <button id="mobileMenuBtn" onclick="toggleMobileMenu()" style="display: none; background: transparent; border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 12px; padding: 0.75rem; cursor: pointer; flex-shrink: 0;">
+                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0;"></div>
+                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0;"></div>
+                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0;"></div>
             </button>
-        </nav>
-    </div>
-</header>
-    <!-- Mobile Menu Overlay -->
-    <div id="mobileMenu" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); z-index: 999; display: none; opacity: 0; transition: opacity 0.3s;">
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 2rem; padding: 2rem;">
-            
-            <!-- Close Button -->
-            <button onclick="toggleMobileMenu()" style="position: absolute; top: 2rem; right: 2rem; background: transparent; border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 50%; width: 50px; height: 50px; color: #ff3366; font-size: 2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.borderColor='#ff3366'; this.style.background='rgba(255, 51, 102, 0.1)'; this.style.transform='rotate(90deg)'" onmouseout="this.style.borderColor='rgba(255, 51, 102, 0.3)'; this.style.background='transparent'; this.style.transform='rotate(0deg)'">
-                ×
-            </button>
-            
-            <!-- Mobile Nav Links -->
-            <a href="#why-us" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; transition: all 0.3s; padding: 1rem 2rem; border-radius: 15px;" onmouseover="this.style.color='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                Why Us
-            </a>
-            
-            <a href="#services" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; transition: all 0.3s; padding: 1rem 2rem; border-radius: 15px;" onmouseover="this.style.color='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                Services
-            </a>
-            
-            <a href="#use-cases" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; transition: all 0.3s; padding: 1rem 2rem; border-radius: 15px;" onmouseover="this.style.color='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                Use Cases
-            </a>
-            
-            <a href="#resources" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; transition: all 0.3s; padding: 1rem 2rem; border-radius: 15px;" onmouseover="this.style.color='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                Resources
-            </a>
-            
-            <a href="#roi-calculator" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; transition: all 0.3s; padding: 1rem 2rem; border-radius: 15px;" onmouseover="this.style.color='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                ROI Calculator
-            </a>
-            
-            <a href="#contact" onclick="toggleMobileMenu()" style="padding: 1.5rem 3rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 1.3rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4); transition: all 0.3s; margin-top: 2rem;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(255, 51, 102, 0.6)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 10px 30px rgba(255, 51, 102, 0.4)'">
-                Contact Us
-            </a>
         </div>
     </div>
-    <!-- END OF NEW HEADER -->
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobileMenu" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); z-index: 999; display: none; opacity: 0; transition: opacity 0.3s;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 2rem; padding: 2rem;">
+        
+        <!-- Close Button -->
+        <button onclick="toggleMobileMenu()" style="position: absolute; top: 2rem; right: 2rem; background: transparent; border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 50%; width: 50px; height: 50px; color: #ff3366; font-size: 2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+            ×
+        </button>
+        
+        <!-- Mobile Nav Links -->
+        <a href="#why-us" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem; border-radius: 15px;">Why Us</a>
+        <a href="#services" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem; border-radius: 15px;">Services</a>
+        <a href="#use-cases" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem; border-radius: 15px;">Use Cases</a>
+        <a href="#resources" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem; border-radius: 15px;">Resources</a>
+        <a href="#roi-calculator" onclick="toggleMobileMenu()" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem; border-radius: 15px;">ROI Calculator</a>
+        <a href="#contact" onclick="toggleMobileMenu()" style="padding: 1.5rem 3rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 1.3rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4); margin-top: 2rem;">Contact Us</a>
+    </div>
+</div>
+
+<style>
+/* Header Responsive Styles */
+@media (max-width: 1200px) {
+    #desktopNav {
+        gap: 1.25rem !important;
+    }
+    
+    #desktopNav a {
+        font-size: 0.9rem !important;
+    }
+    
+    #desktopNav a[href="#contact"] {
+        padding: 0.65rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    #desktopNav {
+        gap: 1rem !important;
+    }
+    
+    #desktopNav a {
+        font-size: 0.85rem !important;
+    }
+    
+    header .container > div > a > div > div:last-child {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #desktopNav {
+        display: none !important;
+    }
+    
+    #mobileMenuBtn {
+        display: flex !important;
+        flex-direction: column;
+    }
+    
+    body {
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    header .container {
+        padding: 0 1rem !important;
+    }
+    
+    header .container > div > a img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    header .container > div > a > div > div:first-child {
+        font-size: 1.1rem !important;
+    }
+}
+</style>
+<!-- END CORRECTED HEADER -->
 
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
