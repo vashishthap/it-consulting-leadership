@@ -1490,7 +1490,18 @@
             }
         }
         
-      /* Trust Indicators - Mobile Responsive */
+/* Trust Indicators - Mobile Responsive */
+@media (max-width: 1024px) {
+    .hero > div > div > div:nth-child(4) > div {
+        gap: 1.5rem !important;
+        padding: 1.5rem 2rem !important;
+    }
+    
+    .hero > div > div > div:nth-child(4) > div > div span:last-child {
+        font-size: 0.95rem !important;
+    }
+}
+
 @media (max-width: 768px) {
     .hero > div > div > div:nth-child(4) > div {
         flex-direction: column !important;
@@ -1498,9 +1509,14 @@
         padding: 1.5rem !important;
     }
     
+    /* Hide dividers on mobile */
     .hero > div > div > div:nth-child(4) > div > div:nth-child(2),
     .hero > div > div > div:nth-child(4) > div > div:nth-child(4) {
-        display: none !important; /* Hide dividers on mobile */
+        display: none !important;
+    }
+    
+    .hero > div > div > div:nth-child(4) > div > div {
+        white-space: normal !important;
     }
 }
 
