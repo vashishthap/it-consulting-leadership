@@ -1390,7 +1390,88 @@
                 padding: 60px 15px;
             }
         }
+		</style>
+    <!-- Your existing styles -->
+    <style>
+        /* All your existing CSS */
     </style>
+    
+    <!-- ADD THIS NEW BLOCK HERE -->
+    <style>
+        /* Desktop Card Layout - Optimized */
+        
+        .hero > div > div > div:nth-child(5) {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 2rem !important;
+        }
+        
+        .services-grid {
+            display: flex !important;
+            overflow-x: auto !important;
+            gap: 2rem !important;
+            padding-bottom: 1rem !important;
+            scroll-snap-type: x mandatory !important;
+        }
+        
+        .service-card {
+            min-width: 350px !important;
+            flex-shrink: 0 !important;
+            scroll-snap-align: start !important;
+        }
+        
+        .why-us-compact {
+            display: flex !important;
+            overflow-x: auto !important;
+            gap: 2rem !important;
+            padding-bottom: 1rem !important;
+            scroll-snap-type: x mandatory !important;
+        }
+        
+        .why-card {
+            min-width: 280px !important;
+            flex-shrink: 0 !important;
+            scroll-snap-align: start !important;
+        }
+        
+        .challenge-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 2rem !important;
+        }
+        
+        .use-case-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 2rem !important;
+        }
+        
+        #resources > div > div:nth-child(3) > div {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 2.5rem !important;
+        }
+        
+        .services-grid::-webkit-scrollbar,
+        .why-us-compact::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .services-grid::-webkit-scrollbar-track,
+        .why-us-compact::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .services-grid::-webkit-scrollbar-thumb,
+        .why-us-compact::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #00d9ff, #7c3aed);
+            border-radius: 10px;
+        }
+    </style>
+    
+</head> <!-- This is the closing head tag -->
+<body>
 </head>
 <script>
 // Assessment Data
