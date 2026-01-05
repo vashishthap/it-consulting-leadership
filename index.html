@@ -2705,139 +2705,144 @@ function sendToZohoCRM(userData, score, pillars) {
         </div>
     </section>
 
-    <!-- Use Cases Section -->
-    <section id="use-cases">
-        <div class="container">
-            <h2>AI Use Cases for SME IT Services</h2>
-            <p class="section-subtitle">Real transformations, measurable results</p>
-            
-           <div class="tabs">
-    <button class="tab active" onclick="showTab('internal', this)">Internal Operations</button>
-    <button class="tab" onclick="showTab('client', this)">Client Delivery</button>
-    <button class="tab" onclick="showTab('revenue', this)">New Revenue</button>
-</div>
-            
-            <div id="internal" class="tab-content active">
-                <div class="use-case-grid">
-                    <div class="use-case-card">
-                        <h3>🎫 Service Desk Automation</h3>
-                        <p class="use-case-desc">AI-powered ticket triage, routing, and L1/L2 responses</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">30-50% ticket deflection, $80K-$150K savings</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>📝 Documentation Generation</h3>
-                        <p class="use-case-desc">Auto-generate runbooks, knowledge base articles, meeting notes</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">60% faster, $50K-$100K time savings</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>💼 Proposal Automation</h3>
-                        <p class="use-case-desc">RFP response and proposal generation from templates</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">3x faster, 25% higher win rates</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>👥 Resource Optimization</h3>
-                        <p class="use-case-desc">AI-driven resource allocation and capacity planning</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">20% better utilization, $100K+ revenue impact</span>
-                        </div>
+   <!-- Use Cases Section -->
+<section id="use-cases">
+    <div class="container">
+        <h2>AI Use Cases for SME IT Services</h2>
+        <p class="section-subtitle">Real transformations, measurable results</p>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="internal">Internal Operations</button>
+            <button class="tab" data-tab="client">Client Delivery</button>
+            <button class="tab" data-tab="revenue">New Revenue</button>
+        </div>
+        
+        <!-- Tab Content 1 - Internal Operations -->
+        <div id="internal" class="tab-content active">
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <h3>🎫 Service Desk Automation</h3>
+                    <p class="use-case-desc">AI-powered ticket triage, routing, and L1/L2 responses</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">30-50% ticket deflection, $80K-$150K savings</span>
                     </div>
                 </div>
-            </div>
-            
-            <div id="client" class="tab-content">
-                <div class="use-case-grid">
-                    <div class="use-case-card">
-                        <h3>🔧 Predictive Maintenance</h3>
-                        <p class="use-case-desc">Proactive monitoring and automated remediation</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">Premium pricing, 15-25% churn reduction</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>⚡ Professional Services</h3>
-                        <p class="use-case-desc">Code generation, testing automation, migration planning</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">40% faster delivery, 15% margin improvement</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>📊 Client Reporting</h3>
-                        <p class="use-case-desc">Automated dashboards and insight generation</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">Upsell opportunities, client retention boost</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>🛡️ Security Enhancement</h3>
-                        <p class="use-case-desc">AI-driven threat detection and response</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">Differentiated offering, premium positioning</span>
-                        </div>
+                
+                <div class="use-case-card">
+                    <h3>📝 Documentation Generation</h3>
+                    <p class="use-case-desc">Auto-generate runbooks, knowledge base articles, meeting notes</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">60% faster, $50K-$100K time savings</span>
                     </div>
                 </div>
-            </div>
-            
-            <div id="revenue" class="tab-content">
-                <div class="use-case-grid">
-                    <div class="use-case-card">
-                        <h3>💡 AI Consulting</h3>
-                        <p class="use-case-desc">Readiness assessments, strategy, implementation for clients</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">$50K-$200K per client, new revenue stream</span>
-                        </div>
+                
+                <div class="use-case-card">
+                    <h3>💼 Proposal Automation</h3>
+                    <p class="use-case-desc">RFP response and proposal generation from templates</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">3x faster, 25% higher win rates</span>
                     </div>
-                    
-                    <div class="use-case-card">
-                        <h3>🤖 AI-Powered MSP</h3>
-                        <p class="use-case-desc">AI-enhanced NOC/SOC and intelligent automation</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">20-40% premium pricing on services</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>🏥 Industry Solutions</h3>
-                        <p class="use-case-desc">Vertical-specific AI (healthcare, finance, manufacturing)</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">$100K-$500K per solution package</span>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3>🎓 AI Training Services</h3>
-                        <p class="use-case-desc">Deliver AI literacy and upskilling to client teams</p>
-                        <div class="use-case-roi">
-                            <span class="roi-label">VALUE:</span>
-                            <span class="roi-value">$5K-$25K per program, recurring revenue</span>
-                        </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>👥 Resource Optimization</h3>
+                    <p class="use-case-desc">AI-driven resource allocation and capacity planning</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">20% better utilization, $100K+ revenue impact</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        
+        <!-- Tab Content 2 - Client Delivery -->
+        <div id="client" class="tab-content">
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <h3>🔧 Predictive Maintenance</h3>
+                    <p class="use-case-desc">Proactive monitoring and automated remediation</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">Premium pricing, 15-25% churn reduction</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>⚡ Professional Services</h3>
+                    <p class="use-case-desc">Code generation, testing automation, migration planning</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">40% faster delivery, 15% margin improvement</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>📊 Client Reporting</h3>
+                    <p class="use-case-desc">Automated dashboards and insight generation</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">Upsell opportunities, client retention boost</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>🛡️ Security Enhancement</h3>
+                    <p class="use-case-desc">AI-driven threat detection and response</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">Differentiated offering, premium positioning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab Content 3 - New Revenue -->
+        <div id="revenue" class="tab-content">
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <h3>💡 AI Consulting</h3>
+                    <p class="use-case-desc">Readiness assessments, strategy, implementation for clients</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">$50K-$200K per client, new revenue stream</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>🤖 AI-Powered MSP</h3>
+                    <p class="use-case-desc">AI-enhanced NOC/SOC and intelligent automation</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">20-40% premium pricing on services</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>🏥 Industry Solutions</h3>
+                    <p class="use-case-desc">Vertical-specific AI (healthcare, finance, manufacturing)</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">$100K-$500K per solution package</span>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>🎓 AI Training Services</h3>
+                    <p class="use-case-desc">Deliver AI literacy and upskilling to client teams</p>
+                    <div class="use-case-roi">
+                        <span class="roi-label">VALUE:</span>
+                        <span class="roi-value">$5K-$25K per program, recurring revenue</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
 
     <!-- ROI Calculator -->
     <section id="roi-calculator" class="calculator-section">
