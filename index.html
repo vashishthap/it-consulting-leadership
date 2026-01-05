@@ -2088,67 +2088,66 @@ function sendToZohoCRM(userData, score, pillars) {
 }
 </script>
 <body>
-    <!-- NEW HEADER - ADD THIS ENTIRE BLOCK -->
-    <header id="mainHeader" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">
-        <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
-            <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0;">
-                
-                <!-- Logo -->
-                <a href="#" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Nothing But Value Logo" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(0, 217, 255, 0.3); box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);">
-                    <div>
-                        <div style="font-size: 1.3rem; font-weight: 900; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;">
-                            NOTHING BUT VALUE
-                        </div>
-                        <div style="font-size: 0.75rem; color: #a0a0b0; font-weight: 600; letter-spacing: 1px;">
-                            Big Firm Expertise. Small Firm Agility.
-                        </div>
+   <!-- NEW HEADER - OPTIMIZED FOR ALL SCREEN SIZES -->
+<header id="mainHeader" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">
+    <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+        <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0;">
+            
+            <!-- Logo -->
+            <a href="#" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Nothing But Value Logo" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(0, 217, 255, 0.3); box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);">
+                <div>
+                    <div style="font-size: 1.3rem; font-weight: 900; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; white-space: nowrap;">
+                        NOTHING BUT VALUE
                     </div>
+                    <div style="font-size: 0.75rem; color: #a0a0b0; font-weight: 600; letter-spacing: 1px; white-space: nowrap;">
+                        Big Firm Expertise. Small Firm Agility.
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div id="desktopNav" style="display: flex; align-items: center; gap: 2rem;">
+                <a href="#why-us" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
+                    Why Us
+                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
                 </a>
                 
-                <!-- Desktop Navigation -->
-                <div id="desktopNav" style="display: flex; align-items: center; gap: 3rem;">
-                    <a href="#why-us" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; position: relative; padding: 0.5rem 0;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                        Why Us
-                        <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                    </a>
-                    
-                    <a href="#services" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; position: relative; padding: 0.5rem 0;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                        Services
-                        <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                    </a>
-                    
-                    <a href="#use-cases" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; position: relative; padding: 0.5rem 0;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                        Use Cases
-                        <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                    </a>
-                    
-                    <a href="#resources" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; position: relative; padding: 0.5rem 0;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                        Resources
-                        <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                    </a>
-                    
-                    <a href="#roi-calculator" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; position: relative; padding: 0.5rem 0;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
-                        ROI Calculator
-                        <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
-                    </a>
-                    
-                    <!-- CTA Button -->
-                    <a href="#contact" style="padding: 0.9rem 2rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 0.95rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4); transition: all 0.3s; display: inline-block;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 40px rgba(255, 51, 102, 0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(255, 51, 102, 0.4)'">
-                        Contact
-                    </a>
-                </div>
+                <a href="#services" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
+                    Services
+                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
+                </a>
                 
-                <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" style="display: none; background: transparent; border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 12px; padding: 0.75rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.borderColor='rgba(0, 217, 255, 0.3)'; this.style.background='transparent'">
-                    <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
-                    <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
-                    <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
-                </button>
-            </nav>
-        </div>
-    </header>
-
+                <a href="#use-cases" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
+                    Use Cases
+                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
+                </a>
+                
+                <a href="#resources" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
+                    Resources
+                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
+                </a>
+                
+                <a href="#roi-calculator" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; white-space: nowrap;" onmouseover="this.style.color='#00d9ff'; this.querySelector('.nav-underline').style.width='100%'" onmouseout="this.style.color='#ffffff'; this.querySelector('.nav-underline').style.width='0%'">
+                    ROI Calc
+                    <div class="nav-underline" style="position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #00d9ff, #7c3aed); transition: width 0.3s;"></div>
+                </a>
+                
+                <!-- CTA Button -->
+                <a href="#contact" style="padding: 0.8rem 1.8rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 0.9rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4); transition: all 0.3s; display: inline-block; white-space: nowrap;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 40px rgba(255, 51, 102, 0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(255, 51, 102, 0.4)'">
+                    Contact
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" onclick="toggleMobileMenu()" style="display: none; background: transparent; border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 12px; padding: 0.75rem; cursor: pointer; transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.borderColor='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.1)'" onmouseout="this.style.borderColor='rgba(0, 217, 255, 0.3)'; this.style.background='transparent'">
+                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
+                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
+                <div style="width: 24px; height: 2px; background: #00d9ff; margin: 5px 0; transition: all 0.3s;"></div>
+            </button>
+        </nav>
+    </div>
+</header>
     <!-- Mobile Menu Overlay -->
     <div id="mobileMenu" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); z-index: 999; display: none; opacity: 0; transition: opacity 0.3s;">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 2rem; padding: 2rem;">
