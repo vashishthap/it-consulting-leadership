@@ -3405,7 +3405,331 @@ function sendToZohoCRM(userData, score, pillars) {
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(255, 51, 102, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(90px); animation: pulse 6s ease-in-out infinite;"></div>
     
     <div class="container" style="position: relative; z-index: 1;">
-        
+ <style>
+/* Resources Section - Mobile Optimization */
+
+/* Tablet and smaller */
+@media (max-width: 1024px) {
+    #resources {
+        padding: 5rem 0 !important;
+    }
+    
+    #resources h2 {
+        font-size: 3rem !important;
+    }
+    
+    #resources h3 {
+        font-size: 2rem !important;
+    }
+    
+    /* Featured Assessment Card - Stack on tablet */
+    #resources > div > div:nth-child(2) > div > div > div {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    
+    /* Hide popular badge on tablet */
+    #resources > div > div:nth-child(2) > div > div:first-child {
+        position: static !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Stats grid - 2 columns on tablet */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(4) {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 768px) {
+    #resources {
+        padding: 4rem 0 !important;
+    }
+    
+    #resources h2 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    #resources h3 {
+        font-size: 1.8rem !important;
+    }
+    
+    #resources p {
+        font-size: 1rem !important;
+    }
+    
+    /* Section header badge */
+    #resources > div > div:first-child > div:first-child {
+        padding: 0.6rem 1.5rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    #resources > div > div:first-child > div:first-child span:first-child {
+        font-size: 1.2rem !important;
+    }
+    
+    /* Featured card padding */
+    #resources > div > div:nth-child(2) > div {
+        padding: 0 !important;
+        border-radius: 30px !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    /* Icon size */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:first-child {
+        font-size: 4rem !important;
+    }
+    
+    /* Title in featured card */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(2) h3 {
+        font-size: 2rem !important;
+    }
+    
+    /* Stats badges */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(2) > div {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(2) > div span {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Description text */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > p {
+        font-size: 1.05rem !important;
+    }
+    
+    /* Stats grid - 2x2 on mobile */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(4) {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(4) > div {
+        padding: 1.2rem 1rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(4) > div > div:first-child {
+        font-size: 2rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(4) > div > div:last-child {
+        font-size: 0.8rem !important;
+    }
+    
+    /* CTA Button */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > button {
+        padding: 1.5rem 2rem !important;
+        font-size: 1.2rem !important;
+    }
+    
+    /* Trust indicators */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:last-child {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:last-child > div {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Right column - Score preview */
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child {
+        margin-top: 2rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    /* Score circle */
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:first-child > div {
+        width: 180px !important;
+        height: 180px !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:first-child > div > div {
+        width: 150px !important;
+        height: 150px !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:first-child > div > div > div:first-child {
+        font-size: 3rem !important;
+    }
+    
+    /* Floating badges */
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div:nth-child(2),
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div:nth-child(3) {
+        display: none !important;
+    }
+    
+    /* Additional Resources Grid */
+    #resources > div > div:nth-child(3) > div {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    
+    /* Resource cards */
+    #resources > div > div:nth-child(3) > div > div {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > div:first-child {
+        font-size: 3rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > h4 {
+        font-size: 1.5rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > p {
+        font-size: 1rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > div:nth-child(4) {
+        flex-wrap: wrap !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > button {
+        padding: 1rem 2rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    #resources {
+        padding: 3rem 0 !important;
+    }
+    
+    #resources h2 {
+        font-size: 2rem !important;
+    }
+    
+    #resources h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Section header */
+    #resources > div > div:first-child {
+        margin-bottom: 3rem !important;
+    }
+    
+    #resources > div > div:first-child > div:first-child {
+        padding: 0.5rem 1.2rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    #resources > div > div:first-child > div:first-child span:first-child {
+        font-size: 1rem !important;
+    }
+    
+    /* Featured card */
+    #resources > div > div:nth-child(2) > div > div {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    /* Popular badge - smaller */
+    #resources > div > div:nth-child(2) > div > div:first-child {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div:first-child > div span:first-child {
+        font-size: 1rem !important;
+    }
+    
+    /* Icon and title */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:first-child {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        text-align: center !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:first-child > div:first-child {
+        font-size: 3.5rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:first-child > div:last-child h3 {
+        font-size: 1.8rem !important;
+    }
+    
+    /* Stats grid - stack vertically on very small screens */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > div:nth-child(4) {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* CTA button */
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > button {
+        padding: 1.3rem 1.5rem !important;
+        font-size: 1.1rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:first-child > button span:last-child {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Score circle - smaller */
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:first-child > div {
+        width: 150px !important;
+        height: 150px !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:first-child > div > div {
+        width: 125px !important;
+        height: 125px !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:first-child > div > div > div:first-child {
+        font-size: 2.5rem !important;
+    }
+    
+    /* Progress bars */
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:last-child > div {
+        margin-bottom: 1rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:last-child > div > div:first-child span:first-child {
+        font-size: 0.85rem !important;
+    }
+    
+    #resources > div > div:nth-child(2) > div > div > div > div:last-child > div > div > div:last-child > div > div:first-child span:last-child {
+        font-size: 1rem !important;
+    }
+    
+    /* Additional resource cards */
+    #resources > div > div:nth-child(3) > div > div {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > div:first-child {
+        font-size: 2.5rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > h4 {
+        font-size: 1.3rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > p {
+        font-size: 0.95rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > div:nth-child(4) span {
+        font-size: 0.8rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+    
+    #resources > div > div:nth-child(3) > div > div > div > button {
+        padding: 1rem 1.5rem !important;
+        font-size: 0.95rem !important;
+    }
+}
+</style>       
         <!-- Section Header -->
         <div style="text-align: center; margin-bottom: 5rem;">
             <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 50px; margin-bottom: 2rem; animation: glow 2s ease-in-out infinite;">
