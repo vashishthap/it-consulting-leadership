@@ -1909,11 +1909,22 @@ function startAssessment() {
     document.body.style.overflow = 'hidden';
 }
 
+function startAssessment() {
+    document.getElementById('assessmentModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    // Scroll modal to top
+    document.getElementById('assessmentModal').scrollTop = 0;
+}
+
 function closeAssessment() {
     document.getElementById('assessmentModal').style.display = 'none';
     document.body.style.overflow = 'auto';
     currentQuestionIndex = 0;
     answers = [];
+    // Reset to email capture
+    document.getElementById('emailCapture').style.display = 'block';
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'none';
 }
 
 function startQuestions() {
@@ -1939,9 +1950,11 @@ function startQuestions() {
     document.getElementById('emailCapture').style.display = 'none';
     document.getElementById('questionsContainer').style.display = 'block';
     
+    // Scroll to top
+    document.getElementById('assessmentModal').scrollTop = 0;
+    
     showQuestion();
 }
-
 function showQuestion() {
     const question = assessmentQuestions[currentQuestionIndex];
     const progress = ((currentQuestionIndex + 1) / assessmentQuestions.length * 100).toFixed(0);
