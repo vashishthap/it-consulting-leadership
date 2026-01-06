@@ -2435,11 +2435,6 @@ function sendToZohoCRM(userData, score, pillars, reportType) {
         company: userData.company,
         role: userData.role,
         aiReadinessScore: score,
-        strategyScore: pillars.Strategy,
-        dataScore: pillars.Data,
-        technologyScore: pillars.Technology,
-        peopleScore: pillars.People,
-        governanceScore: pillars.Governance,
         reportType: reportType
     });
     
@@ -2449,6 +2444,9 @@ function sendToZohoCRM(userData, score, pillars, reportType) {
     form.action = 'https://crm.zoho.eu/crm/WebToLeadForm';
     form.target = 'zoho_iframe';
     form.style.display = 'none';
+    
+    // Prepare assessment summary
+    const assessmentSummary = `AI Readiness Score: ${score}/100 | Strategy: ${pillars.Strategy}% | Data: ${pillars.Data}% | Technology: ${pillars.Technology}% | People: ${pillars.People}% | Governance: ${pillars.Governance}% | Report: ${reportType}`;
     
     // Add Zoho required fields
     const fields = {
@@ -2463,22 +2461,8 @@ function sendToZohoCRM(userData, score, pillars, reportType) {
         'Email': userData.email,
         'Company': userData.company,
         'Industry': userData.role || 'Not specified',
-        
-        // Assessment scores in description
-        'Description': `AI Readiness Assessment Results:
-        
-Overall Score: ${score}/100
-Report Type: ${reportType}
-
-Pillar Breakdown:
-- Strategy: ${pillars.Strategy}%
-- Data: ${pillars.Data}%
-- Technology: ${pillars.Technology}%
-- People: ${pillars.People}%
-- Governance: ${pillars.Governance}%
-
-Assessment completed on: ${new Date().toLocaleString()}
-        `
+        'Lead Source': 'AI Assessment - Website',
+        'Website': assessmentSummary  // Put scores in Website field temporarily
     };
     
     // Create form fields
