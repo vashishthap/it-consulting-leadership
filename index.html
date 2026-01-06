@@ -1634,6 +1634,37 @@ header {
         font-size: 1.2rem !important;
     }
 }
+	/* Assessment Modal - Mobile Fix */
+@media (max-width: 768px) {
+    #assessmentModal > div {
+        padding: 1rem !important;
+    }
+    
+    #assessmentModal > div > div {
+        padding: 2rem 1.5rem !important;
+        border-radius: 20px !important;
+    }
+    
+    #assessmentModal h2 {
+        font-size: 2rem !important;
+    }
+    
+    #assessmentModal button[onclick="closeAssessment()"] {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.8rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #assessmentModal > div > div {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    #assessmentModal h2 {
+        font-size: 1.8rem !important;
+    }
+}
     </style>
 </head>
 <script>
