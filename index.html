@@ -2323,10 +2323,7 @@ function downloadFreeReport() {
     closeAssessment();
 }
 
-function sendToZohoCRM(userData, score, pillars) {
-    // Send assessment data to Zoho CRM
-    // This would integrate with your Zoho CRM API
-    
+function sendToZohoCRM(userData, score, pillars, reportType) {
     console.log('Sending to Zoho CRM:', {
         name: userData.name,
         email: userData.email,
@@ -2337,10 +2334,77 @@ function sendToZohoCRM(userData, score, pillars) {
         dataScore: pillars.Data,
         technologyScore: pillars.Technology,
         peopleScore: pillars.People,
-        governanceScore: pillars.Governance
+        governanceScore: pillars.Governance,
+        reportType: reportType
     });
     
-    // TODO: Actual Zoho CRM API call
+    // Create hidden form
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://crm.zoho.eu/crm/WebToLeadForm';
+    form.target = 'zoho_iframe';
+    form.style.display = 'none';
+    
+    // Add Zoho required fields
+    const fields = {
+        'xnQsjsdp': 'd38b5c5d24d47d69e4d4d3b1108556b89b5db9c5201c227fba71c1ac8a63cd40',
+        'zc_gad': '',
+        'xmIwtLD': 'c13ea234492206c9820af3abbf29162e53e7cd3c5a22cb5abd9919cfa0cb99decb08ccd524a1463ebf5a1d4e2ea4258c',
+        'actionType': 'TGVhZHM=',
+        'returnURL': 'https://vashishthap.github.io/it-consulting-leadership/thank-you.html',
+        
+        // User data
+        'Last Name': userData.name,
+        'Email': userData.email,
+        'Company': userData.company,
+        'Industry': userData.role || 'Not specified',
+        
+        // Assessment scores in description
+        'Description': `AI Readiness Assessment Results:
+        
+Overall Score: ${score}/100
+Report Type: ${reportType}
+
+Pillar Breakdown:
+- Strategy: ${pillars.Strategy}%
+- Data: ${pillars.Data}%
+- Technology: ${pillars.Technology}%
+- People: ${pillars.People}%
+- Governance: ${pillars.Governance}%
+
+Assessment completed on: ${new Date().toLocaleString()}
+        `
+    };
+    
+    // Create form fields
+    Object.keys(fields).forEach(key => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+    });
+    
+    // Create hidden iframe for form submission
+    let iframe = document.getElementById('zoho_iframe');
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.name = 'zoho_iframe';
+        iframe.id = 'zoho_iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    
+    // Submit form
+    document.body.appendChild(form);
+    form.submit();
+    
+    // Clean up after 2 seconds
+    setTimeout(function() {
+        document.body.removeChild(form);
+    }, 2000);
+    
+    return true;
 }
 </script>
 <body>
