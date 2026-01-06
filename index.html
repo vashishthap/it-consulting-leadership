@@ -2308,11 +2308,25 @@ function showResults() {
 }
 
 function upgradeToPremium(price) {
-    // Redirect to payment page or show payment modal
-    alert(`Upgrade to Premium ($${price}) - Payment integration coming soon!\n\nFor now, please contact us at value.advisor@nothingbutvalue.com`);
+    const totalScore = calculateTotalScore();
+    const pillarScores = getPillarScores();
     
-    // TODO: Integrate with Stripe
-    // window.location.href = `/checkout?plan=premium&price=${price}&email=${userData.email}`;
+    // Determine package name
+    let packageName = '';
+    if (price === 97) packageName = 'Premium Report ($97)';
+    else if (price === 297) packageName = 'Premium + Consult ($297)';
+    else if (price === 997) packageName = 'Enterprise ($997)';
+    
+    // Send to Zoho with premium package info
+    sendToZohoCRM(userData, totalScore, pillarScores, packageName);
+    
+    // Show confirmation
+    alert(`Thank you for your interest in ${packageName}!\n\nWe've received your request and will contact you at ${userData.email} within 24 hours to complete your purchase and schedule your consultation.\n\nFor immediate assistance, email us at value.advisor@nothingbutvalue.com`);
+    
+    // Close modal after short delay
+    setTimeout(function() {
+        closeAssessment();
+    }, 2000);
 }
 
 function downloadFreeReport() {
