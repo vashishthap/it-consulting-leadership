@@ -1489,7 +1489,33 @@
                 background: linear-gradient(90deg, #00f5ff, #9d5aff);
             }
         }
-        
+        }
+    }
+}
+
+/* Z-Index Management - CRITICAL FIX */
+header {
+    z-index: 999 !important;
+}
+
+.scroll-progress {
+    z-index: 9999 !important;
+}
+
+.sticky-cta {
+    z-index: 998 !important;
+}
+
+#assessmentModal {
+    z-index: 10000 !important;
+}
+
+#assessmentModal > div {
+    z-index: 10001 !important;
+}
+
+/* Trust Indicators - Mobile Responsive */
+@media (max-width: 1024px) {        
 /* Trust Indicators - Mobile Responsive */
 @media (max-width: 1024px) {
     .hero > div > div > div:nth-child(4) > div {
