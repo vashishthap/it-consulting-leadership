@@ -2014,29 +2014,23 @@ let userData = {};
 
 function startAssessment() {
     document.getElementById('assessmentModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function startAssessment() {
-    document.getElementById('assessmentModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    // Scroll modal to top
+    document.body.classList.add('modal-open');
     document.getElementById('assessmentModal').scrollTop = 0;
 }
 
 function closeAssessment() {
     document.getElementById('assessmentModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    document.body.classList.remove('modal-open');
+    
     currentQuestionIndex = 0;
     answers = [];
-    // Reset to email capture
+    
     document.getElementById('emailCapture').style.display = 'block';
     document.getElementById('questionsContainer').style.display = 'none';
     document.getElementById('resultsContainer').style.display = 'none';
 }
 
 function startQuestions() {
-    // Validate email capture
     const name = document.getElementById('userName').value.trim();
     const email = document.getElementById('userEmail').value.trim();
     const company = document.getElementById('userCompany').value.trim();
@@ -2054,11 +2048,8 @@ function startQuestions() {
     
     userData = { name, email, company, role };
     
-    // Hide email capture, show questions
     document.getElementById('emailCapture').style.display = 'none';
     document.getElementById('questionsContainer').style.display = 'block';
-    
-    // Scroll to top
     document.getElementById('assessmentModal').scrollTop = 0;
     
     showQuestion();
