@@ -1742,6 +1742,30 @@ header {
         font-size: 0.8rem !important;
     }
 }
+	/* Hide header and sticky CTA when modal is open */
+body.modal-open header,
+body.modal-open .sticky-cta,
+body.modal-open #stickyCTA {
+    display: none !important;
+}
+
+body.modal-open {
+    overflow: hidden !important;
+}
+
+/* Modal Fade Animation */
+#assessmentModal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
     </style>
 </head>
 <script>
