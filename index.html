@@ -1580,6 +1580,60 @@ header {
 .modal-content {
     z-index: 10001 !important;
 }	
+	/* Assessment Modal - Scroll Fix */
+#assessmentModal {
+    display: flex;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+}
+
+#assessmentModal > div {
+    width: 100%;
+}
+
+#questionsContainer {
+    min-height: 500px;
+}
+
+#currentQuestion {
+    width: 100%;
+}
+
+/* Mobile Modal Fix */
+@media (max-width: 768px) {
+    #assessmentModal {
+        padding: 1rem;
+    }
+    
+    #assessmentModal > div {
+        margin: 1rem auto !important;
+        padding: 2rem 1.5rem !important;
+        min-height: auto !important;
+    }
+    
+    #questionsContainer {
+        min-height: 400px;
+    }
+    
+    #currentQuestion h3 {
+        font-size: 1.4rem !important;
+    }
+    
+    #currentQuestion button {
+        padding: 1.2rem !important;
+        font-size: 0.95rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #assessmentModal > div {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    #currentQuestion h3 {
+        font-size: 1.2rem !important;
+    }
+}
     </style>
 </head>
 <script>
