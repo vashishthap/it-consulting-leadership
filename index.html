@@ -2371,6 +2371,45 @@ function downloadFreeReport() {
     }
 }
 
+// Calculate total score from all answers
+function calculateTotalScore() {
+    const pillarScores = getPillarScores();
+    const totalScore = Object.values(pillarScores).reduce((a, b) => a + b, 0) / 5;
+    return Math.round(totalScore);
+}
+
+// Get individual pillar scores
+function getPillarScores() {
+    const pillarScores = {
+        'Strategy': 0,
+        'Data': 0,
+        'Technology': 0,
+        'People': 0,
+        'Governance': 0
+    };
+    
+    const pillarCounts = {
+        'Strategy': 0,
+        'Data': 0,
+        'Technology': 0,
+        'People': 0,
+        'Governance': 0
+    };
+    
+    answers.forEach(answer => {
+        pillarScores[answer.pillar] += answer.score;
+        pillarCounts[answer.pillar]++;
+    });
+    
+    // Calculate percentages
+    const pillarPercentages = {};
+    Object.keys(pillarScores).forEach(pillar => {
+        const maxScore = pillarCounts[pillar] * 5;
+        pillarPercentages[pillar] = Math.round((pillarScores[pillar] / maxScore) * 100);
+    });
+    
+    return pillarPercentages;
+}
 function sendToZohoCRM(userData, score, pillars, reportType) {
     console.log('Sending to Zoho CRM:', {
         name: userData.name,
