@@ -2429,43 +2429,49 @@ function getPillarScores() {
     return pillarPercentages;
 }
 function sendToZohoCRM(userData, score, pillars, reportType) {
-    console.log('Sending to Zoho CRM:', {
-        name: userData.name,
-        email: userData.email,
-        company: userData.company,
-        role: userData.role,
-        aiReadinessScore: score,
-        reportType: reportType
-    });
+    console.log('Sending to Zoho CRM with custom fields');
     
-    // Create hidden form
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://crm.zoho.eu/crm/WebToLeadForm';
     form.target = 'zoho_iframe';
     form.style.display = 'none';
     
-    // Prepare assessment summary
-    const assessmentSummary = `AI Readiness Score: ${score}/100 | Strategy: ${pillars.Strategy}% | Data: ${pillars.Data}% | Technology: ${pillars.Technology}% | People: ${pillars.People}% | Governance: ${pillars.Governance}% | Report: ${reportType}`;
+    const assessmentDetails = `AI Readiness Assessment Results:
+
+Overall Score: ${score}/100
+Report Type: ${reportType}
+
+Pillar Breakdown:
+- Strategy: ${pillars.Strategy}%
+- Data: ${pillars.Data}%
+- Technology: ${pillars.Technology}%
+- People: ${pillars.People}%
+- Governance: ${pillars.Governance}%
+
+Completed: ${new Date().toLocaleString()}`;
     
-    // Add Zoho required fields
     const fields = {
+        // Your existing form token and IDs (DON'T CHANGE THESE)
         'xnQsjsdp': 'd38b5c5d24d47d69e4d4d3b1108556b89b5db9c5201c227fba71c1ac8a63cd40',
         'zc_gad': '',
         'xmIwtLD': 'c13ea234492206c9820af3abbf29162e53e7cd3c5a22cb5abd9919cfa0cb99decb08ccd524a1463ebf5a1d4e2ea4258c',
         'actionType': 'TGVhZHM=',
         'returnURL': 'https://vashishthap.github.io/it-consulting-leadership/thank-you.html',
         
-        // User data
+        // Standard fields
         'Last Name': userData.name,
         'Email': userData.email,
         'Company': userData.company,
         'Industry': userData.role || 'Not specified',
         'Lead Source': 'AI Assessment - Website',
-        'Website': assessmentSummary  // Put scores in Website field temporarily
+        
+        // Custom fields - REPLACE WITH YOUR ACTUAL API NAMES
+        'LEADCF1': score,  // AI Readiness Score (replace LEADCF1 with actual name)
+        'LEADCF2': assessmentDetails,  // Assessment Details (replace LEADCF2 with actual name)
+        'LEADCF3': reportType  // Report Type (replace LEADCF3 with actual name)
     };
     
-    // Create form fields
     Object.keys(fields).forEach(key => {
         const input = document.createElement('input');
         input.type = 'hidden';
@@ -2474,7 +2480,6 @@ function sendToZohoCRM(userData, score, pillars, reportType) {
         form.appendChild(input);
     });
     
-    // Create hidden iframe for form submission
     let iframe = document.getElementById('zoho_iframe');
     if (!iframe) {
         iframe = document.createElement('iframe');
@@ -2484,11 +2489,9 @@ function sendToZohoCRM(userData, score, pillars, reportType) {
         document.body.appendChild(iframe);
     }
     
-    // Submit form
     document.body.appendChild(form);
     form.submit();
     
-    // Clean up after 2 seconds
     setTimeout(function() {
         document.body.removeChild(form);
     }, 2000);
