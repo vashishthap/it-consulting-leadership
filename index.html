@@ -1525,6 +1525,35 @@
         font-size: 0.9rem !important;
     }
 }
+	/* Z-Index Management - CRITICAL FIX */
+header {
+    z-index: 999 !important;
+}
+
+.scroll-progress {
+    z-index: 9999 !important;
+}
+
+.sticky-cta {
+    z-index: 998 !important;
+}
+
+#assessmentModal {
+    z-index: 10000 !important;
+}
+
+#assessmentModal > div {
+    z-index: 10001 !important;
+}
+
+/* Modal specific - ensure it's above everything */
+.modal {
+    z-index: 10000 !important;
+}
+
+.modal-content {
+    z-index: 10001 !important;
+}	
     </style>
 </head>
 <script>
