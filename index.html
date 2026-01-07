@@ -2046,9 +2046,42 @@ let answers = [];
 let userData = {};
 
 function startAssessment() {
-    document.getElementById('assessmentModal').style.display = 'block';
+    console.log('startAssessment called'); // Debug log
+    
+    const modal = document.getElementById('assessmentModal');
+    
+    if (!modal) {
+        console.error('Assessment modal not found!');
+        return;
+    }
+    
+    console.log('Opening modal...');
+    
+    // Show modal
+    modal.style.display = 'block';
+    
+    // Add class to body to prevent scrolling
     document.body.classList.add('modal-open');
-    document.getElementById('assessmentModal').scrollTop = 0;
+    
+    // Scroll modal to top
+    modal.scrollTop = 0;
+    
+    // Reset assessment state
+    currentQuestionIndex = 0;
+    answers = [];
+    finalTotalScore = 0;
+    finalPillarScores = {};
+    
+    // Show email capture, hide others
+    document.getElementById('emailCapture').style.display = 'block';
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'none';
+    
+    // Reset progress bar
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('progressText').textContent = '0%';
+    
+    console.log('Modal opened successfully');
 }
 
 function closeAssessment() {
