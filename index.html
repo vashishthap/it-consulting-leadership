@@ -2234,7 +2234,6 @@ function showResults() {
         pillarCounts[answer.pillar]++;
     });
     
-    // Calculate percentages
     const pillarPercentages = {};
     Object.keys(pillarScores).forEach(pillar => {
         const maxScore = pillarCounts[pillar] * 5;
@@ -2244,14 +2243,42 @@ function showResults() {
     const totalScore = Object.values(pillarPercentages).reduce((a, b) => a + b, 0) / 5;
     const roundedScore = Math.round(totalScore);
     
-    // ✅ STORE SCORES GLOBALLY - ADD THESE TWO LINES
+    // Store scores globally
     finalTotalScore = roundedScore;
     finalPillarScores = pillarPercentages;
     
     console.log('Scores stored globally:', {
         totalScore: finalTotalScore,
         pillars: finalPillarScores
-    });    
+    });
+    
+    // ✅ NO sendToZohoCRM() call here!
+    // Email will only be sent when user clicks "Download Free Report"
+    
+    // Determine maturity level
+    let maturityLevel, maturityColor, maturityDescription;
+    if (roundedScore >= 80) {
+        maturityLevel = "Advanced";
+        maturityColor = "#00ff88";
+        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
+    } else if (roundedScore >= 60) {
+        maturityLevel = "Intermediate";
+        maturityColor = "#00d9ff";
+        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
+    } else if (roundedScore >= 40) {
+        maturityLevel = "Developing";
+        maturityColor = "#ff9500";
+        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
+    } else {
+        maturityLevel = "Beginner";
+        maturityColor = "#ff3366";
+        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
+    }
+    
+    // Hide questions, show results
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'block';
+} 
     // Determine maturity level
     let maturityLevel, maturityColor, maturityDescription;
     if (roundedScore >= 80) {
