@@ -3006,7 +3006,7 @@ function downloadFreeReport() {
     console.log('=== DOWNLOAD FREE REPORT ===');
     console.log('Using stored scores - Total:', finalTotalScore, 'Pillars:', finalPillarScores);
     
-    // Use the stored scores instead of recalculating
+    // Use the stored scores
     const totalScore = finalTotalScore;
     const pillarScores = finalPillarScores;
     
@@ -3018,7 +3018,7 @@ function downloadFreeReport() {
     }
     
     // Show loading state
-    button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="animation: spin 1s linear infinite; display: inline-block;">⏳</span><span>Sending to your email...</span></span>';
+    button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="animation: spin 1s linear infinite; display: inline-block;">⏳</span><span>Generating your report...</span></span>';
     button.disabled = true;
     button.style.cursor = 'not-allowed';
     button.style.opacity = '0.7';
@@ -3028,7 +3028,10 @@ function downloadFreeReport() {
     
     if (success) {
         setTimeout(function() {
-            button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="font-size: 1.5rem;">✅</span><span>Email Sent Successfully!</span></span>';
+            // ✅ GENERATE AND OPEN PDF
+            generatePDFReport(userData, totalScore, pillarScores);
+            
+            button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="font-size: 1.5rem;">✅</span><span>Report Generated!</span></span>';
             button.style.background = 'linear-gradient(135deg, #00ff88 0%, #00d9ff 100%)';
             button.style.borderColor = '#00ff88';
             button.style.opacity = '1';
@@ -3036,14 +3039,14 @@ function downloadFreeReport() {
             const confirmMsg = document.createElement('div');
             confirmMsg.style.cssText = 'margin-top: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 15px; text-align: center;';
             confirmMsg.innerHTML = `
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📧</div>
-                <div style="color: #00ff88; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Check Your Inbox!</div>
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+                <div style="color: #00ff88; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Report Ready!</div>
                 <div style="color: #a0a0b0; font-size: 0.95rem;">
-                    We've sent your AI Readiness Summary (Score: ${totalScore}/100) to:<br>
-                    <strong style="color: #00d9ff;">${userData.email}</strong>
+                    Your AI Readiness Summary (Score: ${totalScore}/100) is ready to print/save.<br>
+                    <strong style="color: #00d9ff;">Check your email for upgrade options!</strong>
                 </div>
                 <div style="color: #a0a0b0; font-size: 0.85rem; margin-top: 1rem;">
-                    📥 Check your spam folder if you don't see it in 5 minutes
+                    💡 Use your browser's print dialog to save as PDF
                 </div>
             `;
             button.parentElement.appendChild(confirmMsg);
@@ -3057,7 +3060,7 @@ function downloadFreeReport() {
         button.disabled = false;
         button.style.cursor = 'pointer';
         button.style.opacity = '1';
-        alert('There was an error sending your report. Please try again or contact us at value.advisor@nothingbutvalue.com');
+        alert('There was an error generating your report. Please try again or contact us at value.advisor@nothingbutvalue.com');
     }
 }
 // Calculate total score from all answers
