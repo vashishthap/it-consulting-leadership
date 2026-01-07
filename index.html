@@ -2198,6 +2198,14 @@ function showResults() {
     const totalScore = Object.values(pillarPercentages).reduce((a, b) => a + b, 0) / 5;
     const roundedScore = Math.round(totalScore);
     
+    // ✅ STORE SCORES GLOBALLY - ADD THESE TWO LINES
+    finalTotalScore = roundedScore;
+    finalPillarScores = pillarPercentages;
+    
+    console.log('Scores stored globally:', {
+        totalScore: finalTotalScore,
+        pillars: finalPillarScores
+    });    
     // Determine maturity level
     let maturityLevel, maturityColor, maturityDescription;
     if (roundedScore >= 80) {
