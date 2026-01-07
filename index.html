@@ -2136,10 +2136,19 @@ function showQuestion() {
     document.getElementById('assessmentModal').scrollTop = 0;
 }
 function selectAnswer(score) {
+    const question = assessmentQuestions[currentQuestionIndex];
+    
     answers[currentQuestionIndex] = {
-        pillar: assessmentQuestions[currentQuestionIndex].pillar,
+        pillar: question.pillar,
+        question: question.question,
         score: score
     };
+    
+    console.log('Answer recorded:', {
+        pillar: question.pillar,
+        score: score,
+        totalAnswers: answers.length
+    });
     
     currentQuestionIndex++;
     
@@ -2149,7 +2158,6 @@ function selectAnswer(score) {
         showResults();
     }
 }
-
 function previousQuestion() {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
