@@ -1773,12 +1773,18 @@ body.modal-open {
     </style>
 </head>
 <script>
+// ============================================
+// ASSESSMENT SYSTEM - COMPLETE WORKING VERSION
+// ============================================
+
+// Global Variables
 let currentQuestionIndex = 0;
 let answers = [];
 let userData = {};
-let finalTotalScore = 0;  // ADD THIS
-let finalPillarScores = {};  // ADD THIS
-// Assessment Data
+let finalTotalScore = 0;
+let finalPillarScores = {};
+
+// Assessment Questions (keep your existing 25 questions array)
 const assessmentQuestions = [
     // PILLAR 1: STRATEGY (5 questions)
     {
@@ -2040,8 +2046,13 @@ const assessmentQuestions = [
         ]
     }
 ];
+
+// ============================================
+// MODAL CONTROL FUNCTIONS
+// ============================================
+
 function startAssessment() {
-    console.log('startAssessment called'); // Debug log
+    console.log('startAssessment called');
     
     const modal = document.getElementById('assessmentModal');
     
@@ -2050,33 +2061,32 @@ function startAssessment() {
         return;
     }
     
-    console.log('Opening modal...');
-    
     // Show modal
     modal.style.display = 'block';
-    
-    // Add class to body to prevent scrolling
     document.body.classList.add('modal-open');
-    
-    // Scroll modal to top
     modal.scrollTop = 0;
     
-    // Reset assessment state
+    // Reset state
     currentQuestionIndex = 0;
     answers = [];
     finalTotalScore = 0;
     finalPillarScores = {};
     
-    // Show email capture, hide others
+    // Show email capture
     document.getElementById('emailCapture').style.display = 'block';
     document.getElementById('questionsContainer').style.display = 'none';
     document.getElementById('resultsContainer').style.display = 'none';
     
-    // Reset progress bar
+    // Reset progress
     document.getElementById('progressBar').style.width = '0%';
     document.getElementById('progressText').textContent = '0%';
     
     console.log('Modal opened successfully');
+}
+
+// Alias for compatibility
+function openAssessment() {
+    startAssessment();
 }
 
 function closeAssessment() {
@@ -2091,8 +2101,6 @@ function closeAssessment() {
     
     // Hide modal
     modal.style.display = 'none';
-    
-    // Remove body class
     document.body.classList.remove('modal-open');
     
     // Reset state
@@ -2101,7 +2109,7 @@ function closeAssessment() {
     finalTotalScore = 0;
     finalPillarScores = {};
     
-    // Show email capture, hide others
+    // Reset UI
     document.getElementById('emailCapture').style.display = 'block';
     document.getElementById('questionsContainer').style.display = 'none';
     document.getElementById('resultsContainer').style.display = 'none';
@@ -2109,30 +2117,43 @@ function closeAssessment() {
     console.log('Modal closed successfully');
 }
 
+// ============================================
+// ASSESSMENT FLOW FUNCTIONS
+// ============================================
+
 function startQuestions() {
     const name = document.getElementById('userName').value.trim();
     const email = document.getElementById('userEmail').value.trim();
     const company = document.getElementById('userCompany').value.trim();
-    const role = document.getElementById('userRole').value;
+    const roleField = document.getElementById('userRole');
+    const role = roleField.tagName === 'SELECT' ? roleField.value : roleField.value.trim();
     
+    // Validation
     if (!name || !email || !company) {
-        alert('Please fill in all required fields');
+        alert('Please fill in all required fields (Name, Email, Company)');
         return;
     }
     
-    if (!email.includes('@')) {
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
         alert('Please enter a valid email address');
         return;
     }
     
-    userData = { name, email, company, role };
+    // Store user data
+    userData = { name, email, company, role: role || 'Not specified' };
+    console.log('User data stored:', userData);
     
+    // Hide email capture, show questions
     document.getElementById('emailCapture').style.display = 'none';
     document.getElementById('questionsContainer').style.display = 'block';
     document.getElementById('assessmentModal').scrollTop = 0;
     
+    // Show first question
     showQuestion();
 }
+
 function showQuestion() {
     const question = assessmentQuestions[currentQuestionIndex];
     const progress = ((currentQuestionIndex + 1) / assessmentQuestions.length * 100).toFixed(0);
@@ -2177,10 +2198,9 @@ function showQuestion() {
     }
     
     document.getElementById('currentQuestion').innerHTML = html;
-    
-    // Scroll to top of modal
     document.getElementById('assessmentModal').scrollTop = 0;
 }
+
 function selectAnswer(score) {
     const question = assessmentQuestions[currentQuestionIndex];
     
@@ -2204,12 +2224,17 @@ function selectAnswer(score) {
         showResults();
     }
 }
+
 function previousQuestion() {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
         showQuestion();
     }
 }
+
+// ============================================
+// RESULTS & SCORING
+// ============================================
 
 function showResults() {
     // Calculate scores
@@ -2252,33 +2277,6 @@ function showResults() {
         pillars: finalPillarScores
     });
     
-    // ✅ NO sendToZohoCRM() call here!
-    // Email will only be sent when user clicks "Download Free Report"
-    
-    // Determine maturity level
-    let maturityLevel, maturityColor, maturityDescription;
-    if (roundedScore >= 80) {
-        maturityLevel = "Advanced";
-        maturityColor = "#00ff88";
-        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
-    } else if (roundedScore >= 60) {
-        maturityLevel = "Intermediate";
-        maturityColor = "#00d9ff";
-        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
-    } else if (roundedScore >= 40) {
-        maturityLevel = "Developing";
-        maturityColor = "#ff9500";
-        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
-    } else {
-        maturityLevel = "Beginner";
-        maturityColor = "#ff3366";
-        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
-    }
-    
-    // Hide questions, show results
-    document.getElementById('questionsContainer').style.display = 'none';
-    document.getElementById('resultsContainer').style.display = 'block';
-} 
     // Determine maturity level
     let maturityLevel, maturityColor, maturityDescription;
     if (roundedScore >= 80) {
@@ -2400,15 +2398,17 @@ function showResults() {
     `;
     
     document.getElementById('resultsContainer').innerHTML = html;
-    
+    document.getElementById('assessmentModal').scrollTop = 0;
 }
 
+// ============================================
+// PREMIUM UPGRADE & EMAIL FUNCTIONS
+// ============================================
+
 function upgradeToPremium(price) {
-    // Use stored scores
     const totalScore = finalTotalScore;
     const pillarScores = finalPillarScores;
     
-    // Determine package name
     let packageName = '';
     if (price === 97) packageName = 'Premium Report ($97)';
     else if (price === 297) packageName = 'Premium + Consult ($297)';
@@ -2425,6 +2425,7 @@ function upgradeToPremium(price) {
         closeAssessment();
     }, 2000);
 }
+
 function downloadFreeReport() {
     const button = event.target;
     const originalText = button.innerHTML;
@@ -2432,7 +2433,6 @@ function downloadFreeReport() {
     console.log('=== DOWNLOAD FREE REPORT ===');
     console.log('Using stored scores - Total:', finalTotalScore, 'Pillars:', finalPillarScores);
     
-    // Use the stored scores instead of recalculating
     const totalScore = finalTotalScore;
     const pillarScores = finalPillarScores;
     
@@ -2486,45 +2486,11 @@ function downloadFreeReport() {
         alert('There was an error sending your report. Please try again or contact us at value.advisor@nothingbutvalue.com');
     }
 }
-// Calculate total score from all answers
-function calculateTotalScore() {
-    const pillarScores = getPillarScores();
-    const totalScore = Object.values(pillarScores).reduce((a, b) => a + b, 0) / 5;
-    return Math.round(totalScore);
-}
 
-// Get individual pillar scores
-function getPillarScores() {
-    const pillarScores = {
-        'Strategy': 0,
-        'Data': 0,
-        'Technology': 0,
-        'People': 0,
-        'Governance': 0
-    };
-    
-    const pillarCounts = {
-        'Strategy': 0,
-        'Data': 0,
-        'Technology': 0,
-        'People': 0,
-        'Governance': 0
-    };
-    
-    answers.forEach(answer => {
-        pillarScores[answer.pillar] += answer.score;
-        pillarCounts[answer.pillar]++;
-    });
-    
-    // Calculate percentages
-    const pillarPercentages = {};
-    Object.keys(pillarScores).forEach(pillar => {
-        const maxScore = pillarCounts[pillar] * 5;
-        pillarPercentages[pillar] = Math.round((pillarScores[pillar] / maxScore) * 100);
-    });
-    
-    return pillarPercentages;
-}
+// ============================================
+// ZOHO CRM INTEGRATION
+// ============================================
+
 function sendToZohoCRM(userData, score, pillars, reportType) {
     console.log('Sending to Zoho CRM with custom fields');
     
@@ -2549,24 +2515,19 @@ Pillar Breakdown:
 Completed: ${new Date().toLocaleString()}`;
     
     const fields = {
-        // Your existing form token and IDs (DON'T CHANGE THESE)
         'xnQsjsdp': 'd38b5c5d24d47d69e4d4d3b1108556b89b5db9c5201c227fba71c1ac8a63cd40',
         'zc_gad': '',
         'xmIwtLD': 'c13ea234492206c9820af3abbf29162e53e7cd3c5a22cb5abd9919cfa0cb99decb08ccd524a1463ebf5a1d4e2ea4258c',
         'actionType': 'TGVhZHM=',
         'returnURL': 'https://vashishthap.github.io/it-consulting-leadership/thank-you.html',
-        
-        // Standard fields
         'Last Name': userData.name,
         'Email': userData.email,
         'Company': userData.company,
         'Industry': userData.role || 'Not specified',
         'Lead Source': 'AI Assessment - Website',
-        
-        // Custom fields - REPLACE WITH YOUR ACTUAL API NAMES
-        'LEADCF51': score,  // AI Readiness Score (replace LEADCF1 with actual name)
-        'LEADCF1': assessmentDetails,  // Assessment Details (replace LEADCF2 with actual name)
-        'LEADCF2': reportType  // Report Type (replace LEADCF3 with actual name)
+        'LEADCF51': score,
+        'LEADCF1': assessmentDetails,
+        'LEADCF2': reportType
     };
     
     Object.keys(fields).forEach(key => {
@@ -2595,6 +2556,145 @@ Completed: ${new Date().toLocaleString()}`;
     
     return true;
 }
+
+// ============================================
+// OTHER PAGE FUNCTIONS (ROI, FAQ, etc.)
+// ============================================
+
+// ROI Calculator
+function calculateROI() {
+    const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+    const employees = parseFloat(document.getElementById('employees').value) || 0;
+    const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
+    const tickets = parseFloat(document.getElementById('tickets').value) || 0;
+    
+    const deskSavings = tickets * 12 * 0.4 * 0.5 * hourlyRate;
+    const docSavings = employees * 0.3 * 10 * 52 * hourlyRate * 0.6;
+    const resourceSavings = employees * 0.2 * 40 * 52 * hourlyRate * 0.2;
+    
+    const totalSavings = deskSavings + docSavings + resourceSavings;
+    const newRevenue = revenue * 0.05;
+    
+    let investment;
+    if (employees < 50) investment = 50000;
+    else if (employees < 100) investment = 100000;
+    else if (employees < 250) investment = 150000;
+    else investment = 200000;
+    
+    const totalValue = totalSavings + newRevenue;
+    const netROI = ((totalValue - investment) / investment * 100).toFixed(0);
+    const payback = (investment / (totalValue / 12)).toFixed(1);
+    
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('savings').textContent = '$' + totalSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('desk-savings').textContent = '$' + deskSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('doc-savings').textContent = '$' + docSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('resource-savings').textContent = '$' + resourceSavings.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('new-revenue').textContent = '$' + newRevenue.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('investment').textContent = '$' + investment.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('net-roi').textContent = netROI + '%';
+    document.getElementById('payback').textContent = payback;
+    
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// FAQ Toggle
+function toggleFAQ(element) {
+    element.classList.toggle('active');
+    const toggle = element.querySelector('.faq-toggle');
+    toggle.textContent = element.classList.contains('active') ? '−' : '+';
+}
+
+// Tab Switching
+document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+            
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none';
+            });
+            
+            this.classList.add('active');
+            
+            const targetContent = document.getElementById(tabName);
+            if (targetContent) {
+                targetContent.classList.add('active');
+                targetContent.style.display = 'block';
+            }
+        });
+    });
+});
+
+// Scroll Progress Bar
+window.addEventListener('scroll', function() {
+    const scrollProgress = document.getElementById('scrollProgress');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+    scrollProgress.style.width = scrollPercentage + '%';
+});
+
+// Sticky CTA Bar
+window.addEventListener('scroll', function() {
+    const stickyCTA = document.getElementById('stickyCTA');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+    
+    if (scrollPercentage > 50) {
+        stickyCTA.classList.add('visible');
+    } else {
+        stickyCTA.classList.remove('visible');
+    }
+});
+
+// Scroll Animation Observer
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const animatedElements = document.querySelectorAll('.service-card, .why-card, .use-case-card, .challenge-card, .solution-card-alt, .faq-item');
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(el);
+    });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+console.log('✅ All assessment functions loaded successfully');
 </script>
 <body>
  <!-- COMPLETE WORKING HEADER + MOBILE MENU -->
