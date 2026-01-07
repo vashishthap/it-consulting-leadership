@@ -1771,6 +1771,31 @@ body.modal-open {
     to { transform: rotate(360deg); }
 }
     </style>
+	</style>
+<!-- END OF EXISTING STYLES -->
+
+<!-- PDF REPORT STYLES - ADD THIS NEW BLOCK -->
+<style id="pdf-report-styles">
+    /* PDF Report Styles - Hidden from main page */
+    .pdf-report-container {
+        display: none;
+    }
+    
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        .pdf-report-container, .pdf-report-container * {
+            visibility: visible;
+        }
+        .pdf-report-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+    }
+</style>
 </head>
 <script>
 let currentQuestionIndex = 0;
