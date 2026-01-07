@@ -1797,1725 +1797,6 @@ body.modal-open {
     }
 </style>
 </head>
-<script>
-let currentQuestionIndex = 0;
-let answers = [];
-let userData = {};
-let finalTotalScore = 0;  // ADD THIS
-let finalPillarScores = {};  // ADD THIS
-// Assessment Data
-const assessmentQuestions = [
-    // PILLAR 1: STRATEGY (5 questions)
-    {
-        pillar: "Strategy",
-        question: "Does your company have a documented AI strategy?",
-        options: [
-            { text: "Yes, comprehensive and board-approved", score: 5 },
-            { text: "Yes, but still in draft form", score: 3 },
-            { text: "We're working on it", score: 1 },
-            { text: "No, not yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "Strategy",
-        question: "How many AI use cases have you identified for your business?",
-        options: [
-            { text: "10+ use cases with clear ROI", score: 5 },
-            { text: "5-10 use cases", score: 3 },
-            { text: "1-5 use cases", score: 1 },
-            { text: "None yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "Strategy",
-        question: "What's your primary AI transformation goal?",
-        options: [
-            { text: "Clear, measurable goals aligned with business strategy", score: 5 },
-            { text: "General goals defined", score: 3 },
-            { text: "Still exploring possibilities", score: 1 },
-            { text: "No specific goals yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "Strategy",
-        question: "Do you have executive buy-in for AI initiatives?",
-        options: [
-            { text: "Yes, CEO/Board are champions", score: 5 },
-            { text: "Yes, from some executives", score: 3 },
-            { text: "Working on getting buy-in", score: 1 },
-            { text: "No executive support yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "Strategy",
-        question: "Have you allocated budget for AI transformation?",
-        options: [
-            { text: "Yes, dedicated multi-year budget", score: 5 },
-            { text: "Yes, annual budget approved", score: 3 },
-            { text: "Budget under discussion", score: 1 },
-            { text: "No budget allocated", score: 0 }
-        ]
-    },
-    
-    // PILLAR 2: DATA (5 questions)
-    {
-        pillar: "Data",
-        question: "What percentage of your data is structured and accessible?",
-        options: [
-            { text: "80%+ is structured and AI-ready", score: 5 },
-            { text: "50-80% is structured", score: 3 },
-            { text: "20-50% is structured", score: 1 },
-            { text: "Less than 20%", score: 0 }
-        ]
-    },
-    {
-        pillar: "Data",
-        question: "Do you have a data governance framework in place?",
-        options: [
-            { text: "Yes, comprehensive and enforced", score: 5 },
-            { text: "Yes, but needs improvement", score: 3 },
-            { text: "Basic policies only", score: 1 },
-            { text: "No formal governance", score: 0 }
-        ]
-    },
-    {
-        pillar: "Data",
-        question: "How would you rate your data quality?",
-        options: [
-            { text: "Excellent - clean, accurate, complete", score: 5 },
-            { text: "Good - mostly reliable", score: 3 },
-            { text: "Fair - some quality issues", score: 1 },
-            { text: "Poor - significant issues", score: 0 }
-        ]
-    },
-    {
-        pillar: "Data",
-        question: "Can you easily access data across different systems?",
-        options: [
-            { text: "Yes, fully integrated data platform", score: 5 },
-            { text: "Yes, with some manual work", score: 3 },
-            { text: "Difficult, data is siloed", score: 1 },
-            { text: "No, major integration challenges", score: 0 }
-        ]
-    },
-    {
-        pillar: "Data",
-        question: "Do you have data security and privacy controls?",
-        options: [
-            { text: "Yes, comprehensive and compliant", score: 5 },
-            { text: "Yes, basic controls in place", score: 3 },
-            { text: "Minimal controls", score: 1 },
-            { text: "No formal controls", score: 0 }
-        ]
-    },
-    
-    // PILLAR 3: TECHNOLOGY (5 questions)
-    {
-        pillar: "Technology",
-        question: "What's your current AI technology maturity?",
-        options: [
-            { text: "Advanced - multiple AI solutions in production", score: 5 },
-            { text: "Intermediate - pilot projects running", score: 3 },
-            { text: "Beginner - exploring options", score: 1 },
-            { text: "None - no AI technology yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "Technology",
-        question: "Do you have cloud infrastructure for AI workloads?",
-        options: [
-            { text: "Yes, scalable cloud platform ready", score: 5 },
-            { text: "Yes, basic cloud infrastructure", score: 3 },
-            { text: "Planning cloud migration", score: 1 },
-            { text: "No cloud infrastructure", score: 0 }
-        ]
-    },
-    {
-        pillar: "Technology",
-        question: "How do you approach AI tool selection?",
-        options: [
-            { text: "Rigorous evaluation process with clear criteria", score: 5 },
-            { text: "Basic evaluation process", score: 3 },
-            { text: "Ad-hoc selection", score: 1 },
-            { text: "Haven't selected any tools yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "Technology",
-        question: "Do you have API integrations for AI tools?",
-        options: [
-            { text: "Yes, comprehensive API strategy", score: 5 },
-            { text: "Yes, some integrations", score: 3 },
-            { text: "Planning integrations", score: 1 },
-            { text: "No integrations", score: 0 }
-        ]
-    },
-    {
-        pillar: "Technology",
-        question: "How do you handle AI model deployment?",
-        options: [
-            { text: "Automated CI/CD pipeline", score: 5 },
-            { text: "Manual but documented process", score: 3 },
-            { text: "Ad-hoc deployment", score: 1 },
-            { text: "Haven't deployed any models", score: 0 }
-        ]
-    },
-    
-    // PILLAR 4: PEOPLE (5 questions)
-    {
-        pillar: "People",
-        question: "What's your team's AI skill level?",
-        options: [
-            { text: "Advanced - dedicated AI team", score: 5 },
-            { text: "Intermediate - some AI skills", score: 3 },
-            { text: "Beginner - basic awareness", score: 1 },
-            { text: "No AI skills yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "People",
-        question: "Do you have an AI training program?",
-        options: [
-            { text: "Yes, comprehensive ongoing training", score: 5 },
-            { text: "Yes, basic training provided", score: 3 },
-            { text: "Planning to implement", score: 1 },
-            { text: "No training program", score: 0 }
-        ]
-    },
-    {
-        pillar: "People",
-        question: "How is your team's attitude toward AI?",
-        options: [
-            { text: "Enthusiastic - actively embracing", score: 5 },
-            { text: "Positive - open to learning", score: 3 },
-            { text: "Neutral - wait and see", score: 1 },
-            { text: "Resistant - concerned about jobs", score: 0 }
-        ]
-    },
-    {
-        pillar: "People",
-        question: "Do you have dedicated AI roles?",
-        options: [
-            { text: "Yes, multiple AI specialists", score: 5 },
-            { text: "Yes, one AI lead", score: 3 },
-            { text: "No, but planning to hire", score: 1 },
-            { text: "No dedicated roles", score: 0 }
-        ]
-    },
-    {
-        pillar: "People",
-        question: "How do you handle change management for AI?",
-        options: [
-            { text: "Structured change management program", score: 5 },
-            { text: "Basic change management", score: 3 },
-            { text: "Informal approach", score: 1 },
-            { text: "No change management", score: 0 }
-        ]
-    },
-    
-    // PILLAR 5: GOVERNANCE (5 questions)
-    {
-        pillar: "Governance",
-        question: "Do you have AI ethics and governance policies?",
-        options: [
-            { text: "Yes, comprehensive policies enforced", score: 5 },
-            { text: "Yes, basic policies in place", score: 3 },
-            { text: "Policies in development", score: 1 },
-            { text: "No policies yet", score: 0 }
-        ]
-    },
-    {
-        pillar: "Governance",
-        question: "How do you measure AI project success?",
-        options: [
-            { text: "Clear KPIs and ROI tracking", score: 5 },
-            { text: "Basic metrics defined", score: 3 },
-            { text: "Informal tracking", score: 1 },
-            { text: "No measurement framework", score: 0 }
-        ]
-    },
-    {
-        pillar: "Governance",
-        question: "Do you have an AI steering committee?",
-        options: [
-            { text: "Yes, meets regularly with clear mandate", score: 5 },
-            { text: "Yes, informal oversight", score: 3 },
-            { text: "Planning to establish", score: 1 },
-            { text: "No governance structure", score: 0 }
-        ]
-    },
-    {
-        pillar: "Governance",
-        question: "How do you handle AI risk management?",
-        options: [
-            { text: "Comprehensive risk framework", score: 5 },
-            { text: "Basic risk assessment", score: 3 },
-            { text: "Informal risk consideration", score: 1 },
-            { text: "No risk management", score: 0 }
-        ]
-    },
-    {
-        pillar: "Governance",
-        question: "Do you have AI compliance processes?",
-        options: [
-            { text: "Yes, full compliance program", score: 5 },
-            { text: "Yes, basic compliance", score: 3 },
-            { text: "Compliance in progress", score: 1 },
-            { text: "No compliance processes", score: 0 }
-        ]
-    }
-];
-function startAssessment() {
-    console.log('startAssessment called'); // Debug log
-    
-    const modal = document.getElementById('assessmentModal');
-    
-    if (!modal) {
-        console.error('Assessment modal not found!');
-        return;
-    }
-    
-    console.log('Opening modal...');
-    
-    // Show modal
-    modal.style.display = 'block';
-    
-    // Add class to body to prevent scrolling
-    document.body.classList.add('modal-open');
-    
-    // Scroll modal to top
-    modal.scrollTop = 0;
-    
-    // Reset assessment state
-    currentQuestionIndex = 0;
-    answers = [];
-    finalTotalScore = 0;
-    finalPillarScores = {};
-    
-    // Show email capture, hide others
-    document.getElementById('emailCapture').style.display = 'block';
-    document.getElementById('questionsContainer').style.display = 'none';
-    document.getElementById('resultsContainer').style.display = 'none';
-    
-    // Reset progress bar
-    document.getElementById('progressBar').style.width = '0%';
-    document.getElementById('progressText').textContent = '0%';
-    
-    console.log('Modal opened successfully');
-}
-
-function closeAssessment() {
-    console.log('closeAssessment called');
-    
-    const modal = document.getElementById('assessmentModal');
-    
-    if (!modal) {
-        console.error('Assessment modal not found!');
-        return;
-    }
-    
-    // Hide modal
-    modal.style.display = 'none';
-    
-    // Remove body class
-    document.body.classList.remove('modal-open');
-    
-    // Reset state
-    currentQuestionIndex = 0;
-    answers = [];
-    finalTotalScore = 0;
-    finalPillarScores = {};
-    
-    // Show email capture, hide others
-    document.getElementById('emailCapture').style.display = 'block';
-    document.getElementById('questionsContainer').style.display = 'none';
-    document.getElementById('resultsContainer').style.display = 'none';
-    
-    console.log('Modal closed successfully');
-}
-
-function startQuestions() {
-    const name = document.getElementById('userName').value.trim();
-    const email = document.getElementById('userEmail').value.trim();
-    const company = document.getElementById('userCompany').value.trim();
-    const role = document.getElementById('userRole').value;
-    
-    if (!name || !email || !company) {
-        alert('Please fill in all required fields');
-        return;
-    }
-    
-    if (!email.includes('@')) {
-        alert('Please enter a valid email address');
-        return;
-    }
-    
-    userData = { name, email, company, role };
-    
-    document.getElementById('emailCapture').style.display = 'none';
-    document.getElementById('questionsContainer').style.display = 'block';
-    document.getElementById('assessmentModal').scrollTop = 0;
-    
-    showQuestion();
-}
-function showQuestion() {
-    const question = assessmentQuestions[currentQuestionIndex];
-    const progress = ((currentQuestionIndex + 1) / assessmentQuestions.length * 100).toFixed(0);
-    
-    document.getElementById('progressBar').style.width = progress + '%';
-    document.getElementById('progressText').textContent = progress + '%';
-    
-    let html = `
-        <div style="margin-bottom: 2rem;">
-            <div style="color: #00d9ff; font-weight: 800; font-size: 0.85rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">
-                ${question.pillar} • Question ${currentQuestionIndex + 1} of ${assessmentQuestions.length}
-            </div>
-            <h3 style="font-size: 2rem; margin-bottom: 0; color: #fff; line-height: 1.3; font-weight: 800;">
-                ${question.question}
-            </h3>
-        </div>
-        
-        <div style="display: flex; flex-direction: column; gap: 1rem; margin: 3rem 0 2rem 0;">
-    `;
-    
-    question.options.forEach((option, index) => {
-        html += `
-            <button onclick="selectAnswer(${option.score})" style="width: 100%; padding: 1.5rem 1.75rem; background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 16px; color: #fff; font-size: 1.05rem; text-align: left; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; line-height: 1.5; position: relative; overflow: hidden;" onmouseover="this.style.borderColor='#00d9ff'; this.style.background='linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 217, 255, 0.05))'; this.style.transform='translateX(8px)'; this.style.boxShadow='0 8px 30px rgba(0, 217, 255, 0.25)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.background='linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01))'; this.style.transform='translateX(0)'; this.style.boxShadow='none'">
-                <span style="display: flex; align-items: center; gap: 1.25rem;">
-                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(0, 217, 255, 0.15); border: 2px solid rgba(0, 217, 255, 0.4); border-radius: 50%; font-weight: 800; font-size: 0.95rem; color: #00d9ff; flex-shrink: 0; transition: all 0.3s;">${String.fromCharCode(65 + index)}</span>
-                    <span style="flex: 1; color: rgba(255, 255, 255, 0.95);">${option.text}</span>
-                </span>
-            </button>
-        `;
-    });
-    
-    html += `</div>`;
-    
-    if (currentQuestionIndex > 0) {
-        html += `
-            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                <button onclick="previousQuestion()" style="padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: rgba(255, 255, 255, 0.8); font-weight: 700; cursor: pointer; transition: all 0.3s; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.borderColor='#00d9ff'; this.style.color='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.05)'; this.style.transform='translateX(-5px)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='rgba(255, 255, 255, 0.8)'; this.style.background='rgba(255, 255, 255, 0.03)'; this.style.transform='translateX(0)'">
-                    ← Previous Question
-                </button>
-            </div>
-        `;
-    }
-    
-    document.getElementById('currentQuestion').innerHTML = html;
-    
-    // Scroll to top of modal
-    document.getElementById('assessmentModal').scrollTop = 0;
-}
-function selectAnswer(score) {
-    const question = assessmentQuestions[currentQuestionIndex];
-    
-    answers[currentQuestionIndex] = {
-        pillar: question.pillar,
-        question: question.question,
-        score: score
-    };
-    
-    console.log('Answer recorded:', {
-        pillar: question.pillar,
-        score: score,
-        totalAnswers: answers.length
-    });
-    
-    currentQuestionIndex++;
-    
-    if (currentQuestionIndex < assessmentQuestions.length) {
-        showQuestion();
-    } else {
-        showResults();
-    }
-}
-function previousQuestion() {
-    if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        showQuestion();
-    }
-}
-
-function showResults() {
-    // Calculate scores
-    const pillarScores = {
-        'Strategy': 0,
-        'Data': 0,
-        'Technology': 0,
-        'People': 0,
-        'Governance': 0
-    };
-    
-    const pillarCounts = {
-        'Strategy': 0,
-        'Data': 0,
-        'Technology': 0,
-        'People': 0,
-        'Governance': 0
-    };
-    
-    answers.forEach(answer => {
-        pillarScores[answer.pillar] += answer.score;
-        pillarCounts[answer.pillar]++;
-    });
-    
-    const pillarPercentages = {};
-    Object.keys(pillarScores).forEach(pillar => {
-        const maxScore = pillarCounts[pillar] * 5;
-        pillarPercentages[pillar] = Math.round((pillarScores[pillar] / maxScore) * 100);
-    });
-    
-    const totalScore = Object.values(pillarPercentages).reduce((a, b) => a + b, 0) / 5;
-    const roundedScore = Math.round(totalScore);
-    
-    // Store scores globally
-    finalTotalScore = roundedScore;
-    finalPillarScores = pillarPercentages;
-    
-    console.log('Scores stored globally:', {
-        totalScore: finalTotalScore,
-        pillars: finalPillarScores
-    });
-    
-    // ✅ NO sendToZohoCRM() call here!
-    // Email will only be sent when user clicks "Download Free Report"
-    
-    // Determine maturity level
-    let maturityLevel, maturityColor, maturityDescription;
-    if (roundedScore >= 80) {
-        maturityLevel = "Advanced";
-        maturityColor = "#00ff88";
-        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
-    } else if (roundedScore >= 60) {
-        maturityLevel = "Intermediate";
-        maturityColor = "#00d9ff";
-        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
-    } else if (roundedScore >= 40) {
-        maturityLevel = "Developing";
-        maturityColor = "#ff9500";
-        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
-    } else {
-        maturityLevel = "Beginner";
-        maturityColor = "#ff3366";
-        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
-    }
-    
-    // Hide questions, show results
-    document.getElementById('questionsContainer').style.display = 'none';
-    document.getElementById('resultsContainer').style.display = 'block';
-} 
-    // Determine maturity level
-    let maturityLevel, maturityColor, maturityDescription;
-    if (roundedScore >= 80) {
-        maturityLevel = "Advanced";
-        maturityColor = "#00ff88";
-        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
-    } else if (roundedScore >= 60) {
-        maturityLevel = "Intermediate";
-        maturityColor = "#00d9ff";
-        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
-    } else if (roundedScore >= 40) {
-        maturityLevel = "Developing";
-        maturityColor = "#ff9500";
-        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
-    } else {
-        maturityLevel = "Beginner";
-        maturityColor = "#ff3366";
-        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
-    }
-    
-    // Hide questions, show results
-    document.getElementById('questionsContainer').style.display = 'none';
-    document.getElementById('resultsContainer').style.display = 'block';
-    
-    let html = `
-        <div style="text-align: center; margin-bottom: 3rem;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                Your AI Readiness Score
-            </h2>
-            
-            <div style="font-size: 5rem; font-weight: 900; color: ${maturityColor}; margin: 2rem 0;">
-                ${roundedScore}/100
-            </div>
-            
-            <div style="display: inline-block; padding: 0.75rem 2rem; background: ${maturityColor}22; border: 2px solid ${maturityColor}; border-radius: 50px; color: ${maturityColor}; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">
-                ${maturityLevel}
-            </div>
-            
-            <p style="color: #a0a0b0; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                ${maturityDescription}
-            </p>
-        </div>
-        
-        <div style="background: rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
-            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #fff;">Your Pillar Breakdown</h3>
-    `;
-    
-    Object.keys(pillarPercentages).forEach(pillar => {
-        const score = pillarPercentages[pillar];
-        let color;
-        if (score >= 80) color = "#00ff88";
-        else if (score >= 60) color = "#00d9ff";
-        else if (score >= 40) color = "#ff9500";
-        else color = "#ff3366";
-        
-        html += `
-            <div style="margin-bottom: 1.5rem;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span style="color: #fff; font-weight: 700;">${pillar}</span>
-                    <span style="color: ${color}; font-weight: 700;">${score}%</span>
-                </div>
-                <div style="width: 100%; height: 12px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden;">
-                    <div style="width: ${score}%; height: 100%; background: ${color}; transition: width 1s;"></div>
-                </div>
-            </div>
-        `;
-    });
-    
-    html += `
-        </div>
-        
-        <div style="background: linear-gradient(135deg, rgba(255, 51, 102, 0.1), rgba(255, 149, 0, 0.1)); border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
-            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #fff;">🎁 Unlock Your Premium Report</h3>
-            <p style="color: #a0a0b0; margin-bottom: 1.5rem;">
-                Get a detailed 15-page analysis with:
-            </p>
-            <ul style="color: #a0a0b0; margin-bottom: 1.5rem; padding-left: 1.5rem;">
-                <li>Custom 90-day transformation roadmap</li>
-                <li>Prioritized use cases with ROI projections</li>
-                <li>Benchmarking vs industry peers</li>
-                <li>Implementation timeline & budget</li>
-                <li>Risk analysis & mitigation strategies</li>
-            </ul>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                <button onclick="upgradeToPremium(97)" style="padding: 1.2rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 15px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s;">
-                    Premium Report<br>
-                    <span style="font-size: 1.5rem; font-weight: 900;">$97</span>
-                </button>
-                
-                <button onclick="upgradeToPremium(297)" style="padding: 1.2rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); border: none; border-radius: 15px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s; position: relative;">
-                    <div style="position: absolute; top: -10px; right: -10px; background: #00ff88; color: #0a0a0f; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 900;">POPULAR</div>
-                    Premium + Consult<br>
-                    <span style="font-size: 1.5rem; font-weight: 900;">$297</span><br>
-                    <span style="font-size: 0.85rem; opacity: 0.9;">+ 60-min strategy call</span>
-                </button>
-                
-                <button onclick="upgradeToPremium(997)" style="padding: 1.2rem; background: linear-gradient(135deg, #7c3aed 0%, #ff3366 100%); border: none; border-radius: 15px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s;">
-                    Enterprise<br>
-                    <span style="font-size: 1.5rem; font-weight: 900;">$997</span><br>
-                    <span style="font-size: 0.85rem; opacity: 0.9;">+ Team workshop</span>
-                </button>
-            </div>
-            
-            <p style="text-align: center; color: #a0a0b0; font-size: 0.85rem;">
-                ⚡ Limited: Only 10 premium slots available this month
-            </p>
-        </div>
-        
-        <div style="text-align: center;">
-            <button onclick="downloadFreeReport()" style="width: 100%; padding: 1.5rem; background: transparent; border: 2px solid #00d9ff; border-radius: 50px; color: #00d9ff; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; margin-bottom: 1rem;">
-                📥 Download Free Summary (1-Page PDF)
-            </button>
-            
-            <p style="color: #a0a0b0; font-size: 0.9rem;">
-                We'll email your results to: <strong style="color: #00d9ff;">${userData.email}</strong>
-            </p>
-        </div>
-    `;
-    
-    document.getElementById('resultsContainer').innerHTML = html;
-    
-}
-
-function upgradeToPremium(price) {
-    // Use stored scores
-    const totalScore = finalTotalScore;
-    const pillarScores = finalPillarScores;
-    
-    // Determine package name
-    let packageName = '';
-    if (price === 97) packageName = 'Premium Report ($97)';
-    else if (price === 297) packageName = 'Premium + Consult ($297)';
-    else if (price === 997) packageName = 'Enterprise ($997)';
-    
-    // Send to Zoho with premium package info
-    sendToZohoCRM(userData, totalScore, pillarScores, packageName);
-    
-    // Show confirmation
-    alert(`Thank you for your interest in ${packageName}!\n\nWe've received your request and will contact you at ${userData.email} within 24 hours to complete your purchase and schedule your consultation.\n\nFor immediate assistance, email us at value.advisor@nothingbutvalue.com`);
-    
-    // Close modal after short delay
-    setTimeout(function() {
-        closeAssessment();
-    }, 2000);
-}
-// ========================================
-// PDF REPORT GENERATION
-// ========================================
-function generatePDFReport(userData, totalScore, pillarScores) {
-    console.log('Generating PDF report...');
-    
-    // Determine maturity level
-    let maturityLevel, maturityClass, maturityDescription;
-    if (totalScore >= 80) {
-        maturityLevel = "ADVANCED";
-        maturityClass = "maturity-advanced";
-        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
-    } else if (totalScore >= 60) {
-        maturityLevel = "INTERMEDIATE";
-        maturityClass = "maturity-intermediate";
-        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
-    } else if (totalScore >= 40) {
-        maturityLevel = "DEVELOPING";
-        maturityClass = "maturity-developing";
-        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
-    } else {
-        maturityLevel = "BEGINNER";
-        maturityClass = "maturity-beginner";
-        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
-    }
-    
-    // Generate quick wins based on lowest scoring pillars
-    const quickWins = [];
-    
-    if (pillarScores.Strategy < 60) {
-        quickWins.push("Develop a documented AI strategy with clear goals and executive buy-in");
-    }
-    if (pillarScores.Data < 60) {
-        quickWins.push("Implement data governance framework and improve data quality");
-    }
-    if (pillarScores.Technology < 60) {
-        quickWins.push("Start with one high-impact AI pilot project to prove value quickly");
-    }
-    if (pillarScores.People < 60) {
-        quickWins.push("Launch AI training program to build internal capability and reduce resistance");
-    }
-    if (pillarScores.Governance < 60) {
-        quickWins.push("Establish AI ethics policies and measurement framework");
-    }
-    
-    // If all scores are good, suggest optimization
-    if (quickWins.length === 0) {
-        quickWins.push("Scale successful pilots across the organization");
-        quickWins.push("Develop advanced AI capabilities in lowest-scoring pillar");
-        quickWins.push("Create center of excellence to drive continuous improvement");
-    }
-    
-    // Take top 3
-    const topQuickWins = quickWins.slice(0, 3);
-    
-    // Calculate circle stroke offset
-    const circumference = 408.4;
-    const offset = circumference - (circumference * totalScore / 100);
-    
-    // Determine maturity color for badge
-    let badgeStyle = '';
-    if (totalScore >= 80) {
-        badgeStyle = 'background: linear-gradient(135deg, #00ff88, #00d9ff); color: #0a0a0f;';
-    } else if (totalScore >= 60) {
-        badgeStyle = 'background: linear-gradient(135deg, #00d9ff, #7c3aed); color: white;';
-    } else if (totalScore >= 40) {
-        badgeStyle = 'background: linear-gradient(135deg, #ff9500, #ffcc00); color: #0a0a0f;';
-    } else {
-        badgeStyle = 'background: linear-gradient(135deg, #ff3366, #ff9500); color: white;';
-    }
-    
-    // Create PDF HTML
-    const pdfHTML = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Readiness Report - ${userData.name}</title>
-    <style>
-        @page {
-            size: A4;
-            margin: 0;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-            color: #ffffff;
-            width: 210mm;
-            height: 297mm;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .report-container {
-            width: 100%;
-            height: 100%;
-            padding: 20mm 15mm;
-            position: relative;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid rgba(0, 217, 255, 0.3);
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 3px solid rgba(0, 217, 255, 0.5);
-        }
-        
-        .company-name {
-            font-size: 20px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #00d9ff, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .tagline {
-            font-size: 10px;
-            color: #a0a0b0;
-            font-weight: 600;
-        }
-        
-        .report-date {
-            text-align: right;
-            color: #a0a0b0;
-            font-size: 11px;
-        }
-        
-        .title-section {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .report-title {
-            font-size: 28px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-        
-        .user-name {
-            font-size: 16px;
-            color: #ffffff;
-            font-weight: 600;
-        }
-        
-        .company-info {
-            font-size: 13px;
-            color: #a0a0b0;
-        }
-        
-        .score-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1));
-            border: 2px solid rgba(0, 217, 255, 0.3);
-            border-radius: 20px;
-        }
-        
-        .score-circle {
-            position: relative;
-            width: 130px;
-            height: 130px;
-        }
-        
-        .score-value {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-        
-        .score-number {
-            font-size: 42px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #00d9ff, #00ff88);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .score-total {
-            font-size: 16px;
-            color: #a0a0b0;
-        }
-        
-        .maturity-badge {
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: inline-block;
-        }
-        
-        .section-title {
-            font-size: 18px;
-            font-weight: 900;
-            color: #00d9ff;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .pillars-section {
-            margin-bottom: 20px;
-        }
-        
-        .pillar-item {
-            margin-bottom: 10px;
-        }
-        
-        .pillar-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-        }
-        
-        .pillar-name {
-            font-weight: 700;
-            font-size: 13px;
-        }
-        
-        .pillar-score {
-            font-weight: 900;
-            font-size: 13px;
-        }
-        
-        .pillar-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .pillar-fill {
-            height: 100%;
-            border-radius: 10px;
-        }
-        
-        .quick-wins {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
-            border: 2px solid rgba(0, 255, 136, 0.3);
-            border-radius: 15px;
-        }
-        
-        .quick-wins ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 10px;
-        }
-        
-        .quick-wins li {
-            padding: 6px 0;
-            padding-left: 25px;
-            position: relative;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-        
-        .quick-wins li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #00ff88;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        
-        .premium-teaser {
-            padding: 15px;
-            background: linear-gradient(135deg, rgba(255, 51, 102, 0.15), rgba(255, 149, 0, 0.15));
-            border: 3px solid rgba(255, 51, 102, 0.5);
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .premium-title {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ff3366;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        
-        .premium-text {
-            font-size: 11px;
-            color: #ffffff;
-            margin-bottom: 12px;
-            line-height: 1.6;
-        }
-        
-        .premium-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-        
-        .premium-feature {
-            font-size: 10px;
-            color: #a0a0b0;
-            text-align: left;
-            padding-left: 18px;
-            position: relative;
-        }
-        
-        .premium-feature::before {
-            content: '🔒';
-            position: absolute;
-            left: 0;
-            font-size: 11px;
-        }
-        
-        .premium-cta {
-            font-size: 13px;
-            font-weight: 900;
-            color: #ff3366;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .footer {
-            position: absolute;
-            bottom: 15mm;
-            left: 15mm;
-            right: 15mm;
-            text-align: center;
-            padding-top: 12px;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .footer-text {
-            font-size: 10px;
-            color: #a0a0b0;
-        }
-        
-        .footer-contact {
-            font-size: 11px;
-            color: #00d9ff;
-            font-weight: 700;
-            margin-top: 4px;
-        }
-    </style>
-</head>
-<body>
-    <div class="report-container">
-        
-        <!-- Header -->
-        <div class="header">
-            <div class="logo-section">
-                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Logo" class="logo">
-                <div>
-                    <div class="company-name">NOTHING BUT VALUE</div>
-                    <div class="tagline">Big Firm Expertise. Small Firm Agility.</div>
-                </div>
-            </div>
-            <div class="report-date">
-                <div style="font-weight: 700; color: #00d9ff;">Assessment Date</div>
-                <div>${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-            </div>
-        </div>
-        
-        <!-- Title -->
-        <div class="title-section">
-            <h1 class="report-title">AI Readiness Assessment</h1>
-            <div class="user-name">${userData.name}</div>
-            <div class="company-info">${userData.company}${userData.role ? ' • ' + userData.role : ''}</div>
-        </div>
-        
-        <!-- Score -->
-        <div class="score-section">
-            <div class="score-circle">
-                <svg width="130" height="130" style="transform: rotate(-90deg);">
-                    <circle cx="65" cy="65" r="55" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="10"/>
-                    <circle cx="65" cy="65" r="55" fill="none" stroke="url(#gradient)" stroke-width="10" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
-                    <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#00d9ff;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#00ff88;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div class="score-value">
-                    <div class="score-number">${totalScore}</div>
-                    <div class="score-total">/100</div>
-                </div>
-            </div>
-            
-            <div style="flex: 1; padding-left: 25px;">
-                <div style="margin-bottom: 12px;">
-                    <div style="font-size: 13px; color: #a0a0b0; margin-bottom: 6px;">Your AI Maturity Level</div>
-                    <div class="maturity-badge" style="${badgeStyle}">${maturityLevel}</div>
-                </div>
-                <div style="font-size: 12px; color: #c0c0d0; line-height: 1.7;">
-                    ${maturityDescription}
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pillars -->
-        <div class="pillars-section">
-            <div class="section-title">📊 Pillar Breakdown</div>
-            
-            <div class="pillar-item">
-                <div class="pillar-header">
-                    <span class="pillar-name">Strategy</span>
-                    <span class="pillar-score" style="color: #00d9ff;">${pillarScores.Strategy}%</span>
-                </div>
-                <div class="pillar-bar">
-                    <div class="pillar-fill" style="width: ${pillarScores.Strategy}%; background: linear-gradient(90deg, #00d9ff, #00ff88);"></div>
-                </div>
-            </div>
-            
-            <div class="pillar-item">
-                <div class="pillar-header">
-                    <span class="pillar-name">Data</span>
-                    <span class="pillar-score" style="color: #7c3aed;">${pillarScores.Data}%</span>
-                </div>
-                <div class="pillar-bar">
-                    <div class="pillar-fill" style="width: ${pillarScores.Data}%; background: linear-gradient(90deg, #7c3aed, #00d9ff);"></div>
-                </div>
-            </div>
-            
-            <div class="pillar-item">
-                <div class="pillar-header">
-                    <span class="pillar-name">Technology</span>
-                    <span class="pillar-score" style="color: #ff9500;">${pillarScores.Technology}%</span>
-                </div>
-                <div class="pillar-bar">
-                    <div class="pillar-fill" style="width: ${pillarScores.Technology}%; background: linear-gradient(90deg, #ff9500, #ff3366);"></div>
-                </div>
-            </div>
-            
-            <div class="pillar-item">
-                <div class="pillar-header">
-                    <span class="pillar-name">People</span>
-                    <span class="pillar-score" style="color: #00ff88;">${pillarScores.People}%</span>
-                </div>
-                <div class="pillar-bar">
-                    <div class="pillar-fill" style="width: ${pillarScores.People}%; background: linear-gradient(90deg, #00ff88, #00d9ff);"></div>
-                </div>
-            </div>
-            
-            <div class="pillar-item">
-                <div class="pillar-header">
-                    <span class="pillar-name">Governance</span>
-                    <span class="pillar-score" style="color: #ff3366;">${pillarScores.Governance}%</span>
-                </div>
-                <div class="pillar-bar">
-                    <div class="pillar-fill" style="width: ${pillarScores.Governance}%; background: linear-gradient(90deg, #ff3366, #ff9500);"></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Quick Wins -->
-        <div class="quick-wins">
-            <div class="section-title" style="color: #00ff88;">⚡ Your Top 3 Quick Wins</div>
-            <ul>
-                ${topQuickWins.map(win => `<li>${win}</li>`).join('')}
-            </ul>
-        </div>
-        
-        <!-- Premium Teaser -->
-        <div class="premium-teaser">
-            <div class="premium-title">🔒 Unlock Your Full Potential</div>
-            <div class="premium-text">
-                This free summary shows your current state. Our <strong>Premium Report</strong> gives you the complete roadmap to AI transformation success.
-            </div>
-            
-            <div class="premium-features">
-                <div class="premium-feature">Custom 90-day roadmap</div>
-                <div class="premium-feature">Prioritized use cases with ROI</div>
-                <div class="premium-feature">Industry benchmarking</div>
-                <div class="premium-feature">Implementation timeline</div>
-                <div class="premium-feature">Budget breakdown</div>
-                <div class="premium-feature">Risk mitigation strategies</div>
-            </div>
-            
-            <div class="premium-cta">
-                📧 Check your email for upgrade options →
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <div class="footer-text">
-                This is a free 1-page summary. For detailed analysis and personalized recommendations, upgrade to our Premium Report.
-            </div>
-            <div class="footer-contact">
-                value.advisor@nothingbutvalue.com • www.nothingbutvalue.com
-            </div>
-        </div>
-        
-    </div>
-</body>
-</html>
-    `;
-    
-    // Open in new window for printing
-    const printWindow = window.open('', '_blank', 'width=800,height=1000');
-    printWindow.document.write(pdfHTML);
-    printWindow.document.close();
-    
-    // Wait for content to load, then trigger print
-    printWindow.onload = function() {
-        setTimeout(function() {
-            printWindow.print();
-        }, 500);
-    };
-    
-    console.log('PDF report generated successfully');
-}
-function downloadFreeReport() {
-    const button = event.target;
-    const originalText = button.innerHTML;
-    
-    console.log('=== DOWNLOAD FREE REPORT ===');
-    console.log('Using stored scores - Total:', finalTotalScore, 'Pillars:', finalPillarScores);
-    
-    // Use the stored scores
-    const totalScore = finalTotalScore;
-    const pillarScores = finalPillarScores;
-    
-    // Validate scores exist
-    if (!totalScore || !pillarScores || Object.keys(pillarScores).length === 0) {
-        console.error('ERROR: Scores not found!');
-        alert('Error: Assessment data not found. Please complete the assessment again.');
-        return;
-    }
-    
-    // Show loading state
-    button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="animation: spin 1s linear infinite; display: inline-block;">⏳</span><span>Generating your report...</span></span>';
-    button.disabled = true;
-    button.style.cursor = 'not-allowed';
-    button.style.opacity = '0.7';
-    
-    // Send to Zoho CRM
-    const success = sendToZohoCRM(userData, totalScore, pillarScores, 'Free 1-Page Summary');
-    
-    if (success) {
-        setTimeout(function() {
-            // ✅ GENERATE AND OPEN PDF
-            generatePDFReport(userData, totalScore, pillarScores);
-            
-            button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="font-size: 1.5rem;">✅</span><span>Report Generated!</span></span>';
-            button.style.background = 'linear-gradient(135deg, #00ff88 0%, #00d9ff 100%)';
-            button.style.borderColor = '#00ff88';
-            button.style.opacity = '1';
-            
-            const confirmMsg = document.createElement('div');
-            confirmMsg.style.cssText = 'margin-top: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 15px; text-align: center;';
-            confirmMsg.innerHTML = `
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
-                <div style="color: #00ff88; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Report Ready!</div>
-                <div style="color: #a0a0b0; font-size: 0.95rem;">
-                    Your AI Readiness Summary (Score: ${totalScore}/100) is ready to print/save.<br>
-                    <strong style="color: #00d9ff;">Check your email for upgrade options!</strong>
-                </div>
-                <div style="color: #a0a0b0; font-size: 0.85rem; margin-top: 1rem;">
-                    💡 Use your browser's print dialog to save as PDF
-                </div>
-            `;
-            button.parentElement.appendChild(confirmMsg);
-            
-            setTimeout(function() {
-                closeAssessment();
-            }, 5000);
-        }, 1500);
-    } else {
-        button.innerHTML = originalText;
-        button.disabled = false;
-        button.style.cursor = 'pointer';
-        button.style.opacity = '1';
-        alert('There was an error generating your report. Please try again or contact us at value.advisor@nothingbutvalue.com');
-    }
-}
-// Calculate total score from all answers
-function calculateTotalScore() {
-    const pillarScores = getPillarScores();
-    const totalScore = Object.values(pillarScores).reduce((a, b) => a + b, 0) / 5;
-    return Math.round(totalScore);
-}
-
-// Get individual pillar scores
-function getPillarScores() {
-    const pillarScores = {
-        'Strategy': 0,
-        'Data': 0,
-        'Technology': 0,
-        'People': 0,
-        'Governance': 0
-    };
-    
-    const pillarCounts = {
-        'Strategy': 0,
-        'Data': 0,
-        'Technology': 0,
-        'People': 0,
-        'Governance': 0
-    };
-    
-    answers.forEach(answer => {
-        pillarScores[answer.pillar] += answer.score;
-        pillarCounts[answer.pillar]++;
-    });
-    
-    // Calculate percentages
-    const pillarPercentages = {};
-    Object.keys(pillarScores).forEach(pillar => {
-        const maxScore = pillarCounts[pillar] * 5;
-        pillarPercentages[pillar] = Math.round((pillarScores[pillar] / maxScore) * 100);
-    });
-    
-    return pillarPercentages;
-}
-function sendToZohoCRM(userData, score, pillars, reportType) {
-    console.log('Sending to Zoho CRM with custom fields');
-    
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://crm.zoho.eu/crm/WebToLeadForm';
-    form.target = 'zoho_iframe';
-    form.style.display = 'none';
-    
-    const assessmentDetails = `AI Readiness Assessment Results:
-
-Overall Score: ${score}/100
-Report Type: ${reportType}
-
-Pillar Breakdown:
-- Strategy: ${pillars.Strategy}%
-- Data: ${pillars.Data}%
-- Technology: ${pillars.Technology}%
-- People: ${pillars.People}%
-- Governance: ${pillars.Governance}%
-
-Completed: ${new Date().toLocaleString()}`;
-    
-    const fields = {
-        // Your existing form token and IDs (DON'T CHANGE THESE)
-        'xnQsjsdp': 'd38b5c5d24d47d69e4d4d3b1108556b89b5db9c5201c227fba71c1ac8a63cd40',
-        'zc_gad': '',
-        'xmIwtLD': 'c13ea234492206c9820af3abbf29162e53e7cd3c5a22cb5abd9919cfa0cb99decb08ccd524a1463ebf5a1d4e2ea4258c',
-        'actionType': 'TGVhZHM=',
-        'returnURL': 'https://vashishthap.github.io/it-consulting-leadership/thank-you.html',
-        
-        // Standard fields
-        'Last Name': userData.name,
-        'Email': userData.email,
-        'Company': userData.company,
-        'Industry': userData.role || 'Not specified',
-        'Lead Source': 'AI Assessment - Website',
-        
-        // Custom fields - REPLACE WITH YOUR ACTUAL API NAMES
-        'LEADCF51': score,  // AI Readiness Score (replace LEADCF1 with actual name)
-        'LEADCF1': assessmentDetails,  // Assessment Details (replace LEADCF2 with actual name)
-        'LEADCF2': reportType  // Report Type (replace LEADCF3 with actual name)
-    };
-    
-    Object.keys(fields).forEach(key => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = fields[key];
-        form.appendChild(input);
-    });
-    
-    let iframe = document.getElementById('zoho_iframe');
-    if (!iframe) {
-        iframe = document.createElement('iframe');
-        iframe.name = 'zoho_iframe';
-        iframe.id = 'zoho_iframe';
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-    }
-    
-    document.body.appendChild(form);
-    form.submit();
-    
-    setTimeout(function() {
-        document.body.removeChild(form);
-    }, 2000);
-    
-    return true;
-}
-</script>
-<body>
- <!-- COMPLETE WORKING HEADER + MOBILE MENU -->
-<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 217, 255, 0.1);">
-    <div style="max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;">
-        
-        <!-- Logo -->
-        <a href="#" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; flex-shrink: 0;">
-            <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Logo" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(0, 217, 255, 0.3);">
-            <div>
-                <div style="font-size: 1.25rem; font-weight: 900; background: linear-gradient(135deg, #00d9ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; line-height: 1.2;">NOTHING BUT VALUE</div>
-                <div class="tagline" style="font-size: 0.75rem; color: #a0a0b0; font-weight: 600; white-space: nowrap;">Big Firm Expertise. Small Firm Agility.</div>
-            </div>
-        </a>
-        
-        <!-- Desktop Nav -->
-        <nav class="desktop-nav" style="display: flex; align-items: center; gap: 1.5rem;">
-            <a href="#why-us" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem;">Why Us</a>
-            <a href="#services" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem;">Services</a>
-            <a href="#use-cases" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem;">Use Cases</a>
-            <a href="#resources" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem;">Resources</a>
-            <a href="#roi-calculator" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 600; font-size: 0.95rem;">ROI Calc</a>
-            <a href="#contact" style="background: linear-gradient(135deg, #ff006e, #7c3aed); color: white; padding: 0.75rem 1.75rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem;">CONTACT</a>
-        </nav>
-        
-        <!-- Hamburger -->
-        <button class="hamburger" style="display: none; background: rgba(0, 217, 255, 0.1); border: 2px solid #00d9ff; border-radius: 12px; padding: 0.75rem; cursor: pointer; width: 50px; height: 50px; flex-direction: column; align-items: center; justify-content: center; gap: 5px;">
-            <span style="display: block; width: 24px; height: 3px; background: #00d9ff; border-radius: 2px;"></span>
-            <span style="display: block; width: 24px; height: 3px; background: #00d9ff; border-radius: 2px;"></span>
-            <span style="display: block; width: 24px; height: 3px; background: #00d9ff; border-radius: 2px;"></span>
-        </button>
-    </div>
-</header>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); z-index: 99999; opacity: 0; transition: opacity 0.3s;">
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 2rem; padding: 2rem; position: relative;">
-        
-        <button class="close-menu" style="position: absolute; top: 2rem; right: 2rem; background: transparent; border: 2px solid #ff3366; border-radius: 50%; width: 50px; height: 50px; color: #ff3366; font-size: 2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
-        
-        <a href="#why-us" class="menu-link" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem;">Why Us</a>
-        <a href="#services" class="menu-link" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem;">Services</a>
-        <a href="#use-cases" class="menu-link" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem;">Use Cases</a>
-        <a href="#resources" class="menu-link" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem;">Resources</a>
-        <a href="#roi-calculator" class="menu-link" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.8rem; padding: 1rem 2rem;">ROI Calc</a>
-        <a href="#contact" class="menu-link" style="background: linear-gradient(135deg, #ff3366, #ff9500); color: white; padding: 1.5rem 3rem; border-radius: 50px; font-size: 1.3rem; text-decoration: none; font-weight: 800; margin-top: 2rem;">CONTACT</a>
-    </div>
-</div>
-
-<style>
-@media (max-width: 768px) {
-    .desktop-nav { display: none !important; }
-    .hamburger { display: flex !important; }
-    .tagline { display: none !important; }
-    body { padding-top: 80px; }
-}
-
-@media (max-width: 480px) {
-    header img { width: 40px !important; height: 40px !important; }
-    header > div > a > div > div:first-child { font-size: 1.1rem !important; }
-}
-</style>
-
-<script>
-// Mobile Menu JavaScript
-(function() {
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const closeBtn = document.querySelector('.close-menu');
-    const menuLinks = document.querySelectorAll('.menu-link');
-    
-    function openMenu() {
-        mobileMenu.style.display = 'block';
-        setTimeout(() => { mobileMenu.style.opacity = '1'; }, 10);
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeMenu() {
-        mobileMenu.style.opacity = '0';
-        setTimeout(() => { 
-            mobileMenu.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-    
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    menuLinks.forEach(link => link.addEventListener('click', closeMenu));
-})();
-</script>
-<!-- END CORRECTED HEADER -->
-
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Sticky CTA Bar -->
-    <div class="sticky-cta" id="stickyCTA">
-        <div class="sticky-cta-content">
-            <span class="sticky-cta-text">🚀 Ready to Transform with AI? Limited Spots Available!</span>
-            <a href="#contact" class="sticky-cta-btn">Book Free Strategy Call →</a>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-<section class="hero" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); position: relative; overflow: hidden; padding: 8rem 0 6rem;">
-    
-    <!-- Animated Background Blobs -->
-    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.15;">
-        <div style="position: absolute; top: 20%; left: 10%; width: 400px; height: 400px; background: radial-gradient(circle, #00d9ff 0%, transparent 70%); border-radius: 50%; filter: blur(80px); animation: float 8s ease-in-out infinite;"></div>
-        <div style="position: absolute; bottom: 20%; right: 10%; width: 500px; height: 500px; background: radial-gradient(circle, #7c3aed 0%, transparent 70%); border-radius: 50%; filter: blur(100px); animation: float 10s ease-in-out infinite reverse;"></div>
-    </div>
-    
-    <div class="container" style="position: relative; z-index: 1;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            
-            <!-- Announcement Bar -->
-            <div style="text-align: center; margin-bottom: 3rem; animation: slideDown 0.8s ease-out;">
-                <div style="display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 2rem; background: linear-gradient(135deg, rgba(255, 51, 102, 0.1), rgba(255, 149, 0, 0.1)); border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 50px; backdrop-filter: blur(10px);">
-                    <span style="font-size: 1.5rem; animation: pulse 2s ease-in-out infinite;">🚀</span>
-                    <span style="color: #ff3366; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;">The AI Supercycle is Here</span>
-                    <span style="padding: 0.4rem 1rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border-radius: 20px; color: white; font-weight: 900; font-size: 0.85rem;">$180B Opportunity</span>
-                </div>
-            </div>
-            
-            <!-- Main Headline -->
-            <h1 style="font-size: 5rem; font-weight: 900; text-align: center; margin-bottom: 2rem; line-height: 1.1; animation: fadeInUp 1s ease-out 0.2s backwards;">
-                <span style="display: block; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                    Transform Your IT Services Business with AI
-                </span>
-                <span style="display: block; margin-top: 1rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                    See ROI in 6 Weeks, Not 6 Months
-                </span>
-            </h1>
-            
-            <!-- Sub-headline -->
-            <p style="font-size: 1.5rem; color: #a0a0b0; text-align: center; max-width: 900px; margin: 0 auto 3rem; line-height: 1.8; animation: fadeInUp 1s ease-out 0.4s backwards;">
-                We help <strong style="color: #00d9ff;">MSPs and IT service providers</strong> implement Fortune 500 AI strategies that <strong style="color: #00ff88;">reduce costs by 40%</strong> and unlock new revenue streams—without the enterprise price tag or 18-month timelines.
-            </p>
-            
-            <!-- CTA Buttons -->
-            <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 3rem; animation: fadeInUp 1s ease-out 0.6s backwards;">
-                <a href="#resources" onclick="startAssessment(); return false;" style="padding: 1.8rem 3rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 60px; color: white; font-weight: 900; font-size: 1.4rem; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 20px 60px rgba(255, 51, 102, 0.5); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; display: inline-flex; align-items: center; gap: 1rem; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 25px 70px rgba(255, 51, 102, 0.7)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 20px 60px rgba(255, 51, 102, 0.5)'">
-                    <span style="position: relative; z-index: 1;">Get Your Free AI Readiness Score</span>
-                    <span style="font-size: 1.6rem; position: relative; z-index: 1;">→</span>
-                    <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); animation: shimmer 2.5s infinite;"></div>
-                </a>
-                
-                <a href="#use-cases" style="padding: 1.8rem 3rem; background: transparent; border: 3px solid #00d9ff; border-radius: 60px; color: #00d9ff; font-weight: 800; font-size: 1.3rem; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; display: inline-flex; align-items: center; gap: 1rem;" onmouseover="this.style.background='#00d9ff'; this.style.color='#0a0a0f'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 50px rgba(0, 217, 255, 0.5)'" onmouseout="this.style.background='transparent'; this.style.color='#00d9ff'; this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 40px rgba(0, 217, 255, 0.3)'">
-                    <span>Explore Use Cases</span>
-                    <span style="font-size: 1.4rem;">📊</span>
-                </a>
-            </div>
-            
-<!-- Trust Indicators - SINGLE HORIZONTAL LINE -->
-<div style="text-align: center; margin: 3rem auto; animation: fadeInUp 1s ease-out 0.8s backwards; max-width: 1100px;">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: nowrap; padding: 1.5rem 2.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 50px; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);">
-        
-        <!-- Item 1 -->
-        <div style="display: flex; align-items: center; gap: 0.75rem; white-space: nowrap;">
-            <span style="font-size: 1.5rem;">✓</span>
-            <span style="color: #a0a0b0; font-size: 1rem;">Trusted by <strong style="color: #00d9ff; font-weight: 800;">IT Services Companies</strong></span>
-        </div>
-        
-        <!-- Divider -->
-        <div style="width: 2px; height: 35px; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3), transparent); flex-shrink: 0;"></div>
-        
-        <!-- Item 2 -->
-        <div style="display: flex; align-items: center; gap: 0.75rem; white-space: nowrap;">
-            <span style="font-size: 1.5rem;">⚡</span>
-            <span style="color: #a0a0b0; font-size: 1rem;"><strong style="color: #00ff88; font-weight: 800;">Fast Results</strong> in 6-8 Weeks</span>
-        </div>
-        
-        <!-- Divider -->
-        <div style="width: 2px; height: 35px; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3), transparent); flex-shrink: 0;"></div>
-        
-        <!-- Item 3 -->
-        <div style="display: flex; align-items: center; gap: 0.75rem; white-space: nowrap;">
-            <span style="font-size: 1.5rem;">🎯</span>
-            <span style="color: #a0a0b0; font-size: 1rem;"><strong style="color: #ff3366; font-weight: 800;">Proven Frameworks</strong> from Fortune 500</span>
-        </div>
-        
-    </div>
-</div>
-            
-            <!-- Value Props Grid -->
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 5rem; animation: fadeInUp 1s ease-out 1s backwards;">
-                
-                <!-- Card 1 -->
-                <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(0, 217, 255, 0.02)); border: 2px solid rgba(0, 217, 255, 0.2); border-radius: 25px; padding: 2.5rem; text-align: center; transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='#00d9ff'; this.style.boxShadow='0 20px 60px rgba(0, 217, 255, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(0, 217, 255, 0.2)'; this.style.boxShadow='none'">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 10px 30px rgba(0, 217, 255, 0.4));">⚡</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #00d9ff; font-weight: 800;">6-8 Week ROI</h3>
-                    <p style="color: #a0a0b0; font-size: 1.05rem; line-height: 1.7;">Quick wins first, then scale. Not 18-month enterprise timelines.</p>
-                </div>
-                
-                <!-- Card 2 -->
-                <div style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 255, 136, 0.02)); border: 2px solid rgba(0, 255, 136, 0.2); border-radius: 25px; padding: 2.5rem; text-align: center; transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='#00ff88'; this.style.boxShadow='0 20px 60px rgba(0, 255, 136, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(0, 255, 136, 0.2)'; this.style.boxShadow='none'">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 10px 30px rgba(0, 255, 136, 0.4));">💰</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #00ff88; font-weight: 800;">40% Cost Reduction</h3>
-                    <p style="color: #a0a0b0; font-size: 1.05rem; line-height: 1.7;">Automate service desk, documentation, proposals, and more.</p>
-                </div>
-                
-                <!-- Card 3 -->
-                <div style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(124, 58, 237, 0.02)); border: 2px solid rgba(124, 58, 237, 0.2); border-radius: 25px; padding: 2.5rem; text-align: center; transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='#7c3aed'; this.style.boxShadow='0 20px 60px rgba(124, 58, 237, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(124, 58, 237, 0.2)'; this.style.boxShadow='none'">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 10px 30px rgba(124, 58, 237, 0.4));">🚀</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #7c3aed; font-weight: 800;">New Revenue Streams</h3>
-                    <p style="color: #a0a0b0; font-size: 1.05rem; line-height: 1.7;">Launch AI consulting services and premium offerings.</p>
-                </div>
-                
-                <!-- Card 4 -->
-                <div style="background: linear-gradient(135deg, rgba(255, 51, 102, 0.05), rgba(255, 51, 102, 0.02)); border: 2px solid rgba(255, 51, 102, 0.2); border-radius: 25px; padding: 2.5rem; text-align: center; transition: all 0.4s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='#ff3366'; this.style.boxShadow='0 20px 60px rgba(255, 51, 102, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255, 51, 102, 0.2)'; this.style.boxShadow='none'">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 10px 30px rgba(255, 51, 102, 0.4));">🎯</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #ff3366; font-weight: 800;">Fortune 500 Expertise</h3>
-                    <p style="color: #a0a0b0; font-size: 1.05rem; line-height: 1.7;">Proven strategies from Microsoft, AWS, Google—for SMEs.</p>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-
-<!-- Hero Section Animations -->
-<style>
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 200%; }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-30px); }
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-}
-
-/* Hero Responsive Styles */
-@media (max-width: 1024px) {
-    .hero h1 {
-        font-size: 3.5rem !important;
-    }
-    
-    .hero p {
-        font-size: 1.3rem !important;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding: 6rem 0 4rem !important;
-        min-height: auto !important;
-    }
-    
-    .hero h1 {
-        font-size: 2.5rem !important;
-    }
-    
-    .hero h1 span {
-        display: inline !important;
-    }
-    
-    .hero p {
-        font-size: 1.1rem !important;
-    }
-    
-    .hero a {
-        font-size: 1.1rem !important;
-        padding: 1.5rem 2rem !important;
-    }
-    
-    .hero > div > div > div:nth-child(3) > div {
-        flex-direction: column;
-        gap: 1rem !important;
-    }
-    
-    .hero > div > div > div:nth-child(4) > div {
-        gap: 1rem !important;
-        padding: 1rem 1.5rem !important;
-    }
-    
-    .hero > div > div > div:nth-child(4) > div > div:nth-child(2),
-    .hero > div > div > div:nth-child(4) > div > div:nth-child(4) {
-        display: none !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2rem !important;
-    }
-    
-    .hero p {
-        font-size: 1rem !important;
-    }
-    
-    .hero a {
-        width: 100%;
-        justify-content: center;
-        font-size: 1rem !important;
-        padding: 1.3rem 1.5rem !important;
-    }
-    
-    .hero > div > div > div:first-child > div {
-        padding: 0.75rem 1.5rem !important;
-        gap: 0.75rem !important;
-    }
-    
-    .hero > div > div > div:first-child > div > span:nth-child(2) {
-        font-size: 0.8rem !important;
-    }
-    
-    .hero > div > div > div:first-child > div > span:nth-child(3) {
-        font-size: 0.75rem !important;
-        padding: 0.3rem 0.75rem !important;
-    }
-    
-    .hero > div > div > div:nth-child(5) {
-        grid-template-columns: 1fr !important;
-    }
-}
-</style>
 
     <!-- Supercycle Section - SEPARATE -->
     <section class="supercycle-section">
@@ -5865,7 +4146,576 @@ document.addEventListener('DOMContentLoaded', function() {
                 maxScroll = scrollPercentage;
             }
         });
-    </script>
+        </script>
+
+<!-- ========================================
+     ASSESSMENT JAVASCRIPT - MOVED TO BOTTOM
+     ======================================== -->
+<script>
+// Global Variables
+let currentQuestionIndex = 0;
+let answers = [];
+let userData = {};
+let finalTotalScore = 0;
+let finalPillarScores = {};
+
+// Assessment Questions
+const assessmentQuestions = [
+    // PILLAR 1: STRATEGY (5 questions)
+    {
+        pillar: "Strategy",
+        question: "Does your company have a documented AI strategy?",
+        options: [
+            { text: "Yes, comprehensive and board-approved", score: 5 },
+            { text: "Yes, but still in draft form", score: 3 },
+            { text: "We're working on it", score: 1 },
+            { text: "No, not yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "How many AI use cases have you identified for your business?",
+        options: [
+            { text: "10+ use cases with clear ROI", score: 5 },
+            { text: "5-10 use cases", score: 3 },
+            { text: "1-5 use cases", score: 1 },
+            { text: "None yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "What's your primary AI transformation goal?",
+        options: [
+            { text: "Clear, measurable goals aligned with business strategy", score: 5 },
+            { text: "General goals defined", score: 3 },
+            { text: "Still exploring possibilities", score: 1 },
+            { text: "No specific goals yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "Do you have executive buy-in for AI initiatives?",
+        options: [
+            { text: "Yes, CEO/Board are champions", score: 5 },
+            { text: "Yes, from some executives", score: 3 },
+            { text: "Working on getting buy-in", score: 1 },
+            { text: "No executive support yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Strategy",
+        question: "Have you allocated budget for AI transformation?",
+        options: [
+            { text: "Yes, dedicated multi-year budget", score: 5 },
+            { text: "Yes, annual budget approved", score: 3 },
+            { text: "Budget under discussion", score: 1 },
+            { text: "No budget allocated", score: 0 }
+        ]
+    },
+    
+    // PILLAR 2: DATA (5 questions)
+    {
+        pillar: "Data",
+        question: "What percentage of your data is structured and accessible?",
+        options: [
+            { text: "80%+ is structured and AI-ready", score: 5 },
+            { text: "50-80% is structured", score: 3 },
+            { text: "20-50% is structured", score: 1 },
+            { text: "Less than 20%", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "Do you have a data governance framework in place?",
+        options: [
+            { text: "Yes, comprehensive and enforced", score: 5 },
+            { text: "Yes, but needs improvement", score: 3 },
+            { text: "Basic policies only", score: 1 },
+            { text: "No formal governance", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "How would you rate your data quality?",
+        options: [
+            { text: "Excellent - clean, accurate, complete", score: 5 },
+            { text: "Good - mostly reliable", score: 3 },
+            { text: "Fair - some quality issues", score: 1 },
+            { text: "Poor - significant issues", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "Can you easily access data across different systems?",
+        options: [
+            { text: "Yes, fully integrated data platform", score: 5 },
+            { text: "Yes, with some manual work", score: 3 },
+            { text: "Difficult, data is siloed", score: 1 },
+            { text: "No, major integration challenges", score: 0 }
+        ]
+    },
+    {
+        pillar: "Data",
+        question: "Do you have data security and privacy controls?",
+        options: [
+            { text: "Yes, comprehensive and compliant", score: 5 },
+            { text: "Yes, basic controls in place", score: 3 },
+            { text: "Minimal controls", score: 1 },
+            { text: "No formal controls", score: 0 }
+        ]
+    },
+    
+    // PILLAR 3: TECHNOLOGY (5 questions)
+    {
+        pillar: "Technology",
+        question: "What's your current AI technology maturity?",
+        options: [
+            { text: "Advanced - multiple AI solutions in production", score: 5 },
+            { text: "Intermediate - pilot projects running", score: 3 },
+            { text: "Beginner - exploring options", score: 1 },
+            { text: "None - no AI technology yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "Do you have cloud infrastructure for AI workloads?",
+        options: [
+            { text: "Yes, scalable cloud platform ready", score: 5 },
+            { text: "Yes, basic cloud infrastructure", score: 3 },
+            { text: "Planning cloud migration", score: 1 },
+            { text: "No cloud infrastructure", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "How do you approach AI tool selection?",
+        options: [
+            { text: "Rigorous evaluation process with clear criteria", score: 5 },
+            { text: "Basic evaluation process", score: 3 },
+            { text: "Ad-hoc selection", score: 1 },
+            { text: "Haven't selected any tools yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "Do you have API integrations for AI tools?",
+        options: [
+            { text: "Yes, comprehensive API strategy", score: 5 },
+            { text: "Yes, some integrations", score: 3 },
+            { text: "Planning integrations", score: 1 },
+            { text: "No integrations", score: 0 }
+        ]
+    },
+    {
+        pillar: "Technology",
+        question: "How do you handle AI model deployment?",
+        options: [
+            { text: "Automated CI/CD pipeline", score: 5 },
+            { text: "Manual but documented process", score: 3 },
+            { text: "Ad-hoc deployment", score: 1 },
+            { text: "Haven't deployed any models", score: 0 }
+        ]
+    },
+    
+    // PILLAR 4: PEOPLE (5 questions)
+    {
+        pillar: "People",
+        question: "What's your team's AI skill level?",
+        options: [
+            { text: "Advanced - dedicated AI team", score: 5 },
+            { text: "Intermediate - some AI skills", score: 3 },
+            { text: "Beginner - basic awareness", score: 1 },
+            { text: "No AI skills yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "Do you have an AI training program?",
+        options: [
+            { text: "Yes, comprehensive ongoing training", score: 5 },
+            { text: "Yes, basic training provided", score: 3 },
+            { text: "Planning to implement", score: 1 },
+            { text: "No training program", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "How is your team's attitude toward AI?",
+        options: [
+            { text: "Enthusiastic - actively embracing", score: 5 },
+            { text: "Positive - open to learning", score: 3 },
+            { text: "Neutral - wait and see", score: 1 },
+            { text: "Resistant - concerned about jobs", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "Do you have dedicated AI roles?",
+        options: [
+            { text: "Yes, multiple AI specialists", score: 5 },
+            { text: "Yes, one AI lead", score: 3 },
+            { text: "No, but planning to hire", score: 1 },
+            { text: "No dedicated roles", score: 0 }
+        ]
+    },
+    {
+        pillar: "People",
+        question: "How do you handle change management for AI?",
+        options: [
+            { text: "Structured change management program", score: 5 },
+            { text: "Basic change management", score: 3 },
+            { text: "Informal approach", score: 1 },
+            { text: "No change management", score: 0 }
+        ]
+    },
+    
+    // PILLAR 5: GOVERNANCE (5 questions)
+    {
+        pillar: "Governance",
+        question: "Do you have AI ethics and governance policies?",
+        options: [
+            { text: "Yes, comprehensive policies enforced", score: 5 },
+            { text: "Yes, basic policies in place", score: 3 },
+            { text: "Policies in development", score: 1 },
+            { text: "No policies yet", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "How do you measure AI project success?",
+        options: [
+            { text: "Clear KPIs and ROI tracking", score: 5 },
+            { text: "Basic metrics defined", score: 3 },
+            { text: "Informal tracking", score: 1 },
+            { text: "No measurement framework", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "Do you have an AI steering committee?",
+        options: [
+            { text: "Yes, meets regularly with clear mandate", score: 5 },
+            { text: "Yes, informal oversight", score: 3 },
+            { text: "Planning to establish", score: 1 },
+            { text: "No governance structure", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "How do you handle AI risk management?",
+        options: [
+            { text: "Comprehensive risk framework", score: 5 },
+            { text: "Basic risk assessment", score: 3 },
+            { text: "Informal risk consideration", score: 1 },
+            { text: "No risk management", score: 0 }
+        ]
+    },
+    {
+        pillar: "Governance",
+        question: "Do you have AI compliance processes?",
+        options: [
+            { text: "Yes, full compliance program", score: 5 },
+            { text: "Yes, basic compliance", score: 3 },
+            { text: "Compliance in progress", score: 1 },
+            { text: "No compliance processes", score: 0 }
+        ]
+    }
+];
+
+// Start Assessment Function
+function startAssessment() {
+    console.log('startAssessment called');
+    
+    const modal = document.getElementById('assessmentModal');
+    
+    if (!modal) {
+        console.error('Assessment modal not found!');
+        return;
+    }
+    
+    console.log('Opening modal...');
+    
+    modal.style.display = 'block';
+    document.body.classList.add('modal-open');
+    modal.scrollTop = 0;
+    
+    currentQuestionIndex = 0;
+    answers = [];
+    finalTotalScore = 0;
+    finalPillarScores = {};
+    
+    document.getElementById('emailCapture').style.display = 'block';
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'none';
+    
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('progressText').textContent = '0%';
+    
+    console.log('Modal opened successfully');
+}
+
+// Close Assessment Function
+function closeAssessment() {
+    console.log('closeAssessment called');
+    
+    const modal = document.getElementById('assessmentModal');
+    
+    if (!modal) {
+        console.error('Assessment modal not found!');
+        return;
+    }
+    
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+    
+    currentQuestionIndex = 0;
+    answers = [];
+    finalTotalScore = 0;
+    finalPillarScores = {};
+    
+    document.getElementById('emailCapture').style.display = 'block';
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'none';
+    
+    console.log('Modal closed successfully');
+}
+
+// Start Questions Function
+function startQuestions() {
+    const name = document.getElementById('userName').value.trim();
+    const email = document.getElementById('userEmail').value.trim();
+    const company = document.getElementById('userCompany').value.trim();
+    const role = document.getElementById('userRole').value;
+    
+    if (!name || !email || !company) {
+        alert('Please fill in all required fields');
+        return;
+    }
+    
+    if (!email.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    userData = { name, email, company, role };
+    
+    document.getElementById('emailCapture').style.display = 'none';
+    document.getElementById('questionsContainer').style.display = 'block';
+    document.getElementById('assessmentModal').scrollTop = 0;
+    
+    showQuestion();
+}
+
+// Show Question Function
+function showQuestion() {
+    const question = assessmentQuestions[currentQuestionIndex];
+    const progress = ((currentQuestionIndex + 1) / assessmentQuestions.length * 100).toFixed(0);
+    
+    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('progressText').textContent = progress + '%';
+    
+    let html = `
+        <div style="margin-bottom: 2rem;">
+            <div style="color: #00d9ff; font-weight: 800; font-size: 0.85rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">
+                ${question.pillar} • Question ${currentQuestionIndex + 1} of ${assessmentQuestions.length}
+            </div>
+            <h3 style="font-size: 2rem; margin-bottom: 0; color: #fff; line-height: 1.3; font-weight: 800;">
+                ${question.question}
+            </h3>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin: 3rem 0 2rem 0;">
+    `;
+    
+    question.options.forEach((option, index) => {
+        html += `
+            <button onclick="selectAnswer(${option.score})" style="width: 100%; padding: 1.5rem 1.75rem; background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 16px; color: #fff; font-size: 1.05rem; text-align: left; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; line-height: 1.5; position: relative; overflow: hidden;" onmouseover="this.style.borderColor='#00d9ff'; this.style.background='linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 217, 255, 0.05))'; this.style.transform='translateX(8px)'; this.style.boxShadow='0 8px 30px rgba(0, 217, 255, 0.25)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.background='linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01))'; this.style.transform='translateX(0)'; this.style.boxShadow='none'">
+                <span style="display: flex; align-items: center; gap: 1.25rem;">
+                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(0, 217, 255, 0.15); border: 2px solid rgba(0, 217, 255, 0.4); border-radius: 50%; font-weight: 800; font-size: 0.95rem; color: #00d9ff; flex-shrink: 0; transition: all 0.3s;">${String.fromCharCode(65 + index)}</span>
+                    <span style="flex: 1; color: rgba(255, 255, 255, 0.95);">${option.text}</span>
+                </span>
+            </button>
+        `;
+    });
+    
+    html += `</div>`;
+    
+    if (currentQuestionIndex > 0) {
+        html += `
+            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <button onclick="previousQuestion()" style="padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: rgba(255, 255, 255, 0.8); font-weight: 700; cursor: pointer; transition: all 0.3s; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.borderColor='#00d9ff'; this.style.color='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.05)'; this.style.transform='translateX(-5px)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='rgba(255, 255, 255, 0.8)'; this.style.background='rgba(255, 255, 255, 0.03)'; this.style.transform='translateX(0)'">
+                    ← Previous Question
+                </button>
+            </div>
+        `;
+    }
+    
+    document.getElementById('currentQuestion').innerHTML = html;
+    document.getElementById('assessmentModal').scrollTop = 0;
+}
+
+// Select Answer Function
+function selectAnswer(score) {
+    const question = assessmentQuestions[currentQuestionIndex];
+    
+    answers[currentQuestionIndex] = {
+        pillar: question.pillar,
+        question: question.question,
+        score: score
+    };
+    
+    console.log('Answer recorded:', {
+        pillar: question.pillar,
+        score: score,
+        totalAnswers: answers.length
+    });
+    
+    currentQuestionIndex++;
+    
+    if (currentQuestionIndex < assessmentQuestions.length) {
+        showQuestion();
+    } else {
+        showResults();
+    }
+}
+
+// Previous Question Function
+function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        showQuestion();
+    }
+}
+
+// Show Results Function
+function showResults() {
+    const pillarScores = {
+        'Strategy': 0,
+        'Data': 0,
+        'Technology': 0,
+        'People': 0,
+        'Governance': 0
+    };
+    
+    const pillarCounts = {
+        'Strategy': 0,
+        'Data': 0,
+        'Technology': 0,
+        'People': 0,
+        'Governance': 0
+    };
+    
+    answers.forEach(answer => {
+        pillarScores[answer.pillar] += answer.score;
+        pillarCounts[answer.pillar]++;
+    });
+    
+    const pillarPercentages = {};
+    Object.keys(pillarScores).forEach(pillar => {
+        const maxScore = pillarCounts[pillar] * 5;
+        pillarPercentages[pillar] = Math.round((pillarScores[pillar] / maxScore) * 100);
+    });
+    
+    const totalScore = Object.values(pillarPercentages).reduce((a, b) => a + b, 0) / 5;
+    const roundedScore = Math.round(totalScore);
+    
+    finalTotalScore = roundedScore;
+    finalPillarScores = pillarPercentages;
+    
+    console.log('Scores stored globally:', {
+        totalScore: finalTotalScore,
+        pillars: finalPillarScores
+    });
+    
+    let maturityLevel, maturityColor, maturityDescription;
+    if (roundedScore >= 80) {
+        maturityLevel = "Advanced";
+        maturityColor = "#00ff88";
+        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
+    } else if (roundedScore >= 60) {
+        maturityLevel = "Intermediate";
+        maturityColor = "#00d9ff";
+        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
+    } else if (roundedScore >= 40) {
+        maturityLevel = "Developing";
+        maturityColor = "#ff9500";
+        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
+    } else {
+        maturityLevel = "Beginner";
+        maturityColor = "#ff3366";
+        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
+    }
+    
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'block';
+    
+    let html = `
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Your AI Readiness Score
+            </h2>
+            
+            <div style="font-size: 5rem; font-weight: 900; color: ${maturityColor}; margin: 2rem 0;">
+                ${roundedScore}/100
+            </div>
+            
+            <div style="display: inline-block; padding: 0.75rem 2rem; background: ${maturityColor}22; border: 2px solid ${maturityColor}; border-radius: 50px; color: ${maturityColor}; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">
+                ${maturityLevel}
+            </div>
+            
+            <p style="color: #a0a0b0; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                ${maturityDescription}
+            </p>
+        </div>
+        
+        <div style="background: rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #fff;">Your Pillar Breakdown</h3>
+    `;
+    
+    Object.keys(pillarPercentages).forEach(pillar => {
+        const score = pillarPercentages[pillar];
+        let color;
+        if (score >= 80) color = "#00ff88";
+        else if (score >= 60) color = "#00d9ff";
+        else if (score >= 40) color = "#ff9500";
+        else color = "#ff3366";
+        
+        html += `
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: #fff; font-weight: 700;">${pillar}</span>
+                    <span style="color: ${color}; font-weight: 700;">${score}%</span>
+                </div>
+                <div style="width: 100%; height: 12px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden;">
+                    <div style="width: ${score}%; height: 100%; background: ${color}; transition: width 1s;"></div>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += `
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(255, 51, 102, 0.1), rgba(255, 149, 0, 0.1)); border: 2px solid rgba(255, 51, 102, 0.3); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #fff;">🎁 Get Your Free Report</h3>
+            <p style="color: #a0a0b0; margin-bottom: 1.5rem;">
+                Download your personalized AI Readiness Summary with actionable recommendations.
+            </p>
+            
+            <button onclick="alert('Report download feature coming soon! We will email your results to: ${userData.email}')" style="width: 100%; padding: 1.5rem; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); border: none; border-radius: 50px; color: white; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">
+                📥 Download Free Summary
+            </button>
+            
+            <p style="color: #a0a0b0; font-size: 0.9rem; text-align: center; margin-top: 1rem;">
+                We'll email your results to: <strong style="color: #00d9ff;">${userData.email}</strong>
+            </p>
+        </div>
+    `;
+    
+    document.getElementById('resultsContainer').innerHTML = html;
+    document.getElementById('assessmentModal').scrollTop = 0;
+}
+</script>
 	
 </body>
 </html>
