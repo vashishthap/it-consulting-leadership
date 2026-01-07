@@ -2085,15 +2085,33 @@ function startAssessment() {
 }
 
 function closeAssessment() {
-    document.getElementById('assessmentModal').style.display = 'none';
+    console.log('closeAssessment called');
+    
+    const modal = document.getElementById('assessmentModal');
+    
+    if (!modal) {
+        console.error('Assessment modal not found!');
+        return;
+    }
+    
+    // Hide modal
+    modal.style.display = 'none';
+    
+    // Remove body class
     document.body.classList.remove('modal-open');
     
+    // Reset state
     currentQuestionIndex = 0;
     answers = [];
+    finalTotalScore = 0;
+    finalPillarScores = {};
     
+    // Show email capture, hide others
     document.getElementById('emailCapture').style.display = 'block';
     document.getElementById('questionsContainer').style.display = 'none';
     document.getElementById('resultsContainer').style.display = 'none';
+    
+    console.log('Modal closed successfully');
 }
 
 function startQuestions() {
