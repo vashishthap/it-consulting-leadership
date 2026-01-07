@@ -1773,6 +1773,11 @@ body.modal-open {
     </style>
 </head>
 <script>
+let currentQuestionIndex = 0;
+let answers = [];
+let userData = {};
+let finalTotalScore = 0;  // ADD THIS
+let finalPillarScores = {};  // ADD THIS
 // Assessment Data
 const assessmentQuestions = [
     // PILLAR 1: STRATEGY (5 questions)
