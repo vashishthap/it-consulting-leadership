@@ -2358,35 +2358,43 @@ function downloadFreeReport() {
     const button = event.target;
     const originalText = button.innerHTML;
     
+    console.log('=== DOWNLOAD FREE REPORT ===');
+    console.log('Using stored scores - Total:', finalTotalScore, 'Pillars:', finalPillarScores);
+    
+    // Use the stored scores instead of recalculating
+    const totalScore = finalTotalScore;
+    const pillarScores = finalPillarScores;
+    
+    // Validate scores exist
+    if (!totalScore || !pillarScores || Object.keys(pillarScores).length === 0) {
+        console.error('ERROR: Scores not found!');
+        alert('Error: Assessment data not found. Please complete the assessment again.');
+        return;
+    }
+    
     // Show loading state
     button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="animation: spin 1s linear infinite; display: inline-block;">⏳</span><span>Sending to your email...</span></span>';
     button.disabled = true;
     button.style.cursor = 'not-allowed';
     button.style.opacity = '0.7';
     
-    // Calculate scores
-    const totalScore = calculateTotalScore();
-    const pillarScores = getPillarScores();
-    
     // Send to Zoho CRM
     const success = sendToZohoCRM(userData, totalScore, pillarScores, 'Free 1-Page Summary');
     
     if (success) {
-        // Show success state
         setTimeout(function() {
             button.innerHTML = '<span style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;"><span style="font-size: 1.5rem;">✅</span><span>Email Sent Successfully!</span></span>';
             button.style.background = 'linear-gradient(135deg, #00ff88 0%, #00d9ff 100%)';
             button.style.borderColor = '#00ff88';
             button.style.opacity = '1';
             
-            // Show confirmation message
             const confirmMsg = document.createElement('div');
             confirmMsg.style.cssText = 'margin-top: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 15px; text-align: center;';
             confirmMsg.innerHTML = `
                 <div style="font-size: 2rem; margin-bottom: 0.5rem;">📧</div>
                 <div style="color: #00ff88; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Check Your Inbox!</div>
                 <div style="color: #a0a0b0; font-size: 0.95rem;">
-                    We've sent your AI Readiness Summary to:<br>
+                    We've sent your AI Readiness Summary (Score: ${totalScore}/100) to:<br>
                     <strong style="color: #00d9ff;">${userData.email}</strong>
                 </div>
                 <div style="color: #a0a0b0; font-size: 0.85rem; margin-top: 1rem;">
@@ -2395,13 +2403,11 @@ function downloadFreeReport() {
             `;
             button.parentElement.appendChild(confirmMsg);
             
-            // Close modal after 5 seconds
             setTimeout(function() {
                 closeAssessment();
             }, 5000);
         }, 1500);
     } else {
-        // Show error state
         button.innerHTML = originalText;
         button.disabled = false;
         button.style.cursor = 'pointer';
@@ -2409,7 +2415,6 @@ function downloadFreeReport() {
         alert('There was an error sending your report. Please try again or contact us at value.advisor@nothingbutvalue.com');
     }
 }
-
 // Calculate total score from all answers
 function calculateTotalScore() {
     const pillarScores = getPillarScores();
