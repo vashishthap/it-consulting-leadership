@@ -2450,6 +2450,555 @@ function upgradeToPremium(price) {
         closeAssessment();
     }, 2000);
 }
+// ========================================
+// PDF REPORT GENERATION
+// ========================================
+function generatePDFReport(userData, totalScore, pillarScores) {
+    console.log('Generating PDF report...');
+    
+    // Determine maturity level
+    let maturityLevel, maturityClass, maturityDescription;
+    if (totalScore >= 80) {
+        maturityLevel = "ADVANCED";
+        maturityClass = "maturity-advanced";
+        maturityDescription = "You're leading the pack! Your organization is well-positioned for AI transformation.";
+    } else if (totalScore >= 60) {
+        maturityLevel = "INTERMEDIATE";
+        maturityClass = "maturity-intermediate";
+        maturityDescription = "You're on the right track! Focus on strengthening weak areas to accelerate transformation.";
+    } else if (totalScore >= 40) {
+        maturityLevel = "DEVELOPING";
+        maturityClass = "maturity-developing";
+        maturityDescription = "You're building momentum! Prioritize quick wins to demonstrate value.";
+    } else {
+        maturityLevel = "BEGINNER";
+        maturityClass = "maturity-beginner";
+        maturityDescription = "You're at the start of your journey! Focus on strategy and data foundation first.";
+    }
+    
+    // Generate quick wins based on lowest scoring pillars
+    const quickWins = [];
+    
+    if (pillarScores.Strategy < 60) {
+        quickWins.push("Develop a documented AI strategy with clear goals and executive buy-in");
+    }
+    if (pillarScores.Data < 60) {
+        quickWins.push("Implement data governance framework and improve data quality");
+    }
+    if (pillarScores.Technology < 60) {
+        quickWins.push("Start with one high-impact AI pilot project to prove value quickly");
+    }
+    if (pillarScores.People < 60) {
+        quickWins.push("Launch AI training program to build internal capability and reduce resistance");
+    }
+    if (pillarScores.Governance < 60) {
+        quickWins.push("Establish AI ethics policies and measurement framework");
+    }
+    
+    // If all scores are good, suggest optimization
+    if (quickWins.length === 0) {
+        quickWins.push("Scale successful pilots across the organization");
+        quickWins.push("Develop advanced AI capabilities in lowest-scoring pillar");
+        quickWins.push("Create center of excellence to drive continuous improvement");
+    }
+    
+    // Take top 3
+    const topQuickWins = quickWins.slice(0, 3);
+    
+    // Calculate circle stroke offset
+    const circumference = 408.4;
+    const offset = circumference - (circumference * totalScore / 100);
+    
+    // Determine maturity color for badge
+    let badgeStyle = '';
+    if (totalScore >= 80) {
+        badgeStyle = 'background: linear-gradient(135deg, #00ff88, #00d9ff); color: #0a0a0f;';
+    } else if (totalScore >= 60) {
+        badgeStyle = 'background: linear-gradient(135deg, #00d9ff, #7c3aed); color: white;';
+    } else if (totalScore >= 40) {
+        badgeStyle = 'background: linear-gradient(135deg, #ff9500, #ffcc00); color: #0a0a0f;';
+    } else {
+        badgeStyle = 'background: linear-gradient(135deg, #ff3366, #ff9500); color: white;';
+    }
+    
+    // Create PDF HTML
+    const pdfHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Readiness Report - ${userData.name}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            color: #ffffff;
+            width: 210mm;
+            height: 297mm;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .report-container {
+            width: 100%;
+            height: 100%;
+            padding: 20mm 15mm;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(0, 217, 255, 0.3);
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid rgba(0, 217, 255, 0.5);
+        }
+        
+        .company-name {
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d9ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 10px;
+            color: #a0a0b0;
+            font-weight: 600;
+        }
+        
+        .report-date {
+            text-align: right;
+            color: #a0a0b0;
+            font-size: 11px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .report-title {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        
+        .user-name {
+            font-size: 16px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .company-info {
+            font-size: 13px;
+            color: #a0a0b0;
+        }
+        
+        .score-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1));
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 20px;
+        }
+        
+        .score-circle {
+            position: relative;
+            width: 130px;
+            height: 130px;
+        }
+        
+        .score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .score-number {
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .score-total {
+            font-size: 16px;
+            color: #a0a0b0;
+        }
+        
+        .maturity-badge {
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: #00d9ff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .pillars-section {
+            margin-bottom: 20px;
+        }
+        
+        .pillar-item {
+            margin-bottom: 10px;
+        }
+        
+        .pillar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        
+        .pillar-name {
+            font-weight: 700;
+            font-size: 13px;
+        }
+        
+        .pillar-score {
+            font-weight: 900;
+            font-size: 13px;
+        }
+        
+        .pillar-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .pillar-fill {
+            height: 100%;
+            border-radius: 10px;
+        }
+        
+        .quick-wins {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 15px;
+        }
+        
+        .quick-wins ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        
+        .quick-wins li {
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .quick-wins li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .premium-teaser {
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 51, 102, 0.15), rgba(255, 149, 0, 0.15));
+            border: 3px solid rgba(255, 51, 102, 0.5);
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .premium-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: #ff3366;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .premium-text {
+            font-size: 11px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .premium-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        
+        .premium-feature {
+            font-size: 10px;
+            color: #a0a0b0;
+            text-align: left;
+            padding-left: 18px;
+            position: relative;
+        }
+        
+        .premium-feature::before {
+            content: '🔒';
+            position: absolute;
+            left: 0;
+            font-size: 11px;
+        }
+        
+        .premium-cta {
+            font-size: 13px;
+            font-weight: 900;
+            color: #ff3366;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 15mm;
+            right: 15mm;
+            text-align: center;
+            padding-top: 12px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-text {
+            font-size: 10px;
+            color: #a0a0b0;
+        }
+        
+        .footer-contact {
+            font-size: 11px;
+            color: #00d9ff;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-section">
+                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Logo" class="logo">
+                <div>
+                    <div class="company-name">NOTHING BUT VALUE</div>
+                    <div class="tagline">Big Firm Expertise. Small Firm Agility.</div>
+                </div>
+            </div>
+            <div class="report-date">
+                <div style="font-weight: 700; color: #00d9ff;">Assessment Date</div>
+                <div>${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+            </div>
+        </div>
+        
+        <!-- Title -->
+        <div class="title-section">
+            <h1 class="report-title">AI Readiness Assessment</h1>
+            <div class="user-name">${userData.name}</div>
+            <div class="company-info">${userData.company}${userData.role ? ' • ' + userData.role : ''}</div>
+        </div>
+        
+        <!-- Score -->
+        <div class="score-section">
+            <div class="score-circle">
+                <svg width="130" height="130" style="transform: rotate(-90deg);">
+                    <circle cx="65" cy="65" r="55" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="10"/>
+                    <circle cx="65" cy="65" r="55" fill="none" stroke="url(#gradient)" stroke-width="10" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d9ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00ff88;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="score-value">
+                    <div class="score-number">${totalScore}</div>
+                    <div class="score-total">/100</div>
+                </div>
+            </div>
+            
+            <div style="flex: 1; padding-left: 25px;">
+                <div style="margin-bottom: 12px;">
+                    <div style="font-size: 13px; color: #a0a0b0; margin-bottom: 6px;">Your AI Maturity Level</div>
+                    <div class="maturity-badge" style="${badgeStyle}">${maturityLevel}</div>
+                </div>
+                <div style="font-size: 12px; color: #c0c0d0; line-height: 1.7;">
+                    ${maturityDescription}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pillars -->
+        <div class="pillars-section">
+            <div class="section-title">📊 Pillar Breakdown</div>
+            
+            <div class="pillar-item">
+                <div class="pillar-header">
+                    <span class="pillar-name">Strategy</span>
+                    <span class="pillar-score" style="color: #00d9ff;">${pillarScores.Strategy}%</span>
+                </div>
+                <div class="pillar-bar">
+                    <div class="pillar-fill" style="width: ${pillarScores.Strategy}%; background: linear-gradient(90deg, #00d9ff, #00ff88);"></div>
+                </div>
+            </div>
+            
+            <div class="pillar-item">
+                <div class="pillar-header">
+                    <span class="pillar-name">Data</span>
+                    <span class="pillar-score" style="color: #7c3aed;">${pillarScores.Data}%</span>
+                </div>
+                <div class="pillar-bar">
+                    <div class="pillar-fill" style="width: ${pillarScores.Data}%; background: linear-gradient(90deg, #7c3aed, #00d9ff);"></div>
+                </div>
+            </div>
+            
+            <div class="pillar-item">
+                <div class="pillar-header">
+                    <span class="pillar-name">Technology</span>
+                    <span class="pillar-score" style="color: #ff9500;">${pillarScores.Technology}%</span>
+                </div>
+                <div class="pillar-bar">
+                    <div class="pillar-fill" style="width: ${pillarScores.Technology}%; background: linear-gradient(90deg, #ff9500, #ff3366);"></div>
+                </div>
+            </div>
+            
+            <div class="pillar-item">
+                <div class="pillar-header">
+                    <span class="pillar-name">People</span>
+                    <span class="pillar-score" style="color: #00ff88;">${pillarScores.People}%</span>
+                </div>
+                <div class="pillar-bar">
+                    <div class="pillar-fill" style="width: ${pillarScores.People}%; background: linear-gradient(90deg, #00ff88, #00d9ff);"></div>
+                </div>
+            </div>
+            
+            <div class="pillar-item">
+                <div class="pillar-header">
+                    <span class="pillar-name">Governance</span>
+                    <span class="pillar-score" style="color: #ff3366;">${pillarScores.Governance}%</span>
+                </div>
+                <div class="pillar-bar">
+                    <div class="pillar-fill" style="width: ${pillarScores.Governance}%; background: linear-gradient(90deg, #ff3366, #ff9500);"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Wins -->
+        <div class="quick-wins">
+            <div class="section-title" style="color: #00ff88;">⚡ Your Top 3 Quick Wins</div>
+            <ul>
+                ${topQuickWins.map(win => `<li>${win}</li>`).join('')}
+            </ul>
+        </div>
+        
+        <!-- Premium Teaser -->
+        <div class="premium-teaser">
+            <div class="premium-title">🔒 Unlock Your Full Potential</div>
+            <div class="premium-text">
+                This free summary shows your current state. Our <strong>Premium Report</strong> gives you the complete roadmap to AI transformation success.
+            </div>
+            
+            <div class="premium-features">
+                <div class="premium-feature">Custom 90-day roadmap</div>
+                <div class="premium-feature">Prioritized use cases with ROI</div>
+                <div class="premium-feature">Industry benchmarking</div>
+                <div class="premium-feature">Implementation timeline</div>
+                <div class="premium-feature">Budget breakdown</div>
+                <div class="premium-feature">Risk mitigation strategies</div>
+            </div>
+            
+            <div class="premium-cta">
+                📧 Check your email for upgrade options →
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                This is a free 1-page summary. For detailed analysis and personalized recommendations, upgrade to our Premium Report.
+            </div>
+            <div class="footer-contact">
+                value.advisor@nothingbutvalue.com • www.nothingbutvalue.com
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
+    `;
+    
+    // Open in new window for printing
+    const printWindow = window.open('', '_blank', 'width=800,height=1000');
+    printWindow.document.write(pdfHTML);
+    printWindow.document.close();
+    
+    // Wait for content to load, then trigger print
+    printWindow.onload = function() {
+        setTimeout(function() {
+            printWindow.print();
+        }, 500);
+    };
+    
+    console.log('PDF report generated successfully');
+}
 function downloadFreeReport() {
     const button = event.target;
     const originalText = button.innerHTML;
