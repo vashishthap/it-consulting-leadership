@@ -2492,7 +2492,60 @@ function downloadFreeReport() {
 // ============================================
 
 function sendToZohoCRM(userData, score, pillars, reportType) {
-    console.log('Sending to Zoho CRM with custom fields');
+    console.log('📧 Sending enhanced data to Zoho CRM...');
+    
+    // Determine maturity level
+    let maturityLevel, recommendations;
+    if (score >= 80) {
+        maturityLevel = "Advanced";
+        recommendations = "Focus on scaling AI across departments. Consider launching AI consulting services for clients.";
+    } else if (score >= 60) {
+        maturityLevel = "Intermediate";
+        recommendations = "Strengthen weak pillars. Implement 2-3 quick-win pilots in next 90 days.";
+    } else if (score >= 40) {
+        maturityLevel = "Developing";
+        recommendations = "Start with AI Readiness Audit. Focus on data governance and team training first.";
+    } else {
+        maturityLevel = "Beginner";
+        recommendations = "Begin with strategy workshop. Build executive buy-in and identify 1-2 high-impact use cases.";
+    }
+    
+    // Create detailed assessment summary
+    const assessmentSummary = `AI READINESS ASSESSMENT RESULTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OVERALL SCORE: ${score}/100
+MATURITY LEVEL: ${maturityLevel}
+REPORT TYPE: ${reportType}
+
+PILLAR BREAKDOWN:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+* Strategy:     ${pillars.Strategy}% ${getScoreEmoji(pillars.Strategy)}
+* Data:         ${pillars.Data}% ${getScoreEmoji(pillars.Data)}
+* Technology:   ${pillars.Technology}% ${getScoreEmoji(pillars.Technology)}
+* People:       ${pillars.People}% ${getScoreEmoji(pillars.People)}
+* Governance:   ${pillars.Governance}% ${getScoreEmoji(pillars.Governance)}
+
+RECOMMENDATIONS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${recommendations}
+
+NEXT STEPS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${getNextSteps(score, pillars)}
+
+COMPLETED: ${new Date().toLocaleString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+})}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Contact: value.advisor@nothingbutvalue.com
+Website: www.nothingbutvalue.com`;
     
     const form = document.createElement('form');
     form.method = 'POST';
@@ -2500,34 +2553,28 @@ function sendToZohoCRM(userData, score, pillars, reportType) {
     form.target = 'zoho_iframe';
     form.style.display = 'none';
     
-    const assessmentDetails = `AI Readiness Assessment Results:
-
-Overall Score: ${score}/100
-Report Type: ${reportType}
-
-Pillar Breakdown:
-- Strategy: ${pillars.Strategy}%
-- Data: ${pillars.Data}%
-- Technology: ${pillars.Technology}%
-- People: ${pillars.People}%
-- Governance: ${pillars.Governance}%
-
-Completed: ${new Date().toLocaleString()}`;
-    
     const fields = {
+        // Your existing Zoho form fields
         'xnQsjsdp': 'd38b5c5d24d47d69e4d4d3b1108556b89b5db9c5201c227fba71c1ac8a63cd40',
         'zc_gad': '',
         'xmIwtLD': 'c13ea234492206c9820af3abbf29162e53e7cd3c5a22cb5abd9919cfa0cb99decb08ccd524a1463ebf5a1d4e2ea4258c',
         'actionType': 'TGVhZHM=',
         'returnURL': 'https://vashishthap.github.io/it-consulting-leadership/thank-you.html',
+        
+        // Standard fields
         'Last Name': userData.name,
         'Email': userData.email,
         'Company': userData.company,
         'Industry': userData.role || 'Not specified',
         'Lead Source': 'AI Assessment - Website',
-        'LEADCF51': score,
-        'LEADCF1': assessmentDetails,
-        'LEADCF2': reportType
+        
+        // Custom fields - ENHANCED
+        'LEADCF51': score,  // AI Readiness Score
+        'LEADCF1': assessmentSummary,  // Full Assessment Details
+        'LEADCF2': reportType,  // Report Type (Free/Premium)
+        
+        // Additional tracking fields (add these to your Zoho CRM if needed)
+        'Description': `${userData.name} from ${userData.company} completed AI Assessment. Score: ${score}/100 (${maturityLevel}). Report: ${reportType}. Pillars: Strategy ${pillars.Strategy}%, Data ${pillars.Data}%, Tech ${pillars.Technology}%, People ${pillars.People}%, Gov ${pillars.Governance}%.`
     };
     
     Object.keys(fields).forEach(key => {
@@ -2550,11 +2597,51 @@ Completed: ${new Date().toLocaleString()}`;
     document.body.appendChild(form);
     form.submit();
     
+    console.log('✅ Enhanced data sent to Zoho CRM');
+    console.log('📊 Score:', score, '| Level:', maturityLevel, '| Report:', reportType);
+    
     setTimeout(function() {
         document.body.removeChild(form);
     }, 2000);
     
     return true;
+}
+
+// Helper function for score emojis
+function getScoreEmoji(score) {
+    if (score >= 80) return '🟢 Excellent';
+    if (score >= 60) return '🟡 Good';
+    if (score >= 40) return '🟠 Fair';
+    return '🔴 Needs Work';
+}
+
+// Helper function for next steps
+function getNextSteps(score, pillars) {
+    const weakestPillar = Object.keys(pillars).reduce((a, b) => 
+        pillars[a] < pillars[b] ? a : b
+    );
+    
+    const steps = [];
+    
+    if (score < 40) {
+        steps.push('1. Schedule free 30-min strategy call to discuss your AI roadmap');
+        steps.push('2. Download our SME AI Playbook (free PDF guide)');
+        steps.push('3. Identify 1-2 quick-win use cases for pilot projects');
+    } else if (score < 60) {
+        steps.push('1. Focus on strengthening your weakest pillar: ' + weakestPillar);
+        steps.push('2. Book AI Readiness Audit ($10K-$20K) for detailed roadmap');
+        steps.push('3. Launch Quick-Win Pilot in next 60 days');
+    } else if (score < 80) {
+        steps.push('1. Scale AI across multiple departments');
+        steps.push('2. Consider Department Transformation package ($60K-$120K)');
+        steps.push('3. Explore launching AI consulting services for your clients');
+    } else {
+        steps.push('1. You\'re ready to lead! Consider Fractional AI Leadership');
+        steps.push('2. Launch premium AI-powered service offerings');
+        steps.push('3. Share your success story - we\'d love to feature you!');
+    }
+    
+    return steps.join('\n');
 }
 
 // ============================================
