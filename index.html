@@ -3124,19 +3124,20 @@ const questions = [
     }
 ];
         
-       function startAssessment() {
-    // Show the assessment modal
+     function startAssessment() {
     const modal = document.getElementById('assessmentModal');
     if (modal) {
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
         
-        // Reset to first question
+        // Reset state
         currentQuestion = 0;
         answers = {};
         
-        // Show first question
-        showQuestion();
+        // Show email capture form first
+        document.getElementById('emailCapture').style.display = 'block';
+        document.getElementById('questionsContainer').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'none';
     } else {
         console.error('Assessment modal not found');
     }
