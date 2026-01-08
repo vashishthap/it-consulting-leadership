@@ -3239,6 +3239,8 @@ function previousQuestion() {
     }
 }
 function showResults() {
+    document.getElementById('questionsContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'block';
     // Calculate scores by pillar
     const pillarScores = {};
     const pillarCounts = {};
