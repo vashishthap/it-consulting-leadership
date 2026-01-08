@@ -2903,16 +2903,13 @@
     }
 }
         
-        function closeAssessment() {
-            document.getElementById('assessmentModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            currentQuestionIndex = 0;
-            answers = {};
-            document.getElementById('emailCapture').style.display = 'block';
-            document.getElementById('questionsContainer').style.display = 'none';
-            document.getElementById('resultsContainer').style.display = 'none';
-        }
-        
+function closeAssessment() {
+    const modal = document.getElementById('assessmentModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+}
         function startQuestions() {
             const name = document.getElementById('userName').value.trim();
             const email = document.getElementById('userEmail').value.trim();
@@ -2933,72 +2930,59 @@
         }
         
         function showQuestion() {
-            const question = questions[currentQuestionIndex];
-            const progress = ((currentQuestionIndex + 1) / questions.length * 100).toFixed(0);
-            
-            document.getElementById('progressBar').style.width = progress + '%';
-            document.getElementById('progressText').textContent = progress + '%';
-            
-            let html = `
-                <div style="text-align: center; margin-bottom: 3rem;">
-                    <div style="color: #00d9ff; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
-                        ${question.pillar} • Question ${currentQuestionIndex + 1} of ${questions.length}
-                    </div>
-                    <h3 style="font-size: 1.8rem; color: #ffffff; font-weight: 800; line-height: 1.4; margin-bottom: 2rem;">
-                        ${question.question}
-                    </h3>
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-            `;
-            
-            question.options.forEach((option, index) => {
-                html += `
-                    <button onclick="selectAnswer(${index})" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: #ffffff; font-size: 1.05rem; cursor: pointer; transition: all 0.3s; text-align: left; font-weight: 600;" onmouseover="this.style.borderColor='#00d9ff'; this.style.background='rgba(0, 217, 255, 0.05)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.03)'">
-                        ${option.text}
-                    </button>
-                `;
-            });
-            
-            html += '</div>';
-            
-            if (currentQuestionIndex > 0) {
-                html += `
-                    <div style="margin-top: 2rem; text-align: center;">
-                        <button onclick="previousQuestion()" style="padding: 1rem 2rem; background: transparent; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50px; color: rgba(255, 255, 255, 0.6); cursor: pointer; transition: all 0.3s; font-weight: 700;" onmouseover="this.style.borderColor='rgba(255, 255, 255, 0.4)'; this.style.color='rgba(255, 255, 255, 0.9)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='rgba(255, 255, 255, 0.6)'">
-                            ← Previous Question
-                        </button>
-                    </div>
-                `;
-            }
-            
-            document.getElementById('currentQuestion').innerHTML = html;
-        }
+    const question = questions[currentQuestion];
+    const modalContent = document.querySelector('.assessment-content');
+    
+    if (!modalContent) return;
+    
+    let html = `
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: ${((currentQuestion + 1) / questions.length) * 100}%"></div>
+        </div>
         
-        function selectAnswer(optionIndex) {
-            const question = questions[currentQuestionIndex];
-            answers[currentQuestionIndex] = {
-                pillar: question.pillar,
-                question: question.question,
-                answer: question.options[optionIndex].text,
-                score: question.options[optionIndex].score
-            };
-            
-            currentQuestionIndex++;
-            
-            if (currentQuestionIndex < questions.length) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        }
+        <div class="question-counter">Question ${currentQuestion + 1} of ${questions.length}</div>
         
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                showQuestion();
-            }
-        }
+        <h3 class="question-title">${question.question}</h3>
+        
+        <div class="options-container">
+    `;
+    
+    question.options.forEach((option, index) => {
+        html += `
+            <button class="option-btn" onclick="selectAnswer(${index}, ${option.score})">
+                <span class="option-text">${option.text}</span>
+                <span class="option-arrow">→</span>
+            </button>
+        `;
+    });
+    
+    html += `
+        </div>
+        
+        <div class="navigation-buttons">
+            ${currentQuestion > 0 ? '<button class="btn-back" onclick="previousQuestion()">← Back</button>' : ''}
+        </div>
+    `;
+    
+    modalContent.innerHTML = html;
+}
+function selectAnswer(optionIndex, score) {
+    answers[currentQuestion] = score;
+    
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+    }
+}
         
         function showResults() {
             document.getElementById('questionsContainer').style.display = 'none';
