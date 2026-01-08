@@ -3111,39 +3111,73 @@ Object.entries(pillarScores).forEach(([pillar, data]) => {
 // Send to Zoho CRM
 sendToZohoCRM(userData, overallScore, pillarPercentages, 'Free AI Readiness Assessment');
         }
+function sendToZohoCRM(userData, score, pillars, reportType) {
+    console.log('Sending to Zoho CRM with custom fields');
+    
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://crm.zoho.eu/crm/WebToLeadForm';
+    form.target = 'zoho_iframe';
+    form.style.display = 'none';
+    
+    const assessmentDetails = `AI Readiness Assessment Results:
+
+Overall Score: ${score}/100
+Report Type: ${reportType}
+
+Pillar Breakdown:
+- Strategy: ${pillars.Strategy}%
+- Data: ${pillars.Data}%
+- Technology: ${pillars.Technology}%
+- People: ${pillars.People}%
+- Governance: ${pillars.Governance}%
+
+Completed: ${new Date().toLocaleString()}`;
+    
+    const fields = {
+        'xnQsjsdp': 'd38b5c5d24d47d69e4d4d3b1108556b89b5db9c5201c227fba71c1ac8a63cd40',
+        'zc_gad': '',
+        'xmIwtLD': 'c13ea234492206c9820af3abbf29162e53e7cd3c5a22cb5abd9919cfa0cb99decb08ccd524a1463ebf5a1d4e2ea4258c',
+        'actionType': 'TGVhZHM=',
+        'returnURL': 'https://vashishthap.github.io/it-consulting-leadership/thank-you.html',
+        'Last Name': userData.name,
+        'Email': userData.email,
+        'Company': userData.company,
+        'Industry': userData.role || 'Not specified',
+        'Lead Source': 'AI Assessment - Website',
+        'LEADCF51': score,
+        'LEADCF1': assessmentDetails,
+        'LEADCF2': reportType
+    };
+    
+    Object.keys(fields).forEach(key => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+    });
+    
+    let iframe = document.getElementById('zoho_iframe');
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.name = 'zoho_iframe';
+        iframe.id = 'zoho_iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    
+    document.body.appendChild(form);
+    form.submit();
+    
+    setTimeout(function() {
+        document.body.removeChild(form);
+    }, 2000);
+    
+    return true;
+}
         
-        function sendAssessmentResults(userData, answers, overallScore, maturityLevel, pillarScores) {
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'https://formsubmit.co/nothingbutvalue18@gmail.com';
-            form.style.display = 'none';
-            
-            const fields = {
-                '_subject': `AI Assessment Results - ${userData.name} (${userData.company})`,
-                '_captcha': 'false',
-                'Name': userData.name,
-                'Email': userData.email,
-                'Company': userData.company,
-                'Role': userData.role || 'Not provided',
-                'Overall Score': `${overallScore}% - ${maturityLevel}`,
-                'Strategy Score': `${Math.round((pillarScores['Strategy'].score / pillarScores['Strategy'].max) * 100)}%`,
-                'Data Score': `${Math.round((pillarScores['Data'].score / pillarScores['Data'].max) * 100)}%`,
-                'Technology Score': `${Math.round((pillarScores['Technology'].score / pillarScores['Technology'].max) * 100)}%`,
-                'People Score': `${Math.round((pillarScores['People'].score / pillarScores['People'].max) * 100)}%`,
-                'Governance Score': `${Math.round((pillarScores['Governance'].score / pillarScores['Governance'].max) * 100)}%`
-            };
-            
-            Object.entries(fields).forEach(([key, value]) => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = value;
-                form.appendChild(input);
-            });
-            
-            document.body.appendChild(form);
-            form.submit();
-        }
+
         
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
