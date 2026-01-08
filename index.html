@@ -3066,7 +3066,7 @@ function previousQuestion() {
                     </div>
                 `;
             });
-            html += `
+ html += `
     </div>
     
     <!-- PREMIUM UPGRADE SECTION -->
@@ -3116,7 +3116,7 @@ function previousQuestion() {
                     <li>✓ ROI projections</li>
                     <li>✓ Risk analysis</li>
                 </ul>
-                <button onclick="upgradeToPremium('premium', ${overallScore})" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #00d9ff, #7c3aed); border: none; border-radius: 10px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(0, 217, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <button onclick="upgradeToPremium('premium', 0)" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #00d9ff, #7c3aed); border: none; border-radius: 10px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s;">
                     Get Premium Report →
                 </button>
             </div>
@@ -3135,7 +3135,7 @@ function previousQuestion() {
                     <li>✓ Implementation guidance</li>
                     <li>✓ Priority support</li>
                 </ul>
-                <button onclick="upgradeToPremium('consult', ${overallScore})" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: transparent; border: 2px solid rgba(124, 58, 237, 0.5); border-radius: 10px; color: #7c3aed; font-weight: 700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#7c3aed'; this.style.background='rgba(124, 58, 237, 0.1)'" onmouseout="this.style.borderColor='rgba(124, 58, 237, 0.5)'; this.style.background='transparent'">
+                <button onclick="upgradeToPremium('consult', 0)" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: transparent; border: 2px solid rgba(124, 58, 237, 0.5); border-radius: 10px; color: #7c3aed; font-weight: 700; cursor: pointer; transition: all 0.3s;">
                     Get Report + Call →
                 </button>
             </div>
@@ -3154,7 +3154,7 @@ function previousQuestion() {
                     <li>✓ Vendor recommendations</li>
                     <li>✓ 30-day support</li>
                 </ul>
-                <button onclick="upgradeToPremium('enterprise', ${overallScore})" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: transparent; border: 2px solid rgba(255, 149, 0, 0.5); border-radius: 10px; color: #ff9500; font-weight: 700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#ff9500'; this.style.background='rgba(255, 149, 0, 0.1)'" onmouseout="this.style.borderColor='rgba(255, 149, 0, 0.5)'; this.style.background='transparent'">
+                <button onclick="upgradeToPremium('enterprise', 0)" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: transparent; border: 2px solid rgba(255, 149, 0, 0.5); border-radius: 10px; color: #ff9500; font-weight: 700; cursor: pointer; transition: all 0.3s;">
                     Get Enterprise →
                 </button>
             </div>
@@ -3167,37 +3167,7 @@ function previousQuestion() {
             </p>
         </div>
     </div>
-    
-    <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
-            html += `
-                </div>
-                
-                <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
-                    <h3 style="color: #00d9ff; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 800;">
-                        📧 Results Sent to Your Email
-                    </h3>
-                    <p style="color: #a0a0b0; font-size: 1rem; line-height: 1.7;">
-                        We've sent a detailed report to <strong style="color: #ffffff;">${userData.email}</strong> including:
-                    </p>
-                    <ul style="color: #a0a0b0; margin: 1rem 0; padding-left: 1.5rem;">
-                        <li>Your complete assessment results</li>
-                        <li>Personalized recommendations</li>
-                        <li>Custom AI transformation roadmap</li>
-                        <li>Quick-win opportunities</li>
-                    </ul>
-                </div>
-                
-                <div style="text-align: center;">
-                    <a href="#contact" onclick="closeAssessment()" style="display: inline-block; padding: 1.25rem 2.5rem; background: linear-gradient(135deg, #ff3366 0%, #ff9500 100%); border: none; border-radius: 50px; color: white; font-weight: 800; font-size: 1.1rem; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 40px rgba(255, 51, 102, 0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(255, 51, 102, 0.4)'">
-                        Book Free Strategy Call →
-                    </a>
-                    
-                    <p style="color: #808090; font-size: 0.9rem; margin-top: 1.5rem;">
-                        Let's discuss your results and create a custom AI transformation plan
-                    </p>
-                </div>
-            `;
-            
+`;
             document.getElementById('resultsContainer').innerHTML = html;
             
         
