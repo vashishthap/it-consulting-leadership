@@ -2623,10 +2623,15 @@
         </div>
     </footer>
 
-    <!-- ASSESSMENT MODAL -->
-    <div id="assessmentModal" class="assessment-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeAssessment()">&times;</span>
+<!-- Assessment Modal -->
+<div id="assessmentModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeAssessment()">✕</button>
+        <div class="assessment-content">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+    </div>
+</div>
             
             <!-- Progress Bar -->
             <div class="progress-container">
