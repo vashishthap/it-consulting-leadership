@@ -3069,7 +3069,109 @@
                     </div>
                 `;
             });
+            html += `
+    </div>
+    
+    <!-- PREMIUM UPGRADE SECTION -->
+    <div style="background: rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; border: 2px solid rgba(0, 217, 255, 0.2);">
+        <h3 style="color: #ffffff; font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 800; text-align: center;">
+            🚀 Unlock Your Full AI Potential
+        </h3>
+        <p style="color: #a0a0b0; text-align: center; margin-bottom: 2rem;">
+            Get deeper insights and actionable strategies with our premium reports
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
             
+            <!-- Free 1-Page Summary -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 1.5rem; border: 2px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: #00ff88;"></div>
+                    <h4 style="color: #ffffff; font-size: 1.1rem; font-weight: 700;">Free 1-Page Summary</h4>
+                </div>
+                <div style="color: #00ff88; font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem;">FREE</div>
+                <ul style="list-style: none; padding: 0; color: #a0a0b0; font-size: 0.95rem; line-height: 1.8;">
+                    <li>✓ Overall readiness score</li>
+                    <li>✓ Pillar breakdown</li>
+                    <li>✓ Basic recommendations</li>
+                    <li>✓ Email delivery</li>
+                </ul>
+                <div style="margin-top: 1.5rem; padding: 0.75rem; background: rgba(0, 255, 136, 0.1); border-radius: 10px; text-align: center;">
+                    <span style="color: #00ff88; font-weight: 700;">✓ INCLUDED</span>
+                </div>
+            </div>
+            
+            <!-- Premium Report - POPULAR -->
+            <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(124, 58, 237, 0.15)); border-radius: 15px; padding: 1.5rem; border: 2px solid #00d9ff; position: relative;">
+                <div style="position: absolute; top: -12px; right: 20px; background: linear-gradient(135deg, #ff3366, #ff9500); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 900; color: white; letter-spacing: 1px;">
+                    POPULAR
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: #00d9ff;"></div>
+                    <h4 style="color: #ffffff; font-size: 1.1rem; font-weight: 700;">Premium Report</h4>
+                </div>
+                <div style="color: #00d9ff; font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem;">$97</div>
+                <ul style="list-style: none; padding: 0; color: #ffffff; font-size: 0.95rem; line-height: 1.8;">
+                    <li>✓ 15-page detailed report</li>
+                    <li>✓ Benchmarking vs peers</li>
+                    <li>✓ Custom 90-day roadmap</li>
+                    <li>✓ Prioritized use cases</li>
+                    <li>✓ ROI projections</li>
+                    <li>✓ Risk analysis</li>
+                </ul>
+                <button onclick="upgradeToPremium('premium', ${overallScore})" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #00d9ff, #7c3aed); border: none; border-radius: 10px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(0, 217, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    Get Premium Report →
+                </button>
+            </div>
+            
+            <!-- Premium + Consult -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 1.5rem; border: 2px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: #7c3aed;"></div>
+                    <h4 style="color: #ffffff; font-size: 1.1rem; font-weight: 700;">Premium + Consult</h4>
+                </div>
+                <div style="color: #7c3aed; font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem;">$297</div>
+                <ul style="list-style: none; padding: 0; color: #a0a0b0; font-size: 0.95rem; line-height: 1.8;">
+                    <li>✓ Everything in Premium</li>
+                    <li>✓ 60-min strategy call</li>
+                    <li>✓ Expert Q&A session</li>
+                    <li>✓ Implementation guidance</li>
+                    <li>✓ Priority support</li>
+                </ul>
+                <button onclick="upgradeToPremium('consult', ${overallScore})" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: transparent; border: 2px solid rgba(124, 58, 237, 0.5); border-radius: 10px; color: #7c3aed; font-weight: 700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#7c3aed'; this.style.background='rgba(124, 58, 237, 0.1)'" onmouseout="this.style.borderColor='rgba(124, 58, 237, 0.5)'; this.style.background='transparent'">
+                    Get Report + Call →
+                </button>
+            </div>
+            
+            <!-- Enterprise -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 1.5rem; border: 2px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff9500;"></div>
+                    <h4 style="color: #ffffff; font-size: 1.1rem; font-weight: 700;">Enterprise</h4>
+                </div>
+                <div style="color: #ff9500; font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem;">$997</div>
+                <ul style="list-style: none; padding: 0; color: #a0a0b0; font-size: 0.95rem; line-height: 1.8;">
+                    <li>✓ Everything in Premium+</li>
+                    <li>✓ Full team workshop</li>
+                    <li>✓ Custom transformation plan</li>
+                    <li>✓ Vendor recommendations</li>
+                    <li>✓ 30-day support</li>
+                </ul>
+                <button onclick="upgradeToPremium('enterprise', ${overallScore})" style="margin-top: 1.5rem; width: 100%; padding: 0.75rem; background: transparent; border: 2px solid rgba(255, 149, 0, 0.5); border-radius: 10px; color: #ff9500; font-weight: 700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#ff9500'; this.style.background='rgba(255, 149, 0, 0.1)'" onmouseout="this.style.borderColor='rgba(255, 149, 0, 0.5)'; this.style.background='transparent'">
+                    Get Enterprise →
+                </button>
+            </div>
+            
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: #a0a0b0; font-size: 0.9rem;">
+                💳 Secure payment via Stripe • 📧 Instant delivery • 🔒 Money-back guarantee
+            </p>
+        </div>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 2px solid rgba(0, 217, 255, 0.3); border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
             html += `
                 </div>
                 
