@@ -3297,39 +3297,50 @@ Completed: ${new Date().toLocaleString()}`;
                 }
             });
         });
-       function upgradeToPremium(tier, score) {
+  function upgradeToPremium(tier, score) {
     console.log(`Upgrading to ${tier} tier with score ${score}`);
     
-    // Track in Zoho CRM
-    const upgradeData = {
-        tier: tier,
-        score: score,
-        email: userData.email,
-        name: userData.name,
-        company: userData.company,
-        timestamp: new Date().toISOString()
+    // Check if userData exists, if not create a minimal version
+    const userInfo = typeof userData !== 'undefined' ? userData : {
+        email: '',
+        name: '',
+        company: ''
     };
     
-    // Send upgrade intent to Zoho
-    sendToZohoCRM(userData, score, {}, `Premium Upgrade - ${tier}`);
+    // Track in Zoho CRM only if userData exists
+    if (typeof userData !== 'undefined' && typeof sendToZohoCRM === 'function') {
+        sendToZohoCRM(userData, score, {}, `Premium Upgrade - ${tier}`);
+    }
     
     // Stripe payment links (you'll need to create these in Stripe Dashboard)
     const stripeLinks = {
-        premium: 'https://buy.stripe.com/test_YOUR_PREMIUM_LINK',  // Replace with actual Stripe link
-        consult: 'https://buy.stripe.com/test_YOUR_CONSULT_LINK',  // Replace with actual Stripe link
-        enterprise: 'https://buy.stripe.com/test_YOUR_ENTERPRISE_LINK'  // Replace with actual Stripe link
+        premium: 'https://buy.stripe.com/test_YOUR_PREMIUM_LINK',
+        consult: 'https://buy.stripe.com/test_YOUR_CONSULT_LINK',
+        enterprise: 'https://buy.stripe.com/test_YOUR_ENTERPRISE_LINK'
     };
     
-    // For now, show alert and redirect to contact
-    alert(`Premium ${tier.toUpperCase()} upgrade selected!\n\nPrice: ${tier === 'premium' ? '$97' : tier === 'consult' ? '$297' : '$997'}\n\nRedirecting to contact form...`);
+    const prices = {
+        premium: '$97',
+        consult: '$297',
+        enterprise: '$997'
+    };
     
-    // Temporary: redirect to contact form
-    // Once you set up Stripe, replace this with: window.location.href = stripeLinks[tier];
-    closeAssessment();
+    // Show alert
+    alert(`Premium ${tier.toUpperCase()} upgrade selected!\n\nPrice: ${prices[tier]}\n\nRedirecting to contact form...`);
+    
+    // Close assessment modal if it exists
+    if (typeof closeAssessment === 'function') {
+        closeAssessment();
+    }
+    
+    // Redirect to contact form
     setTimeout(() => {
-        document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+        const contactSection = document.querySelector('#contact');
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
     }, 500);
-} 
+}
     </script>
 </body>
 </html>
