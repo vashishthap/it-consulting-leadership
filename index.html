@@ -2511,15 +2511,15 @@ function sendToZohoCRM(userData, score, pillars, reportType) {
     }
     
     // Create detailed assessment summary
-    const assessmentSummary = `AI READINESS ASSESSMENT RESULTS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const assessmentSummary = `AI READINESS ASSESSMENT RESULTS
+------------------------------------------------
 
 OVERALL SCORE: ${score}/100
 MATURITY LEVEL: ${maturityLevel}
 REPORT TYPE: ${reportType}
 
 PILLAR BREAKDOWN:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+------------------------------------------------
 * Strategy:     ${pillars.Strategy}% ${getScoreEmoji(pillars.Strategy)}
 * Data:         ${pillars.Data}% ${getScoreEmoji(pillars.Data)}
 * Technology:   ${pillars.Technology}% ${getScoreEmoji(pillars.Technology)}
@@ -2527,11 +2527,11 @@ PILLAR BREAKDOWN:
 * Governance:   ${pillars.Governance}% ${getScoreEmoji(pillars.Governance)}
 
 RECOMMENDATIONS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+------------------------------------------------
 ${recommendations}
 
 NEXT STEPS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+------------------------------------------------
 ${getNextSteps(score, pillars)}
 
 COMPLETED: ${new Date().toLocaleString('en-US', { 
@@ -2543,7 +2543,7 @@ COMPLETED: ${new Date().toLocaleString('en-US', {
     minute: '2-digit'
 })}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+------------------------------------------------
 Contact: value.advisor@nothingbutvalue.com
 Website: www.nothingbutvalue.com`;
     
