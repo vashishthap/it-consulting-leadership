@@ -3171,7 +3171,7 @@ function closeAssessment() {
         
    function showQuestion() {
     const question = questions[currentQuestion];
-    const modalContent = document.querySelector('.assessment-content');
+    const modalContent = document.getElementById('currentQuestion')
     
     if (!modalContent) {
         console.error('Modal content not found');
