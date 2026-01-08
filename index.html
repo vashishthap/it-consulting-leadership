@@ -3214,12 +3214,19 @@ function closeAssessment() {
     modalContent.innerHTML = html;
 }
 function selectAnswer(optionIndex, score) {
-    answers[currentQuestion] = score;
+    // Store the answer
+    answers[currentQuestion] = {
+        questionIndex: currentQuestion,
+        pillar: questions[currentQuestion].pillar,
+        score: score
+    };
     
+    // Move to next question or show results
     if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         showQuestion();
     } else {
+        // All questions answered, show results
         showResults();
     }
 }
