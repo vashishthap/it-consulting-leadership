@@ -2939,11 +2939,19 @@ function closeAssessment() {
             showQuestion();
         }
         
-        function showQuestion() {
+   function showQuestion() {
     const question = questions[currentQuestion];
     const modalContent = document.querySelector('.assessment-content');
     
-    if (!modalContent) return;
+    if (!modalContent) {
+        console.error('Modal content not found');
+        return;
+    }
+    
+    if (!question) {
+        console.error('Question not found at index:', currentQuestion);
+        return;
+    }
     
     let html = `
         <div class="progress-bar">
