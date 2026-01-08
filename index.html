@@ -3102,7 +3102,14 @@
             document.getElementById('resultsContainer').innerHTML = html;
             
             // Send results via email (using FormSubmit)
-            sendAssessmentResults(userData, answers, overallScore, maturityLevel, pillarScores);
+            // Calculate pillar percentages for Zoho
+const pillarPercentages = {};
+Object.entries(pillarScores).forEach(([pillar, data]) => {
+    pillarPercentages[pillar] = Math.round((data.score / data.max) * 100);
+});
+
+// Send to Zoho CRM
+sendToZohoCRM(userData, overallScore, pillarPercentages, 'Free AI Readiness Assessment');
         }
         
         function sendAssessmentResults(userData, answers, overallScore, maturityLevel, pillarScores) {
