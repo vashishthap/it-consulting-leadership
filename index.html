@@ -1938,20 +1938,27 @@ let lastPillarAverages = {};
 // Open modal from "Free AI Assessment" button
 function startAssessment() {
   const modal = document.getElementById("assessmentModal");
-  if (!modal) return console.error("assessmentModal not found");
+  if (!modal) {
+    console.error("assessmentModal not found");
+    return;
+  }
 
-  // Reset state
-  currentQuestionIndex = 0;
-  answers = {};
-  lastOverallScore = 0;
-  lastPillarAverages = {};
+  // reset state safely
+  window._nbv.currentQuestionIndex = 0;
+  window._nbv.answers = {};
 
-  // Show modal + email step
+  // show modal
   modal.style.display = "flex";
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 
-  showStep("email");
+  // show email step first
+  const email = document.getElementById("emailCapture");
+  const qs = document.getElementById("questionsContainer");
+  const res = document.getElementById("resultsContainer");
+  if (email) email.style.display = "block";
+  if (qs) qs.style.display = "none";
+  if (res) res.style.display = "none";
 }
 window.startAssessment = startAssessment;
 
@@ -1964,6 +1971,7 @@ function closeAssessment() {
   document.body.style.overflow = "auto";
 }
 window.closeAssessment = closeAssessment;
+
 
 // Switch between steps
 function showStep(step) {
