@@ -1848,6 +1848,14 @@
   </div>
 
   <script>
+  window._nbvAssessment = window._nbvAssessment || {
+  currentQuestionIndex: 0,
+  answers: [],
+  userData: {},
+  lastOverallScore: 0,
+  lastPillarAverages: {}
+};
+
     // ======= UI: scroll effects =======
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
