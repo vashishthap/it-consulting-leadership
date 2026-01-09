@@ -1891,15 +1891,18 @@
       res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // ======= Assessment =======
-    let currentQuestion = 0;
-     = {};
-    let userData = {};
+   // ======= Assessment =======
+let currentQuestion = 0;
+let userData = {};
+// store last computed results for upgrade buttons
+let lastOverallScore = 0;
+let lastPillarAverages = {};
 
-    // store last computed results for upgrade buttons (safer than inline JSON)
-    let lastOverallScore = 0;
-    let lastPillarAverages = {};
-
+// Optional global (safe placeholder)
+window._nbvAssessment = {
+  overallScore: 0,
+  pillarAverages: {}
+};
     const questions = [
       {
         question: "How would you rate your organization's current AI awareness and understanding?",
