@@ -2126,73 +2126,257 @@ window._nbvAssessment = {
       }
     ];
 
-    let currentQuestionIndex = 0;
-    let answers = [];
+// ======= Assessment (Working + aligned to your modal IDs) =======
+let currentQuestionIndex = 0;
+let answers = {};          // avoid "already declared" by defining ONCE
+let userData = {};         // captured from Email screen
 
+// Make these available for upgrade buttons safely (no inline JSON needed)
+let lastOverallScore = 0;
+let lastPillarAverages = {};
+
+// Open modal from "Free AI Assessment" button
 function startAssessment() {
   const modal = document.getElementById("assessmentModal");
-  if (!modal) {
-    console.error("assessmentModal not found");
-    return;
-  }
+  if (!modal) return console.error("assessmentModal not found");
+
+  // Reset state
+  currentQuestionIndex = 0;
+  answers = {};
+  lastOverallScore = 0;
+  lastPillarAverages = {};
+
+  // Show modal + email step
   modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
+
+  showStep("email");
 }
 window.startAssessment = startAssessment;
 
-    function closeAssessment() {
-      document.getElementById("assessmentModal").style.display = "none";
-    }
+function closeAssessment() {
+  const modal = document.getElementById("assessmentModal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  }
+  document.body.style.overflow = "auto";
+}
+window.closeAssessment = closeAssessment;
 
-    function renderQuestion() {
-      const q = questions[currentQuestionIndex];
+// Switch between steps
+function showStep(step) {
+  const email = document.getElementById("emailCapture");
+  const qs = document.getElementById("questionsContainer");
+  const res = document.getElementById("resultsContainer");
 
-      const progress = ((currentQuestionIndex) / questions.length) * 100;
-      document.getElementById("progressFill").style.width = progress + "%";
+  if (email) email.style.display = (step === "email") ? "block" : "none";
+  if (qs) qs.style.display = (step === "questions") ? "block" : "none";
+  if (res) res.style.display = (step === "results") ? "block" : "none";
+}
 
-      document.getElementById("questionCounter").innerText =
-        `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+// From your Email screen button: onclick="startQuestions()"
+function startQuestions() {
+  const name = (document.getElementById("userName")?.value || "").trim();
+  const email = (document.getElementById("userEmail")?.value || "").trim();
+  const company = (document.getElementById("userCompany")?.value || "").trim();
+  const role = (document.getElementById("userRole")?.value || "").trim();
 
-      document.getElementById("questionTitle").innerText = q.question;
+  if (!name || !email || !company) {
+    alert("Please fill in Name, Work Email, and Company Name.");
+    return;
+  }
 
-      const optionsContainer = document.getElementById("optionsContainer");
-      optionsContainer.innerHTML = "";
+  userData = { name, email, company, role };
 
-      q.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-        btn.innerHTML = `<span>${option.text}</span><span class="option-arrow">→</span>`;
-        btn.onclick = () => selectOption(option.score, q.pillar);
-        optionsContainer.appendChild(btn);
-      });
+  showStep("questions");
+  renderQuestion();
+}
+window.startQuestions = startQuestions;
 
-      document.getElementById("backBtn").style.display =
-        currentQuestionIndex === 0 ? "none" : "inline-block";
-    }
+// Render current question
+function renderQuestion() {
+  const q = questions[currentQuestionIndex];
+  if (!q) return console.error("Question not found at index:", currentQuestionIndex);
 
-    function selectOption(score, pillar) {
-      answers[currentQuestionIndex] = { score, pillar };
-      currentQuestionIndex++;
+  const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
+  const questionCounter = document.getElementById("questionCounter");
+  const questionTitle = document.getElementById("questionTitle");
+  const optionsContainer = document.getElementById("optionsContainer");
+  const backBtn = document.getElementById("backBtn");
 
-      if (currentQuestionIndex < questions.length) {
-        renderQuestion();
-      } else {
-        showResults();
-      }
-    }
+  if (!questionTitle || !optionsContainer) {
+    console.error("Missing question DOM elements. Check IDs in modal.");
+    return;
+  }
 
-    function goBack() {
-      if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        renderQuestion();
-      }
-    }
+  // Progress
+  const pct = Math.round(((currentQuestionIndex + 1) / questions.length) * 100);
+  if (progressBar) progressBar.style.width = pct + "%";
+  if (progressText) progressText.textContent = pct + "%";
 
+  if (questionCounter) {
+    questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+  }
+  questionTitle.textContent = q.question;
+
+  // Options
+  optionsContainer.innerHTML = "";
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option-btn";
+    btn.style.cssText = `
+      width:100%;
+      text-align:left;
+      padding: 1rem 1.1rem;
+      border-radius: 14px;
+      border: 2px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 1rem;
+      transition: transform .15s ease, border-color .15s ease;
+    `;
+    btn.innerHTML = `<span>${opt.text}</span><span style="opacity:.85;">→</span>`;
+    btn.onmouseenter = () => { btn.style.transform = "translateY(-2px)"; btn.style.borderColor = "rgba(0,217,255,0.5)"; };
+    btn.onmouseleave = () => { btn.style.transform = "translateY(0)"; btn.style.borderColor = "rgba(255,255,255,0.12)"; };
+    btn.onclick = () => selectOption(opt.score, q.pillar);
+    optionsContainer.appendChild(btn);
+  });
+
+  if (backBtn) backBtn.style.display = (currentQuestionIndex === 0) ? "none" : "inline-block";
+}
+
+function selectOption(score, pillar) {
+  answers[currentQuestionIndex] = { pillar, score };
+
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function previousQuestion() {
+  if (currentQuestionIndex > 0) {
+    currentQuestionIndex--;
+    renderQuestion();
+  }
+}
+window.previousQuestion = previousQuestion;
+
+// Compute + render results
 function showResults() {
-  // Hide questions, show results container
-  document.getElementById('questionsContainer').style.display = 'none';
-  const resultsEl = document.getElementById('resultsContainer');
-  resultsEl.style.display = 'block';
+  // pillar averages
+  const pillarScores = {};
+  const pillarCounts = {};
+
+  Object.values(answers).forEach(a => {
+    pillarScores[a.pillar] = (pillarScores[a.pillar] || 0) + a.score;
+    pillarCounts[a.pillar] = (pillarCounts[a.pillar] || 0) + 1;
+  });
+
+  const pillarAverages = {};
+  Object.keys(pillarScores).forEach(p => {
+    pillarAverages[p] = Math.round((pillarScores[p] / pillarCounts[p]) * 20); // % out of 100
+  });
+
+  const totalScore = Object.values(answers).reduce((s, a) => s + a.score, 0);
+  const maxScore = questions.length * 5;
+  const overallScore = Math.round((totalScore / maxScore) * 100);
+
+  lastOverallScore = overallScore;
+  lastPillarAverages = pillarAverages;
+
+  // readiness label
+  let readinessLevel = "Building Foundation";
+  let readinessColor = "var(--warning)";
+  let readinessMsg = "You have some AI basics in place, but strengthening core capabilities will accelerate adoption.";
+
+  if (overallScore < 30) {
+    readinessLevel = "Getting Started";
+    readinessColor = "var(--accent)";
+    readinessMsg = "You’re in the early stages of AI readiness. Focus on foundations: strategy, data basics, and quick wins.";
+  } else if (overallScore < 50) {
+    readinessLevel = "Building Foundation";
+    readinessColor = "var(--warning)";
+    readinessMsg = "You have momentum. Prioritize 1–2 high-ROI use cases and put simple governance in place.";
+  } else if (overallScore < 70) {
+    readinessLevel = "Progressing Well";
+    readinessColor = "var(--primary)";
+    readinessMsg = "Solid foundations. Now focus on scaling, integration, and measurable KPIs across teams.";
+  } else if (overallScore < 85) {
+    readinessLevel = "Advanced";
+    readinessColor = "var(--secondary)";
+    readinessMsg = "Strong capabilities. You’re ready for multi-use-case rollouts and deeper optimization.";
+  } else {
+    readinessLevel = "AI Leader";
+    readinessColor = "var(--success)";
+    readinessMsg = "Mature AI readiness. You’re positioned to lead your market with advanced implementations.";
+  }
+
+  const res = document.getElementById("resultsContainer");
+  if (!res) return console.error("resultsContainer not found");
+
+  showStep("results");
+
+  // Render results (you can swap in your premium section later)
+  const pillarCards = Object.keys(pillarAverages).map(p => {
+    const v = pillarAverages[p];
+    return `
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:14px; padding:1rem;">
+        <div style="font-weight:900; color: rgba(255,255,255,0.85);">${p}</div>
+        <div style="font-size:1.6rem; font-weight:900; margin-top:.2rem;">${v}%</div>
+      </div>
+    `;
+  }).join("");
+
+  res.innerHTML = `
+    <div style="text-align:center; padding: .5rem 0;">
+      <h2 style="font-size:2rem; font-weight:900; margin-bottom:.5rem;">Your AI Readiness Score</h2>
+
+      <div style="display:inline-flex; align-items:center; justify-content:center; width:140px; height:140px; border-radius:999px; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.12); margin: 1rem 0;">
+        <div style="font-size:2.6rem; font-weight:900; color:#fff;">${overallScore}%</div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius:16px; padding:1rem; margin: 1rem auto; max-width: 720px;">
+        <div style="font-weight:900; font-size:1.2rem; color:${readinessColor}; margin-bottom:.3rem;">${readinessLevel}</div>
+        <div style="color: var(--text-muted); line-height:1.7;">${readinessMsg}</div>
+      </div>
+
+      <h3 style="font-size:1.3rem; font-weight:900; margin: 1.4rem 0 .8rem;">Scores by Pillar</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:.8rem; max-width: 820px; margin: 0 auto;">
+        ${pillarCards}
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:.8rem; margin-top: 1.5rem; flex-wrap:wrap;">
+        <button type="button" onclick="closeAssessment()"
+          style="padding: .9rem 1.2rem; border-radius: 14px; border: none; background: rgba(255,255,255,0.08); color:#fff; font-weight:900; cursor:pointer;">
+          Close
+        </button>
+        <button type="button" onclick="restartAssessment()"
+          style="padding: .9rem 1.2rem; border-radius: 14px; border: 2px solid rgba(0,217,255,0.4); background: transparent; color: var(--primary); font-weight:900; cursor:pointer;">
+          Retake
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function restartAssessment() {
+  currentQuestionIndex = 0;
+  answers = {};
+  showStep("email");
+}
+window.restartAssessment = restartAssessment;
 
   // ---- 1) Calculate pillar totals + counts ----
   const pillarScores = {};
