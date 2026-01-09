@@ -1893,7 +1893,7 @@
 
     // ======= Assessment =======
     let currentQuestion = 0;
-    let answers = {};
+     = {};
     let userData = {};
 
     // store last computed results for upgrade buttons (safer than inline JSON)
@@ -2126,12 +2126,16 @@
     let currentQuestionIndex = 0;
     let answers = [];
 
-    function startAssessment() {
-      document.getElementById("assessmentModal").style.display = "flex";
-      currentQuestionIndex = 0;
-      answers = [];
-      renderQuestion();
-    }
+function startAssessment() {
+  const modal = document.getElementById("assessmentModal");
+  if (!modal) {
+    console.error("assessmentModal not found");
+    return;
+  }
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+window.startAssessment = startAssessment;
 
     function closeAssessment() {
       document.getElementById("assessmentModal").style.display = "none";
