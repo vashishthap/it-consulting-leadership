@@ -2075,6 +2075,27 @@
       const maxScore = questions.length * 5;
       const overallScore = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
 
+      const reportType = "Free 1-Page Summary"; // or whatever they selected
+      const assessmentDetails =
+        "Assessment Completed\n" +
+        "Overall Score: " + overallScore + "%\n" +
+        "Pillars: " + JSON.stringify(pillarAverages) + "\n" +
+        "Role: " + (userData.role || "") + "\n" +
+        "Company: " + (userData.company || "");
+      
+      pushAssessmentToZoho(
+        {
+          name: userData.name,
+          email: userData.email,
+          company: userData.company,
+          goals: "AI Readiness Assessment submission via website"
+        },
+        overallScore,
+        reportType,
+        assessmentDetails
+      );
+
+
       // store for upgrade buttons
       window._nbvAssessment.lastOverallScore = overallScore;
       window._nbvAssessment.lastPillarAverages = pillarAverages;
