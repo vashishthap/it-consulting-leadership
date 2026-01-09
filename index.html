@@ -2188,51 +2188,210 @@ window.startAssessment = startAssessment;
       }
     }
 
-    function showResults() {
-      document.getElementById("assessmentContent").style.display = "none";
-      document.getElementById("resultsContainer").style.display = "block";
-      document.getElementById("progressFill").style.width = "100%";
+function showResults() {
+  // Hide questions, show results container
+  document.getElementById('questionsContainer').style.display = 'none';
+  const resultsEl = document.getElementById('resultsContainer');
+  resultsEl.style.display = 'block';
 
-      const pillarTotals = {};
-      const pillarCounts = {};
+  // ---- 1) Calculate pillar totals + counts ----
+  const pillarScores = {};
+  const pillarCounts = {};
 
-      answers.forEach(a => {
-        pillarTotals[a.pillar] = (pillarTotals[a.pillar] || 0) + a.score;
-        pillarCounts[a.pillar] = (pillarCounts[a.pillar] || 0) + 1;
-      });
+  Object.values(answers).forEach(a => {
+    const p = a.pillar;
+    pillarScores[p] = (pillarScores[p] || 0) + (a.score || 0);
+    pillarCounts[p] = (pillarCounts[p] || 0) + 1;
+  });
 
-      const pillarAverages = {};
-      let totalScore = 0;
-      let totalQuestions = answers.length;
+  // ---- 2) Convert to % averages ----
+  const pillarAverages = {};
+  Object.keys(pillarScores).forEach(p => {
+    // each question is 1..5, so average * 20 -> percent
+    pillarAverages[p] = Math.round((pillarScores[p] / pillarCounts[p]) * 20);
+  });
 
-      for (let p in pillarTotals) {
-        const avg = Math.round(pillarTotals[p] / pillarCounts[p]);
-        pillarAverages[p] = avg;
-        totalScore += avg;
-      }
+  // ---- 3) Overall score ----
+  const totalScore = Object.values(answers).reduce((sum, a) => sum + (a.score || 0), 0);
+  const maxScore = questions.length * 5;
+  const overallScore = Math.round((totalScore / maxScore) * 100);
 
-      const overallScore = Math.round((totalScore / Object.keys(pillarAverages).length) * 20);
+  // ---- 4) Readiness bands ----
+  let readinessLevel = '';
+  let readinessColor = '';
+  let readinessMessage = '';
 
-      document.getElementById("overallScore").innerText = overallScore;
+  if (overallScore < 30) {
+    readinessLevel = 'Getting Started';
+    readinessColor = '#ff3366';
+    readinessMessage = 'Your organization is in the early stages of AI readiness. Significant opportunities exist to build foundational capabilities.';
+  } else if (overallScore < 50) {
+    readinessLevel = 'Building Foundation';
+    readinessColor = '#ff9500';
+    readinessMessage = 'You have some AI basics in place, but need to strengthen core capabilities to accelerate adoption.';
+  } else if (overallScore < 70) {
+    readinessLevel = 'Progressing Well';
+    readinessColor = '#00d9ff';
+    readinessMessage = 'Your organization has solid AI foundations and is making good progress toward transformation.';
+  } else if (overallScore < 85) {
+    readinessLevel = 'Advanced';
+    readinessColor = '#7c3aed';
+    readinessMessage = 'You have strong AI capabilities and are well-positioned for advanced implementations.';
+  } else {
+    readinessLevel = 'AI Leader';
+    readinessColor = '#00ff88';
+    readinessMessage = 'Your organization is an AI leader with mature capabilities across all dimensions.';
+  }
 
-      const pillarContainer = document.getElementById("pillarScores");
-      pillarContainer.innerHTML = "";
+  // ---- 5) Store computed results globally (FIX for upgrade buttons) ----
+  lastOverallScore = overallScore;
+  lastPillarAverages = pillarAverages;
 
-      Object.keys(pillarAverages).forEach(p => {
-        const div = document.createElement("div");
-        div.className = "pillar-card";
-        div.innerHTML = `
-          <div class="pillar-name">${p}</div>
-          <div class="pillar-score">${pillarAverages[p]}/5</div>
-        `;
-        pillarContainer.appendChild(div);
-      });
+  window._nbvAssessment = {
+    overallScore: overallScore,
+    pillarAverages: pillarAverages
+  };
 
-      window._nbvAssessment = {
-        overallScore,
-        pillarAverages
-      };
+  // ---- 6) Build results HTML ----
+  let html = `
+    <div class="results-container">
+      <h2 style="color:#ffffff;font-size:2.2rem;font-weight:900;margin-bottom:0.75rem;text-align:center;">
+        Your AI Readiness Score
+      </h2>
+
+      <div class="score-circle" style="margin:1.5rem auto;background:linear-gradient(135deg, ${readinessColor}, ${readinessColor}dd);border-radius:999px;width:200px;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.12);box-shadow:0 15px 50px rgba(0,0,0,0.45);">
+        <div class="score-number" style="font-size:3.2rem;font-weight:900;line-height:1;color:#fff;">${overallScore}%</div>
+        <div class="score-label" style="margin-top:0.35rem;color:rgba(255,255,255,0.75);font-weight:800;letter-spacing:1px;text-transform:uppercase;font-size:0.85rem;">Overall Score</div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.05);border-radius:16px;padding:1.5rem;margin:1.5rem 0;border:1px solid rgba(255,255,255,0.1);">
+        <h3 style="color:${readinessColor};font-size:1.6rem;font-weight:900;margin-bottom:0.6rem;text-align:center;">${readinessLevel}</h3>
+        <p style="color:#a0a0b0;font-size:1.05rem;line-height:1.6;text-align:center;margin:0;">${readinessMessage}</p>
+      </div>
+
+      <h3 style="color:#ffffff;font-size:1.25rem;font-weight:900;margin:1.5rem 0 1rem;text-align:center;">
+        Scores by Pillar
+      </h3>
+
+      <div class="pillar-scores" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.8rem;">
+  `;
+
+  // Pillar cards
+  Object.keys(pillarAverages).forEach(pillar => {
+    const score = pillarAverages[pillar];
+    const pillarColor = score < 40 ? '#ff3366' : score < 60 ? '#ff9500' : score < 80 ? '#00d9ff' : '#00ff88';
+
+    html += `
+      <div class="pillar-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:1rem;text-align:center;">
+        <div class="pillar-name" style="color:${pillarColor};font-weight:900;margin-bottom:0.25rem;">${pillar}</div>
+        <div class="pillar-score" style="color:#fff;font-weight:900;font-size:1.4rem;">${score}%</div>
+      </div>
+    `;
+  });
+
+  html += `
+      </div>
+
+      <!-- Upgrade section (kept, but safer: no inline JSON / no undefined vars) -->
+      <div style="background:rgba(255,255,255,.03);border-radius:20px;padding:2rem;margin:1.6rem 0;border:2px solid rgba(0,217,255,.2);">
+        <h3 style="color:#ffffff;font-size:1.4rem;margin-bottom:.4rem;font-weight:900;text-align:center;">🚀 Unlock Your Full AI Potential</h3>
+        <p style="color:#a0a0b0;text-align:center;margin-bottom:1.4rem;">Get deeper insights and actionable strategies with our premium reports</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Free 1-Page Summary</h4>
+            <div style="color:#00ff88;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">FREE</div>
+            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
+              <li>✓ Overall readiness score</li><li>✓ Pillar breakdown</li><li>✓ Basic recommendations</li><li>✓ Email delivery</li>
+            </ul>
+            <div style="margin-top:1rem;padding:.6rem;background:rgba(0,255,136,.1);border-radius:10px;text-align:center;">
+              <span style="color:#00ff88;font-weight:900;">✓ INCLUDED</span>
+            </div>
+          </div>
+
+          <div style="background:linear-gradient(135deg,rgba(0,217,255,.15),rgba(124,58,237,.15));border-radius:15px;padding:1.25rem;border:2px solid #00d9ff;position:relative;">
+            <div style="position:absolute;top:-12px;right:14px;background:linear-gradient(135deg,#ff3366,#ff9500);padding:.35rem .85rem;border-radius:20px;font-size:.75rem;font-weight:900;color:#fff;letter-spacing:1px;">POPULAR</div>
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Premium Report</h4>
+            <div style="color:#00d9ff;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$97</div>
+            <ul style="list-style:none;padding:0;color:#ffffff;font-size:.95rem;line-height:1.8;">
+              <li>✓ 15-page detailed report</li><li>✓ Benchmarking vs peers</li><li>✓ Custom 90-day roadmap</li><li>✓ Prioritized use cases</li><li>✓ ROI projections</li><li>✓ Risk analysis</li>
+            </ul>
+            <button type="button" onclick="upgradeToPremium('premium')" style="margin-top:1rem;width:100%;padding:.75rem;background:linear-gradient(135deg,#00d9ff,#7c3aed);border:none;border-radius:12px;color:#fff;font-weight:900;cursor:pointer;">
+              Get Premium Report →
+            </button>
+          </div>
+
+          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Premium + Consult</h4>
+            <div style="color:#7c3aed;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$297</div>
+            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
+              <li>✓ Everything in Premium</li><li>✓ 60-min strategy call</li><li>✓ Expert Q&A session</li><li>✓ Implementation guidance</li><li>✓ Priority support</li>
+            </ul>
+            <button type="button" onclick="upgradeToPremium('consult')" style="margin-top:1rem;width:100%;padding:.75rem;background:transparent;border:2px solid rgba(124,58,237,.6);border-radius:12px;color:#7c3aed;font-weight:900;cursor:pointer;">
+              Get Report + Call →
+            </button>
+          </div>
+
+          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Enterprise</h4>
+            <div style="color:#ff9500;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$997</div>
+            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
+              <li>✓ Everything in Premium+</li><li>✓ Full team workshop</li><li>✓ Custom transformation plan</li><li>✓ Vendor recommendations</li><li>✓ 30-day support</li>
+            </ul>
+            <button type="button" onclick="upgradeToPremium('enterprise')" style="margin-top:1rem;width:100%;padding:.75rem;background:transparent;border:2px solid rgba(255,149,0,.6);border-radius:12px;color:#ff9500;font-weight:900;cursor:pointer;">
+              Get Enterprise →
+            </button>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:1.2rem;color:#a0a0b0;font-size:.9rem;">
+          💳 Secure payment via Stripe • 📧 Instant delivery • 🔒 Money-back guarantee
+        </div>
+      </div>
+
+      <!-- Email capture form -->
+      <div style="background:linear-gradient(135deg,rgba(0,217,255,.1),rgba(124,58,237,.1));border:2px solid rgba(0,217,255,.3);border-radius:20px;padding:2rem;margin-bottom:1rem;">
+        <h3 style="color:#ffffff;font-size:1.4rem;font-weight:900;margin-bottom:.6rem;text-align:center;">📧 Get Your Free Detailed Report</h3>
+        <p style="color:#a0a0b0;text-align:center;margin-bottom:1.4rem;">Enter your details to receive a comprehensive 1-page AI readiness report via email</p>
+
+        <form id="resultsForm" style="max-width:520px;margin:0 auto;">
+          <input type="text" id="resultUserName" placeholder="Your Name *" required
+            style="width:100%;padding:1rem;margin-bottom:1rem;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:12px;color:white;font-size:1rem;">
+          <input type="email" id="resultUserEmail" placeholder="Email Address *" required
+            style="width:100%;padding:1rem;margin-bottom:1rem;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:12px;color:white;font-size:1rem;">
+          <input type="text" id="resultUserCompany" placeholder="Company Name *" required
+            style="width:100%;padding:1rem;margin-bottom:1.2rem;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:12px;color:white;font-size:1rem;">
+
+          <button type="submit" style="width:100%;padding:1rem;background:linear-gradient(135deg,#ff3366,#ff9500);border:none;border-radius:50px;color:white;font-size:1.05rem;font-weight:900;cursor:pointer;">
+            Send Me My Report 📊
+          </button>
+        </form>
+      </div>
+    </div>
+  `;
+
+  resultsEl.innerHTML = html;
+
+  // ---- 7) Attach submit handler (FIX: correct IDs) ----
+  const form = document.getElementById('resultsForm');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    userData = {
+      name: document.getElementById('resultUserName').value.trim(),
+      email: document.getElementById('resultUserEmail').value.trim(),
+      company: document.getElementById('resultUserCompany').value.trim()
+    };
+
+    // Send to Zoho CRM (only if function exists)
+    if (typeof sendToZohoCRM === 'function') {
+      sendToZohoCRM(userData, overallScore, pillarAverages, 'Free 1-Page Summary');
     }
+
+    alert('Thank you! Your AI Readiness Report will be sent to ' + userData.email + ' shortly.');
+    closeAssessment();
+  });
+}
 
     function submitEmail() {
       const email = document.getElementById("emailInput").value.trim();
