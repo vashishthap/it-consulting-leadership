@@ -1895,35 +1895,36 @@
       });
     });
 
-    // ======= ROI Calculator =======
-    function calculateROI() {
-      const revenue = parseFloat(document.getElementById('revenue').value) || 0;
-      const employees = parseFloat(document.getElementById('employees').value) || 0;
-      const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
-      const tickets = parseFloat(document.getElementById('tickets').value) || 0;
+  function calculateROI() {
+  const revenue = parseFloat(document.getElementById('revenue')?.value) || 0;
+  const employees = parseFloat(document.getElementById('employees')?.value) || 0;
+  const hourlyRate = parseFloat(document.getElementById('hourly-rate')?.value) || 0;
+  const tickets = parseFloat(document.getElementById('tickets')?.value) || 0;
 
-      const deskSavings = tickets * 12 * 0.5 * hourlyRate * 2;
-      const docSavings = employees * 10 * hourlyRate * 12 * 0.6;
-      const resourceSavings = revenue * 0.15;
-      const totalSavings = deskSavings + docSavings + resourceSavings;
-      const newRevenue = revenue * 0.1;
-      const investment = Math.min(200000, Math.max(50000, revenue * 0.03));
-      const netROI = ((totalSavings + newRevenue - investment) / investment * 100).toFixed(0);
-      const payback = investment > 0 ? (investment / (totalSavings / 12)).toFixed(1) : '0';
+  const deskSavings = tickets * 12 * 0.5 * hourlyRate * 2;
+  const docSavings = employees * 10 * hourlyRate * 12 * 0.6;
+  const resourceSavings = revenue * 0.15;
+  const totalSavings = deskSavings + docSavings + resourceSavings;
 
-      document.getElementById('savings').textContent = '$' + Math.round(totalSavings).toLocaleString();
-      document.getElementById('desk-savings').textContent = '$' + Math.round(deskSavings).toLocaleString();
-      document.getElementById('doc-savings').textContent = '$' + Math.round(docSavings).toLocaleString();
-      document.getElementById('resource-savings').textContent = '$' + Math.round(resourceSavings).toLocaleString();
-      document.getElementById('new-revenue').textContent = '$' + Math.round(newRevenue).toLocaleString();
-      document.getElementById('investment').textContent = '$' + Math.round(investment).toLocaleString();
-      document.getElementById('net-roi').textContent = netROI + '%';
-      document.getElementById('payback').textContent = payback;
+  const newRevenue = revenue * 0.1;
+  const investment = Math.min(200000, Math.max(50000, revenue * 0.03));
+  const netROI = investment > 0 ? ((totalSavings + newRevenue - investment) / investment * 100).toFixed(0) : "0";
+  const payback = totalSavings > 0 ? (investment / (totalSavings / 12)).toFixed(1) : "N/A";
 
-      const res = document.getElementById('roiResults');
-      res.style.display = 'block';
-      res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
+  document.getElementById('savings').textContent = '$' + Math.round(totalSavings).toLocaleString();
+  document.getElementById('desk-savings').textContent = '$' + Math.round(deskSavings).toLocaleString();
+  document.getElementById('doc-savings').textContent = '$' + Math.round(docSavings).toLocaleString();
+  document.getElementById('resource-savings').textContent = '$' + Math.round(resourceSavings).toLocaleString();
+  document.getElementById('new-revenue').textContent = '$' + Math.round(newRevenue).toLocaleString();
+  document.getElementById('investment').textContent = '$' + Math.round(investment).toLocaleString();
+  document.getElementById('net-roi').textContent = netROI + '%';
+  document.getElementById('payback').textContent = payback;
+
+  const results = document.getElementById('results');
+  if (results) results.style.display = 'block';
+}
+window.calculateROI = calculateROI;
+
 
 // ======= Assessment (Working + aligned to your modal IDs) =======
 let currentQuestionIndex = 0;
