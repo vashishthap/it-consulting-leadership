@@ -2190,6 +2190,105 @@
       bindTabs();
       bindSmoothScroll();
     });
+    <script>
+/* =========================
+   ZOHO WEB-TO-LEAD (EU) - SAFE for static sites
+   Uses your provided tokens + endpoint.
+   ========================= */
+
+const ZOHO_W2L = {
+  endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
+  xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
+  xmIwtLD: "6fb00fd876fe13687ff5a183eaabcffc40d0ac2b49d9f27355afb17ad109330dec2849768843aabc47935ba77065a882",
+  actionType: "TGVhZHM=",
+  returnURL: "https://vashishthap.github.io/it-consulting-leadership/thank-you.html",
+  zc_gad: "" // optional
+};
+
+// Fire-and-forget submit to Zoho (no CORS noise; does not block your current form flows)
+function postToZohoLead(fields) {
+  const fd = new FormData();
+
+  // Required hidden fields
+  fd.append("xnQsjsdp", ZOHO_W2L.xnQsjsdp);
+  fd.append("xmIwtLD", ZOHO_W2L.xmIwtLD);
+  fd.append("actionType", ZOHO_W2L.actionType);
+  fd.append("returnURL", ZOHO_W2L.returnURL);
+  fd.append("zc_gad", ZOHO_W2L.zc_gad);
+
+  // Add user fields
+  Object.entries(fields || {}).forEach(([k, v]) => {
+    if (v !== undefined && v !== null) fd.append(k, String(v));
+  });
+
+  // no-cors avoids console CORS errors; Zoho still receives it
+  return fetch(ZOHO_W2L.endpoint, { method: "POST", mode: "no-cors", body: fd })
+    .catch(() => {});
+}
+
+/* =========================
+   A) CONTACT FORM: keep FormSubmit + also push to Zoho
+   =========================
+   1) Add id="contactForm" to your existing contact <form>
+   2) This listener will NOT prevent your formsubmit.co submission.
+*/
+(function wireContactFormToZoho() {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+
+  form.addEventListener("submit", function () {
+    const name = (document.getElementById("name")?.value || "").trim();
+    const email = (document.getElementById("email")?.value || "").trim();
+    const company = (document.getElementById("company")?.value || "").trim();
+    const phone = (document.getElementById("phone")?.value || "").trim();
+    const message = (document.getElementById("message")?.value || "").trim();
+
+    // Zoho requires "Last Name" (you can pass full name here)
+    postToZohoLead({
+      "Last Name": name || "Website Lead",
+      "Email": email,
+      "Company": company || "Unknown",
+      "Phone": phone,
+      "Description": message,
+      // Optional: use your custom fields for consistency if you want:
+      "LEADCF2": "Free 1-Page Summary",
+      "LEADCF1": "Source: Website Contact Form"
+      // "LEADCF51": "0"  // score not applicable to contact form
+    });
+  });
+})();
+
+/* =========================
+   B) AI ASSESSMENT RESULTS FORM → Zoho
+   =========================
+   Call this from your resultsForm submit handler.
+   Uses your Zoho custom fields:
+     LEADCF51 = AI Readiness Score
+     LEADCF2  = Report Type
+     LEADCF1  = Assessment Details
+*/
+function pushAssessmentToZoho({ name, email, company, phone, industry, annualRevenue, employees, website, goals }, overallScore, reportType, assessmentDetails) {
+  return postToZohoLead({
+    "Last Name": name || "Assessment Lead",
+    "Email": email || "",
+    "Company": company || "Unknown",
+    "Phone": phone || "",
+    "Industry": industry || "-None-",
+    "Annual Revenue": annualRevenue || "",
+    "No of Employees": employees || "",
+    "Website": website || "",
+
+    // Your *required* Description field in the Zoho webform
+    "Description": goals || "AI Assessment Lead",
+
+    // Your hidden custom fields
+    "LEADCF51": String(overallScore ?? 0),
+    "LEADCF2": reportType || "Free 1-Page Summary",
+    "LEADCF1": assessmentDetails || ""
+  });
+}
+window.postToZohoLead = postToZohoLead;
+window.pushAssessmentToZoho = pushAssessmentToZoho;
   </script>
 </body>
 </html>
