@@ -1755,6 +1755,41 @@
               Take our 5-minute assessment to understand where you stand and get personalized recommendations for your AI transformation journey.
             </p>
           </div>
+         <!-- Questions Container -->
+<div id="questionsContainer" class="modal-inner" style="display:none;">
+  <!-- Progress -->
+  <div class="progress-container" style="margin-bottom: 1.2rem;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+      <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+        PROGRESS
+      </div>
+      <div id="progressText" style="color: var(--primary); font-size: 1.05rem; font-weight: 900;">0%</div>
+    </div>
+    <div style="width:100%; height: 8px; background: rgba(255,255,255,0.12); border-radius: 10px; overflow:hidden;">
+      <div id="progressBar" style="width:0%; height:100%; background: var(--gradient-primary); transition: width .3s ease; border-radius: 10px;"></div>
+    </div>
+  </div>
+
+  <div id="questionCounter" style="color: rgba(255,255,255,0.65); font-weight: 800; margin-bottom: .8rem;"></div>
+  <h3 id="questionTitle" style="font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem;"></h3>
+
+  <div id="optionsContainer" style="display:flex; flex-direction:column; gap:.75rem;"></div>
+
+  <div style="display:flex; justify-content:space-between; gap:1rem; margin-top: 1.2rem;">
+    <button id="backBtn" type="button" onclick="previousQuestion()"
+      style="display:none; padding:.9rem 1.2rem; border-radius: 14px; border: 2px solid rgba(255,255,255,0.18); background: transparent; color:#fff; font-weight:900; cursor:pointer;">
+      ← Back
+    </button>
+
+    <button type="button" onclick="closeAssessment()"
+      style="margin-left:auto; padding:.9rem 1.2rem; border-radius: 14px; border: none; background: rgba(255,255,255,0.08); color:#fff; font-weight:900; cursor:pointer;">
+      Exit
+    </button>
+  </div>
+</div>
+
+<!-- Results Container -->
+<div id="resultsContainer" class="modal-inner" style="display:none;"></div>
 
           <div style="background: rgba(255,255,255,0.03); border-radius: 20px; padding: 1.6rem; border: 1px solid rgba(255,255,255,0.1);">
             <div style="margin-bottom: 1rem;">
