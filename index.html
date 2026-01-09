@@ -1906,7 +1906,6 @@
       const docSavings = employees * 10 * hourlyRate * 12 * 0.6;
       const resourceSavings = revenue * 0.15;
       const totalSavings = deskSavings + docSavings + resourceSavings;
-
       const newRevenue = revenue * 0.1;
       const investment = Math.min(200000, Math.max(50000, revenue * 0.03));
       const netROI = ((totalSavings + newRevenue - investment) / investment * 100).toFixed(0);
