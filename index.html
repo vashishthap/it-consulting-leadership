@@ -2187,24 +2187,113 @@
     window.restartAssessment = restartAssessment;
 
     // Upgrade handler (uses saved values; avoids inline JSON bugs)
-    function upgradeToPremium(type) {
-      const score = window._nbvAssessment.lastOverallScore;
-      const pillars = window._nbvAssessment.lastPillarAverages;
-      alert(
-        `🚀 Selected: ${type.toUpperCase()}\n\n` +
-        `Score: ${score}%\n` +
-        `Pillars: ${JSON.stringify(pillars, null, 2)}\n\n` +
-        `Connect your Stripe checkout here.`
-      );
-    }
-    window.upgradeToPremium = upgradeToPremium;
+    // Upgrade handler (uses saved values; avoids inline JSON bugs)
+function upgradeToPremium(type) {
+  const score = window._nbvAssessment?.lastOverallScore ?? 0;
+  const pillars = window._nbvAssessment?.lastPillarAverages ?? {};
+  alert(
+    `🚀 Selected: ${String(type).toUpperCase()}\n\n` +
+    `Score: ${score}%\n` +
+    `Pillars: ${JSON.stringify(pillars, null, 2)}\n\n` +
+    `Connect your Stripe checkout here.`
+  );
+}
+window.upgradeToPremium = upgradeToPremium;
 
-    // Optional stub (so it never throws if referenced later)
-    function sendToZohoCRM(userData, overallScore, pillarAverages, leadMagnetName) {
-      // hook your Zoho integration here
-      console.log("sendToZohoCRM stub:", { userData, overallScore, pillarAverages, leadMagnetName });
+/* =========================
+   ZOHO WEB-TO-LEAD (EU) - SAFE for static sites
+   - No fetch() (avoids CORS)
+   - Uses hidden form + hidden iframe
+   ========================= */
+const ZOHO_W2L = {
+  endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
+  xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
+  xmIwtLD: "6fb00fd876fe13687ff5a183eaabcffc40d0ac2b49d9f27355afb17ad109330dec2849768843aabc47935ba77065a882",
+  actionType: "TGVhZHM=",
+  returnURL: "https://vashishthap.github.io/it-consulting-leadership/thank-you.html",
+  zc_gad: ""
+};
+
+// Helper to post to Zoho without CORS issues (hidden iframe submit)
+function postToZohoLead(fields) {
+  try {
+    const iframeName = "zoho_iframe_" + Math.random().toString(36).slice(2);
+
+    const iframe = document.createElement("iframe");
+    iframe.name = iframeName;
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = ZOHO_W2L.endpoint;
+    form.target = iframeName;
+    form.acceptCharset = "UTF-8";
+    form.style.display = "none";
+
+    // Required Zoho hidden fields
+    const hiddenBase = {
+      xnQsjsdp: ZOHO_W2L.xnQsjsdp,
+      zc_gad: ZOHO_W2L.zc_gad,
+      xmIwtLD: ZOHO_W2L.xmIwtLD,
+      actionType: ZOHO_W2L.actionType,
+      returnURL: ZOHO_W2L.returnURL
+    };
+
+    function addField(name, value) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value == null ? "" : String(value);
+      form.appendChild(input);
     }
-    window.sendToZohoCRM = sendToZohoCRM;
+
+    Object.entries(hiddenBase).forEach(([k, v]) => addField(k, v));
+    Object.entries(fields || {}).forEach(([k, v]) => addField(k, v));
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+    // cleanup
+    setTimeout(() => {
+      form.remove();
+      iframe.remove();
+    }, 1500);
+
+    return true;
+  } catch (err) {
+    console.error("Zoho W2L submit failed:", err);
+    return false;
+  }
+}
+
+// ✅ Replace stub with a working Zoho lead submit
+function sendToZohoCRM(userData, overallScore, pillarAverages, leadMagnetName) {
+  // Map YOUR assessment fields -> Zoho Lead fields
+  // (These names match your Zoho embed snippet)
+  const detailsText =
+    `Lead Magnet: ${leadMagnetName}\n` +
+    `Overall Score: ${overallScore}%\n` +
+    `Pillars: ${JSON.stringify(pillarAverages || {}, null, 2)}\n` +
+    `Role: ${userData?.role || ""}`;
+
+  const payload = {
+    // Required in your Zoho form:
+    "Last Name": userData?.name || "Unknown",
+    "Email": userData?.email || "",
+    "Company": userData?.company || "Unknown",
+    "Description": detailsText,
+
+    // Hidden custom fields from your Zoho form:
+    "LEADCF51": String(overallScore ?? 0),           // AI Readiness Score
+    "LEADCF2": leadMagnetName || "Free 1-Page Summary", // Report Type
+    "LEADCF1": detailsText                            // Assessment Details (or keep separate)
+  };
+
+  return postToZohoLead(payload);
+}
+window.sendToZohoCRM = sendToZohoCRM;
 
     // DOM init
     document.addEventListener("DOMContentLoaded", () => {
