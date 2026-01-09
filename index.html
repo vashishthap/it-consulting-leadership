@@ -2215,31 +2215,6 @@ const ZOHO_W2L = {
 };
 
 // Helper to post to Zoho without CORS issues (hidden iframe submit)
-function postToZohoLead(fields) {
-  try {
-    const iframeName = "zoho_iframe_" + Math.random().toString(36).slice(2);
-
-    const iframe = document.createElement("iframe");
-    iframe.name = iframeName;
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = ZOHO_W2L.endpoint;
-    form.target = iframeName;
-    form.acceptCharset = "UTF-8";
-    form.style.display = "none";
-
-    // Required Zoho hidden fields
-    const hiddenBase = {
-      xnQsjsdp: ZOHO_W2L.xnQsjsdp,
-      zc_gad: ZOHO_W2L.zc_gad,
-      xmIwtLD: ZOHO_W2L.xmIwtLD,
-      actionType: ZOHO_W2L.actionType,
-      returnURL: ZOHO_W2L.returnURL
-    };
-
     function addField(name, value) {
       const input = document.createElement("input");
       input.type = "hidden";
@@ -2300,12 +2275,6 @@ window.sendToZohoCRM = sendToZohoCRM;
       bindTabs();
       bindSmoothScroll();
     });
-/* =========================
-   ZOHO WEB-TO-LEAD (EU) - SAFE for static sites
-   Uses your provided tokens + endpoint.
-   ========================= */
-
-// Fire-and-forget submit to Zoho (no CORS noise; does not block your current form flows)
 function postToZohoLead(fields) {
   const fd = new FormData();
 
