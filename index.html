@@ -2276,32 +2276,62 @@ window.sendToZohoCRM = sendToZohoCRM;
       bindSmoothScroll();
     });
 function postToZohoLead(fields) {
-  const fd = new FormData();
+  try {
+    const Z = window.ZOHO_W2L;
 
-  // Required hidden fields
-  fd.append("xnQsjsdp", ZOHO_W2L.xnQsjsdp);
-  fd.append("xmIwtLD", ZOHO_W2L.xmIwtLD);
-  fd.append("actionType", ZOHO_W2L.actionType);
-  fd.append("returnURL", ZOHO_W2L.returnURL);
-  fd.append("zc_gad", ZOHO_W2L.zc_gad);
+    const iframeName = "zoho_iframe_" + Math.random().toString(36).slice(2);
+    const iframe = document.createElement("iframe");
+    iframe.name = iframeName;
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
 
-  // Add user fields
-  Object.entries(fields || {}).forEach(([k, v]) => {
-    if (v !== undefined && v !== null) fd.append(k, String(v));
-  });
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = Z.endpoint;
+    form.target = iframeName;
+    form.acceptCharset = "UTF-8";
+    form.style.display = "none";
 
-  // no-cors avoids console CORS errors; Zoho still receives it
-  return fetch(ZOHO_W2L.endpoint, { method: "POST", mode: "no-cors", body: fd })
-    .catch(() => {});
+    function addField(name, value) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value == null ? "" : String(value);
+      form.appendChild(input);
+    }
+
+    // required hidden fields
+    addField("xnQsjsdp", Z.xnQsjsdp);
+    addField("zc_gad", Z.zc_gad || "");
+    addField("xmIwtLD", Z.xmIwtLD);
+    addField("actionType", Z.actionType);
+    addField("returnURL", Z.returnURL);
+
+    // your lead fields
+    Object.entries(fields || {}).forEach(([k, v]) => addField(k, v));
+
+    document.body.appendChild(form);
+    form.submit();
+
+    // cleanup (safe in more browsers)
+    setTimeout(() => {
+      if (form && form.parentNode) form.parentNode.removeChild(form);
+      if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
+    }, 2000);
+
+    return true;
+  } catch (err) {
+    console.error("Zoho W2L submit failed:", err);
+    return false;
+  }
 }
-
 /* =========================
    A) CONTACT FORM: keep FormSubmit + also push to Zoho
    =========================
    1) Add id="contactForm" to your existing contact <form>
    2) This listener will NOT prevent your formsubmit.co submission.
 */
-(function wireContactFormToZoho() {
+ function wireContactFormToZoho() {
   const form = document.getElementById("contactForm");
   if (!form) return;
 
