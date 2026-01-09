@@ -2364,18 +2364,21 @@ window.restartAssessment = restartAssessment;
 
   resultsEl.innerHTML = html;
 
-  // ---- 7) Attach submit handler (FIX: correct IDs) ----
-  const form = document.getElementById('resultsForm');
-  form.addEventListener('submit', function (e) {
+  // ---- 7) Attach submit handler (FIX: correct IDs + safe null check) ----
+const resultsForm = document.getElementById('resultsForm');
+
+if (resultsForm) {
+  resultsForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    // IMPORTANT: don't redeclare userData with "let" here — just assign
     userData = {
       name: document.getElementById('resultUserName').value.trim(),
       email: document.getElementById('resultUserEmail').value.trim(),
       company: document.getElementById('resultUserCompany').value.trim()
     };
 
-    // Send to Zoho CRM (only if function exists)
+    // Send to Zoho CRM only if function exists
     if (typeof sendToZohoCRM === 'function') {
       sendToZohoCRM(userData, overallScore, pillarAverages, 'Free 1-Page Summary');
     }
@@ -2384,6 +2387,7 @@ window.restartAssessment = restartAssessment;
     closeAssessment();
   });
 }
+
 
     function submitEmail() {
       const email = document.getElementById("emailInput").value.trim();
