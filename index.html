@@ -2222,14 +2222,10 @@ const ZOHO_W2L = {
       input.value = value == null ? "" : String(value);
       form.appendChild(input);
     }
-
     Object.entries(hiddenBase).forEach(([k, v]) => addField(k, v));
     Object.entries(fields || {}).forEach(([k, v]) => addField(k, v));
-
     document.body.appendChild(form);
-
     form.submit();
-
     // cleanup
     setTimeout(() => {
       form.remove();
