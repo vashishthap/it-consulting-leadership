@@ -1945,30 +1945,41 @@ let lastPillarAverages = {};
 
 // Open modal from "Free AI Assessment" button
 function startAssessment() {
+  // ensure state exists
+  window._nbvAssessment = window._nbvAssessment || {
+    currentQuestionIndex: 0,
+    answers: [],
+    userData: {},
+    lastOverallScore: 0,
+    lastPillarAverages: {}
+  };
+
+  // reset state
+  window._nbvAssessment.currentQuestionIndex = 0;
+  window._nbvAssessment.answers = [];
+  window._nbvAssessment.userData = {};
+
   const modal = document.getElementById("assessmentModal");
   if (!modal) {
     console.error("assessmentModal not found");
     return;
   }
 
-  // reset state safely
-  window._nbv.currentQuestionIndex = 0;
-  window._nbv.answers = {};
-
-  // show modal
   modal.style.display = "flex";
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 
-  // show email step first
-  const email = document.getElementById("emailCapture");
-  const qs = document.getElementById("questionsContainer");
-  const res = document.getElementById("resultsContainer");
-  if (email) email.style.display = "block";
-  if (qs) qs.style.display = "none";
-  if (res) res.style.display = "none";
+  // show email capture first (if present)
+  const emailCapture = document.getElementById("emailCapture");
+  const questionsContainer = document.getElementById("questionsContainer");
+  const resultsContainer = document.getElementById("resultsContainer");
+
+  if (emailCapture) emailCapture.style.display = "block";
+  if (questionsContainer) questionsContainer.style.display = "none";
+  if (resultsContainer) resultsContainer.style.display = "none";
 }
 window.startAssessment = startAssessment;
+
 
 function closeAssessment() {
   const modal = document.getElementById("assessmentModal");
