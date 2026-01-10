@@ -1766,22 +1766,25 @@ window.ZOHO_W2L = window.ZOHO_W2L || {
 
 function postToZohoLead(fields) {
   const cfg = window.ZOHO_W2L;
+  if (!cfg || !cfg.endpoint || !cfg.xnQsjsdp || !cfg.xmIwtLD) {
+    console.error("[Zoho] Missing config", cfg);
+    return false;
+  }
 
-  // Super explicit errors (so we never “guess” again)
-  if (!cfg) { console.error("ZOHO_W2L is undefined"); return false; }
-  if (!cfg.endpoint) { console.error("ZOHO_W2L.endpoint missing"); return false; }
-  if (!cfg.xnQsjsdp) { console.error("ZOHO_W2L.xnQsjsdp missing"); return false; }
-  if (!cfg.xmIwtLD) { console.error("ZOHO_W2L.xmIwtLD missing"); return false; }
+  const debug = new URLSearchParams(location.search).has("zohoDebug");
 
   const iframeName = "zoho_w2l_iframe_" + Date.now();
   const iframe = document.createElement("iframe");
   iframe.name = iframeName;
-  iframe.style.display = "none";
+  iframe.style.display = debug ? "block" : "none";
+  iframe.style.width = debug ? "100%" : "0";
+  iframe.style.height = debug ? "700px" : "0";
+  iframe.style.border = debug ? "1px solid #333" : "0";
 
   const form = document.createElement("form");
   form.method = "POST";
   form.action = cfg.endpoint;
-  form.target = iframeName;
+  form.target = debug ? "_blank" : iframeName;   // KEY: open Zoho response in new tab when debugging
   form.acceptCharset = "UTF-8";
   form.style.display = "none";
 
@@ -1799,21 +1802,26 @@ function postToZohoLead(fields) {
   add("actionType", cfg.actionType);
   add("returnURL", cfg.returnURL);
 
-  // Zoho honeypot (must exist + empty)
+  // Zoho honeypot (must be present and empty)
   add("aG9uZXlwb3Q", "");
 
   Object.keys(fields || {}).forEach(k => add(k, fields[k]));
 
   console.log("[Zoho] Submitting lead payload:", fields);
 
+  // Only append iframe when not debugging (or if you want to visually see it)
   document.body.appendChild(iframe);
   document.body.appendChild(form);
+
   form.submit();
 
-  setTimeout(() => {
-    try { form.remove(); } catch(e) {}
-    try { iframe.remove(); } catch(e) {}
-  }, 3000);
+  // Cleanup only when not debugging
+  if (!debug) {
+    setTimeout(() => {
+      try { form.remove(); } catch(e) {}
+      try { iframe.remove(); } catch(e) {}
+    }, 3000);
+  }
 
   return true;
 }
