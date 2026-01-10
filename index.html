@@ -349,7 +349,7 @@ function selectOption(score, pillar) {
     window._nbvAssessment.currentQuestionIndex++;
     renderQuestion();
   } else {
-    showResults();
+    s();
   }
 }
 
@@ -464,6 +464,18 @@ function showResults() {
   `;
 }
 window.showResults = showResults;
+postAssessmentToZoho(
+  {
+    name: userData.name,
+    email: userData.email,
+    company: userData.company,
+    score: window._nbvAssessment.lastOverallScore,
+    details: JSON.stringify(window._nbvAssessment.lastPillarAverages),
+    goals: "Submitted via AI Readiness Assessment"
+  },
+  "Free 1-Page Summary"
+);
+
 
 /* =========================================================
    UPGRADE HANDLER (no inline JSON bugs)
