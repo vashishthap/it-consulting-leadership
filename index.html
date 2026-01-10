@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AI Readiness Assessment | NothingButValue</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+  body {
+    margin: 0;
+    background: #0b0f19;
+    font-family: Arial, sans-serif;
+    color: #fff;
+  }
+
+  /* CTA button */
+  .cta-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg,#00d9ff,#7c3aed);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 900;
+    cursor: pointer;
+    border: none;
+    margin: 2rem auto;
+    display: block;
+  }
+
+  /* Modal backdrop */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  /* Modal container */
+  .modal-content {
+    background: #111827;
+    width: 100%;
+    max-width: 650px;
+    border-radius: 20px;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+
+  .close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+  }
+
+  /* Inputs */
+  input, textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  /* Question buttons */
+  .option-btn {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .option-btn:hover {
+    border-color: #00d9ff;
+    transform: translateY(-2px);
+  }
+
+  /* Results */
+  .score-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 999px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    margin: 1.5rem auto;
+    color: #fff;
+    font-weight: 900;
+  }
+
+  .pillar-scores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
+    gap: 1rem;
+  }
+
+  .pillar-card {
+    background: rgba(255,255,255,0.04);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    text-align:center;
+  }
+
+</style>
+</head>
+
+<body>
+
+<button class="cta-btn" onclick="startAssessment()">✨ Free AI Readiness Assessment</button>
+
+<!-- =========================
+     ASSESSMENT MODAL
+   ========================= -->
+<div id="assessmentModal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeAssessment()">✕</button>
+
+    <!-- STEP 1: EMAIL CAPTURE -->
+    <div id="emailCapture">
+      <h2 style="text-align:center;font-weight:900;font-size:1.8rem;">Discover Your AI Readiness Score</h2>
+
+      <input id="userName" placeholder="Your Name *" />
+      <input id="userEmail" type="email" placeholder="Work Email *" />
+      <input id="userCompany" placeholder="Company *" />
+      <input id="userRole" placeholder="Your Role (Optional)" />
+
+      <button class="cta-btn" style="margin-top:1rem;" onclick="startQuestions()">Start Assessment →</button>
+
+      <p style="text-align:center;color:#ccc;font-size:.9rem;">
+        🔒 Your information is secure.<br>⏱️ Takes ~5 minutes.
+      </p>
+    </div>
+
+    <!-- STEP 2: QUESTIONS -->
+    <div id="questionsContainer" style="display:none;">
+      <div id="questionCounter" style="font-size:1rem;margin-bottom:1rem;"></div>
+      <h3 id="questionTitle"></h3>
+      <div id="optionsContainer"></div>
+
+      <button onclick="previousQuestion()" id="backBtn" style="margin-top:1rem;display:none;">← Back</button>
+    </div>
+
+    <!-- STEP 3: RESULTS -->
+    <div id="resultsContainer" style="display:none;"></div>
+  </div>
+</div>
+```html
+<!-- =========================
+     PART 2 — JAVASCRIPT ENGINE
+     (Paste this IMMEDIATELY after PART 1)
+   ========================= -->
+<script>
+/* =========================================================
+   GLOBAL STATE (single source of truth)
+   ========================================================= */
+window._nbvAssessment = window._nbvAssessment || {
+  currentQuestionIndex: 0,
+  answers: [],               // array of {pillar, score}
+  userData: {},              // {name,email,company,role}
+  lastOverallScore: 0,
+  lastPillarAverages: {}
+};
+
+/* =========================================================
+   OPEN / CLOSE MODAL
+   ========================================================= */
+function startAssessment() {
+  const modal = document.getElementById("assessmentModal");
+  if (!modal) return console.error("assessmentModal not found");
+
+  // reset state each time you start
+  window._nbvAssessment.currentQuestionIndex = 0;
+  window._nbvAssessment.answers = [];
+  window._nbvAssessment.userData = {};
+  window._nbvAssessment.lastOverallScore = 0;
+  window._nbvAssessment.lastPillarAverages = {};
+
+  // show step 1
+  showStep("email");
+
+  modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+window.startAssessment = startAssessment;
+
+function closeAssessment() {
+  const modal = document.getElementById("assessmentModal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  }
+  document.body.style.overflow = "auto";
+}
+window.closeAssessment = closeAssessment;
+
+function showStep(step) {
+  const email = document.getElementById("emailCapture");
+  const qs = document.getElementById("questionsContainer");
+  const res = document.getElementById("resultsContainer");
+
+  if (email) email.style.display = (step === "email") ? "block" : "none";
+  if (qs) qs.style.display = (step === "questions") ? "block" : "none";
+  if (res) res.style.display = (step === "results") ? "block" : "none";
+}
+
+/* =========================================================
+   QUESTIONS (Your full list continues here)
+   ========================================================= */
+const questions = [
+  {
+    question: "Do you have a clear AI strategy aligned to business goals?",
+    pillar: "Strategy",
+    options: [
+      { text: "No strategy", score: 1 },
+      { text: "Early discussions", score: 2 },
+      { text: "Defined strategy", score: 3 },
+      { text: "Strategy with roadmap", score: 4 },
+      { text: "Strategy executed & measured", score: 5 }
+    ]
+  },
+  {
+    question: "How ready is your data (quality, access, governance) for AI?",
+    pillar: "Data",
+    options: [
+      { text: "Data is messy/inaccessible", score: 1 },
+      { text: "Some usable data, limited access", score: 2 },
+      { text: "Core data available, some governance", score: 3 },
+      { text: "Good data + governance, improving", score: 4 },
+      { text: "High-quality data + strong governance", score: 5 }
+    ]
+  },
+  {
+    question: "How mature is your AI/ML technology stack and infrastructure?",
+    pillar: "Technology",
+    options: [
+      { text: "No AI tech stack", score: 1 },
+      { text: "Exploring tools / ad-hoc usage", score: 2 },
+      { text: "Basic tools in place (limited scale)", score: 3 },
+      { text: "Scalable stack with some MLOps", score: 4 },
+      { text: "Robust MLOps + scalable production platform", score: 5 }
+    ]
+  },
+  {
+    question: "How ready are your people and culture to adopt AI?",
+    pillar: "People",
+    options: [
+      { text: "Strong resistance / fear", score: 1 },
+      { text: "Low awareness, limited buy-in", score: 2 },
+      { text: "Some champions and training", score: 3 },
+      { text: "Good adoption + change plan", score: 4 },
+      { text: "AI-first culture with strong upskilling", score: 5 }
+    ]
+  },
+  {
+    question: "How do you ensure AI systems respect customer privacy and data rights?",
+    pillar: "Governance",
+    options: [
+      { text: "Privacy concerns not addressed", score: 1 },
+      { text: "Privacy planning not started", score: 2 },
+      { text: "Privacy considerations identified", score: 3 },
+      { text: "Privacy policies being developed", score: 4 },
+      { text: "Comprehensive privacy framework with regular audits", score: 5 }
+    ]
+  }
+];
+
+/* =========================================================
+   START QUESTIONS (after email capture)
+   ========================================================= */
+function startQuestions() {
+  const name = (document.getElementById("userName")?.value || "").trim();
+  const email = (document.getElementById("userEmail")?.value || "").trim();
+  const company = (document.getElementById("userCompany")?.value || "").trim();
+  const role = (document.getElementById("userRole")?.value || "").trim();
+
+  if (!name || !email || !company) {
+    alert("Please fill in Name, Work Email, and Company.");
+    return;
+  }
+
+  window._nbvAssessment.userData = { name, email, company, role };
+  window._nbvAssessment.currentQuestionIndex = 0;
+  window._nbvAssessment.answers = [];
+
+  showStep("questions");
+  renderQuestion();
+}
+window.startQuestions = startQuestions;
+
+/* =========================================================
+   RENDER QUESTION
+   ========================================================= */
+function renderQuestion() {
+  const idx = window._nbvAssessment.currentQuestionIndex;
+  const q = questions[idx];
+  if (!q) return console.error("Question not found at index:", idx);
+
+  const counter = document.getElementById("questionCounter");
+  const title = document.getElementById("questionTitle");
+  const optionsContainer = document.getElementById("optionsContainer");
+  const backBtn = document.getElementById("backBtn");
+
+  if (counter) counter.textContent = `Question ${idx + 1} of ${questions.length}`;
+  if (title) title.textContent = q.question;
+
+  if (!optionsContainer) return console.error("optionsContainer missing in DOM");
+  optionsContainer.innerHTML = "";
+
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option-btn";
+    btn.innerHTML = `<span>${opt.text}</span><span>→</span>`;
+    btn.onclick = () => selectOption(opt.score, q.pillar);
+    optionsContainer.appendChild(btn);
+  });
+
+  if (backBtn) backBtn.style.display = (idx === 0) ? "none" : "inline-block";
+}
+
+function selectOption(score, pillar) {
+  const idx = window._nbvAssessment.currentQuestionIndex;
+  window._nbvAssessment.answers[idx] = { pillar, score };
+
+  if (idx < questions.length - 1) {
+    window._nbvAssessment.currentQuestionIndex++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function previousQuestion() {
+  if (window._nbvAssessment.currentQuestionIndex > 0) {
+    window._nbvAssessment.currentQuestionIndex--;
+    renderQuestion();
+  }
+}
+window.previousQuestion = previousQuestion;
+
+/* =========================================================
+   RESULTS: compute scores + render + save for upgrades
+   ========================================================= */
+function showResults() {
+  showStep("results");
+
+  const resultsContainer = document.getElementById("resultsContainer");
+  if (!resultsContainer) return console.error("resultsContainer missing");
+
+  const answersArr = window._nbvAssessment.answers || [];
+
+  // Pillar totals
+  const pillarScores = {};
+  const pillarCounts = {};
+
+  answersArr.forEach(a => {
+    if (!a) return;
+    const p = a.pillar;
+    pillarScores[p] = (pillarScores[p] || 0) + (a.score || 0);
+    pillarCounts[p] = (pillarCounts[p] || 0) + 1;
+  });
+
+  // Pillar averages as %
+  const pillarAverages = {};
+  Object.keys(pillarScores).forEach(p => {
+    pillarAverages[p] = Math.round((pillarScores[p] / pillarCounts[p]) * 20);
+  });
+
+  const totalScore = answersArr.reduce((sum, a) => sum + ((a && a.score) || 0), 0);
+  const maxScore = questions.length * 5;
+  const overallScore = Math.round((totalScore / maxScore) * 100);
+
+  // Save globally for upgrade actions
+  window._nbvAssessment.lastOverallScore = overallScore;
+  window._nbvAssessment.lastPillarAverages = pillarAverages;
+
+  // Readiness bands
+  let readinessLevel = "Getting Started";
+  let readinessColor = "#ff3366";
+  let readinessMessage = "You’re in the early stages of AI readiness. Focus on building foundations first.";
+
+  if (overallScore >= 30 && overallScore < 50) {
+    readinessLevel = "Building Foundation";
+    readinessColor = "#ff9500";
+    readinessMessage = "You’ve started, but should strengthen core capabilities to accelerate AI adoption.";
+  } else if (overallScore >= 50 && overallScore < 70) {
+    readinessLevel = "Progressing Well";
+    readinessColor = "#00d9ff";
+    readinessMessage = "You have solid foundations and are moving toward real AI transformation.";
+  } else if (overallScore >= 70 && overallScore < 85) {
+    readinessLevel = "Advanced";
+    readinessColor = "#7c3aed";
+    readinessMessage = "Strong AI readiness — you’re well-positioned for advanced implementations.";
+  } else if (overallScore >= 85) {
+    readinessLevel = "AI Leader";
+    readinessColor = "#00ff88";
+    readinessMessage = "Excellent — you’re operating at an AI leader level with mature capabilities.";
+  }
+
+  const pillarsHtml = Object.keys(pillarAverages).map(p => {
+    const s = pillarAverages[p];
+    return `
+      <div class="pillar-card">
+        <div style="font-weight:900;margin-bottom:.35rem;color:${readinessColor};">${p}</div>
+        <div style="font-size:1.3rem;font-weight:900;">${s}%</div>
+      </div>
+    `;
+  }).join("");
+
+  resultsContainer.innerHTML = `
+    <h2 style="text-align:center;font-weight:900;font-size:2rem;">Your AI Readiness Score</h2>
+
+    <div class="score-circle" style="background:linear-gradient(135deg, ${readinessColor}, ${readinessColor}cc);">
+      <div style="font-size:3rem;">${overallScore}%</div>
+      <div style="opacity:.85;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;">Overall Score</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.05);padding:1.25rem;border-radius:16px;text-align:center;">
+      <div style="font-weight:900;font-size:1.4rem;color:${readinessColor};">${readinessLevel}</div>
+      <p style="color:#cbd5e1;margin:.6rem 0 0;">${readinessMessage}</p>
+    </div>
+
+    <h3 style="margin-top:1.5rem;font-weight:900;text-align:center;">Scores by Pillar</h3>
+    <div class="pillar-scores" style="margin-top:1rem;">${pillarsHtml}</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:1.5rem;">
+      <button class="cta-btn" style="margin:0;border-radius:14px;" onclick="upgradeToPremium('premium')">Premium Report →</button>
+      <button class="cta-btn" style="margin:0;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#00d9ff);" onclick="upgradeToPremium('consult')">Report + Call →</button>
+      <button class="cta-btn" style="margin:0;border-radius:14px;background:linear-gradient(135deg,#ff9500,#ff3366);" onclick="upgradeToPremium('enterprise')">Enterprise →</button>
+    </div>
+
+    <div style="margin-top:1.5rem;background:rgba(255,255,255,0.04);padding:1rem;border-radius:14px;">
+      <h3 style="margin:0 0 .8rem;font-weight:900;">Send Results to Email (Zoho Lead)</h3>
+      <button class="cta-btn" style="margin:0;width:100%;border-radius:14px;" onclick="submitAssessmentToZoho('Free 1-Page Summary')">
+        Send My Report →
+      </button>
+      <p style="color:#94a3b8;font-size:.9rem;margin:.75rem 0 0;">
+        This submits a lead into Zoho CRM using your Web-to-Lead credentials.
+      </p>
+    </div>
+  `;
+}
+window.showResults = showResults;
+
+/* =========================================================
+   UPGRADE HANDLER (no inline JSON bugs)
+   ========================================================= */
+function upgradeToPremium(type) {
+  const score = window._nbvAssessment.lastOverallScore;
+  const pillars = window._nbvAssessment.lastPillarAverages;
+  alert(
+    `🚀 Selected: ${type.toUpperCase()}\n\n` +
+    `Score: ${score}%\n` +
+    `Pillars: ${JSON.stringify(pillars, null, 2)}\n\n` +
+    `Connect your Stripe checkout here.`
+  );
+
+  // OPTIONAL: also log upgrade intent to Zoho
+  submitAssessmentToZoho(type);
+}
+window.upgradeToPremium = upgradeToPremium;
+
+/* =========================================================
+   ZOHO WEB-TO-LEAD (SAFE SUBMIT via hidden iframe)
+   - Fixes "Unexpected token <"
+   - No <script> nested inside <script>
+   - No CORS fetch noise
+   ========================================================= */
+const NBV_ZOHO_W2L = {
+  endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
+  xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
+  xmIwtLD: "6fb00fd876fe13687ff5a183eaabcffc40d0ac2b49d9f27355afb17ad109330dec2849768843aabc47935ba77065a882",
+  actionType: "TGVhZHM=",
+  returnURL: "https://vashishthap.github.io/it-consulting-leadership/thank-you.html",
+  zc_gad: ""
+};
+
+// submit to Zoho Web-to-Lead without navigation
+function postToZohoLead(fields) {
+  try {
+    const iframeName = "zohoW2LFrame_" + Date.now();
+    const iframe = document.createElement("iframe");
+    iframe.name = iframeName;
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+
+    const form = document.createElement("form");
+    form.action = NBV_ZOHO_W2L.endpoint;
+    form.method = "POST";
+    form.target = iframeName;
+    form.acceptCharset = "UTF-8";
+
+    // required hidden fields
+    const hidden = (name, val) => {
+      const i = document.createElement("input");
+      i.type = "hidden";
+      i.name = name;
+      i.value = String(val ?? "");
+      return i;
+    };
+
+    form.appendChild(hidden("xnQsjsdp", NBV_ZOHO_W2L.xnQsjsdp));
+    form.appendChild(hidden("zc_gad", NBV_ZOHO_W2L.zc_gad));
+    form.appendChild(hidden("xmIwtLD", NBV_ZOHO_W2L.xmIwtLD));
+    form.appendChild(hidden("actionType", NBV_ZOHO_W2L.actionType));
+    form.appendChild(hidden("returnURL", NBV_ZOHO_W2L.returnURL));
+
+    // add payload fields
+    Object.keys(fields || {}).forEach(k => {
+      form.appendChild(hidden(k, fields[k]));
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+
+    // cleanup
+    setTimeout(() => {
+      form.remove();
+      iframe.remove();
+    }, 1500);
+
+    return true;
+  } catch (err) {
+    console.error("Zoho W2L submit failed:", err);
+    return false;
+  }
+}
+
+function submitAssessmentToZoho(reportType) {
+  const u = window._nbvAssessment.userData || {};
+  const overall = window._nbvAssessment.lastOverallScore || 0;
+  const pillars = window._nbvAssessment.lastPillarAverages || {};
+
+  // This maps to your Zoho form field names:
+  // Last Name (mandatory in Zoho) -> use Name
+  // Email -> Work Email
+  // Company -> Company
+  // LEADCF51 -> AI Readiness Score
+  // LEADCF2 -> Report Type
+  // LEADCF1 -> Assessment Details
+  const details = {
+    OverallScore: overall,
+    Pillars: pillars,
+    Role: u.role || ""
+  };
+
+  const zohoFields = {
+    "Last Name": u.name || "Website Lead",
+    "Email": u.email || "",
+    "Company": u.company || "",
+    "LEADCF51": String(overall),
+    "LEADCF2": reportType || "Free 1-Page Summary",
+    "LEADCF1": JSON.stringify(details)
+  };
+
+  const ok = postToZohoLead(zohoFields);
+  if (ok) {
+    alert("✅ Submitted to Zoho CRM. We’ll email your report shortly.");
+  } else {
+    alert("⚠️ Zoho submission failed. Please try again or contact value.advisor@nothingbutvalue.com");
+  }
+}
+window.submitAssessmentToZoho = submitAssessmentToZoho;
+</script>
