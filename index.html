@@ -585,4 +585,82 @@ function submitAssessmentToZoho(reportType) {
 }
 window.submitAssessmentToZoho = submitAssessmentToZoho;
 </script>
+<script>
+/* =========================
+   ZOHO WEB-TO-LEAD (EU)
+   Safe for static sites
+   ========================= */
+(function () {
+  if (window.postAssessmentToZoho) return; // prevent duplicates
+
+  const ZOHO = {
+    endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
+    xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
+    xmIwtLD: "6fb00fd876fe13687ff5a183eaabcffc40d0ac2b49d9f27355afb17ad109330dec2849768843aabc47935ba77065a882",
+    actionType: "TGVhZHM=",
+    returnURL: "https://nothingbutvalue.com/thank-you.html",
+    zc_gad: ""
+  };
+
+  window.postAssessmentToZoho = function (assessment, reportType) {
+    try {
+      const iframe = document.createElement("iframe");
+      iframe.name = "zohoFrame_" + Date.now();
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = ZOHO.endpoint;
+      form.target = iframe.name;
+      form.acceptCharset = "UTF-8";
+
+      const add = (name, value) => {
+        const i = document.createElement("input");
+        i.type = "hidden";
+        i.name = name;
+        i.value = value ?? "";
+        form.appendChild(i);
+      };
+
+      // Required Zoho tokens
+      add("xnQsjsdp", ZOHO.xnQsjsdp);
+      add("zc_gad", ZOHO.zc_gad);
+      add("xmIwtLD", ZOHO.xmIwtLD);
+      add("actionType", ZOHO.actionType);
+      add("returnURL", ZOHO.returnURL);
+
+      // Lead fields
+      add("Last Name", assessment.name || "Website Lead");
+      add("Email", assessment.email);
+      add("Company", assessment.company);
+      add("Phone", assessment.phone || "");
+      add("Industry", assessment.industry || "");
+      add("Annual Revenue", assessment.revenue || "");
+      add("No of Employees", assessment.employees || "");
+      add("Website", assessment.website || "");
+      add("Description", assessment.goals || "AI Readiness Assessment completed");
+
+      // Custom fields
+      add("LEADCF51", String(assessment.score || 0));   // AI Readiness Score
+      add("LEADCF2", reportType);                        // Report Type
+      add("LEADCF1", assessment.details);                // Assessment Details
+
+      document.body.appendChild(form);
+      form.submit();
+
+      setTimeout(() => {
+        form.remove();
+        iframe.remove();
+      }, 1500);
+
+      return true;
+    } catch (e) {
+      console.error("Zoho submission failed", e);
+      return false;
+    }
+  };
+})();
+</script>
+
   
