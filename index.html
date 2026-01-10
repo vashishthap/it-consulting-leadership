@@ -1,235 +1,1900 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>AI Readiness Assessment | NothingButValue</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-  body {
-    margin: 0;
-    background: #0b0f19;
-    font-family: Arial, sans-serif;
-    color: #fff;
-  }
+  <!-- Primary Meta Tags -->
+  <title>AI Transformation for SME Businesses | Nothing But Value - Fortune 500 Expertise at 1/5th the Cost</title>
+  <meta name="title" content="AI Transformation for SME Businesses | Nothing But Value" />
+  <meta name="description" content="Fortune 500 AI executives helping SME businesses transform with AI. Enterprise-grade expertise at 1/5th the cost. ROI in 6-8 weeks. $50K-$200K vs $500K-$2M." />
+  <meta name="keywords" content="AI transformation SME, AI consulting businesses, Fortune 500 AI expertise, SME AI strategy, AI implementation mid-market" />
+  <meta name="author" content="Nothing But Value" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vashishthap.github.io/it-consulting-leadership/" />
 
-  /* CTA button */
-  .cta-btn {
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg,#00d9ff,#7c3aed);
-    border-radius: 50px;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 900;
-    cursor: pointer;
-    border: none;
-    margin: 2rem auto;
-    display: block;
-  }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vashishthap.github.io/it-consulting-leadership/" />
+  <meta property="og:title" content="AI Transformation for SME Businesses | Nothing But Value" />
+  <meta property="og:description" content="Fortune 500 AI executives helping SMEs implement production-ready AI in 6–8 weeks. Enterprise-grade expertise at 1/5th the cost." />
+  <meta property="og:image" content="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" />
 
-  /* Modal backdrop */
-  .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-  }
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" />
 
-  /* Modal container */
-  .modal-content {
-    background: #111827;
-    width: 100%;
-    max-width: 650px;
-    border-radius: 20px;
-    padding: 1.5rem;
-    position: relative;
-    box-shadow: 0 0 40px rgba(0,0,0,0.5);
-  }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  .close-btn {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #fff;
-  }
+    :root {
+      --primary: #00d9ff;
+      --secondary: #7c3aed;
+      --accent: #ff3366;
+      --success: #00ff88;
+      --warning: #ff9500;
+      --dark: #0a0a0f;
+      --dark-alt: #1a1a2e;
+      --dark-card: #151521;
+      --text: #ffffff;
+      --text-muted: #a0a0b0;
+      --gradient-primary: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%);
+      --gradient-accent: linear-gradient(135deg, #ff3366 0%, #ff9500 100%);
+      --gradient-success: linear-gradient(135deg, #00ff88 0%, #00d9ff 100%);
+    }
 
-  /* Inputs */
-  input, textarea {
-    width: 100%;
-    padding: 1rem;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #fff;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-  }
+    html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      width: 100%;
+    }
 
-  /* Question buttons */
-  .option-btn {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 2px solid rgba(255,255,255,0.15);
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 800;
-    cursor: pointer;
-    color: #fff;
-    margin-bottom: 0.8rem;
-    display:flex;
-    justify-content:space-between;
-  }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
 
-  .option-btn:hover {
-    border-color: #00d9ff;
-    transform: translateY(-2px);
-  }
+    /* Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+      padding: 1rem 0;
+      z-index: 999;
+      transition: all 0.3s;
+    }
+    header.scrolled { padding: 0.75rem 0; box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5); }
 
-  /* Results */
-  .score-circle {
-    width: 200px;
-    height: 200px;
-    border-radius: 999px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-    margin: 1.5rem auto;
-    color: #fff;
-    font-weight: 900;
-  }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+    }
 
-  .pillar-scores {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
-    gap: 1rem;
-  }
+    .logo-container { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+    .logo { height: 60px; width: auto; transition: all 0.3s; border-radius: 10px; }
+    header.scrolled .logo { height: 50px; }
+    .logo-text-container { display: flex; flex-direction: column; gap: 0.25rem; }
+    .logo-text {
+      font-size: 1.2rem; font-weight: 900;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.5px; line-height: 1;
+    }
+    .logo-tagline { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; }
 
-  .pillar-card {
-    background: rgba(255,255,255,0.04);
-    padding: 1rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.15);
-    text-align:center;
-  }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      color: var(--text); text-decoration: none; font-weight: 600;
+      transition: all 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0;
+      width: 0; height: 2px; background: var(--gradient-primary);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--primary); }
 
-</style>
+    .nav-cta {
+      padding: 0.75rem 1.5rem;
+      background: var(--gradient-accent);
+      border-radius: 50px;
+      color: white !important;
+      font-weight: 800;
+      transition: all 0.3s;
+      box-shadow: 0 5px 20px rgba(255, 51, 102, 0.3);
+      border: none;
+      cursor: pointer;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 51, 102, 0.5); }
+    .nav-cta::after { display: none; }
+
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0;
+      width: 0%; height: 4px;
+      background: var(--gradient-accent);
+      z-index: 9999;
+      transition: width 0.1s;
+    }
+
+    /* Sticky CTA Bar */
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--gradient-accent);
+      padding: 1rem; text-align: center;
+      z-index: 998;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      box-shadow: 0 -5px 30px rgba(255, 51, 102, 0.3);
+    }
+    .sticky-cta.visible { transform: translateY(0); }
+    .sticky-cta-content {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .sticky-cta-text { color: white; font-weight: 800; font-size: 1.1rem; }
+    .sticky-cta-btn {
+      background: white; color: var(--accent);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .sticky-cta-btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3); }
+
+    /* Animations */
+    @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 0.8; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes shake { 0%,100% { transform: translateX(0);} 25% { transform: translateX(-10px);} 75% { transform: translateX(10px);} }
+
+    /* Hero */
+    .hero {
+      min-height: auto;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 140px 20px 40px;
+      background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 100%);
+      position: relative;
+      overflow: visible;
+      width: 100%;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, transparent 70%);
+      top: -400px; right: -400px;
+      animation: pulse 6s ease-in-out infinite;
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255, 51, 102, 0.1) 0%, transparent 70%);
+      bottom: -300px; left: -300px;
+      animation: pulse 8s ease-in-out infinite reverse;
+      z-index: 0;
+    }
+    .hero .container { max-width: 1100px; position: relative; z-index: 1; }
+    .alert-box {
+      background: linear-gradient(135deg, rgba(255, 51, 102, 0.2), rgba(255, 149, 0, 0.2));
+      border: 3px solid var(--accent);
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      animation: shake 0.5s ease-in-out;
+      box-shadow: 0 10px 40px rgba(255, 51, 102, 0.3);
+      max-width: 100%;
+    }
+    .alert-box p {
+      color: var(--accent);
+      font-weight: 900;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .gradient-text {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero h2 {
+      font-size: clamp(1.3rem, 3vw, 2.2rem);
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-weight: 400;
+      line-height: 1.5;
+      animation: fadeInUp 1s ease-out;
+    }
+    .highlight-red { color: var(--accent); font-weight: 900; }
+    .highlight-cyan { color: var(--primary); font-weight: 900; }
+
+    .value-prop-box {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1));
+      border-left: 5px solid var(--primary);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2.5rem;
+      width: 100%;
+      animation: fadeInUp 1.2s ease-out;
+      box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
+    }
+    .value-prop-box p {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: var(--text);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .stats-row {
+      display: flex; justify-content: center; gap: 3rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+      animation: fadeInUp 1.4s ease-out;
+    }
+    .stat { text-align: center; transition: transform 0.3s; }
+    .stat:hover { transform: translateY(-10px); }
+    .stat-number {
+      display: block;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      background: var(--gradient-success);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { display: block; color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; font-weight: 700; }
+
+    .cta-buttons {
+      display: flex; gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      animation: fadeInUp 1.6s ease-out;
+    }
+    .btn-primary, .btn-secondary {
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 900;
+      transition: all 0.3s;
+      display: inline-block;
+      font-size: 1.1rem;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: white;
+      box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    .btn-primary:hover::before { left: 100%; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 51, 102, 0.6); }
+
+    .btn-secondary {
+      background: transparent;
+      border: 3px solid var(--primary);
+      color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+    }
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: var(--dark);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
+    }
+
+    /* Section base */
+    section { padding: 100px 20px; position: relative; overflow-x: hidden; width: 100%; }
+    section:nth-child(even) { background: linear-gradient(180deg, var(--dark) 0%, var(--dark-alt) 100%); }
+    section:nth-child(odd) { background: var(--dark); }
+    section h2 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      text-align: center;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      margin-bottom: 4rem;
+      font-weight: 600;
+    }
+
+    /* Problem/Solution grids */
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      width: 100%;
+    }
+    .challenge-card {
+      background: linear-gradient(135deg, rgba(255, 51, 102, 0.08), rgba(255, 51, 102, 0.03));
+      border: 2px solid var(--accent);
+      border-radius: 25px;
+      padding: 2.5rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .challenge-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 5px;
+      background: var(--gradient-accent);
+    }
+    .challenge-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(255, 51, 102, 0.3);
+      border-color: var(--warning);
+    }
+
+    .solution-card-alt {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(0, 217, 255, 0.03));
+      border: 2px solid var(--primary);
+      border-radius: 25px;
+      padding: 2.5rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .solution-card-alt::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 5px;
+      background: var(--gradient-primary);
+    }
+    .solution-card-alt:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 217, 255, 0.3);
+      border-color: var(--secondary);
+    }
+
+    .challenge-card h3 { font-size: 1.8rem; margin-bottom: 2rem; color: var(--accent); font-weight: 900; }
+    .solution-card-alt h3 { font-size: 1.8rem; margin-bottom: 2rem; color: var(--primary); font-weight: 900; }
+
+    .challenge-list { list-style: none; }
+    .challenge-list li {
+      display: flex; gap: 1.2rem;
+      margin-bottom: 1.8rem;
+      align-items: flex-start;
+      transition: all 0.3s;
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
+    .challenge-list li:hover { background: rgba(255, 255, 255, 0.03); transform: translateX(5px); }
+    .challenge-list .icon { font-size: 2rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .challenge-list strong { display: block; color: var(--text); margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 900; }
+    .challenge-list p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+
+    /* Why Us */
+    .why-us-compact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      width: 100%;
+    }
+    .why-card {
+      background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-alt) 100%);
+      border: 2px solid rgba(0, 217, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .why-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .why-card:hover::before { opacity: 0.1; }
+    .why-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 15px 40px rgba(0, 217, 255, 0.3);
+    }
+    .why-card .icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    .why-card:hover .icon { transform: scale(1.2) rotate(5deg); }
+    .why-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: var(--primary); font-weight: 900; position: relative; z-index: 1; }
+    .why-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; position: relative; z-index: 1; }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      width: 100%;
+    }
+    .service-card {
+      background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-alt) 100%);
+      border: 2px solid rgba(124, 58, 237, 0.3);
+      border-radius: 25px;
+      padding: 2.5rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 5px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--secondary);
+      box-shadow: 0 20px 50px rgba(124, 58, 237, 0.4);
+    }
+    .service-icon { font-size: 4rem; margin-bottom: 1.5rem; display: inline-block; transition: all 0.3s; }
+    .service-card:hover .service-icon { transform: scale(1.2) rotate(-5deg); }
+    .service-card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--text); font-weight: 900; }
+    .service-value {
+      color: var(--success);
+      font-size: 1.1rem;
+      font-weight: 900;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+      border-radius: 12px;
+      border-left: 4px solid var(--success);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .service-card > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.7; }
+    .service-features { list-style: none; text-align: left; margin: 1.5rem 0; }
+    .service-features li {
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+      padding-left: 2rem;
+      position: relative;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .service-features li:hover { color: var(--text); transform: translateX(5px); }
+    .service-features li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 900; font-size: 1.2rem; }
+    .service-investment {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 700;
+    }
+    .btn-learn-more {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+    }
+    .btn-learn-more:hover {
+      background: var(--primary);
+      color: var(--dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
+    }
+
+    /* Tabs / Use-cases */
+    .tabs { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .tab {
+      padding: 1.2rem 2.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 900;
+      font-size: 1rem;
+      user-select: none;
+    }
+    .tab:hover { background: rgba(0, 217, 255, 0.1); border-color: var(--primary); transform: translateY(-3px); }
+    .tab.active {
+      background: var(--gradient-primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
+    }
+    .tab-content { display: none; animation: fadeIn 0.5s ease-out; }
+    .tab-content.active { display: block; }
+
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+    .use-case-card {
+      background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-alt) 100%);
+      border: 2px solid rgba(124, 58, 237, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s;
+      width: 100%;
+    }
+    .use-case-card:hover { transform: translateY(-10px); border-color: var(--secondary); box-shadow: 0 15px 40px rgba(124, 58, 237, 0.3); }
+    .use-case-card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--text); font-weight: 900; }
+    .use-case-desc { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
+    .use-case-roi { padding-top: 1rem; border-top: 2px solid rgba(0, 255, 136, 0.3); }
+    .roi-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+    .roi-value { color: var(--success); font-weight: 900; margin-left: 0.5rem; font-size: 1.1rem; }
+
+    /* ROI Calculator */
+    .calculator-section { background: linear-gradient(135deg, var(--dark-alt) 0%, var(--dark) 50%, var(--dark-alt) 100%); }
+    .calculator-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-alt) 100%);
+      border: 2px solid rgba(0, 217, 255, 0.3);
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .calculator-inputs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .input-group label { display: block; color: var(--text); margin-bottom: 0.8rem; font-weight: 900; font-size: 1rem; }
+    .input-group input {
+      width: 100%;
+      padding: 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 800;
+      transition: all 0.3s;
+    }
+    .input-group input:focus { outline: none; border-color: var(--primary); background: rgba(0, 217, 255, 0.05); box-shadow: 0 0 20px rgba(0, 217, 255, 0.2); }
+
+    .btn-calculate {
+      width: 100%;
+      padding: 1.5rem;
+      background: var(--gradient-accent);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 900;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4);
+    }
+    .btn-calculate:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(255, 51, 102, 0.6); }
+
+    .calculator-results { margin-top: 3rem; }
+    .calculator-results h3 { text-align: center; font-size: 2.2rem; margin-bottom: 2.5rem; color: var(--text); font-weight: 900; }
+
+    .result-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s;
+    }
+    .result-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2); }
+    .result-card.highlight {
+      border-color: var(--success);
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+      box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+    }
+    .result-label { color: var(--text-muted); font-size: 1rem; margin-bottom: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+    .result-value {
+      font-size: 2.6rem;
+      font-weight: 900;
+      background: var(--gradient-success);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    .result-breakdown { color: var(--text-muted); font-size: 1rem; line-height: 2; }
+
+    /* FAQ */
+    .faq-container { max-width: 900px; margin: 0 auto; }
+    .faq-item {
+      background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-alt) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .faq-item:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2); }
+    .faq-item.active { border-color: var(--primary); background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(124, 58, 237, 0.05)); }
+    .faq-question { font-weight: 900; color: var(--text); display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; gap: 1rem; }
+    .faq-answer { color: var(--text-muted); margin-top: 1.5rem; line-height: 1.9; display: none; font-size: 1rem; }
+    .faq-item.active .faq-answer { display: block; animation: fadeIn 0.3s ease-out; }
+    .faq-toggle { color: var(--primary); font-size: 2rem; font-weight: 300; transition: all 0.3s; }
+    .faq-item.active .faq-toggle { transform: rotate(45deg); }
+
+    /* Contact */
+    .contact-form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-alt) 100%);
+      border: 2px solid rgba(0, 217, 255, 0.3);
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .form-group { margin-bottom: 2rem; }
+    .form-group label { display: block; color: var(--text); margin-bottom: 0.8rem; font-weight: 900; font-size: 1rem; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    .form-group textarea { min-height: 180px; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(0, 217, 255, 0.05);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 1.5rem;
+      background: var(--gradient-accent);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 900;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4);
+    }
+    .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(255, 51, 102, 0.6); }
+
+    /* Footer */
+    footer { background: #07070b; padding: 60px 20px 30px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .footer-section h3 { color: var(--text); font-weight: 900; margin-bottom: 1rem; }
+    .footer-section p, .footer-section a { color: var(--text-muted); text-decoration: none; line-height: 1.8; display: block; }
+    .footer-section a:hover { color: var(--primary); }
+    .footer-bottom { text-align: center; margin-top: 30px; color: rgba(255,255,255,0.5); font-weight: 700; }
+
+    /* Modal (Assessment) — keep look & feel */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 5000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-content {
+      width: 100%;
+      max-width: 900px;
+      background: linear-gradient(135deg, #0f0f18 0%, #101024 50%, #0f0f18 100%);
+      border: 2px solid rgba(0,217,255,0.25);
+      border-radius: 24px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.65);
+      overflow: hidden;
+      position: relative;
+    }
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: all .2s;
+      z-index: 2;
+    }
+    .close-btn:hover { transform: translateY(-2px); border-color: rgba(0,217,255,0.6); }
+
+    .assessment-content { padding: 28px; }
+    .modal-inner { animation: fadeIn .35s ease-out; }
+
+    @media (max-width: 920px) {
+      .nav-links { display: none; }
+      .sticky-cta-content { justify-content: center; }
+    }
+    @media (max-width: 520px) {
+      .assessment-content { padding: 18px; }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="scrollProgress" class="scroll-progress"></div>
 
-<button class="cta-btn" onclick="startAssessment()">✨ Free AI Readiness Assessment</button>
-
-<!-- =========================
-     ASSESSMENT MODAL
-   ========================= -->
-<div id="assessmentModal" class="modal" aria-hidden="true">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeAssessment()">✕</button>
-
-    <!-- STEP 1: EMAIL CAPTURE -->
-    <div id="emailCapture">
-      <h2 style="text-align:center;font-weight:900;font-size:1.8rem;">Discover Your AI Readiness Score</h2>
-
-      <input id="userName" placeholder="Your Name *" />
-      <input id="userEmail" type="email" placeholder="Work Email *" />
-      <input id="userCompany" placeholder="Company *" />
-      <input id="userRole" placeholder="Your Role (Optional)" />
-
-      <button class="cta-btn" style="margin-top:1rem;" onclick="startQuestions()">Start Assessment →</button>
-
-      <p style="text-align:center;color:#ccc;font-size:.9rem;">
-        🔒 Your information is secure.<br>⏱️ Takes ~5 minutes.
-      </p>
+  <!-- Sticky CTA -->
+  <div id="stickyCTA" class="sticky-cta">
+    <div class="sticky-cta-content">
+      <div class="sticky-cta-text">Ready to see your AI readiness score?</div>
+      <a class="sticky-cta-btn" href="javascript:void(0)" onclick="startAssessment()">Start Free Assessment →</a>
     </div>
-
-    <!-- STEP 2: QUESTIONS -->
-    <div id="questionsContainer" style="display:none;">
-      <div id="questionCounter" style="font-size:1rem;margin-bottom:1rem;"></div>
-      <h3 id="questionTitle"></h3>
-      <div id="optionsContainer"></div>
-
-      <button onclick="previousQuestion()" id="backBtn" style="margin-top:1rem;display:none;">← Back</button>
-    </div>
-
-    <!-- STEP 3: RESULTS -->
-    <div id="resultsContainer" style="display:none;"></div>
   </div>
-</div>
-```html
-<!-- =========================
-     PART 2 — JAVASCRIPT ENGINE
-     (Paste this IMMEDIATELY after PART 1)
-   ========================= -->
-<script>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <a class="logo-container" href="#top" aria-label="Nothing But Value">
+        <img class="logo" src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/a5cb50f2-1cfd-40f4-99f9-a372c5c28c5a/2025-12-28T11-54-06-725Z-a4258078-chat-image-1766922846707-0.jpg" alt="Nothing But Value logo" />
+        <div class="logo-text-container">
+          <div class="logo-text">Nothing But Value</div>
+          <div class="logo-tagline">Fortune 500 AI Expertise for SMEs</div>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#services">Services</a>
+        <a href="#use-cases">Use Cases</a>
+        <a href="#resources">Resources</a>
+        <a href="#roi">ROI</a>
+        <button class="nav-cta" onclick="startAssessment()">Free AI Assessment →</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" class="hero">
+    <div class="container">
+      <div class="alert-box">
+        <p>AI Supercycle is Here — SMEs Must Move Fast</p>
+      </div>
+
+      <h1>
+        <span class="gradient-text">AI Transformation</span><br />
+        for SME Businesses
+      </h1>
+
+      <h2>
+        Fortune 500 AI executives helping SMEs implement <span class="highlight-cyan">production-ready AI</span> in
+        <span class="highlight-red">6–8 weeks</span>, not 12–18 months.
+      </h2>
+
+      <div class="value-prop-box">
+        <p>
+          Get enterprise-grade expertise at <span class="highlight-cyan">1/5th the cost</span> — delivering measurable ROI
+          with hands-on implementation (not PowerPoint decks).
+        </p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-number">6–8</span>
+          <span class="stat-label">Weeks to Production</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">80%</span>
+          <span class="stat-label">Cheaper than Big 4</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">3–5x</span>
+          <span class="stat-label">Faster Delivery</span>
+        </div>
+      </div>
+
+      <div class="cta-buttons">
+        <button class="btn-primary" onclick="startAssessment()">Start Free Assessment →</button>
+        <a class="btn-secondary" href="#contact">Book Strategy Call →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section id="problem">
+    <div class="container">
+      <h2>The Problem: Why Most AI Projects Fail</h2>
+      <p class="section-subtitle">SME businesses face unique challenges that Big Tech consultants don’t understand</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>💸 Overpriced Consulting</h3>
+          <ul class="challenge-list">
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>$500K–$2M+ for Big 4 firms</strong>
+                <p>McKinsey, Deloitte, Accenture charge enterprise rates that SMEs can’t afford.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>12–18 month timelines</strong>
+                <p>By the time they deliver, the market has moved on.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>Junior consultants learning on your dime</strong>
+                <p>You pay $500/hour for fresh grads with no real-world experience.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="challenge-card">
+          <h3>📚 Theory Over Practice</h3>
+          <ul class="challenge-list">
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>200-page strategy decks that collect dust</strong>
+                <p>Beautiful PowerPoints that never get implemented.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>No hands-on implementation</strong>
+                <p>They tell you what to do, but don’t actually build anything.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>Generic frameworks that don’t fit SMEs</strong>
+                <p>Enterprise playbooks that ignore your resource constraints.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="challenge-card">
+          <h3>⏰ Too Slow to Matter</h3>
+          <ul class="challenge-list">
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>Pilots that never reach production</strong>
+                <p>Proof-of-concepts that die in committee meetings.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>Endless discovery phases</strong>
+                <p>6 months of “research” before anything gets built.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔴</span>
+              <div>
+                <strong>No ROI visibility</strong>
+                <p>Can’t prove value, so projects get cancelled.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section id="solution">
+    <div class="container">
+      <h2>Our Solution: Fast, Affordable, Results-Driven</h2>
+      <p class="section-subtitle">Fortune 500 expertise without the Fortune 500 price tag</p>
+
+      <div class="challenge-grid">
+        <div class="solution-card-alt">
+          <h3>💎 Enterprise Expertise at SME Prices</h3>
+          <ul class="challenge-list">
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>$50K–$200K total investment</strong>
+                <p>Up to 80% cheaper than Big 4, same quality of work.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>Senior AI executives only</strong>
+                <p>Former Fortune 500 leaders who’ve done this at scale.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>Fractional engagement model</strong>
+                <p>Get C-level expertise without C-level salaries.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="solution-card-alt">
+          <h3>🛠️ Implementation-First Approach</h3>
+          <ul class="challenge-list">
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>Production-ready solutions in 6–8 weeks</strong>
+                <p>We build, deploy, and hand over working systems.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>Hands-on coding and deployment</strong>
+                <p>We don’t just advise — we actually build the solution.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>SME-specific playbooks</strong>
+                <p>Frameworks designed for companies with 50–500 employees.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="solution-card-alt">
+          <h3>⚡ Speed & ROI Focus</h3>
+          <ul class="challenge-list">
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>ROI visible in 6–8 weeks</strong>
+                <p>Measurable business impact from day one.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>Quick-win pilots that scale</strong>
+                <p>Start small, prove value, then expand.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">✅</span>
+              <div>
+                <strong>Clear KPIs and tracking</strong>
+                <p>Weekly dashboards showing exactly what’s working.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why-us">
+    <div class="container">
+      <h2>Why Nothing But Value?</h2>
+      <p class="section-subtitle">
+        We’re not another consulting firm. We’re AI operators who’ve built and scaled AI at Fortune 500 companies across industries.
+      </p>
+
+      <div class="why-us-compact">
+        <div class="why-card">
+          <div class="icon">🎯</div>
+          <h3>Battle-Tested Expertise</h3>
+          <p>Former AI leaders from major tech and Fortune 500 companies. We’ve implemented AI at scale.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="icon">💰</div>
+          <h3>80% Cost Savings</h3>
+          <p>$50K–$200K vs $500K–$2M for Big 4. Same quality, fraction of the price.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="icon">⚡</div>
+          <h3>3–5x Faster Delivery</h3>
+          <p>6–8 weeks to production vs 12–18 months. Speed is your competitive advantage.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="icon">🛠️</div>
+          <h3>Hands-On Implementation</h3>
+          <p>We don’t just advise. We build, deploy, and train your team.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="icon">📊</div>
+          <h3>ROI-Driven Approach</h3>
+          <p>Every project has clear KPIs and measurable business impact.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="icon">🎓</div>
+          <h3>Knowledge Transfer</h3>
+          <p>We train your team so you’re not dependent on us forever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p class="section-subtitle">Comprehensive AI transformation services designed for SME businesses across all industries</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🎯</div>
+          <h3>AI Readiness Audit</h3>
+          <div class="service-value">Quick Win: 2–3 Weeks</div>
+          <p>Assessment of AI readiness across 5 pillars: Strategy, Data, Technology, People, and Governance.</p>
+          <ul class="service-features">
+            <li>Current state assessment</li>
+            <li>Gap analysis vs industry leaders</li>
+            <li>Prioritized roadmap with ROI projections</li>
+            <li>Quick-win opportunities identified</li>
+            <li>Risk assessment and mitigation plan</li>
+          </ul>
+          <div class="service-investment">Investment: $10K–$20K</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚀</div>
+          <h3>Quick-Win AI Pilot</h3>
+          <div class="service-value">ROI in 6–8 Weeks</div>
+          <p>Rapid implementation of a high-impact AI use case to prove value and build momentum.</p>
+          <ul class="service-features">
+            <li>Use case selection and scoping</li>
+            <li>Data preparation and model training</li>
+            <li>Production deployment</li>
+            <li>Team training and handover</li>
+            <li>ROI measurement and reporting</li>
+          </ul>
+          <div class="service-investment">Investment: $30K–$60K</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <h3>Department Transformation</h3>
+          <div class="service-value">3–6 Month Engagement</div>
+          <p>End-to-end AI transformation of a department (Sales, Support, Operations, etc.).</p>
+          <ul class="service-features">
+            <li>Process analysis and redesign</li>
+            <li>Multiple AI solutions deployed</li>
+            <li>Change management and training</li>
+            <li>Integration with existing systems</li>
+            <li>Ongoing optimization and support</li>
+          </ul>
+          <div class="service-investment">Investment: $60K–$120K</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3>AI Training & Upskilling</h3>
+          <div class="service-value">Build Internal Capability</div>
+          <p>Training programs to build AI literacy and capability across your organization.</p>
+          <ul class="service-features">
+            <li>Executive AI strategy workshops</li>
+            <li>Technical team training</li>
+            <li>Business user training</li>
+            <li>Custom curriculum per industry</li>
+            <li>Certification and support</li>
+          </ul>
+          <div class="service-investment">Investment: $15K–$40K</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">👔</div>
+          <h3>Fractional AI Leadership</h3>
+          <div class="service-value">Ongoing Strategic Guidance</div>
+          <p>Part-time AI executive to lead your transformation without full-time cost.</p>
+          <ul class="service-features">
+            <li>Strategic planning and roadmap</li>
+            <li>Vendor selection and management</li>
+            <li>Team building and hiring</li>
+            <li>Board and investor presentations</li>
+            <li>Ongoing advisory and troubleshooting</li>
+          </ul>
+          <div class="service-investment">Investment: $10K–$20K/month</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏆</div>
+          <h3>Full Company Transformation</h3>
+          <div class="service-value">6–12 Month Program</div>
+          <p>Comprehensive AI transformation across your entire organization.</p>
+          <ul class="service-features">
+            <li>Enterprise AI strategy and roadmap</li>
+            <li>Multiple departments transformed</li>
+            <li>AI Center of Excellence setup</li>
+            <li>Governance and compliance framework</li>
+            <li>Ongoing optimization and scaling</li>
+          </ul>
+          <div class="service-investment">Investment: $150K–$300K</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section id="use-cases">
+    <div class="container">
+      <h2>AI Use Cases Across Industries</h2>
+      <p class="section-subtitle">Real-world applications with proven ROI for IT, Professional Services, Manufacturing, Healthcare, and more</p>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="sales-tab">Sales & Marketing</div>
+        <div class="tab" data-tab="service-tab">Customer Service & Support</div>
+        <div class="tab" data-tab="ops-tab">Operations & Finance</div>
+      </div>
+
+      <div id="sales-tab" class="tab-content active">
+        <div class="use-case-grid">
+          <div class="use-case-card">
+            <h3>AI-Powered Lead Scoring</h3>
+            <p class="use-case-desc">Prioritize leads based on conversion probability, saving sales time and increasing close rates.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">30% increase in sales productivity</span>
+            </div>
+          </div>
+
+          <div class="use-case-card">
+            <h3>Proposal & Quote Automation</h3>
+            <p class="use-case-desc">Generate customized proposals in minutes, reducing turnaround time from days to hours.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">80% faster proposal generation</span>
+            </div>
+          </div>
+
+          <div class="use-case-card">
+            <h3>Customer Segmentation & Personalization</h3>
+            <p class="use-case-desc">AI-driven segmentation for targeted campaigns and personalized outreach at scale.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">2–3x improvement in campaign ROI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="service-tab" class="tab-content">
+        <div class="use-case-grid">
+          <div class="use-case-card">
+            <h3>AI-Powered Customer Support</h3>
+            <p class="use-case-desc">Chatbot handles 40–60% of inquiries, reducing response time and support costs.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">$200K–$500K annual savings</span>
+            </div>
+          </div>
+
+          <div class="use-case-card">
+            <h3>Predictive Maintenance & Quality Control</h3>
+            <p class="use-case-desc">Predict equipment failures and quality issues before they happen, reducing downtime and defects.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">30–50% reduction in downtime</span>
+            </div>
+          </div>
+
+          <div class="use-case-card">
+            <h3>Automated Documentation & Knowledge</h3>
+            <p class="use-case-desc">Generate and maintain documentation automatically, keeping knowledge bases current.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">60% reduction in documentation time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="ops-tab" class="tab-content">
+        <div class="use-case-grid">
+          <div class="use-case-card">
+            <h3>Resource & Workforce Optimization</h3>
+            <p class="use-case-desc">Optimize scheduling and planning to maximize utilization and profitability.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">15–25% improvement in utilization</span>
+            </div>
+          </div>
+
+          <div class="use-case-card">
+            <h3>Contract & Document Analysis</h3>
+            <p class="use-case-desc">Review contracts and invoices for risks and obligations, reducing manual review time.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">70% faster document review</span>
+            </div>
+          </div>
+
+          <div class="use-case-card">
+            <h3>Financial Forecasting & Analytics</h3>
+            <p class="use-case-desc">Improve forecasting for better cash flow management, budgeting, and planning.</p>
+            <div class="use-case-roi">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">40% more accurate forecasts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section id="resources">
+    <div class="container">
+      <h2>Free Resources</h2>
+      <p class="section-subtitle">Tools, guides, and assessments to accelerate your AI transformation</p>
+
+      <!-- Featured Resource -->
+      <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(124, 58, 237, 0.15)); border: 3px solid var(--primary); border-radius: 30px; padding: 3rem; margin-bottom: 4rem; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; z-index: 0; pointer-events: none;"></div>
+
+        <div style="position: relative; z-index: 1;">
+          <div style="font-size: 4rem; margin-bottom: 1rem;">📊</div>
+          <h3 style="font-size: 2.2rem; margin-bottom: 1rem; color: var(--text); font-weight: 900;">
+            Free AI Readiness Assessment
+          </h3>
+          <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Discover your AI maturity score across 5 critical pillars. Get personalized recommendations and a custom roadmap in just 5 minutes.
+          </p>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--success); font-weight: 900;">
+              <span style="font-size: 1.5rem;">✓</span><span>5-Minute Assessment</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--success); font-weight: 900;">
+              <span style="font-size: 1.5rem;">✓</span><span>Instant Results</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--success); font-weight: 900;">
+              <span style="font-size: 1.5rem;">✓</span><span>Custom Roadmap</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--success); font-weight: 900;">
+              <span style="font-size: 1.5rem;">✓</span><span>No Credit Card</span>
+            </div>
+          </div>
+
+          <button onclick="startAssessment()"
+            style="padding: 1.5rem 3rem; background: var(--gradient-accent); border: none; border-radius: 50px; color: white; font-weight: 900; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4);">
+            Start Free Assessment Now →
+          </button>
+
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem;">
+            🔒 100% Free • No Spam • Instant Results Emailed
+          </p>
+        </div>
+      </div>
+
+      <!-- Other resources -->
+      <div class="services-grid">
+        <div class="service-card" style="cursor: default;">
+          <div class="service-icon">📘</div>
+          <h3>SME AI Playbook</h3>
+          <p>Complete guide to AI transformation for SME businesses. Frameworks, templates, and best practices.</p>
+          <ul class="service-features">
+            <li>AI strategy templates</li>
+            <li>Use case prioritization framework</li>
+            <li>ROI calculation models</li>
+            <li>Implementation checklists</li>
+            <li>Vendor evaluation criteria</li>
+          </ul>
+          <button class="btn-learn-more" onclick="alert('Coming Soon! Email value.advisor@nothingbutvalue.com to get early access.')">Download Free Guide</button>
+        </div>
+
+        <div class="service-card" style="cursor: default;">
+          <div class="service-icon">📊</div>
+          <h3>ROI Calculator</h3>
+          <p>Calculate your potential savings and ROI from AI transformation. See how much you could save in year one.</p>
+          <ul class="service-features">
+            <li>Customer support automation savings</li>
+            <li>Document processing efficiency</li>
+            <li>Resource optimization gains</li>
+            <li>New revenue opportunities</li>
+            <li>Payback period analysis</li>
+          </ul>
+          <a href="#roi" class="btn-learn-more" style="display:block;text-align:center;text-decoration:none;">Calculate Your ROI</a>
+        </div>
+
+        <div class="service-card" style="cursor: default;">
+          <div class="service-icon">🎯</div>
+          <h3>Use Case Library</h3>
+          <p>Browse proven AI use cases with ROI data, timelines, and complexity ratings.</p>
+          <ul class="service-features">
+            <li>Sales & marketing automation</li>
+            <li>Customer service optimization</li>
+            <li>Operations & efficiency</li>
+            <li>Forecasting & analytics</li>
+            <li>HR & talent management</li>
+          </ul>
+          <a href="#use-cases" class="btn-learn-more" style="display:block;text-align:center;text-decoration:none;">Browse Use Cases</a>
+        </div>
+
+        <div class="service-card" style="cursor: default;">
+          <div class="service-icon">📄</div>
+          <h3>Case Studies</h3>
+          <p>Real-world SME success stories and the results they achieved with AI.</p>
+          <ul class="service-features">
+            <li>Before & after metrics</li>
+            <li>Implementation timelines</li>
+            <li>Challenges overcome</li>
+            <li>Lessons learned</li>
+            <li>ROI achieved</li>
+          </ul>
+          <button class="btn-learn-more" onclick="alert('Coming Soon! Email value.advisor@nothingbutvalue.com to request case studies.')">Read Case Studies</button>
+        </div>
+
+        <div class="service-card" style="cursor: default;">
+          <div class="service-icon">🎬</div>
+          <h3>Video Masterclass</h3>
+          <p>Free masterclass: “AI Transformation for SMEs — From Strategy to Execution”.</p>
+          <ul class="service-features">
+            <li>Strategy fundamentals</li>
+            <li>Quick-win identification</li>
+            <li>Pilot project framework</li>
+            <li>Scaling best practices</li>
+            <li>Common pitfalls to avoid</li>
+          </ul>
+          <button class="btn-learn-more" onclick="alert('Coming Soon! Email value.advisor@nothingbutvalue.com to get notified when available.')">Watch Masterclass</button>
+        </div>
+
+        <div class="service-card" style="cursor: default;">
+          <div class="service-icon">📋</div>
+          <h3>Templates & Checklists</h3>
+          <p>Ready-to-use templates for AI strategy, vendor evaluation, project planning, and change management.</p>
+          <ul class="service-features">
+            <li>AI strategy template</li>
+            <li>Vendor RFP template</li>
+            <li>Project charter template</li>
+            <li>Change management checklist</li>
+            <li>KPI tracking dashboard</li>
+          </ul>
+          <button class="btn-learn-more" onclick="alert('Coming Soon! Email value.advisor@nothingbutvalue.com to get early access.')">Download Templates</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Calculator -->
+  <section id="roi" class="calculator-section">
+    <div class="container">
+      <h2>Calculate Your AI ROI</h2>
+      <p class="section-subtitle">See how much you could save with AI transformation</p>
+
+      <div class="calculator-container">
+        <div class="calculator-inputs">
+          <div class="input-group">
+            <label for="revenue">Annual Revenue ($)</label>
+            <input type="number" id="revenue" placeholder="5000000" value="5000000" />
+          </div>
+
+          <div class="input-group">
+            <label for="employees">Number of Employees</label>
+            <input type="number" id="employees" placeholder="100" value="100" />
+          </div>
+
+          <div class="input-group">
+            <label for="hourly-rate">Avg Hourly Rate ($)</label>
+            <input type="number" id="hourly-rate" placeholder="75" value="75" />
+          </div>
+
+          <div class="input-group">
+            <label for="tickets">Monthly Support Tickets</label>
+            <input type="number" id="tickets" placeholder="500" value="500" />
+          </div>
+        </div>
+
+        <button class="btn-calculate" onclick="calculateROI()">Calculate My ROI →</button>
+
+        <div id="roiResults" class="calculator-results" style="display:none;">
+          <h3>Your Potential AI ROI</h3>
+
+          <div class="result-card highlight">
+            <div class="result-label">Total Annual Savings</div>
+            <div class="result-value" id="savings">$0</div>
+            <div class="result-breakdown">
+              Customer Support Automation: <strong id="desk-savings">$0</strong><br />
+              Document Processing: <strong id="doc-savings">$0</strong><br />
+              Resource Optimization: <strong id="resource-savings">$0</strong>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-label">New Revenue Opportunities</div>
+            <div class="result-value" id="new-revenue">$0</div>
+            <div class="result-breakdown">From AI-powered service offerings and improved sales efficiency</div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-label">Investment Required</div>
+            <div class="result-value" id="investment">$0</div>
+            <div class="result-breakdown">Estimated investment for comprehensive AI transformation</div>
+          </div>
+
+          <div class="result-card highlight">
+            <div class="result-label">Net ROI</div>
+            <div class="result-value" id="net-roi">0%</div>
+            <div class="result-breakdown">Payback Period: <strong id="payback">0</strong> months</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <p class="section-subtitle">Everything you need to know about working with us</p>
+
+      <div class="faq-container">
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">How are you different from Big 4 consulting firms? <span class="faq-toggle">+</span></div>
+          <div class="faq-answer">
+            We’re former Fortune 500 AI executives who’ve built and scaled AI systems. Unlike Big 4 firms that charge
+            $500K–$2M and take 12–18 months, we deliver production-ready solutions in 6–8 weeks for $50K–$200K.
+            No junior consultants. No PowerPoint-only engagements.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">What if we don’t have clean data? <span class="faq-toggle">+</span></div>
+          <div class="faq-answer">
+            Most companies don’t have perfect data — that’s normal. We start with data readiness and prioritize quick wins
+            that don’t require massive data rework. Data quality improves iteratively as we implement solutions.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">How quickly can we see ROI? <span class="faq-toggle">+</span></div>
+          <div class="faq-answer">
+            Our Quick-Win Pilot program delivers measurable ROI in 6–8 weeks. For example, a customer support assistant can
+            reduce ticket volume by 40–60% within the first month of deployment.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">Do we need to hire AI specialists? <span class="faq-toggle">+</span></div>
+          <div class="faq-answer">
+            Not initially. We handle the heavy lifting and train your existing team to manage and optimize the AI solutions.
+            For larger transformations, we can help you hire the right AI talent when needed.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">What industries do you work with? <span class="faq-toggle">+</span></div>
+          <div class="faq-answer">
+            We work with SMEs (50–500 employees) across IT Services, Professional Services, Manufacturing, Healthcare,
+            Financial Services, and Retail. Our use-case approach applies across industries.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">Do you offer ongoing support after implementation? <span class="faq-toggle">+</span></div>
+          <div class="faq-answer">
+            Yes. Every engagement includes training and handover. After that, you can choose self-management, fractional AI
+            leadership, or project-based support for new initiatives.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2>Ready to Transform Your Business?</h2>
+      <p class="section-subtitle">Book a free 30-minute strategy call to discuss your AI transformation</p>
+
+      <div class="contact-form">
+        <!-- Same UI, submits to Zoho CRM Web-to-Lead (EU) -->
+        <form id="contactZohoForm">
+          <div class="form-group">
+            <label for="c_name">Your Name *</label>
+            <input type="text" id="c_name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="c_email">Work Email *</label>
+            <input type="email" id="c_email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="c_company">Company Name *</label>
+            <input type="text" id="c_company" name="company" required />
+          </div>
+
+          <div class="form-group">
+            <label for="c_phone">Phone Number</label>
+            <input type="tel" id="c_phone" name="phone" />
+          </div>
+
+          <div class="form-group">
+            <label for="c_message">Tell us about your AI goals *</label>
+            <textarea id="c_message" name="message" required placeholder="What are your biggest challenges? What do you want to achieve with AI?"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Book Free Strategy Call →</button>
+        </form>
+
+        <p style="margin-top:1rem;color:rgba(255,255,255,0.55);font-weight:700;text-align:center;">
+          🔒 Sent securely to Zoho CRM
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Nothing But Value</h3>
+        <p>Fortune 500 AI expertise for SME businesses across all industries.</p>
+        <p>Big Firm Expertise. Small Firm Agility.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Services</h3>
+        <a href="#services">AI Readiness Audit</a>
+        <a href="#services">Quick-Win AI Pilot</a>
+        <a href="#services">Department Transformation</a>
+        <a href="#services">Fractional AI Leadership</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <a href="javascript:void(0)" onclick="startAssessment()">AI Readiness Assessment</a>
+        <a href="#use-cases">Use Cases</a>
+        <a href="#roi">ROI Calculator</a>
+        <a href="#faq">FAQ</a>
+        <a href="#resources">All Resources</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: value.advisor@nothingbutvalue.com</p>
+        <p>Website: www.nothingbutvalue.com</p>
+        <a href="#contact">Book Strategy Call</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Nothing But Value. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Assessment Modal (CLEAN, no duplicates, same look/feel) -->
+  <div id="assessmentModal" class="modal" aria-hidden="true" role="dialog" aria-label="AI Readiness Assessment">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeAssessment()" aria-label="Close">✕</button>
+
+      <div class="assessment-content">
+
+        <!-- Email Capture -->
+        <div id="emailCapture" class="modal-inner">
+          <div style="text-align:center; margin-bottom: 1.6rem;">
+            <h2 style="font-size: 2.1rem; margin-bottom: .75rem; background: var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight: 900; line-height: 1.15;">
+              Discover Your AI Readiness Score
+            </h2>
+            <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 560px; margin: 0 auto;">
+              Take our 5-minute assessment to understand where you stand and get personalized recommendations for your AI transformation journey.
+            </p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border-radius: 20px; padding: 1.6rem; border: 1px solid rgba(255,255,255,0.1);">
+            <div style="margin-bottom: 1rem;">
+              <label style="display:block; color:#fff; font-weight: 900; margin-bottom: .4rem; font-size: .95rem;">
+                Your Name <span style="color: var(--accent);">*</span>
+              </label>
+              <input type="text" id="userName" placeholder="John Smith" required
+                style="width:100%; padding: 1rem 1.1rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 1rem; transition: all .2s;" />
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+              <label style="display:block; color:#fff; font-weight: 900; margin-bottom: .4rem; font-size: .95rem;">
+                Work Email <span style="color: var(--accent);">*</span>
+              </label>
+              <input type="email" id="userEmail" placeholder="john@company.com" required
+                style="width:100%; padding: 1rem 1.1rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 1rem; transition: all .2s;" />
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+              <label style="display:block; color:#fff; font-weight: 900; margin-bottom: .4rem; font-size: .95rem;">
+                Company Name <span style="color: var(--accent);">*</span>
+              </label>
+              <input type="text" id="userCompany" placeholder="Acme Corporation" required
+                style="width:100%; padding: 1rem 1.1rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 1rem; transition: all .2s;" />
+            </div>
+
+            <div style="margin-bottom: 1.2rem;">
+              <label style="display:block; color:#fff; font-weight: 900; margin-bottom: .4rem; font-size: .95rem;">
+                Your Role (Optional)
+              </label>
+              <input type="text" id="userRole" placeholder="CTO, CEO, Director..."
+                style="width:100%; padding: 1rem 1.1rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 1rem; transition: all .2s;" />
+            </div>
+
+            <button onclick="startQuestions()"
+              style="width:100%; padding: 1.05rem; background: var(--gradient-primary); border: none; border-radius: 50px; color: #fff; font-weight: 900; font-size: 1.05rem; cursor: pointer; transition: all .2s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(0, 217, 255, 0.25);">
+              Start Assessment →
+            </button>
+
+            <p style="text-align:center; color: rgba(255,255,255,0.55); font-size: .85rem; margin-top: 1rem; line-height: 1.6;">
+              🔒 Your info is secure. We’ll email your results immediately.<br />
+              ⏱️ Takes only ~5 minutes
+            </p>
+          </div>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="questionsContainer" class="modal-inner" style="display:none;">
+          <!-- Progress -->
+          <div class="progress-container" style="margin-bottom: 1.2rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                PROGRESS
+              </div>
+              <div id="progressText" style="color: var(--primary); font-size: 1.05rem; font-weight: 900;">0%</div>
+            </div>
+            <div style="width:100%; height: 8px; background: rgba(255,255,255,0.12); border-radius: 10px; overflow:hidden;">
+              <div id="progressBar" style="width:0%; height:100%; background: var(--gradient-primary); transition: width .3s ease; border-radius: 10px;"></div>
+            </div>
+          </div>
+
+          <div id="questionCounter" style="color: rgba(255,255,255,0.65); font-weight: 800; margin-bottom: .8rem;"></div>
+          <h3 id="questionTitle" style="font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem;"></h3>
+
+          <div id="optionsContainer" style="display:flex; flex-direction:column; gap:.75rem;"></div>
+
+          <div style="display:flex; justify-content:space-between; gap:1rem; margin-top: 1.2rem;">
+            <button id="backBtn" type="button" onclick="previousQuestion()"
+              style="display:none; padding:.9rem 1.2rem; border-radius: 14px; border: 2px solid rgba(255,255,255,0.18); background: transparent; color:#fff; font-weight:900; cursor:pointer;">
+              ← Back
+            </button>
+
+            <button type="button" onclick="closeAssessment()"
+              style="margin-left:auto; padding:.9rem 1.2rem; border-radius: 14px; border: none; background: rgba(255,255,255,0.08); color:#fff; font-weight:900; cursor:pointer;">
+              Exit
+            </button>
+          </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="resultsContainer" class="modal-inner" style="display:none;"></div>
+
+      </div>
+    </div>
+  </div>
+
+ <script>
+"use strict";
+
 /* =========================================================
-   GLOBAL STATE (single source of truth)
+   NBV Single-File Script (FIXED)
+   - No duplicate IDs / no duplicate globals
+   - startAssessment / calculateROI always defined on window
+   - Assessment state stored in ONE place: window._nbvAssessment
+   - Zoho Web-to-Lead (your tokens) submitted via hidden iframe
+   - Avoids "Unexpected token <" by NOT embedding <script> inside <script>
    ========================================================= */
+
+/* ---------------------------
+   0) Global state (ONE place)
+---------------------------- */
 window._nbvAssessment = window._nbvAssessment || {
   currentQuestionIndex: 0,
-  answers: [],               // array of {pillar, score}
-  userData: {},              // {name,email,company,role}
+  answers: {},          // { [index]: {pillar, score} }
+  userData: {},         // {name,email,company,role}
   lastOverallScore: 0,
   lastPillarAverages: {}
 };
 
-/* =========================================================
-   OPEN / CLOSE MODAL
-   ========================================================= */
-function startAssessment() {
-  const modal = document.getElementById("assessmentModal");
-  if (!modal) return console.error("assessmentModal not found");
+/* ---------------------------
+   1) Utility helpers
+---------------------------- */
+const $ = (id) => document.getElementById(id);
 
-  // reset state each time you start
-  window._nbvAssessment.currentQuestionIndex = 0;
-  window._nbvAssessment.answers = [];
-  window._nbvAssessment.userData = {};
-  window._nbvAssessment.lastOverallScore = 0;
-  window._nbvAssessment.lastPillarAverages = {};
+function safeTrim(v) { return (v || "").toString().trim(); }
 
-  // show step 1
-  showStep("email");
-
-  modal.style.display = "flex";
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
-window.startAssessment = startAssessment;
 
-function closeAssessment() {
-  const modal = document.getElementById("assessmentModal");
-  if (modal) {
-    modal.style.display = "none";
-    modal.setAttribute("aria-hidden", "true");
+/* ---------------------------
+   2) UI: scroll effects
+---------------------------- */
+window.addEventListener("scroll", () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+
+  const sp = $("scrollProgress");
+  if (sp) sp.style.width = scrolled + "%";
+
+  const sticky = $("stickyCTA");
+  if (sticky) {
+    if (winScroll > 1000) sticky.classList.add("visible");
+    else sticky.classList.remove("visible");
   }
-  document.body.style.overflow = "auto";
-}
-window.closeAssessment = closeAssessment;
 
-function showStep(step) {
-  const email = document.getElementById("emailCapture");
-  const qs = document.getElementById("questionsContainer");
-  const res = document.getElementById("resultsContainer");
+  const header = document.querySelector("header");
+  if (header) {
+    if (winScroll > 50) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  }
+});
 
-  if (email) email.style.display = (step === "email") ? "block" : "none";
-  if (qs) qs.style.display = (step === "questions") ? "block" : "none";
-  if (res) res.style.display = (step === "results") ? "block" : "none";
+/* ---------------------------
+   3) Tabs
+---------------------------- */
+function bindTabs() {
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+      tab.classList.add("active");
+      const target = document.getElementById(tab.dataset.tab);
+      if (target) target.classList.add("active");
+    });
+  });
 }
+
+/* ---------------------------
+   4) FAQ toggle
+---------------------------- */
+function toggleFAQ(el) { el.classList.toggle("active"); }
+window.toggleFAQ = toggleFAQ;
+
+/* ---------------------------
+   5) Smooth scroll (anchors)
+---------------------------- */
+function bindSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (href && href !== "#" && href !== "javascript:void(0)") {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  });
+}
+
+/* ---------------------------
+   6) ROI Calculator
+---------------------------- */
+function calculateROI() {
+  const revenue = parseFloat($("revenue")?.value) || 0;
+  const employees = parseFloat($("employees")?.value) || 0;
+  const hourlyRate = parseFloat($("hourly-rate")?.value) || 0;
+  const tickets = parseFloat($("tickets")?.value) || 0;
+
+  const deskSavings = tickets * 12 * 0.5 * hourlyRate * 2;
+  const docSavings = employees * 10 * hourlyRate * 12 * 0.6;
+  const resourceSavings = revenue * 0.15;
+  const totalSavings = deskSavings + docSavings + resourceSavings;
+
+  const newRevenue = revenue * 0.1;
+  const investment = Math.min(200000, Math.max(50000, revenue * 0.03));
+  const netROI = investment > 0 ? (((totalSavings + newRevenue - investment) / investment) * 100).toFixed(0) : "0";
+  const payback = totalSavings > 0 ? (investment / (totalSavings / 12)).toFixed(1) : "N/A";
+
+  const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };
+
+  set("savings", "$" + Math.round(totalSavings).toLocaleString());
+  set("desk-savings", "$" + Math.round(deskSavings).toLocaleString());
+  set("doc-savings", "$" + Math.round(docSavings).toLocaleString());
+  set("resource-savings", "$" + Math.round(resourceSavings).toLocaleString());
+  set("new-revenue", "$" + Math.round(newRevenue).toLocaleString());
+  set("investment", "$" + Math.round(investment).toLocaleString());
+  set("net-roi", netROI + "%");
+  set("payback", payback);
+
+  const roiResults = $("roiResults");
+  if (roiResults) roiResults.style.display = "block";
+}
+window.calculateROI = calculateROI;
 
 /* =========================================================
-   QUESTIONS (Your full list continues here)
-   ========================================================= */
+   7) Assessment Questions (20 total, 5 pillars x 4)
+   Pillars: Strategy, Data, Technology, People, Governance
+========================================================= */
 const questions = [
+  // Strategy (4)
   {
     question: "Do you have a clear AI strategy aligned to business goals?",
     pillar: "Strategy",
@@ -242,36 +1907,187 @@ const questions = [
     ]
   },
   {
+    question: "How well are AI use cases prioritized by business value and feasibility?",
+    pillar: "Strategy",
+    options: [
+      { text: "Not prioritized", score: 1 },
+      { text: "Ad-hoc prioritization", score: 2 },
+      { text: "Basic scoring model", score: 3 },
+      { text: "Structured prioritization with owners", score: 4 },
+      { text: "Portfolio-managed with KPI tracking", score: 5 }
+    ]
+  },
+  {
+    question: "How strong is executive sponsorship for AI transformation?",
+    pillar: "Strategy",
+    options: [
+      { text: "No sponsorship", score: 1 },
+      { text: "Limited interest", score: 2 },
+      { text: "Supportive but not active", score: 3 },
+      { text: "Active sponsor with resources", score: 4 },
+      { text: "C-suite led program with governance", score: 5 }
+    ]
+  },
+  {
+    question: "How mature is your AI value measurement (ROI, KPIs, benefits tracking)?",
+    pillar: "Strategy",
+    options: [
+      { text: "No measurement", score: 1 },
+      { text: "Anecdotal benefits", score: 2 },
+      { text: "Some KPIs defined", score: 3 },
+      { text: "KPIs tracked for key initiatives", score: 4 },
+      { text: "Full benefits realization framework", score: 5 }
+    ]
+  },
+
+  // Data (4)
+  {
     question: "How ready is your data (quality, access, governance) for AI?",
     pillar: "Data",
     options: [
-      { text: "Data is messy/inaccessible", score: 1 },
-      { text: "Some usable data, limited access", score: 2 },
-      { text: "Core data available, some governance", score: 3 },
-      { text: "Good data + governance, improving", score: 4 },
-      { text: "High-quality data + strong governance", score: 5 }
+      { text: "Data is fragmented / poor quality", score: 1 },
+      { text: "Some usable datasets exist", score: 2 },
+      { text: "Core data sources are accessible", score: 3 },
+      { text: "Well-managed data with governance", score: 4 },
+      { text: "High-quality, AI-ready data platform", score: 5 }
     ]
   },
   {
-    question: "How mature is your AI/ML technology stack and infrastructure?",
+    question: "How accessible is data across teams (APIs, catalog, permissions)?",
+    pillar: "Data",
+    options: [
+      { text: "Hard to access", score: 1 },
+      { text: "Manual access via requests", score: 2 },
+      { text: "Some shared datasets", score: 3 },
+      { text: "Self-serve access for most teams", score: 4 },
+      { text: "Fully self-serve with catalog + lineage", score: 5 }
+    ]
+  },
+  {
+    question: "How consistent are your data definitions (single source of truth)?",
+    pillar: "Data",
+    options: [
+      { text: "No consistent definitions", score: 1 },
+      { text: "Some shared definitions", score: 2 },
+      { text: "Key metrics standardized", score: 3 },
+      { text: "Most metrics standardized", score: 4 },
+      { text: "Enterprise-wide data product model", score: 5 }
+    ]
+  },
+  {
+    question: "How scalable is your data pipeline to support AI growth?",
+    pillar: "Data",
+    options: [
+      { text: "Not scalable", score: 1 },
+      { text: "Limited scalability", score: 2 },
+      { text: "Scales for some workloads", score: 3 },
+      { text: "Scales reliably with monitoring", score: 4 },
+      { text: "Elastic, governed, cost-optimized at scale", score: 5 }
+    ]
+  },
+
+  // Technology (4)
+  {
+    question: "Do you have the right AI tooling stack (MLOps/LLMOps, deployment, monitoring)?",
     pillar: "Technology",
     options: [
-      { text: "No AI tech stack", score: 1 },
-      { text: "Exploring tools / ad-hoc usage", score: 2 },
-      { text: "Basic tools in place (limited scale)", score: 3 },
-      { text: "Scalable stack with some MLOps", score: 4 },
-      { text: "Robust MLOps + scalable production platform", score: 5 }
+      { text: "No tooling", score: 1 },
+      { text: "Basic experiments only", score: 2 },
+      { text: "Some deployment capability", score: 3 },
+      { text: "Mature deployment + monitoring", score: 4 },
+      { text: "Full MLOps/LLMOps lifecycle automated", score: 5 }
     ]
   },
   {
-    question: "How ready are your people and culture to adopt AI?",
+    question: "How mature is your model monitoring (drift, quality, hallucinations)?",
+    pillar: "Technology",
+    options: [
+      { text: "No monitoring", score: 1 },
+      { text: "Manual spot checks", score: 2 },
+      { text: "Basic dashboards", score: 3 },
+      { text: "Automated alerts + evaluation", score: 4 },
+      { text: "Continuous eval + governance gates", score: 5 }
+    ]
+  },
+  {
+    question: "How well are AI solutions integrated into workflows (CRM, ticketing, ERP)?",
+    pillar: "Technology",
+    options: [
+      { text: "Not integrated", score: 1 },
+      { text: "Pilot-only integrations", score: 2 },
+      { text: "Some key integrations", score: 3 },
+      { text: "Integrated into core workflows", score: 4 },
+      { text: "End-to-end automation with orchestration", score: 5 }
+    ]
+  },
+  {
+    question: "How strong is your security posture for AI systems (access, secrets, logging)?",
+    pillar: "Technology",
+    options: [
+      { text: "Not addressed", score: 1 },
+      { text: "Basic controls", score: 2 },
+      { text: "Role-based access for key systems", score: 3 },
+      { text: "Security reviews + logging", score: 4 },
+      { text: "Enterprise-grade, audited controls", score: 5 }
+    ]
+  },
+
+  // People (4)
+  {
+    question: "How capable is your team to build and run AI solutions?",
     pillar: "People",
     options: [
-      { text: "Strong resistance / fear", score: 1 },
-      { text: "Low awareness, limited buy-in", score: 2 },
-      { text: "Some champions and training", score: 3 },
-      { text: "Good adoption + change plan", score: 4 },
-      { text: "AI-first culture with strong upskilling", score: 5 }
+      { text: "No AI skills", score: 1 },
+      { text: "A few enthusiasts", score: 2 },
+      { text: "Small capable team", score: 3 },
+      { text: "Cross-functional AI team", score: 4 },
+      { text: "Strong org-wide capability + COE", score: 5 }
+    ]
+  },
+  {
+    question: "How prepared is the business for change (training, adoption, comms)?",
+    pillar: "People",
+    options: [
+      { text: "Not prepared", score: 1 },
+      { text: "Some communication", score: 2 },
+      { text: "Basic training planned", score: 3 },
+      { text: "Training + adoption tracked", score: 4 },
+      { text: "Change mgmt embedded in delivery", score: 5 }
+    ]
+  },
+  {
+    question: "How well do you collaborate across IT/Data/Business for AI delivery?",
+    pillar: "People",
+    options: [
+      { text: "Siloed", score: 1 },
+      { text: "Occasional collaboration", score: 2 },
+      { text: "Regular collaboration on projects", score: 3 },
+      { text: "Product-style teams", score: 4 },
+      { text: "High-performing cross-functional model", score: 5 }
+    ]
+  },
+  {
+    question: "How mature is your AI operating model (roles, ownership, delivery cadence)?",
+    pillar: "People",
+    options: [
+      { text: "No model", score: 1 },
+      { text: "Unclear ownership", score: 2 },
+      { text: "Some ownership defined", score: 3 },
+      { text: "Clear owners + cadence", score: 4 },
+      { text: "Scaled operating model across org", score: 5 }
+    ]
+  },
+
+  // Governance (4)
+  {
+    question: "Do you have AI governance policies (risk, compliance, approvals)?",
+    pillar: "Governance",
+    options: [
+      { text: "No governance", score: 1 },
+      { text: "Informal discussions", score: 2 },
+      { text: "Basic guidelines drafted", score: 3 },
+      { text: "Policies implemented", score: 4 },
+      { text: "Comprehensive governance with audits", score: 5 }
     ]
   },
   {
@@ -284,56 +2100,125 @@ const questions = [
       { text: "Privacy policies being developed", score: 4 },
       { text: "Comprehensive privacy framework with regular audits", score: 5 }
     ]
+  },
+  {
+    question: "How are AI risks assessed (bias, fairness, safety, legal)?",
+    pillar: "Governance",
+    options: [
+      { text: "Not assessed", score: 1 },
+      { text: "Ad-hoc reviews", score: 2 },
+      { text: "Basic checklist used", score: 3 },
+      { text: "Formal risk assessment process", score: 4 },
+      { text: "Continuous risk mgmt + independent review", score: 5 }
+    ]
+  },
+  {
+    question: "How mature is your vendor / model governance (contracts, SLAs, evals)?",
+    pillar: "Governance",
+    options: [
+      { text: "No vendor governance", score: 1 },
+      { text: "Basic contracts only", score: 2 },
+      { text: "Some SLAs + reviews", score: 3 },
+      { text: "Formal vendor governance", score: 4 },
+      { text: "Robust governance + ongoing evaluation", score: 5 }
+    ]
   }
 ];
 
 /* =========================================================
-   START QUESTIONS (after email capture)
-   ========================================================= */
+   8) Assessment Modal Controls (NO duplicates)
+========================================================= */
+function startAssessment() {
+  const modal = $("assessmentModal");
+  if (!modal) {
+    console.error("assessmentModal not found");
+    return;
+  }
+
+  // reset assessment state
+  window._nbvAssessment.currentQuestionIndex = 0;
+  window._nbvAssessment.answers = {};
+  window._nbvAssessment.userData = {};
+  window._nbvAssessment.lastOverallScore = 0;
+  window._nbvAssessment.lastPillarAverages = {};
+
+  // show email step first
+  showStep("email");
+
+  modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+window.startAssessment = startAssessment;
+
+function closeAssessment() {
+  const modal = $("assessmentModal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  }
+  document.body.style.overflow = "auto";
+}
+window.closeAssessment = closeAssessment;
+
+function showStep(step) {
+  const email = $("emailCapture");
+  const qs = $("questionsContainer");
+  const res = $("resultsContainer");
+
+  if (email) email.style.display = (step === "email") ? "block" : "none";
+  if (qs) qs.style.display = (step === "questions") ? "block" : "none";
+  if (res) res.style.display = (step === "results") ? "block" : "none";
+}
+
 function startQuestions() {
-  const name = (document.getElementById("userName")?.value || "").trim();
-  const email = (document.getElementById("userEmail")?.value || "").trim();
-  const company = (document.getElementById("userCompany")?.value || "").trim();
-  const role = (document.getElementById("userRole")?.value || "").trim();
+  const name = safeTrim($("userName")?.value);
+  const email = safeTrim($("userEmail")?.value);
+  const company = safeTrim($("userCompany")?.value);
+  const role = safeTrim($("userRole")?.value);
 
   if (!name || !email || !company) {
-    alert("Please fill in Name, Work Email, and Company.");
+    alert("Please fill in Name, Work Email, and Company Name.");
     return;
   }
 
   window._nbvAssessment.userData = { name, email, company, role };
-  window._nbvAssessment.currentQuestionIndex = 0;
-  window._nbvAssessment.answers = [];
 
   showStep("questions");
   renderQuestion();
 }
 window.startQuestions = startQuestions;
 
-/* =========================================================
-   RENDER QUESTION
-   ========================================================= */
 function renderQuestion() {
   const idx = window._nbvAssessment.currentQuestionIndex;
   const q = questions[idx];
-  if (!q) return console.error("Question not found at index:", idx);
+  if (!q) return;
 
-  const counter = document.getElementById("questionCounter");
-  const title = document.getElementById("questionTitle");
-  const optionsContainer = document.getElementById("optionsContainer");
-  const backBtn = document.getElementById("backBtn");
+  const progressBar = $("progressBar");
+  const progressText = $("progressText");
+  const questionCounter = $("questionCounter");
+  const questionTitle = $("questionTitle");
+  const optionsContainer = $("optionsContainer");
+  const backBtn = $("backBtn");
 
-  if (counter) counter.textContent = `Question ${idx + 1} of ${questions.length}`;
-  if (title) title.textContent = q.question;
+  // Progress
+  const pct = Math.round(((idx + 1) / questions.length) * 100);
+  if (progressBar) progressBar.style.width = pct + "%";
+  if (progressText) progressText.textContent = pct + "%";
+  if (questionCounter) questionCounter.textContent = `Question ${idx + 1} of ${questions.length}`;
+  if (questionTitle) questionTitle.textContent = q.question;
 
-  if (!optionsContainer) return console.error("optionsContainer missing in DOM");
+  if (!optionsContainer) {
+    console.error("optionsContainer not found");
+    return;
+  }
+
   optionsContainer.innerHTML = "";
-
   q.options.forEach(opt => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "option-btn";
-    btn.innerHTML = `<span>${opt.text}</span><span>→</span>`;
+    btn.innerHTML = `<span class="option-text">${escapeHtml(opt.text)}</span><span class="option-arrow">→</span>`;
     btn.onclick = () => selectOption(opt.score, q.pillar);
     optionsContainer.appendChild(btn);
   });
@@ -346,161 +2231,206 @@ function selectOption(score, pillar) {
   window._nbvAssessment.answers[idx] = { pillar, score };
 
   if (idx < questions.length - 1) {
-    window._nbvAssessment.currentQuestionIndex++;
+    window._nbvAssessment.currentQuestionIndex += 1;
     renderQuestion();
   } else {
-    s();
+    showResults();
   }
 }
 
 function previousQuestion() {
   if (window._nbvAssessment.currentQuestionIndex > 0) {
-    window._nbvAssessment.currentQuestionIndex--;
+    window._nbvAssessment.currentQuestionIndex -= 1;
     renderQuestion();
   }
 }
 window.previousQuestion = previousQuestion;
 
+function restartAssessment() {
+  window._nbvAssessment.currentQuestionIndex = 0;
+  window._nbvAssessment.answers = {};
+  showStep("email");
+}
+window.restartAssessment = restartAssessment;
+
 /* =========================================================
-   RESULTS: compute scores + render + save for upgrades
-   ========================================================= */
+   9) Results + Upgrade buttons
+========================================================= */
 function showResults() {
+  const resultsContainer = $("resultsContainer");
+  if (!resultsContainer) return;
+
   showStep("results");
 
-  const resultsContainer = document.getElementById("resultsContainer");
-  if (!resultsContainer) return console.error("resultsContainer missing");
-
-  const answersArr = window._nbvAssessment.answers || [];
-
-  // Pillar totals
+  const ans = window._nbvAssessment.answers || {};
   const pillarScores = {};
   const pillarCounts = {};
 
-  answersArr.forEach(a => {
+  Object.values(ans).forEach(a => {
     if (!a) return;
     const p = a.pillar;
     pillarScores[p] = (pillarScores[p] || 0) + (a.score || 0);
     pillarCounts[p] = (pillarCounts[p] || 0) + 1;
   });
 
-  // Pillar averages as %
   const pillarAverages = {};
   Object.keys(pillarScores).forEach(p => {
-    pillarAverages[p] = Math.round((pillarScores[p] / pillarCounts[p]) * 20);
+    pillarAverages[p] = Math.round((pillarScores[p] / pillarCounts[p]) * 20); // 1..5 -> %
   });
 
-  const totalScore = answersArr.reduce((sum, a) => sum + ((a && a.score) || 0), 0);
+  const totalScore = Object.values(ans).reduce((sum, a) => sum + ((a && a.score) || 0), 0);
   const maxScore = questions.length * 5;
   const overallScore = Math.round((totalScore / maxScore) * 100);
 
-  // Save globally for upgrade actions
   window._nbvAssessment.lastOverallScore = overallScore;
   window._nbvAssessment.lastPillarAverages = pillarAverages;
 
-  // Readiness bands
   let readinessLevel = "Getting Started";
   let readinessColor = "#ff3366";
-  let readinessMessage = "You’re in the early stages of AI readiness. Focus on building foundations first.";
+  let readinessMessage = "Your organization is in the early stages of AI readiness. Significant opportunities exist to build foundational capabilities.";
 
   if (overallScore >= 30 && overallScore < 50) {
     readinessLevel = "Building Foundation";
     readinessColor = "#ff9500";
-    readinessMessage = "You’ve started, but should strengthen core capabilities to accelerate AI adoption.";
+    readinessMessage = "You have some AI basics in place, but need to strengthen core capabilities to accelerate adoption.";
   } else if (overallScore >= 50 && overallScore < 70) {
     readinessLevel = "Progressing Well";
     readinessColor = "#00d9ff";
-    readinessMessage = "You have solid foundations and are moving toward real AI transformation.";
+    readinessMessage = "Your organization has solid AI foundations and is making good progress toward transformation.";
   } else if (overallScore >= 70 && overallScore < 85) {
     readinessLevel = "Advanced";
     readinessColor = "#7c3aed";
-    readinessMessage = "Strong AI readiness — you’re well-positioned for advanced implementations.";
+    readinessMessage = "You have strong AI capabilities and are well-positioned for advanced implementations.";
   } else if (overallScore >= 85) {
     readinessLevel = "AI Leader";
     readinessColor = "#00ff88";
-    readinessMessage = "Excellent — you’re operating at an AI leader level with mature capabilities.";
+    readinessMessage = "Your organization is an AI leader with mature capabilities across all dimensions.";
   }
 
   const pillarsHtml = Object.keys(pillarAverages).map(p => {
-    const s = pillarAverages[p];
+    const score = pillarAverages[p];
+    const c = score < 40 ? "#ff3366" : score < 60 ? "#ff9500" : score < 80 ? "#00d9ff" : "#00ff88";
     return `
       <div class="pillar-card">
-        <div style="font-weight:900;margin-bottom:.35rem;color:${readinessColor};">${p}</div>
-        <div style="font-size:1.3rem;font-weight:900;">${s}%</div>
+        <div class="pillar-name" style="color:${c};">${escapeHtml(p)}</div>
+        <div class="pillar-score">${score}%</div>
       </div>
     `;
   }).join("");
 
   resultsContainer.innerHTML = `
-    <h2 style="text-align:center;font-weight:900;font-size:2rem;">Your AI Readiness Score</h2>
+    <div class="results-container">
+      <h2 style="color:#fff;font-size:2.2rem;font-weight:900;margin-bottom:1rem;">Your AI Readiness Score</h2>
 
-    <div class="score-circle" style="background:linear-gradient(135deg, ${readinessColor}, ${readinessColor}cc);">
-      <div style="font-size:3rem;">${overallScore}%</div>
-      <div style="opacity:.85;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;">Overall Score</div>
-    </div>
+      <div class="score-circle" style="background:linear-gradient(135deg, ${readinessColor}, ${readinessColor}dd);">
+        <div class="score-number">${overallScore}%</div>
+        <div class="score-label">Overall Score</div>
+      </div>
 
-    <div style="background:rgba(255,255,255,0.05);padding:1.25rem;border-radius:16px;text-align:center;">
-      <div style="font-weight:900;font-size:1.4rem;color:${readinessColor};">${readinessLevel}</div>
-      <p style="color:#cbd5e1;margin:.6rem 0 0;">${readinessMessage}</p>
-    </div>
+      <div style="background:rgba(255,255,255,0.05);border-radius:15px;padding:1.5rem;margin:1.5rem 0;">
+        <h3 style="color:${readinessColor};font-size:1.6rem;font-weight:900;margin-bottom:.75rem;">${readinessLevel}</h3>
+        <p style="color:#a0a0b0;font-size:1.05rem;line-height:1.6;">${readinessMessage}</p>
+      </div>
 
-    <h3 style="margin-top:1.5rem;font-weight:900;text-align:center;">Scores by Pillar</h3>
-    <div class="pillar-scores" style="margin-top:1rem;">${pillarsHtml}</div>
+      <h3 style="color:#fff;font-size:1.35rem;font-weight:900;margin:1.5rem 0 .75rem;">Scores by Pillar</h3>
+      <div class="pillar-scores">${pillarsHtml}</div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:1.5rem;">
-      <button class="cta-btn" style="margin:0;border-radius:14px;" onclick="upgradeToPremium('premium')">Premium Report →</button>
-      <button class="cta-btn" style="margin:0;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#00d9ff);" onclick="upgradeToPremium('consult')">Report + Call →</button>
-      <button class="cta-btn" style="margin:0;border-radius:14px;background:linear-gradient(135deg,#ff9500,#ff3366);" onclick="upgradeToPremium('enterprise')">Enterprise →</button>
-    </div>
+      <div style="background:rgba(255,255,255,.03);border-radius:20px;padding:2rem;margin:1.6rem 0;border:2px solid rgba(0,217,255,.2);">
+        <h3 style="color:#ffffff;font-size:1.4rem;margin-bottom:.4rem;font-weight:900;text-align:center;">🚀 Unlock Your Full AI Potential</h3>
+        <p style="color:#a0a0b0;text-align:center;margin-bottom:1.4rem;">Get deeper insights and actionable strategies with our premium reports</p>
 
-    <div style="margin-top:1.5rem;background:rgba(255,255,255,0.04);padding:1rem;border-radius:14px;">
-      <h3 style="margin:0 0 .8rem;font-weight:900;">Send Results to Email (Zoho Lead)</h3>
-      <button class="cta-btn" style="margin:0;width:100%;border-radius:14px;" onclick="submitAssessmentToZoho('Free 1-Page Summary')">
-        Send My Report →
-      </button>
-      <p style="color:#94a3b8;font-size:.9rem;margin:.75rem 0 0;">
-        This submits a lead into Zoho CRM using your Web-to-Lead credentials.
-      </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Free 1-Page Summary</h4>
+            <div style="color:#00ff88;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">FREE</div>
+            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
+              <li>✓ Overall readiness score</li><li>✓ Pillar breakdown</li><li>✓ Basic recommendations</li><li>✓ Email delivery</li>
+            </ul>
+            <div style="margin-top:1rem;padding:.6rem;background:rgba(0,255,136,.1);border-radius:10px;text-align:center;">
+              <span style="color:#00ff88;font-weight:900;">✓ INCLUDED</span>
+            </div>
+          </div>
+
+          <div style="background:linear-gradient(135deg,rgba(0,217,255,.15),rgba(124,58,237,.15));border-radius:15px;padding:1.25rem;border:2px solid #00d9ff;position:relative;">
+            <div style="position:absolute;top:-12px;right:14px;background:linear-gradient(135deg,#ff3366,#ff9500);padding:.35rem .85rem;border-radius:20px;font-size:.75rem;font-weight:900;color:#fff;letter-spacing:1px;">POPULAR</div>
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Premium Report</h4>
+            <div style="color:#00d9ff;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$97</div>
+            <ul style="list-style:none;padding:0;color:#ffffff;font-size:.95rem;line-height:1.8;">
+              <li>✓ 15-page detailed report</li><li>✓ Benchmarking vs peers</li><li>✓ Custom 90-day roadmap</li><li>✓ Prioritized use cases</li><li>✓ ROI projections</li><li>✓ Risk analysis</li>
+            </ul>
+            <button type="button" onclick="upgradeToPremium('premium')" style="margin-top:1rem;width:100%;padding:.75rem;background:linear-gradient(135deg,#00d9ff,#7c3aed);border:none;border-radius:12px;color:#fff;font-weight:900;cursor:pointer;">
+              Get Premium Report →
+            </button>
+          </div>
+
+          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Premium + Consult</h4>
+            <div style="color:#7c3aed;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$297</div>
+            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
+              <li>✓ Everything in Premium</li><li>✓ 60-min strategy call</li><li>✓ Expert Q&A session</li><li>✓ Implementation guidance</li><li>✓ Priority support</li>
+            </ul>
+            <button type="button" onclick="upgradeToPremium('consult')" style="margin-top:1rem;width:100%;padding:.75rem;background:transparent;border:2px solid rgba(124,58,237,.6);border-radius:12px;color:#7c3aed;font-weight:900;cursor:pointer;">
+              Get Report + Call →
+            </button>
+          </div>
+
+          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
+            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Enterprise</h4>
+            <div style="color:#ff9500;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$997</div>
+            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
+              <li>✓ Everything in Premium+</li><li>✓ Full team workshop</li><li>✓ Custom transformation plan</li><li>✓ Vendor recommendations</li><li>✓ 30-day support</li>
+            </ul>
+            <button type="button" onclick="upgradeToPremium('enterprise')" style="margin-top:1rem;width:100%;padding:.75rem;background:transparent;border:2px solid rgba(255,149,0,.6);border-radius:12px;color:#ff9500;font-weight:900;cursor:pointer;">
+              Get Enterprise →
+            </button>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:1.2rem;color:#a0a0b0;font-size:.9rem;">
+          💳 Secure payment via Stripe • 📧 Instant delivery • 🔒 Money-back guarantee
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button type="button" onclick="restartAssessment()" style="padding:.85rem 1.1rem;border-radius:12px;border:2px solid rgba(255,255,255,0.18);background:transparent;color:#fff;font-weight:900;cursor:pointer;">
+          Restart
+        </button>
+        <button type="button" onclick="closeAssessment()" style="padding:.85rem 1.1rem;border-radius:12px;border:none;background:rgba(255,255,255,0.08);color:#fff;font-weight:900;cursor:pointer;">
+          Close
+        </button>
+      </div>
+
+      <div style="margin-top:1.2rem;color:#a0a0b0;font-size:.9rem;">
+        Want the FREE 1-page summary emailed? Use the main assessment email entry step (we capture and send to Zoho automatically).
+      </div>
     </div>
   `;
 }
 window.showResults = showResults;
-postAssessmentToZoho(
-  {
-    name: userData.name,
-    email: userData.email,
-    company: userData.company,
-    score: window._nbvAssessment.lastOverallScore,
-    details: JSON.stringify(window._nbvAssessment.lastPillarAverages),
-    goals: "Submitted via AI Readiness Assessment"
-  },
-  "Free 1-Page Summary"
-);
-
 
 /* =========================================================
-   UPGRADE HANDLER (no inline JSON bugs)
-   ========================================================= */
+   10) Upgrade handler (safe: uses saved values)
+========================================================= */
 function upgradeToPremium(type) {
   const score = window._nbvAssessment.lastOverallScore;
   const pillars = window._nbvAssessment.lastPillarAverages;
+
+  // Replace this alert with your Stripe checkout logic
   alert(
-    `🚀 Selected: ${type.toUpperCase()}\n\n` +
+    `🚀 Selected: ${String(type).toUpperCase()}\n\n` +
     `Score: ${score}%\n` +
     `Pillars: ${JSON.stringify(pillars, null, 2)}\n\n` +
-    `Connect your Stripe checkout here.`
+    `Stripe checkout can be connected here.`
   );
-
-  // OPTIONAL: also log upgrade intent to Zoho
-  submitAssessmentToZoho(type);
 }
 window.upgradeToPremium = upgradeToPremium;
 
 /* =========================================================
-   ZOHO WEB-TO-LEAD (SAFE SUBMIT via hidden iframe)
-   - Fixes "Unexpected token <"
-   - No <script> nested inside <script>
-   - No CORS fetch noise
-   ========================================================= */
+   11) ZOHO Web-to-Lead (EU) submit helper
+   - Uses hidden iframe so it works on static GitHub pages.
+   - IMPORTANT: Do NOT paste Zoho's full embed <div><form>...</form> inside your <script>.
+   - Keep Zoho constants declared ONCE to avoid "already declared".
+========================================================= */
 const NBV_ZOHO_W2L = {
   endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
   xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
@@ -510,40 +2440,40 @@ const NBV_ZOHO_W2L = {
   zc_gad: ""
 };
 
-// submit to Zoho Web-to-Lead without navigation
-function postToZohoLead(fields) {
+// Minimal, safe post to Zoho.
+// fields keys must match Zoho WebToLead field names (e.g., "Last Name", "Email", "Company", "Description", custom fields).
+function postToZohoW2L(fields) {
   try {
-    const iframeName = "zohoW2LFrame_" + Date.now();
+    const iframeName = "zoho_w2l_iframe_" + Date.now();
     const iframe = document.createElement("iframe");
     iframe.name = iframeName;
     iframe.style.display = "none";
     document.body.appendChild(iframe);
 
     const form = document.createElement("form");
-    form.action = NBV_ZOHO_W2L.endpoint;
     form.method = "POST";
+    form.action = NBV_ZOHO_W2L.endpoint;
     form.target = iframeName;
     form.acceptCharset = "UTF-8";
+    form.style.display = "none";
 
-    // required hidden fields
-    const hidden = (name, val) => {
-      const i = document.createElement("input");
-      i.type = "hidden";
-      i.name = name;
-      i.value = String(val ?? "");
-      return i;
+    const hidden = (name, value) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value ?? "";
+      form.appendChild(input);
     };
 
-    form.appendChild(hidden("xnQsjsdp", NBV_ZOHO_W2L.xnQsjsdp));
-    form.appendChild(hidden("zc_gad", NBV_ZOHO_W2L.zc_gad));
-    form.appendChild(hidden("xmIwtLD", NBV_ZOHO_W2L.xmIwtLD));
-    form.appendChild(hidden("actionType", NBV_ZOHO_W2L.actionType));
-    form.appendChild(hidden("returnURL", NBV_ZOHO_W2L.returnURL));
+    // Required Zoho tokens
+    hidden("xnQsjsdp", NBV_ZOHO_W2L.xnQsjsdp);
+    hidden("zc_gad", NBV_ZOHO_W2L.zc_gad);
+    hidden("xmIwtLD", NBV_ZOHO_W2L.xmIwtLD);
+    hidden("actionType", NBV_ZOHO_W2L.actionType);
+    hidden("returnURL", NBV_ZOHO_W2L.returnURL);
 
-    // add payload fields
-    Object.keys(fields || {}).forEach(k => {
-      form.appendChild(hidden(k, fields[k]));
-    });
+    // Payload fields
+    Object.keys(fields || {}).forEach(k => hidden(k, fields[k]));
 
     document.body.appendChild(form);
     form.submit();
@@ -560,119 +2490,55 @@ function postToZohoLead(fields) {
     return false;
   }
 }
+window.postToZohoW2L = postToZohoW2L;
 
-function submitAssessmentToZoho(reportType) {
-  const u = window._nbvAssessment.userData || {};
-  const overall = window._nbvAssessment.lastOverallScore || 0;
+/* =========================================================
+   12) Send Assessment lead to Zoho (preserves your integration fields)
+   Your Zoho form includes hidden custom fields:
+   - LEADCF51 = AI Readiness Score
+   - LEADCF2  = Report Type
+   - LEADCF1  = Assessment Details
+========================================================= */
+function sendAssessmentLeadToZoho(reportType = "Free 1-Page Summary") {
+  const ud = window._nbvAssessment.userData || {};
+  const score = window._nbvAssessment.lastOverallScore || 0;
   const pillars = window._nbvAssessment.lastPillarAverages || {};
 
-  // This maps to your Zoho form field names:
-  // Last Name (mandatory in Zoho) -> use Name
-  // Email -> Work Email
-  // Company -> Company
-  // LEADCF51 -> AI Readiness Score
-  // LEADCF2 -> Report Type
-  // LEADCF1 -> Assessment Details
-  const details = {
-    OverallScore: overall,
-    Pillars: pillars,
-    Role: u.role || ""
-  };
+  // Zoho requires Last Name (we use Name as Last Name to satisfy mandatory rule)
+  const descriptionLines = [
+    `AI Readiness Assessment`,
+    `Overall Score: ${score}%`,
+    `Pillars: ${JSON.stringify(pillars)}`
+  ];
 
-  const zohoFields = {
-    "Last Name": u.name || "Website Lead",
-    "Email": u.email || "",
-    "Company": u.company || "",
-    "LEADCF51": String(overall),
-    "LEADCF2": reportType || "Free 1-Page Summary",
-    "LEADCF1": JSON.stringify(details)
-  };
-
-  const ok = postToZohoLead(zohoFields);
-  if (ok) {
-    alert("✅ Submitted to Zoho CRM. We’ll email your report shortly.");
-  } else {
-    alert("⚠️ Zoho submission failed. Please try again or contact value.advisor@nothingbutvalue.com");
-  }
+  return postToZohoW2L({
+    "Last Name": ud.name || "Website Visitor",
+    "Email": ud.email || "",
+    "Company": ud.company || "",
+    "Description": descriptionLines.join("\n"),
+    "LEADCF51": String(score),               // AI Readiness Score
+    "LEADCF2": reportType,                   // Report Type
+    "LEADCF1": "Assessment completed on website" // Assessment Details
+  });
 }
-window.submitAssessmentToZoho = submitAssessmentToZoho;
+window.sendAssessmentLeadToZoho = sendAssessmentLeadToZoho;
+
+/* =========================================================
+   13) OPTIONAL: If you want to automatically create a Zoho lead
+       when assessment finishes, enable this by calling inside showResults.
+       (Currently: NOT auto-posting to avoid duplicates.)
+========================================================= */
+// Example (manual trigger):
+// window.sendAssessmentLeadToZoho("Free 1-Page Summary");
+
+/* ---------------------------
+   14) DOM init
+---------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  bindTabs();
+  bindSmoothScroll();
+
+  // If your modal has duplicate IDs from earlier attempts, this will help you notice quickly.
+  // console.log("Assessment modal loaded:", !!$("assessmentModal"));
+});
 </script>
-<script>
-/* =========================
-   ZOHO WEB-TO-LEAD (EU)
-   Safe for static sites
-   ========================= */
-(function () {
-  if (window.postAssessmentToZoho) return; // prevent duplicates
-
-  const ZOHO = {
-    endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
-    xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
-    xmIwtLD: "6fb00fd876fe13687ff5a183eaabcffc40d0ac2b49d9f27355afb17ad109330dec2849768843aabc47935ba77065a882",
-    actionType: "TGVhZHM=",
-    returnURL: "https://nothingbutvalue.com/thank-you.html",
-    zc_gad: ""
-  };
-
-  window.postAssessmentToZoho = function (assessment, reportType) {
-    try {
-      const iframe = document.createElement("iframe");
-      iframe.name = "zohoFrame_" + Date.now();
-      iframe.style.display = "none";
-      document.body.appendChild(iframe);
-
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = ZOHO.endpoint;
-      form.target = iframe.name;
-      form.acceptCharset = "UTF-8";
-
-      const add = (name, value) => {
-        const i = document.createElement("input");
-        i.type = "hidden";
-        i.name = name;
-        i.value = value ?? "";
-        form.appendChild(i);
-      };
-
-      // Required Zoho tokens
-      add("xnQsjsdp", ZOHO.xnQsjsdp);
-      add("zc_gad", ZOHO.zc_gad);
-      add("xmIwtLD", ZOHO.xmIwtLD);
-      add("actionType", ZOHO.actionType);
-      add("returnURL", ZOHO.returnURL);
-
-      // Lead fields
-      add("Last Name", assessment.name || "Website Lead");
-      add("Email", assessment.email);
-      add("Company", assessment.company);
-      add("Phone", assessment.phone || "");
-      add("Industry", assessment.industry || "");
-      add("Annual Revenue", assessment.revenue || "");
-      add("No of Employees", assessment.employees || "");
-      add("Website", assessment.website || "");
-      add("Description", assessment.goals || "AI Readiness Assessment completed");
-
-      // Custom fields
-      add("LEADCF51", String(assessment.score || 0));   // AI Readiness Score
-      add("LEADCF2", reportType);                        // Report Type
-      add("LEADCF1", assessment.details);                // Assessment Details
-
-      document.body.appendChild(form);
-      form.submit();
-
-      setTimeout(() => {
-        form.remove();
-        iframe.remove();
-      }, 1500);
-
-      return true;
-    } catch (e) {
-      console.error("Zoho submission failed", e);
-      return false;
-    }
-  };
-})();
-</script>
-
-  
