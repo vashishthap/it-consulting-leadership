@@ -1754,7 +1754,105 @@
 ```html
 <script>
 "use strict";
+/* =========================
+   Assessment Theme Overrides
+   - Changes background + fonts for question + options screens
+   - Safe: only affects #assessmentModal area
+   ========================= */
+(function injectAssessmentTheme() {
+  if (document.getElementById("nbvAssessmentTheme")) return;
 
+  const css = `
+    /* Modal outer overlay (slightly darker) */
+    #assessmentModal {
+      background: rgba(0,0,0,0.72) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Modal card background (THIS is the main background you see) */
+    #assessmentModal .modal-content {
+      background: radial-gradient(1200px 500px at 20% 0%, rgba(0,217,255,0.10), transparent 60%),
+                  radial-gradient(900px 500px at 100% 30%, rgba(124,58,237,0.14), transparent 55%),
+                  linear-gradient(180deg, #070A14 0%, #0B1020 100%) !important;
+      border: 1px solid rgba(0,217,255,0.25) !important;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.60) !important;
+      color: #ffffff !important;
+    }
+
+    /* Question title font size */
+    #assessmentModal #questionTitle {
+      font-size: 1.85rem !important;
+      line-height: 1.25 !important;
+      font-weight: 900 !important;
+      letter-spacing: -0.02em !important;
+      margin-bottom: 1.2rem !important;
+    }
+
+    /* "Question 1 of 20" */
+    #assessmentModal #questionCounter {
+      font-size: 1.05rem !important;
+      opacity: 0.85 !important;
+      margin-bottom: 0.65rem !important;
+    }
+
+    /* Options container spacing */
+    #assessmentModal #optionsContainer {
+      display: grid !important;
+      gap: 0.8rem !important;
+    }
+
+    /* Option button styling + font size */
+    #assessmentModal .option-btn {
+      font-size: 1.05rem !important;
+      padding: 1.05rem 1.15rem !important;
+      border-radius: 14px !important;
+      border: 2px solid rgba(255,255,255,0.12) !important;
+      background: rgba(255,255,255,0.06) !important;
+      color: #ffffff !important;
+
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 1rem !important;
+
+      transition: transform .15s ease, border-color .15s ease, background .15s ease !important;
+    }
+
+    #assessmentModal .option-btn:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(0,217,255,0.55) !important;
+      background: rgba(0,217,255,0.10) !important;
+    }
+
+    /* Option text and arrow */
+    #assessmentModal .option-text {
+      font-weight: 800 !important;
+    }
+    #assessmentModal .option-arrow {
+      opacity: 0.85 !important;
+      font-weight: 900 !important;
+    }
+
+    /* Progress label area */
+    #assessmentModal #progressText {
+      font-size: 0.95rem !important;
+      font-weight: 900 !important;
+    }
+
+    /* Back / Exit buttons if present */
+    #assessmentModal button, 
+    #assessmentModal .btn,
+    #assessmentModal #backBtn {
+      font-size: 1rem !important;
+    }
+  `;
+
+  const style = document.createElement("style");
+  style.id = "nbvAssessmentTheme";
+  style.textContent = css;
+  document.head.appendChild(style);
+})();
 /* =========================================================
    NBV — Single, clean script (NO nested <script> tags)
    - Fixes: modal not scrolling, duplicate declarations, missing globals
