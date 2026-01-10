@@ -1754,6 +1754,92 @@
 ```html
 <script>
 "use strict";
+/* Always exists, even if pasted twice (won’t redeclare) */
+window.ZOHO_W2L = window.ZOHO_W2L || {
+  endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
+  xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
+  xmIwtLD: "6fb00fd876fe13687ff5a183eaabcffc40d0ac2b49d9f27355afb17ad109330dec2849768843aabc47935ba77065a882",
+  actionType: "TGVhZHM=",
+  returnURL: "https://nothingbutvalue.com/thank-you.html",
+  zc_gad: ""
+};
+
+function postToZohoLead(fields) {
+  const cfg = window.ZOHO_W2L;
+
+  // Super explicit errors (so we never “guess” again)
+  if (!cfg) { console.error("ZOHO_W2L is undefined"); return false; }
+  if (!cfg.endpoint) { console.error("ZOHO_W2L.endpoint missing"); return false; }
+  if (!cfg.xnQsjsdp) { console.error("ZOHO_W2L.xnQsjsdp missing"); return false; }
+  if (!cfg.xmIwtLD) { console.error("ZOHO_W2L.xmIwtLD missing"); return false; }
+
+  const iframeName = "zoho_w2l_iframe_" + Date.now();
+  const iframe = document.createElement("iframe");
+  iframe.name = iframeName;
+  iframe.style.display = "none";
+
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = cfg.endpoint;
+  form.target = iframeName;
+  form.acceptCharset = "UTF-8";
+  form.style.display = "none";
+
+  const add = (name, value) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value == null ? "" : String(value);
+    form.appendChild(input);
+  };
+
+  add("xnQsjsdp", cfg.xnQsjsdp);
+  add("zc_gad", cfg.zc_gad || "");
+  add("xmIwtLD", cfg.xmIwtLD);
+  add("actionType", cfg.actionType);
+  add("returnURL", cfg.returnURL);
+
+  // Zoho honeypot (must exist + empty)
+  add("aG9uZXlwb3Q", "");
+
+  Object.keys(fields || {}).forEach(k => add(k, fields[k]));
+
+  console.log("[Zoho] Submitting lead payload:", fields);
+
+  document.body.appendChild(iframe);
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(() => {
+    try { form.remove(); } catch(e) {}
+    try { iframe.remove(); } catch(e) {}
+  }, 3000);
+
+  return true;
+}
+window.postToZohoLead = postToZohoLead;
+
+function sendToZohoCRM(userData, overallScore, pillarAverages, reportType) {
+  const u = userData || {};
+  const fields = {
+    "Last Name": u.name || "Website Visitor",
+    "Email": u.email || "",
+    "Company": u.company || "",
+    "Description": "AI goals / aspirations (Assessment)",
+    "LEADCF51": String(overallScore || 0),
+    "LEADCF2": reportType || "Free 1-Page Summary",
+    "LEADCF1": `Role: ${u.role || "-"}\nOverall Score: ${overallScore || 0}%\nPillars: ${JSON.stringify(pillarAverages || {})}`
+  };
+
+  // Mandatory field check (matches your Zoho form)
+  if (!fields["Last Name"] || !fields["Email"] || !fields["Company"] || !fields["Description"]) {
+    console.error("[Zoho] Missing mandatory fields:", fields);
+    return false;
+  }
+
+  return postToZohoLead(fields);
+}
+window.sendToZohoCRM = sendToZohoCRM;
 /* =========================
    Assessment Theme Overrides
    - Changes background + fonts for question + options screens
@@ -1936,124 +2022,6 @@ window._nbvAssessment = window._nbvAssessment || {
   lastPillarAverages: {},
   lastReportType: "Free 1-Page Summary"
 };
-
-/* =========================
-   /* ---------------------------------------------------------
-   Debug mode:
-   open page with ?zohoDebug=1
-   => submits to a new tab so you can SEE Zoho’s response/error
-   --------------------------------------------------------- */
-function isZohoDebug() {
-  try {
-    return new URLSearchParams(window.location.search).get("zohoDebug") === "1";
-  } catch (e) {
-    return false;
-  }
-}
-
-/* Fire-and-forget submit to Zoho (static-site safe) */
-function postToZohoLead(fields) {
-  const cfg = window.ZOHO_W2L;
-
-  if (!cfg || !cfg.endpoint || !cfg.xnQsjsdp || !cfg.xmIwtLD) {
-    console.error("ZOHO_W2L config missing. Cannot submit lead.");
-    return false;
-  }
-
-  // IMPORTANT: Zoho WebToLead uses document charset
-  try { document.charset = "UTF-8"; } catch(e) {}
-
-  const debug = isZohoDebug();
-
-  const iframeName = "zoho_w2l_iframe_" + Date.now();
-  const iframe = document.createElement("iframe");
-  iframe.name = iframeName;
-  iframe.style.display = "none";
-
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = cfg.endpoint;
-  form.acceptCharset = "UTF-8";
-  form.style.display = "none";
-
-  // In debug mode, let Zoho open response page in a new tab
-  form.target = debug ? "_blank" : iframeName;
-
-  const add = (name, value) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    input.value = value == null ? "" : String(value);
-    form.appendChild(input);
-  };
-
-  // Required Zoho fields
-  add("xnQsjsdp", cfg.xnQsjsdp);
-  add("zc_gad", cfg.zc_gad || "");
-  add("xmIwtLD", cfg.xmIwtLD);
-  add("actionType", cfg.actionType);
-  add("returnURL", cfg.returnURL);
-
-  // Honeypot field from your Zoho form HTML (keep empty)
-  add("aG9uZXlwb3Q", "");
-
-  // Payload fields (MUST match Zoho field names exactly)
-  Object.keys(fields || {}).forEach(k => add(k, fields[k]));
-
-  // Mount + submit
-  if (!debug) document.body.appendChild(iframe);
-  document.body.appendChild(form);
-
-  // Helpful console log
-  console.log("Submitting to Zoho W2L...", { debug, fields });
-
-  form.submit();
-
-  // Cleanup (don’t clean immediately; let the POST happen)
-  setTimeout(() => {
-    try { form.remove(); } catch(e) {}
-    try { iframe.remove(); } catch(e) {}
-  }, 3000);
-
-  return true;
-}
-window.postToZohoLead = postToZohoLead;
-
-/* Wrapper used by the assessment + report form */
-function sendToZohoCRM(userData, overallScore, pillarAverages, reportType) {
-  const u = userData || {};
-  const details = [
-    `Role: ${u.role || "-"}`,
-    `Overall Score: ${overallScore || 0}%`,
-    `Pillars: ${JSON.stringify(pillarAverages || {})}`
-  ].join("\n");
-
-  // IMPORTANT: These names must match your Zoho webform "name=" attributes
-  const fields = {
-    "Last Name": u.name || "Website Visitor",
-    "Email": u.email || "",
-    "Company": u.company || "",
-    "Phone": u.phone || "",
-    "Industry": u.industry || "",
-
-    // Your mandatory textarea in Zoho form is "Description"
-    "Description": u.goals || "AI goals / aspirations (Assessment)",
-
-    // Custom fields from your form snippet:
-    "LEADCF51": String(overallScore || 0),
-    "LEADCF2": reportType || "Free 1-Page Summary",
-    "LEADCF1": details
-  };
-
-  // Basic validation (Zoho will reject if these are empty)
-  if (!fields["Last Name"] || !fields["Email"] || !fields["Company"] || !fields["Description"]) {
-    console.error("Zoho submit blocked: missing mandatory fields", fields);
-    return false;
-  }
-
-  return postToZohoLead(fields);
-}
-window.sendToZohoCRM = sendToZohoCRM;
 
 /* =========================
    2) UI helpers (tabs, faq, smooth scroll, scroll effects)
