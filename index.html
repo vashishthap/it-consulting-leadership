@@ -2679,11 +2679,17 @@ function showResults() {
       st.lastReportType = "Free 1-Page Summary";
 
       // Submit to Zoho
-      const ok = sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, st.lastReportType);
+      let ok = false;
+if (typeof window.sendToZohoCRM !== "function") {
+  console.error("sendToZohoCRM is not a function. Script order / duplicate scripts issue.");
+} else {
+  ok = window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, st.lastReportType);
+}
 
-      alert(ok
-        ? `Thank you! We’ve sent your details to Zoho CRM. Your report will be emailed to ${email}.`
-        : `Saved locally, but Zoho submission did not run. Please re-check Zoho config.`);
+alert(ok
+  ? `Thank you! Submitted to Zoho. Your report will be emailed to ${email}.`
+  : `Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.`
+);
     }, { once: true }); // prevent duplicate listeners
   }
 }
