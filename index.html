@@ -1853,6 +1853,70 @@
   style.textContent = css;
   document.head.appendChild(style);
 })();
+  /* =========================
+   Assessment UI Fixes
+   - Prevent X button overlapping progress %
+   - Change results (final score) background
+   ========================= */
+(function fixAssessmentLayoutAndResultsTheme() {
+  if (document.getElementById("nbvAssessmentFixes")) return;
+
+  const css = `
+    /* --- A) Prevent X button overlap --- */
+
+    /* Give header area breathing room so % text never sits under close button */
+    #assessmentModal .assessment-content {
+      padding-top: 34px !important;
+      padding-right: 64px !important; /* space for the X button */
+    }
+
+    /* Move the close button slightly outside the progress area */
+    #assessmentModal .close-btn {
+      top: 12px !important;
+      right: 12px !important;
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 12px !important;
+      z-index: 50 !important;
+    }
+
+    /* Ensure progress text stays left (not under the X) */
+    #assessmentModal #progressText {
+      position: relative !important;
+      z-index: 2 !important;
+      padding-right: 10px !important;
+    }
+
+    /* --- B) Results / Final Score background changes --- */
+
+    /* Whole results container background */
+    #assessmentModal #resultsContainer .results-container {
+      background: rgba(255,255,255,0.03) !important;
+      border: 1px solid rgba(255,255,255,0.10) !important;
+      border-radius: 18px !important;
+      padding: 18px !important;
+    }
+
+    /* Score circle: remove bluish look and make it darker/neutral */
+    #assessmentModal #resultsContainer .score-circle {
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.10), rgba(255,255,255,0.02)) !important;
+      border: 1px solid rgba(255,255,255,0.16) !important;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.55) !important;
+    }
+
+    /* The readiness message block (if it looks too blue, neutralize) */
+    #assessmentModal #resultsContainer .results-container > div[style*="background:"] {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.10) !important;
+    }
+  `;
+
+  const style = document.createElement("style");
+  style.id = "nbvAssessmentFixes";
+  style.textContent = css;
+  document.head.appendChild(style);
+})();
+
 /* =========================================================
    NBV — Single, clean script (NO nested <script> tags)
    - Fixes: modal not scrolling, duplicate declarations, missing globals
