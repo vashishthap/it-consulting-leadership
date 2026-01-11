@@ -2135,7 +2135,7 @@ function calculateROI() {
   set("net-roi", netROI + "%");
   set("payback", payback);
 
-  const results = document.getElementById("roiResults");
+  lts = document.getElementById("roiResults");
   if (results) results.style.display = "block";
 }
 window.calculateROI = calculateROI;
@@ -2492,7 +2492,7 @@ window.restartAssessment = restartAssessment;
 function showResults() {
   const st = window._nbvAssessment;
 
-  const resultsContainer = document.getElementById("resultsContainer");
+  ltsContainer = document.getElementById("resultsContainer");
   const questionsContainer = document.getElementById("questionsContainer");
   if (!resultsContainer || !questionsContainer) return;
 
@@ -2685,9 +2685,11 @@ function showResults() {
   if (rc && st.userData?.company) rc.value = st.userData.company;
 
   // Attach submit handler (avoid redeclare userData)
-  const resultsForm = document.getElementById("resultsForm");
-  if (resultsForm) {
-    resultsForm.addEventListener("submit", function (e) {
+const resultsForm = document.getElementById("resultsForm");
+if (resultsForm) {
+  resultsForm.addEventListener(
+    "submit",
+    function (e) {
       e.preventDefault();
 
       const name = (document.getElementById("resultUserName")?.value || "").trim();
@@ -2703,41 +2705,51 @@ function showResults() {
       st.userData = { ...(st.userData || {}), name, email, company };
       st.lastReportType = "Free 1-Page Summary";
 
-     // Submit to Zoho (reliable + redirect-safe)
-let ok = false;
+      // Disable submit to avoid double-click duplicates
+      const submitBtn = resultsForm.querySelector('button[type="submit"], input[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.7";
+        submitBtn.style.cursor = "not-allowed";
+      }
 
-if (typeof window.sendToZohoCRM !== "function") {
-  console.error("sendToZohoCRM is not a function. Script order / duplicate scripts issue.");
-} else {
-  ok = window.sendToZohoCRM(
-    st.userData,
-    st.lastOverallScore,
-    st.lastPillarAverages,
-    st.lastReportType
+      // Backup payload locally (so we can retry if Zoho is flaky)
+      const backup = {
+        ts: Date.now(),
+        userData: st.userData,
+        overallScore: st.lastOverallScore,
+        pillarAverages: st.lastPillarAverages,
+        reportType: st.lastReportType
+      };
+      try {
+        localStorage.setItem("nbv_last_zoho_payload", JSON.stringify(backup));
+      } catch (err) {}
+
+      // Submit to Zoho
+      let ok = false;
+      try {
+        ok = window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, st.lastReportType);
+      } catch (err) {
+        console.error("[Zoho] sendToZohoCRM threw:", err);
+        ok = false;
+      }
+
+      // IMPORTANT: give the hidden iframe POST time to leave the browser before redirect
+      // (redirecting immediately can cancel the request on some browsers/networks)
+      const delayMs = 1600;
+
+      setTimeout(() => {
+        const qs = new URLSearchParams({
+          status: ok ? "submitted" : "maybe",
+          email: email
+        }).toString();
+
+        window.location.href = "/thank-you.html?" + qs;
+      }, delayMs);
+    },
+    { once: true }
   );
 }
-
-if (ok) {
-  // Wait for Zoho iframe to finish (or fallback timeout)
-  const iframe = document.querySelector('iframe[name^="zoho_w2l_iframe_"]');
-
-  let redirected = false;
-  const redirect = () => {
-    if (redirected) return;
-    redirected = true;
-    window.location.href = "/thank-you.html";
-  };
-
-  if (iframe) {
-    iframe.addEventListener(
-      "load",
-      () => {
-        // Small buffer to ensure Zoho processed the POST
-        setTimeout(redirect, 200);
-      },
-      { once: true }
-    );
-
     // Hard fallback if load never fires (ad blockers / Safari)
     setTimeout(redirect, 1800);
   } else {
