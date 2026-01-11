@@ -1784,85 +1784,100 @@ window.ZOHO_W2L = window.ZOHO_W2L || {
 function postToZohoLead(fields) {
   const cfg = window.ZOHO_W2L;
   if (!cfg || !cfg.endpoint || !cfg.xnQsjsdp || !cfg.xmIwtLD) {
-    console.error("[Zoho] Missing config", cfg);
-    return false;
+    console.warn("[Zoho] Missing config; not submitting.");
+    return Promise.resolve(false);
   }
 
-  const debug = new URLSearchParams(location.search).has("zohoDebug");
+  // Build form once per attempt
+  function attemptSubmit(attemptNo) {
+    return new Promise((resolve) => {
+      const iframeName = "zoho_w2l_iframe_" + Date.now() + "_" + attemptNo;
+      const iframe = document.createElement("iframe");
+      iframe.name = iframeName;
+      iframe.style.display = "none";
 
-  const iframeName = "zoho_w2l_iframe_" + Date.now();
-  const iframe = document.createElement("iframe");
-  iframe.name = iframeName;
-  iframe.style.display = debug ? "block" : "none";
-  iframe.style.width = debug ? "100%" : "0";
-  iframe.style.height = debug ? "700px" : "0";
-  iframe.style.border = debug ? "1px solid #333" : "0";
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = cfg.endpoint;
+      form.target = iframeName;
+      form.acceptCharset = "UTF-8";
+      form.style.display = "none";
 
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = cfg.endpoint;
-  form.target = debug ? "_blank" : iframeName;   // KEY: open Zoho response in new tab when debugging
-  form.acceptCharset = "UTF-8";
-  form.style.display = "none";
+      const add = (name, value) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = value == null ? "" : String(value);
+        form.appendChild(input);
+      };
 
-  const add = (name, value) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    input.value = value == null ? "" : String(value);
-    form.appendChild(input);
-  };
+      // Required Zoho W2L hidden fields
+      add("xnQsjsdp", cfg.xnQsjsdp);
+      add("zc_gad", cfg.zc_gad || "");
+      add("xmIwtLD", cfg.xmIwtLD);
+      add("actionType", cfg.actionType);
+      add("returnURL", cfg.returnURL);
 
-  add("xnQsjsdp", cfg.xnQsjsdp);
-  add("zc_gad", cfg.zc_gad || "");
-  add("xmIwtLD", cfg.xmIwtLD);
-  add("actionType", cfg.actionType);
-  add("returnURL", cfg.returnURL);
+      // Payload
+      Object.keys(fields || {}).forEach(k => add(k, fields[k]));
 
-  // Zoho honeypot (must be present and empty)
-  add("aG9uZXlwb3Q", "");
+      // Detect “something loaded” in iframe (best we can do cross-origin)
+      let done = false;
+      const finish = (ok) => {
+        if (done) return;
+        done = true;
 
-  Object.keys(fields || {}).forEach(k => add(k, fields[k]));
+        // IMPORTANT: give it time; don’t remove instantly
+        setTimeout(() => { try { form.remove(); } catch(e) {} }, 15000);
+        setTimeout(() => { try { iframe.remove(); } catch(e) {} }, 20000);
 
-  console.log("[Zoho] Submitting lead payload:", fields);
+        resolve(ok);
+      };
 
-  // Only append iframe when not debugging (or if you want to visually see it)
-  document.body.appendChild(iframe);
-  document.body.appendChild(form);
+      iframe.onload = () => finish(true);
 
-  form.submit();
+      document.body.appendChild(iframe);
+      document.body.appendChild(form);
 
-  // Cleanup only when not debugging
-  if (!debug) {
-    setTimeout(() => {
-      try { form.remove(); } catch(e) {}
-      try { iframe.remove(); } catch(e) {}
-    }, 3000);
+      try {
+        form.submit();
+      } catch (e) {
+        console.error("[Zoho] form.submit() failed:", e);
+        finish(false);
+        return;
+      }
+
+      // Timeout if onload never fires (some browsers / blockers)
+      setTimeout(() => finish(false), 7000);
+    });
   }
 
-  return true;
+  // Retry once (helps with intermittent drops / blockers)
+  return attemptSubmit(1).then(ok => ok ? true : attemptSubmit(2));
 }
-window.postToZohoLead = postToZohoLead;
 
-function sendToZohoCRM(userData, overallScore, pillarAverages, reportType) {
+window.postToZohoLead = postToZohoLead;
+async function sendToZohoCRM(userData, overallScore, pillarAverages, reportType) {
   const u = userData || {};
+  const details = [
+    `Role: ${u.role || "-"}`,
+    `Overall Score: ${overallScore}%`,
+    `Pillars: ${JSON.stringify(pillarAverages || {})}`
+  ].join("\n");
+
   const fields = {
     "Last Name": u.name || "Website Visitor",
     "Email": u.email || "",
     "Company": u.company || "",
-    "Description": "AI goals / aspirations (Assessment)",
+    "Description": u.company ? `AI goals / aspirations (Assessment): ${u.company}` : "AI goals / aspirations (Assessment)",
     "LEADCF51": String(overallScore || 0),
     "LEADCF2": reportType || "Free 1-Page Summary",
-    "LEADCF1": `Role: ${u.role || "-"}\nOverall Score: ${overallScore || 0}%\nPillars: ${JSON.stringify(pillarAverages || {})}`
+    "LEADCF1": details
   };
 
-  // Mandatory field check (matches your Zoho form)
-  if (!fields["Last Name"] || !fields["Email"] || !fields["Company"] || !fields["Description"]) {
-    console.error("[Zoho] Missing mandatory fields:", fields);
-    return false;
-  }
+  if (u.phone) fields["Phone"] = u.phone;
 
-  return postToZohoLead(fields);
+  return await window.postToZohoLead(fields);
 }
 window.sendToZohoCRM = sendToZohoCRM;
 /* =========================
