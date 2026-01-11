@@ -2700,78 +2700,46 @@ function showResults() {
   if (rc && st.userData?.company) rc.value = st.userData.company;
 
   // Attach submit handler (avoid redeclare userData)
-  const resultsForm = document.getElementById("resultsForm");
-  if (resultsForm) {
-    resultsForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+const resultsForm = document.getElementById("resultsForm");
 
-      const name = (document.getElementById("resultUserName")?.value || "").trim();
-      const email = (document.getElementById("resultUserEmail")?.value || "").trim();
-      const company = (document.getElementById("resultUserCompany")?.value || "").trim();
+if (resultsForm) {
+  resultsForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      if (!name || !email || !company) {
-        alert("Please fill in Name, Email, and Company.");
-        return;
-      }
+    const name = (document.getElementById("resultUserName")?.value || "").trim();
+    const email = (document.getElementById("resultUserEmail")?.value || "").trim();
+    const company = (document.getElementById("resultUserCompany")?.value || "").trim();
 
-      // Update state
-      st.userData = { ...(st.userData || {}), name, email, company };
-      st.lastReportType = "Free 1-Page Summary";
+    if (!name || !email || !company) {
+      alert("Please fill in Name, Email, and Company.");
+      return;
+    }
 
-     // Submit to Zoho (reliable + redirect-safe)
-let ok = false;
+    // Update global assessment state
+    const st = window._nbvAssessment;
+    st.userData = { ...(st.userData || {}), name, email, company };
+    st.lastReportType = "Free 1-Page Summary";
 
-if (typeof window.sendToZohoCRM !== "function") {
-  console.error("sendToZohoCRM is not a function. Script order / duplicate scripts issue.");
-} else {
-  ok = window.sendToZohoCRM(
-    st.userData,
-    st.lastOverallScore,
-    st.lastPillarAverages,
-    st.lastReportType
-  );
+    // 🔹 Fire Zoho submission (do NOT wait for response)
+    try {
+      window.sendToZohoCRM(
+        st.userData,
+        st.lastOverallScore,
+        st.lastPillarAverages,
+        st.lastReportType
+      );
+    } catch (err) {
+      console.error("[Zoho] submission error:", err);
+    }
+
+    // 🔹 Deterministic redirect (always happens)
+    // Give Zoho iframe time to POST before navigation
+    setTimeout(() => {
+      window.location.href = "/thank-you.html";
+    }, 800); // 600–1000ms is ideal
+
+  }, { once: true });
 }
-
-if (ok) {
-  // Wait for Zoho iframe to finish (or fallback timeout)
-  const iframe = document.querySelector('iframe[name^="zoho_w2l_iframe_"]');
-
-  let redirected = false;
-  const redirect = () => {
-    if (redirected) return;
-    redirected = true;
-    window.location.href = "/thank-you.html";
-  };
-
-  if (iframe) {
-    iframe.addEventListener(
-      "load",
-      () => {
-        // Small buffer to ensure Zoho processed the POST
-        setTimeout(redirect, 200);
-      },
-      { once: true }
-    );
-
-    // Hard fallback if load never fires (ad blockers / Safari)
-    setTimeout(redirect, 1800);
-  } else {
-    // iframe blocked → fallback delay
-    setTimeout(redirect, 1200);
-  }
-} else {
-  alert(
-    "We saved your details, but Zoho submission could not be confirmed. " +
-    "Please try again or contact us if the issue persists."
-  );
-}
-if (ok) {
-  // Success → go to thank-you page in site root
-  window.location.href = "/thank-you.html";
-} else {
-  alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
-}
-    }, { once: true }); // prevent duplicate listeners
   }
 }
 window.showResults = showResults;
