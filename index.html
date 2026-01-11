@@ -2685,97 +2685,102 @@ function showResults() {
   if (rc && st.userData?.company) rc.value = st.userData.company;
 
   // Attach submit handler (avoid redeclare userData)
-const resultsForm = document.getElementById("resultsForm");
+  const resultsForm = document.getElementById("resultsForm");
 
-if (resultsForm) {
-  resultsForm.addEventListener(
-    "submit",
-    function (e) {
-      e.preventDefault();
+  if (resultsForm) {
+    resultsForm.addEventListener(
+      "submit",
+      function (e) {
+        e.preventDefault();
 
-      const name = (document.getElementById("resultUserName")?.value || "").trim();
-      const email = (document.getElementById("resultUserEmail")?.value || "").trim();
-      const company = (document.getElementById("resultUserCompany")?.value || "").trim();
+        const name = (document.getElementById("resultUserName")?.value || "").trim();
+        const email = (document.getElementById("resultUserEmail")?.value || "").trim();
+        const company = (document.getElementById("resultUserCompany")?.value || "").trim();
 
-      if (!name || !email || !company) {
-        alert("Please fill in Name, Email, and Company.");
-        return;
-      }
+        if (!name || !email || !company) {
+          alert("Please fill in Name, Email, and Company.");
+          return;
+        }
 
-      // Update state
-      const st = window._nbvAssessment || {};
-      st.userData = { ...(st.userData || {}), name, email, company };
-      st.lastReportType = st.lastReportType || "Free 1-Page Summary";
-      window._nbvAssessment = st;
+        // Update state
+        const st = window._nbvAssessment || {};
+        st.userData = { ...(st.userData || {}), name, email, company };
+        st.lastReportType = st.lastReportType || "Free 1-Page Summary";
+        window._nbvAssessment = st;
 
-      // Submit to Zoho
-      let ok = false;
-      if (typeof window.sendToZohoCRM === "function") {
-        ok = window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, st.lastReportType);
-      } else {
-        console.error("[Zoho] sendToZohoCRM is not defined (script order / duplicate scripts).");
-      }
+        // Submit to Zoho
+        let ok = false;
+        if (typeof window.sendToZohoCRM === "function") {
+          ok = window.sendToZohoCRM(
+            st.userData,
+            st.lastOverallScore,
+            st.lastPillarAverages,
+            st.lastReportType
+          );
+        } else {
+          console.error("[Zoho] sendToZohoCRM is not defined (script order / duplicate scripts).");
+        }
 
-      // Redirect helper
-      const redirect = (status) => {
-        const qs = new URLSearchParams({
-          status: status || (ok ? "submitted" : "maybe"),
-          email: email || ""
-        }).toString();
-        window.location.href = "/thank-you.html?" + qs;
-      };
+        // Redirect helper
+        const redirect = (status) => {
+          const qs = new URLSearchParams({
+            status: status || (ok ? "submitted" : "maybe"),
+            email: email || ""
+          }).toString();
+          window.location.href = "/thank-you.html?" + qs;
+        };
 
-      if (!ok) {
-        alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
-        return;
-      }
+        if (!ok) {
+          alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
+          return;
+        }
 
-      // IMPORTANT: give the hidden iframe POST time to leave the browser before redirect
-      // (redirecting immediately can cancel the request on some browsers/networks)
-      const delayMs = 1600;
+        // IMPORTANT: give the hidden iframe POST time to leave the browser before redirect
+        const delayMs = 1600;
 
-      const iframe = document.querySelector('iframe[name^="zoho_w2l_iframe_"]');
+        const iframe = document.querySelector('iframe[name^="zoho_w2l_iframe_"]');
 
-      // Fallback if load never fires (ad blockers / Safari / some networks)
-      const hardFallback = setTimeout(() => redirect("submitted"), delayMs + 600);
+        // Hard fallback if load never fires (ad blockers / Safari / some networks)
+        const hardFallback = setTimeout(() => redirect("submitted"), delayMs + 700);
 
-      if (iframe) {
-        iframe.addEventListener(
-          "load",
-          () => {
+        if (iframe) {
+          iframe.addEventListener(
+            "load",
+            () => {
+              clearTimeout(hardFallback);
+              setTimeout(() => redirect("submitted"), delayMs);
+            },
+            { once: true }
+          );
+        } else {
+          // iframe not found → still wait a bit then redirect
+          setTimeout(() => {
             clearTimeout(hardFallback);
-            setTimeout(() => redirect("submitted"), delayMs);
-          },
-          { once: true }
-        );
-      } else {
-        // iframe not found → still wait a bit then redirect
-        setTimeout(() => {
-          clearTimeout(hardFallback);
-          redirect("submitted");
-        }, delayMs);
-      }
-    },
-    { once: true }
-  );
-}
+            redirect("submitted");
+          }, delayMs);
+        }
+      },
+      { once: true }
+    );
+  }
+} // ✅ CLOSE showResults()
 
+window.showResults = showResults;
 
 /* =========================
    7) Upgrade handler
-   (Currently submits to Zoho with selected report type; replace alert with Stripe later)
    ========================= */
 function upgradeToPremium(typeLabel) {
-  const st = window._nbvAssessment;
+  const st = window._nbvAssessment || {};
   const reportType = String(typeLabel || "Premium Report").replace(/\s+/g, " ").trim();
 
   st.lastReportType = reportType;
+  window._nbvAssessment = st;
 
-  // If user already provided details, submit immediately
   const hasUser = st.userData && st.userData.name && st.userData.email && st.userData.company;
 
-  if (hasUser) {
-    sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, reportType);
+  if (hasUser && typeof window.sendToZohoCRM === "function") {
+    window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, reportType);
   }
 
   alert(
@@ -2800,6 +2805,5 @@ document.addEventListener("DOMContentLoaded", () => {
   window.startQuestions = window.startQuestions || startQuestions;
   window.previousQuestion = window.previousQuestion || previousQuestion;
   window.calculateROI = window.calculateROI || calculateROI;
-)
 });
 </script>
