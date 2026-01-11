@@ -1756,21 +1756,21 @@
 html
 <script>
 "use strict";
-// HARD CANONICAL: force https://www for every visitor
-(function forceHttpsWww() {
-  const wantHost = "www.nothingbutvalue.com";
+// HARD CANONICAL: force HTTPS only (NO www) for every visitor
+(function forceHttpsOnly() {
   const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-
   if (isLocal) return;
 
+  const wantHost = "nothingbutvalue.com";
   const isHttps = location.protocol === "https:";
-  const isWww = location.hostname === wantHost;
+  const isCorrectHost = location.hostname === wantHost;
 
-  if (!isHttps || !isWww) {
+  // If user comes via http or wrong host, normalize
+  if (!isHttps || !isCorrectHost) {
     const newUrl = "https://" + wantHost + location.pathname + location.search + location.hash;
     location.replace(newUrl);
   }
-})();  
+})();
 /* Always exists, even if pasted twice (won’t redeclare) */
 window.ZOHO_W2L = window.ZOHO_W2L || {
   endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
