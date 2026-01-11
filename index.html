@@ -2696,10 +2696,12 @@ if (typeof window.sendToZohoCRM !== "function") {
   ok = window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, st.lastReportType);
 }
 
-alert(ok
-  ? `Thank you! Submitted to Zoho. Your report will be emailed to ${email}.`
-  : `Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.`
-);
+if (ok) {
+  // Success → go to thank-you page in site root
+  window.location.href = "/thank-you.html";
+} else {
+  alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
+}
     }, { once: true }); // prevent duplicate listeners
   }
 }
