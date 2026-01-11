@@ -2759,28 +2759,7 @@ if (resultsForm) {
     { once: true }
   );
 }
-    // Hard fallback if load never fires (ad blockers / Safari)
-    setTimeout(redirect, 1800);
-   else {
-    // iframe blocked → fallback delay
-    setTimeout(redirect, 1200);
-  }
-} else {
-  alert(
-    "We saved your details, but Zoho submission could not be confirmed. " +
-    "Please try again or contact us if the issue persists."
-  );
-}
-if (ok) {
-  // Success → go to thank-you page in site root
-  window.location.href = "/thank-you.html";
-} else {
-  alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
-}
-    }, { once: true }); // prevent duplicate listeners
-  }
-}
-window.showResults = showResults;
+
 
 /* =========================
    7) Upgrade handler
