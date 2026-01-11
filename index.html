@@ -2686,6 +2686,7 @@ function showResults() {
 
   // Attach submit handler (avoid redeclare userData)
 const resultsForm = document.getElementById("resultsForm");
+
 if (resultsForm) {
   resultsForm.addEventListener(
     "submit",
@@ -2702,50 +2703,58 @@ if (resultsForm) {
       }
 
       // Update state
+      const st = window._nbvAssessment || {};
       st.userData = { ...(st.userData || {}), name, email, company };
-      st.lastReportType = "Free 1-Page Summary";
-
-      // Disable submit to avoid double-click duplicates
-      const submitBtn = resultsForm.querySelector('button[type="submit"], input[type="submit"]');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = "0.7";
-        submitBtn.style.cursor = "not-allowed";
-      }
-
-      // Backup payload locally (so we can retry if Zoho is flaky)
-      const backup = {
-        ts: Date.now(),
-        userData: st.userData,
-        overallScore: st.lastOverallScore,
-        pillarAverages: st.lastPillarAverages,
-        reportType: st.lastReportType
-      };
-      try {
-        localStorage.setItem("nbv_last_zoho_payload", JSON.stringify(backup));
-      } catch (err) {}
+      st.lastReportType = st.lastReportType || "Free 1-Page Summary";
+      window._nbvAssessment = st;
 
       // Submit to Zoho
       let ok = false;
-      try {
+      if (typeof window.sendToZohoCRM === "function") {
         ok = window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, st.lastReportType);
-      } catch (err) {
-        console.error("[Zoho] sendToZohoCRM threw:", err);
-        ok = false;
+      } else {
+        console.error("[Zoho] sendToZohoCRM is not defined (script order / duplicate scripts).");
+      }
+
+      // Redirect helper
+      const redirect = (status) => {
+        const qs = new URLSearchParams({
+          status: status || (ok ? "submitted" : "maybe"),
+          email: email || ""
+        }).toString();
+        window.location.href = "/thank-you.html?" + qs;
+      };
+
+      if (!ok) {
+        alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
+        return;
       }
 
       // IMPORTANT: give the hidden iframe POST time to leave the browser before redirect
       // (redirecting immediately can cancel the request on some browsers/networks)
       const delayMs = 1600;
 
-      setTimeout(() => {
-        const qs = new URLSearchParams({
-          status: ok ? "submitted" : "maybe",
-          email: email
-        }).toString();
+      const iframe = document.querySelector('iframe[name^="zoho_w2l_iframe_"]');
 
-        window.location.href = "/thank-you.html?" + qs;
-      }, delayMs);
+      // Fallback if load never fires (ad blockers / Safari / some networks)
+      const hardFallback = setTimeout(() => redirect("submitted"), delayMs + 600);
+
+      if (iframe) {
+        iframe.addEventListener(
+          "load",
+          () => {
+            clearTimeout(hardFallback);
+            setTimeout(() => redirect("submitted"), delayMs);
+          },
+          { once: true }
+        );
+      } else {
+        // iframe not found → still wait a bit then redirect
+        setTimeout(() => {
+          clearTimeout(hardFallback);
+          redirect("submitted");
+        }, delayMs);
+      }
     },
     { once: true }
   );
