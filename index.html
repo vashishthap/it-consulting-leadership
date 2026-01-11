@@ -2477,9 +2477,12 @@ window.restartAssessment = restartAssessment;
 function showResults() {
   const st = window._nbvAssessment;
 
-  ltsContainer = document.getElementById("resultsContainer");
+  const resultsContainer = document.getElementById("resultsContainer");
   const questionsContainer = document.getElementById("questionsContainer");
-  if (!resultsContainer || !questionsContainer) return;
+  if (!resultsContainer || !questionsContainer) {
+    console.error("Missing resultsContainer or questionsContainer in DOM.");
+    return;
+  }
 
   questionsContainer.style.display = "none";
   resultsContainer.style.display = "block";
@@ -2493,7 +2496,7 @@ function showResults() {
   // ---- Calculate pillar scores ----
   const pillarScores = {};
   const pillarCounts = {};
-  Object.values(st.answers).forEach(a => {
+  Object.values(st.answers || {}).forEach(a => {
     const p = a.pillar;
     pillarScores[p] = (pillarScores[p] || 0) + (a.score || 0);
     pillarCounts[p] = (pillarCounts[p] || 0) + 1;
@@ -2504,8 +2507,8 @@ function showResults() {
     pillarAverages[p] = Math.round((pillarScores[p] / pillarCounts[p]) * 20); // 1..5 => %
   });
 
-  const totalScore = Object.values(st.answers).reduce((sum, a) => sum + (a.score || 0), 0);
-  const maxScore = questions.length * 5;
+  const totalScore = Object.values(st.answers || {}).reduce((sum, a) => sum + (a.score || 0), 0);
+  const maxScore = (window.questions ? window.questions.length : 20) * 5;
   const overallScore = Math.round((totalScore / maxScore) * 100);
 
   st.lastOverallScore = overallScore;
@@ -2514,7 +2517,8 @@ function showResults() {
   // Readiness bands
   let readinessLevel = "Getting Started";
   let readinessColor = "#ff3366";
-  let readinessMessage = "Your organization is in the early stages of AI readiness. Significant opportunities exist to build foundational capabilities.";
+  let readinessMessage =
+    "Your organization is in the early stages of AI readiness. Significant opportunities exist to build foundational capabilities.";
 
   if (overallScore >= 30 && overallScore < 50) {
     readinessLevel = "Building Foundation";
@@ -2546,7 +2550,7 @@ function showResults() {
     `;
   }).join("");
 
-  // Results UI (keeps look/feel similar)
+  // Results UI
   resultsContainer.innerHTML = `
     <div class="results-container">
       <h2 style="color:#fff;font-size:2.2rem;font-weight:900;margin-bottom:1rem;">Your AI Readiness Score</h2>
@@ -2564,66 +2568,7 @@ function showResults() {
       <h3 style="color:#fff;font-size:1.35rem;font-weight:900;margin:1.5rem 0 .75rem;">Scores by Pillar</h3>
       <div class="pillar-scores">${pillarsHtml}</div>
 
-      <div style="background:rgba(255,255,255,.03);border-radius:20px;padding:2rem;margin:1.6rem 0;border:2px solid rgba(0,217,255,.2);">
-        <h3 style="color:#ffffff;font-size:1.4rem;margin-bottom:.4rem;font-weight:900;text-align:center;">🚀 Unlock Your Full AI Potential</h3>
-        <p style="color:#a0a0b0;text-align:center;margin-bottom:1.4rem;">Get deeper insights and actionable strategies with our premium reports</p>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
-          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
-            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Free 1-Page Summary</h4>
-            <div style="color:#00ff88;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">FREE</div>
-            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
-              <li>✓ Overall readiness score</li><li>✓ Pillar breakdown</li><li>✓ Basic recommendations</li><li>✓ Email delivery</li>
-            </ul>
-            <div style="margin-top:1rem;padding:.6rem;background:rgba(0,255,136,.1);border-radius:10px;text-align:center;">
-              <span style="color:#00ff88;font-weight:900;">✓ INCLUDED</span>
-            </div>
-          </div>
-
-          <div style="background:linear-gradient(135deg,rgba(0,217,255,.15),rgba(124,58,237,.15));border-radius:15px;padding:1.25rem;border:2px solid #00d9ff;position:relative;">
-            <div style="position:absolute;top:-12px;right:14px;background:linear-gradient(135deg,#ff3366,#ff9500);padding:.35rem .85rem;border-radius:20px;font-size:.75rem;font-weight:900;color:#fff;letter-spacing:1px;">POPULAR</div>
-            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Premium Report</h4>
-            <div style="color:#00d9ff;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$97</div>
-            <ul style="list-style:none;padding:0;color:#ffffff;font-size:.95rem;line-height:1.8;">
-              <li>✓ 15-page detailed report</li><li>✓ Benchmarking vs peers</li><li>✓ Custom 90-day roadmap</li><li>✓ Prioritized use cases</li><li>✓ ROI projections</li><li>✓ Risk analysis</li>
-            </ul>
-            <button type="button" onclick="upgradeToPremium('Premium Report ($97)')"
-              style="margin-top:1rem;width:100%;padding:.75rem;background:linear-gradient(135deg,#00d9ff,#7c3aed);border:none;border-radius:12px;color:#fff;font-weight:900;cursor:pointer;">
-              Get Premium Report →
-            </button>
-          </div>
-
-          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
-            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Premium + Consult</h4>
-            <div style="color:#7c3aed;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$297</div>
-            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
-              <li>✓ Everything in Premium</li><li>✓ 60-min strategy call</li><li>✓ Expert Q&A session</li><li>✓ Implementation guidance</li><li>✓ Priority support</li>
-            </ul>
-            <button type="button" onclick="upgradeToPremium('Premium + Consult ($297)')"
-              style="margin-top:1rem;width:100%;padding:.75rem;background:transparent;border:2px solid rgba(124,58,237,.6);border-radius:12px;color:#7c3aed;font-weight:900;cursor:pointer;">
-              Get Report + Call →
-            </button>
-          </div>
-
-          <div style="background:rgba(255,255,255,.05);border-radius:15px;padding:1.25rem;border:2px solid rgba(255,255,255,.1);">
-            <h4 style="color:#ffffff;font-size:1.05rem;font-weight:900;margin-bottom:.5rem;">Enterprise</h4>
-            <div style="color:#ff9500;font-size:1.7rem;font-weight:900;margin-bottom:.6rem;">$997</div>
-            <ul style="list-style:none;padding:0;color:#a0a0b0;font-size:.95rem;line-height:1.8;">
-              <li>✓ Everything in Premium+</li><li>✓ Full team workshop</li><li>✓ Custom transformation plan</li><li>✓ Vendor recommendations</li><li>✓ 30-day support</li>
-            </ul>
-            <button type="button" onclick="upgradeToPremium('Enterprise ($997)')"
-              style="margin-top:1rem;width:100%;padding:.75rem;background:transparent;border:2px solid rgba(255,149,0,.6);border-radius:12px;color:#ff9500;font-weight:900;cursor:pointer;">
-              Get Enterprise →
-            </button>
-          </div>
-        </div>
-
-        <div style="text-align:center;margin-top:1.2rem;color:#a0a0b0;font-size:.9rem;">
-          💳 Secure payment via Stripe • 📧 Instant delivery • 🔒 Money-back guarantee
-        </div>
-      </div>
-
-      <div style="background:linear-gradient(135deg,rgba(0,217,255,.1),rgba(124,58,237,.1));border:2px solid rgba(0,217,255,.3);border-radius:20px;padding:1.5rem;margin-bottom:1rem;">
+      <div style="background:linear-gradient(135deg,rgba(0,217,255,.1),rgba(124,58,237,.1));border:2px solid rgba(0,217,255,.3);border-radius:20px;padding:1.5rem;margin:1.6rem 0 1rem;">
         <h3 style="color:#ffffff;font-size:1.25rem;font-weight:900;margin-bottom:.5rem;text-align:center;">📧 Email Me My Free 1-Page Summary</h3>
         <p style="color:#a0a0b0;text-align:center;margin-bottom:1.2rem;">
           We’ll submit your details to Zoho CRM and your workflow can email the report.
@@ -2641,10 +2586,6 @@ function showResults() {
             style="width:100%;padding:1rem;background:linear-gradient(135deg,#ff3366,#ff9500);border:none;border-radius:50px;color:white;font-size:1.05rem;font-weight:900;cursor:pointer;">
             Send Me My Report 📊
           </button>
-
-          <div style="text-align:center;color:rgba(255,255,255,.55);font-size:.85rem;margin-top:.9rem;line-height:1.4;">
-            Tip: check your Zoho workflow/CRM email automation for delivery.
-          </div>
         </form>
       </div>
 
@@ -2661,7 +2602,7 @@ function showResults() {
     </div>
   `;
 
-  // Prefill the results form using the email capture data
+  // Prefill results form
   const rn = document.getElementById("resultUserName");
   const re = document.getElementById("resultUserEmail");
   const rc = document.getElementById("resultUserCompany");
@@ -2669,89 +2610,45 @@ function showResults() {
   if (re && st.userData?.email) re.value = st.userData.email;
   if (rc && st.userData?.company) rc.value = st.userData.company;
 
-  // Attach submit handler (avoid redeclare userData)
+  // Attach submit handler (only once)
   const resultsForm = document.getElementById("resultsForm");
-
   if (resultsForm) {
-    resultsForm.addEventListener(
-      "submit",
-      function (e) {
-        e.preventDefault();
+    resultsForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-        const name = (document.getElementById("resultUserName")?.value || "").trim();
-        const email = (document.getElementById("resultUserEmail")?.value || "").trim();
-        const company = (document.getElementById("resultUserCompany")?.value || "").trim();
+      const name = (document.getElementById("resultUserName")?.value || "").trim();
+      const email = (document.getElementById("resultUserEmail")?.value || "").trim();
+      const company = (document.getElementById("resultUserCompany")?.value || "").trim();
 
-        if (!name || !email || !company) {
-          alert("Please fill in Name, Email, and Company.");
-          return;
-        }
+      if (!name || !email || !company) {
+        alert("Please fill in Name, Email, and Company.");
+        return;
+      }
 
-        // Update state
-        const st = window._nbvAssessment || {};
-        st.userData = { ...(st.userData || {}), name, email, company };
-        st.lastReportType = st.lastReportType || "Free 1-Page Summary";
-        window._nbvAssessment = st;
+      st.userData = { ...(st.userData || {}), name, email, company };
+      st.lastReportType = st.lastReportType || "Free 1-Page Summary";
 
-        // Submit to Zoho
-        let ok = false;
-        if (typeof window.sendToZohoCRM === "function") {
-          ok = window.sendToZohoCRM(
-            st.userData,
-            st.lastOverallScore,
-            st.lastPillarAverages,
-            st.lastReportType
-          );
-        } else {
-          console.error("[Zoho] sendToZohoCRM is not defined (script order / duplicate scripts).");
-        }
+      let ok = false;
+      if (typeof window.sendToZohoCRM === "function") {
+        ok = window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, st.lastReportType);
+      } else {
+        console.error("[Zoho] sendToZohoCRM is not defined.");
+      }
 
-        // Redirect helper
-        const redirect = (status) => {
-          const qs = new URLSearchParams({
-            status: status || (ok ? "submitted" : "maybe"),
-            email: email || ""
-          }).toString();
-          window.location.href = "/thank-you.html?" + qs;
-        };
+      if (!ok) {
+        alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
+        return;
+      }
 
-        if (!ok) {
-          alert("Zoho submit DID NOT run. Open console (F12) and look for a [Zoho] error above.");
-          return;
-        }
-
-        // IMPORTANT: give the hidden iframe POST time to leave the browser before redirect
-        const delayMs = 1600;
-
-        const iframe = document.querySelector('iframe[name^="zoho_w2l_iframe_"]');
-
-        // Hard fallback if load never fires (ad blockers / Safari / some networks)
-        const hardFallback = setTimeout(() => redirect("submitted"), delayMs + 700);
-
-        if (iframe) {
-          iframe.addEventListener(
-            "load",
-            () => {
-              clearTimeout(hardFallback);
-              setTimeout(() => redirect("submitted"), delayMs);
-            },
-            { once: true }
-          );
-        } else {
-          // iframe not found → still wait a bit then redirect
-          setTimeout(() => {
-            clearTimeout(hardFallback);
-            redirect("submitted");
-          }, delayMs);
-        }
-      },
-      { once: true }
-    );
+      // Wait a bit so POST leaves the browser, then redirect
+      setTimeout(() => {
+        const qs = new URLSearchParams({ status: "submitted", email }).toString();
+        window.location.href = "/thank-you.html?" + qs;
+      }, 1600);
+    }, { once: true });
   }
-} // ✅ CLOSE showResults()
-
+}
 window.showResults = showResults;
-
 /* =========================
    7) Upgrade handler
    ========================= */
