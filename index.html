@@ -2704,7 +2704,9 @@ function showResults() {
     console.error("Missing resultsContainer or questionsContainer in DOM.");
     return;
   }
-
+// SAFETY: remove any upgrade section that might exist in the questions view
+document.querySelectorAll("#questionsContainer #upgradeSection, #questionsContainer .nbv-upgrade, #questionsContainer .nbv-upgrade-dark")
+  .forEach(el => el.remove());
   // Switch screens
   questionsContainer.style.display = "none";
   resultsContainer.style.display = "block";
