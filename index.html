@@ -2731,7 +2731,6 @@ document.querySelectorAll("#questionsContainer #upgradeSection, #questionsContai
 
   const mount = document.getElementById("nbvUpgradeMount");
   if (mount) mount.innerHTML = upgradeHTML;
-
   // Single delegated click handler (prevents double-binding)
   resultsContainer.addEventListener("click", (e) => {
     const btn = e.target.closest(".nbv-upcard__btn");
@@ -2755,43 +2754,32 @@ document.querySelectorAll("#questionsContainer #upgradeSection, #questionsContai
 }
 
 window.showResults = showResults;
-/* =========================
-   8) Init
-   ========================= */
 document.addEventListener("DOMContentLoaded", () => {
-  // Site UI
-  bindTabs();
-  bindSmoothScroll();
+  console.log("NBV DOMContentLoaded ✅ v=2026-01-15-99");
 
-  // Bind assessment buttons (avoid inline onclick)
-  const bindStart = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener("click", () => {
-      if (typeof window.startAssessment === "function") {
-        window.startAssessment();
-      } else {
-        console.error("startAssessment missing — script not loaded or failed early");
-      }
-    });
+  // Bind UI helpers (safe if elements exist)
+  try { bindTabs(); } catch (e) { console.warn("bindTabs failed", e); }
+  try { bindSmoothScroll(); } catch (e) { console.warn("bindSmoothScroll failed", e); }
+
+  // SAFE button binding (no inline onclick needed)
+  const safeStart = () => {
+    if (typeof window.startAssessment === "function") window.startAssessment();
+    else console.error("startAssessment missing — script failed earlier or function renamed");
   };
 
-  // Use these IDs in HTML:
-  // <button id="navAssessmentBtn" ...>
-  // <button id="heroAssessmentBtn" ...>
-  bindStart("navAssessmentBtn");
-  bindStart("heroAssessmentBtn");
+  const navBtn = document.getElementById("navAssessmentBtn");
+  if (navBtn) navBtn.addEventListener("click", safeStart);
 
-  // Optional: if you also created a single start button elsewhere
-  bindStart("startAssessmentBtn");
+  const heroBtn = document.getElementById("heroAssessmentBtn");
+  if (heroBtn) heroBtn.addEventListener("click", safeStart);
 
-  // Expose functions for any remaining inline onclick handlers
-  window.startAssessment   = window.startAssessment   || startAssessment;
-  window.closeAssessment   = window.closeAssessment   || closeAssessment;
-  window.startQuestions    = window.startQuestions    || startQuestions;
-  window.previousQuestion  = window.previousQuestion  || previousQuestion;
-  window.restartAssessment = window.restartAssessment || restartAssessment;
-  window.showResults       = window.showResults       || showResults;
-  window.calculateROI      = window.calculateROI      || calculateROI;
+  // Export globals (keeps other inline handlers working if any remain)
+  if (typeof startAssessment === "function") window.startAssessment = startAssessment;
+  if (typeof closeAssessment === "function") window.closeAssessment = closeAssessment;
+  if (typeof startQuestions === "function") window.startQuestions = startQuestions;
+  if (typeof previousQuestion === "function") window.previousQuestion = previousQuestion;
+  if (typeof restartAssessment === "function") window.restartAssessment = restartAssessment;
+  if (typeof showResults === "function") window.showResults = showResults;
+  if (typeof calculateROI === "function") window.calculateROI = calculateROI;
 });
 </script>
