@@ -2753,12 +2753,12 @@ document.addEventListener("DOMContentLoaded", () => {
   bindTabs();
   bindSmoothScroll();
 
-  // Expose functions for inline onclick handlers
-  window.startAssessment = window.startAssessment || startAssessment;
-  window.closeAssessment = window.closeAssessment || closeAssessment;
-  window.startQuestions = window.startQuestions || startQuestions;
-  window.previousQuestion = window.previousQuestion || previousQuestion;
-  window.restartAssessment = window.restartAssessment || restartAssessment;
-  window.showResults = window.showResults || showResults;
+ // ===== Expose functions for inline onclick handlers =====
+window.startAssessment = window.startAssessment || startAssessment;
+window.closeAssessment = window.closeAssessment || closeAssessment;
+window.startQuestions = window.startQuestions || startQuestions;
+window.previousQuestion = window.previousQuestion || previousQuestion;
+window.restartAssessment = window.restartAssessment || restartAssessment;
+window.showResults = window.showResults || showResults;
 });
 </script>
