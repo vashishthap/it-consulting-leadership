@@ -2658,6 +2658,71 @@ window.bindTabs = bindTabs;
               </div>
             </div>
           `;
+          // ===============================
+// Upgrade packages (RESULTS ONLY)
+// ===============================
+const companyName =
+  st.userData?.company ||
+  st.company ||
+  st.companyName ||
+  (st.lead && (st.lead.company || st.lead.companyName)) ||
+  "";
+
+const upgradeHTML = `
+  <section id="upgradeSection" class="nbv-upgrade-dark">
+    <div class="nbv-upgrade-dark__header">
+      <div class="nbv-upgrade-dark__badge">🎁 Upgrade</div>
+      <h2 class="nbv-upgrade-dark__title">Upgrade to a Premium Report</h2>
+      <p class="nbv-upgrade-dark__subtitle">
+        Get a detailed 15-page analysis tailored to
+        <span class="nbv-upgrade-dark__company">${companyName || "your company"}</span>.
+      </p>
+    </div>
+
+    <ul class="nbv-upgrade-dark__bullets">
+      <li><strong>90-Day Transformation Roadmap</strong></li>
+      <li><strong>Prioritised Use Cases with ROI</strong></li>
+      <li><strong>Industry Benchmarking</strong></li>
+      <li><strong>Implementation Timeline & Budget</strong></li>
+      <li><strong>Risk Analysis & Mitigation</strong></li>
+    </ul>
+
+    <div class="nbv-upgrade-dark__grid">
+      <div class="nbv-upcard" data-package="premium" data-price="97">
+        <div class="nbv-upcard__top">
+          <div class="nbv-upcard__name">Premium Report</div>
+          <div class="nbv-upcard__price">$97</div>
+        </div>
+        <button class="nbv-upcard__btn">Get Premium Report</button>
+      </div>
+
+      <div class="nbv-upcard nbv-upcard--popular" data-package="premium_consult" data-price="297">
+        <div class="nbv-upcard__ribbon">POPULAR</div>
+        <div class="nbv-upcard__top">
+          <div class="nbv-upcard__name">Premium + Consult</div>
+          <div class="nbv-upcard__price">$297</div>
+        </div>
+        <button class="nbv-upcard__btn nbv-upcard__btn--primary">Get Premium + Consult</button>
+      </div>
+
+      <div class="nbv-upcard" data-package="enterprise" data-price="997">
+        <div class="nbv-upcard__top">
+          <div class="nbv-upcard__name">Enterprise</div>
+          <div class="nbv-upcard__price">$997+</div>
+        </div>
+        <button class="nbv-upcard__btn">Discuss Enterprise</button>
+      </div>
+    </div>
+  </section>
+`;
+
+// Inject (failsafe)
+const mount = document.getElementById("nbvUpgradeMount");
+if (mount) {
+  mount.innerHTML = upgradeHTML;
+} else {
+  resultsContainer.insertAdjacentHTML("beforeend", upgradeHTML);
+}
 
           // Prefill results form
           const rn = document.getElementById("resultUserName");
@@ -2705,15 +2770,7 @@ window.bindTabs = bindTabs;
           }
         }
       // -------------------------------
-  // Upgrade packages (inject into results screen)
-  // -------------------------------
-  const companyName =
-    st.userData?.company ||
-    st.company ||
-    st.companyName ||
-    (st.lead && (st.lead.company || st.lead.companyName)) ||
-    "";
-
+ 
   const upgradeHTML = `
     <section id="upgradeSection" class="nbv-upgrade-dark">
       <div class="nbv-upgrade-dark__header">
