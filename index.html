@@ -2435,6 +2435,8 @@
 
           // Clean slate
           resultsContainer.innerHTML = "";
+          <!-- Upgrade UI will be injected below -->
+            <div id="nbvUpgradeMount"></div>
 
           // ---- Calculate pillar scores ----
           const pillarScores = {};
@@ -2588,6 +2590,98 @@
             }, { once: true });
           }
         }
+      // -------------------------------
+  // Upgrade packages (inject into results screen)
+  // -------------------------------
+  const companyName =
+    st.userData?.company ||
+    st.company ||
+    st.companyName ||
+    (st.lead && (st.lead.company || st.lead.companyName)) ||
+    "";
+
+  const upgradeHTML = `
+    <section id="upgradeSection" class="nbv-upgrade-dark">
+      <div class="nbv-upgrade-dark__header">
+        <div class="nbv-upgrade-dark__badge">🎁 Upgrade</div>
+        <h2 class="nbv-upgrade-dark__title">Upgrade to a Premium Report</h2>
+        <p class="nbv-upgrade-dark__subtitle">
+          Get a detailed 15-page analysis with actionable insights tailored to
+          <span class="nbv-upgrade-dark__company">${companyName ? companyName : "your company"}</span>.
+        </p>
+      </div>
+
+      <ul class="nbv-upgrade-dark__bullets">
+        <li><strong>Custom 90-Day Transformation Roadmap</strong> — step-by-step implementation plan</li>
+        <li><strong>Prioritized Use Cases with ROI Projections</strong> — identify quick wins</li>
+        <li><strong>Industry Benchmarking</strong> — see how you compare to peers</li>
+        <li><strong>Implementation Timeline & Budget</strong> — realistic resource planning</li>
+        <li><strong>Risk Analysis & Mitigation Strategies</strong> — avoid common pitfalls</li>
+      </ul>
+
+      <div class="nbv-upgrade-dark__grid">
+        <div class="nbv-upcard" data-package="premium" data-price="97">
+          <div class="nbv-upcard__top">
+            <div class="nbv-upcard__name">Premium Report</div>
+            <div class="nbv-upcard__price">$97</div>
+          </div>
+          <div class="nbv-upcard__desc">15-page tailored report + roadmap + ROI use cases.</div>
+          <button class="nbv-upcard__btn" type="button">Get Premium Report</button>
+        </div>
+
+        <div class="nbv-upcard nbv-upcard--popular" data-package="premium_consult" data-price="297">
+          <div class="nbv-upcard__ribbon">POPULAR</div>
+          <div class="nbv-upcard__top">
+            <div class="nbv-upcard__name">Premium + Consult</div>
+            <div class="nbv-upcard__price">$297</div>
+          </div>
+          <div class="nbv-upcard__desc">Premium report + 60-min strategy call.</div>
+          <div class="nbv-upcard__note">⚡ Only <strong>4</strong> premium + consult slots available this month</div>
+          <button class="nbv-upcard__btn nbv-upcard__btn--primary" type="button">Get Premium + Consult</button>
+        </div>
+
+        <div class="nbv-upcard" data-package="enterprise" data-price="997">
+          <div class="nbv-upcard__top">
+            <div class="nbv-upcard__name">Enterprise Package</div>
+            <div class="nbv-upcard__price">$997+</div>
+          </div>
+          <div class="nbv-upcard__desc">Team workshop + tailored transformation plan.</div>
+          <button class="nbv-upcard__btn" type="button">Discuss Enterprise</button>
+        </div>
+      </div>
+
+      <div class="nbv-upgrade-dark__footer">
+        <div>Selected: <strong id="nbvSelectedPackage">None</strong></div>
+      </div>
+    </section>
+  `;
+
+  const mount = document.getElementById("nbvUpgradeMount");
+  if (mount) {
+    mount.innerHTML = upgradeHTML;
+  } else {
+    console.warn("nbvUpgradeMount not found (upgrade UI will not render).");
+  }
+
+  // Delegate clicks (prevents double-binding)
+  resultsContainer.addEventListener("click", (e) => {
+    const btn = e.target.closest(".nbv-upcard__btn");
+    if (!btn) return;
+
+    const card = btn.closest(".nbv-upcard");
+    if (!card) return;
+
+    const pkg = card.dataset.package || "";
+    const price = card.dataset.price || "";
+
+    st.selectedPackage = pkg;
+    st.selectedPrice = price;
+
+    const selectedEl = document.getElementById("nbvSelectedPackage");
+    if (selectedEl) selectedEl.textContent = pkg.replaceAll("_", " ").toUpperCase();
+
+    alert(`Selected: ${pkg}\nPrice: $${price}\n\nNext step: connect to Stripe Checkout.`);
+  }, { once: true });
         window.showResults = showResults;
 
         /* =========================
