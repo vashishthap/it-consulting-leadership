@@ -2616,7 +2616,7 @@ window.bindTabs = bindTabs;
                 <div class="score-number">${overallScore}%</div>
                 <div class="score-label">Overall Score</div>
               </div>
-
+               <div id="nbvUpgradeMount"></div>
               <div style="background:rgba(255,255,255,0.05);border-radius:15px;padding:1.5rem;margin:1.5rem 0;">
                 <h3 style="color:${readinessColor};font-size:1.6rem;font-weight:900;margin-bottom:.75rem;">${readinessLevel}</h3>
                 <p style="color:#a0a0b0;font-size:1.05rem;line-height:1.6;margin:0;">${readinessMessage}</p>
@@ -2638,9 +2638,8 @@ window.bindTabs = bindTabs;
                     style="width:100%;padding:1rem;margin-bottom:1rem;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:12px;color:white;font-size:1rem;">
                   <input type="text" id="resultUserCompany" placeholder="Company Name *" required
                     style="width:100%;padding:1rem;margin-bottom:1.2rem;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:12px;color:white;font-size:1rem;">
-                  <!-- Upgrade UI will be injected below -->
-                      <div id="nbvUpgradeMount"></div>
-                  <button type="submit"
+               
+                      <button type="submit"
                     style="width:100%;padding:1rem;background:linear-gradient(135deg,#ff3366,#ff9500);border:none;border-radius:50px;color:white;font-size:1.05rem;font-weight:900;cursor:pointer;">
                     Send Me My Report 📊
                   </button>
