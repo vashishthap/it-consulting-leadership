@@ -951,7 +951,7 @@
         <a href="#use-cases">Use Cases</a>
         <a href="#resources">Resources</a>
         <a href="#roi">ROI</a>
-        <button class="nav-cta" id="navAssessmentBtn" type="button">Free AI Assessment →</button>
+       <button class="btn-primary" id="navAssessmentBtn" type="button" onclick="startAssessment()">Start Free Assessment →</button>
       </div>
     </nav>
   </header>
@@ -996,7 +996,7 @@
       </div>
 
       <div class="cta-buttons">
-        <button class="btn-primary" id="heroAssessmentBtn" type="button">Start Free Assessment →</button>
+        <button class="btn-primary" id="heroAssessmentBtn" type="button" onclick="startAssessment()">Start Free Assessment →</button>
         <a class="btn-secondary" href="#contact">Book Strategy Call →</a>
       </div>
     </div>
@@ -1474,7 +1474,7 @@
           </div>
 
           <!-- FIXED (valid HTML, same look/feel) -->
-          <button type="button" class="btn-primary" id="resourcesAssessmentBtn"
+         <button class="btn-primary" id="heroAssessmentBtn2" type="button" onclick="startAssessment()">Start Free Assessment →</button>
             style="padding: 1.5rem 3rem; background: var(--gradient-accent); border: none; border-radius: 50px; color: white; font-weight: 900; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4);">
             Start Free Assessment Now →
           </button>
@@ -2092,18 +2092,19 @@
 
     /* Tabs / FAQ / Smooth scroll */
     function bindTabs() {
-      document.querySelectorAll(".tab").forEach(tab => {
-        tab.addEventListener("click", () => {
-          document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-          document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-          tab.classList.add("active");
-          const el = document.getElementById(tab.dataset.tab);
-          if (el) el.classList.add("active");
-        });
-      });
-    }
-    window.bindTabs = bindTabs;
+  document.addEventListener("click", (e) => {
+    const tab = e.target.closest(".tab");
+    if (!tab) return;
 
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+    tab.classList.add("active");
+    const el = document.getElementById(tab.dataset.tab);
+    if (el) el.classList.add("active");
+  });
+}
+window.bindTabs = bindTabs;
     function toggleFAQ(element) {
       element.classList.toggle("active");
     }
@@ -2805,8 +2806,8 @@
           console.log("NBV DOMContentLoaded ✅");
 
           // Bind helpers
-          try { bindTabs(); } catch (e) {}
-          try { bindSmoothScroll(); } catch (e) {}
+          try { bindTabs(); } catch(e) { console.warn(e); }
+          try { bindSmoothScroll(); } catch(e) { console.warn(e); }
 
           // SAFE start for buttons with IDs (if you use them)
           const safeStart = () => {
