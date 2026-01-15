@@ -2869,10 +2869,13 @@ function showResults() {
     }, { once: true });
   }
 }
-window.showResults = showResults;
   // ---- Inject Upgrade UI (only on results screen) ----
   const company =
-    st.company || st.companyName || (st.lead && (st.lead.company || st.lead.companyName)) || "";
+    st.userData?.company ||
+    st.company ||
+    st.companyName ||
+    (st.lead && (st.lead.company || st.lead.companyName)) ||
+    "";
 
   const upgradeHTML = `
     <section id="upgradeSection" class="nbv-upgrade-dark">
@@ -2941,33 +2944,29 @@ window.showResults = showResults;
       const pkg = card.dataset.package;
       const price = card.dataset.price;
       if (selectedEl) selectedEl.textContent = pkg.replaceAll("_"," ").toUpperCase();
+
+      // For now: placeholder. Later we call Stripe Checkout here.
       alert(`Selected: ${pkg}\nPrice: $${price}\n\nNext step: connect to Stripe Checkout.`);
     });
   });
-/* =========================
-   7) Upgrade handler
-   ========================= */
-function upgradeToPremium(typeLabel) {
-  const st = window._nbvAssessment || {};
-  const reportType = String(typeLabel || "Premium Report").replace(/\s+/g, " ").trim();
+window.showResults = showResults;
 
-  st.lastReportType = reportType;
-  window._nbvAssessment = st;
 
-  const hasUser = st.userData && st.userData.name && st.userData.email && st.userData.company;
 
-  if (hasUser && typeof window.sendToZohoCRM === "function") {
-    window.sendToZohoCRM(st.userData, st.lastOverallScore, st.lastPillarAverages, reportType);
-  }
+  // Append upgrade HTML at the bottom of results container
+  resultsContainer.insertAdjacentHTML("beforeend", upgradeHTML);
 
-  alert(
-    "🚀 Selected: " + reportType + "\n\n" +
-    "Score: " + (st.lastOverallScore || 0) + "%\n" +
-    "Next: connect Stripe checkout here.\n\n" +
-    (hasUser ? "We also sent this selection to Zoho CRM." : "Tip: Submit the free report form to send details to Zoho CRM.")
-  );
-}
-window.upgradeToPremium = upgradeToPremium;
+  // Bind buttons (placeholder actions for now)
+  const selectedEl = document.getElementById("nbvSelectedPackage");
+  resultsContainer.querySelectorAll(".nbv-upcard").forEach(card => {
+    const btn = card.querySelector("button");
+    btn.addEventListener("click", () => {
+      const pkg = card.dataset.package;
+      const price = card.dataset.price;
+      if (selectedEl) selectedEl.textContent = pkg.replaceAll("_"," ").toUpperCase();
+      alert(`Selected: ${pkg}\nPrice: $${price}\n\nNext step: connect to Stripe Checkout.`);
+    });
+  });
 
 /* =========================
    8) Init
