@@ -520,7 +520,121 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       font-weight: 700;
     }
-
+    /* ===============================
+   Upgrade (Results Screen only)
+   =============================== */
+.nbv-upgrade-dark{
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+}
+.nbv-upgrade-dark__badge{
+  display:inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  background: rgba(255,149,0,0.15);
+  border: 1px solid rgba(255,149,0,0.35);
+  color: #ff9500;
+  margin-bottom: 10px;
+}
+.nbv-upgrade-dark__title{
+  margin: 0 0 6px 0;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+.nbv-upgrade-dark__subtitle{
+  margin: 0 0 14px 0;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+}
+.nbv-upgrade-dark__company{
+  color: #00d9ff;
+  font-weight: 900;
+}
+.nbv-upgrade-dark__bullets{
+  margin: 0 0 16px 18px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+}
+.nbv-upgrade-dark__grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.nbv-upcard{
+  position: relative;
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.nbv-upcard:hover{
+  transform: translateY(-2px);
+  border-color: rgba(0,217,255,0.35);
+  background: rgba(0,217,255,0.06);
+}
+.nbv-upcard__top{
+  display:flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.nbv-upcard__name{
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+.nbv-upcard__price{
+  font-weight: 900;
+  color: #00ff88;
+}
+.nbv-upcard__desc{
+  color: rgba(255,255,255,0.70);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.nbv-upcard__note{
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 10px;
+}
+.nbv-upcard__btn{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+.nbv-upcard__btn:hover{
+  border-color: rgba(255,51,102,0.5);
+  background: rgba(255,51,102,0.15);
+}
+.nbv-upcard__btn--primary{
+  border: none;
+  background: linear-gradient(135deg,#ff3366,#ff9500);
+}
+.nbv-upcard__ribbon{
+  position:absolute;
+  top: 12px;
+  right: 12px;
+  font-size: .75rem;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,51,102,0.18);
+  border: 1px solid rgba(255,51,102,0.35);
+}
+.nbv-upgrade-dark__footer{
+  margin-top: 12px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 800;
+}
     /* Tabs / Use-cases */
     .tabs { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
     .tab {
