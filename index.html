@@ -820,7 +820,7 @@
         <a href="#use-cases">Use Cases</a>
         <a href="#resources">Resources</a>
         <a href="#roi">ROI</a>
-        <button class="nav-cta" onclick="startAssessment()">Free AI Assessment →</button>
+        <button class="btn-primary" id="heroAssessmentBtn" type="button">Start Free Assessment →</button>
       </div>
     </nav>
   </header>
@@ -865,7 +865,7 @@
       </div>
 
       <div class="cta-buttons">
-        <button class="btn-primary" onclick="startAssessment()">Start Free Assessment →</button>
+        <button class="btn-primary" id="heroAssessmentBtn" type="button">Start Free Assessment →</button>
         <a class="btn-secondary" href="#contact">Book Strategy Call →</a>
       </div>
     </div>
@@ -2759,25 +2759,39 @@ window.showResults = showResults;
    8) Init
    ========================= */
 document.addEventListener("DOMContentLoaded", () => {
- const startBtn = document.getElementById("startAssessmentBtn");
-if (startBtn) {
-  startBtn.addEventListener("click", () => {
-    if (typeof window.startAssessment === "function") window.startAssessment();
-    else console.error("startAssessment is not available on window");
-  });
-}
-      bindTabs();
+  // Site UI
+  bindTabs();
   bindSmoothScroll();
 
-// ===============================
-// Ensure inline onclick handlers always work (immediate export)
-// ===============================
-window.startAssessment   = window.startAssessment   || startAssessment;
-window.closeAssessment   = window.closeAssessment   || closeAssessment;
-window.startQuestions    = window.startQuestions    || startQuestions;
-window.previousQuestion  = window.previousQuestion  || previousQuestion;
-window.restartAssessment = window.restartAssessment || restartAssessment;
-window.showResults       = window.showResults       || showResults;
-window.calculateROI      = window.calculateROI      || calculateROI;
+  // Bind assessment buttons (avoid inline onclick)
+  const bindStart = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener("click", () => {
+      if (typeof window.startAssessment === "function") {
+        window.startAssessment();
+      } else {
+        console.error("startAssessment missing — script not loaded or failed early");
+      }
+    });
+  };
+
+  // Use these IDs in HTML:
+  // <button id="navAssessmentBtn" ...>
+  // <button id="heroAssessmentBtn" ...>
+  bindStart("navAssessmentBtn");
+  bindStart("heroAssessmentBtn");
+
+  // Optional: if you also created a single start button elsewhere
+  bindStart("startAssessmentBtn");
+
+  // Expose functions for any remaining inline onclick handlers
+  window.startAssessment   = window.startAssessment   || startAssessment;
+  window.closeAssessment   = window.closeAssessment   || closeAssessment;
+  window.startQuestions    = window.startQuestions    || startQuestions;
+  window.previousQuestion  = window.previousQuestion  || previousQuestion;
+  window.restartAssessment = window.restartAssessment || restartAssessment;
+  window.showResults       = window.showResults       || showResults;
+  window.calculateROI      = window.calculateROI      || calculateROI;
 });
 </script>
