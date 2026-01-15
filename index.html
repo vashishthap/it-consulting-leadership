@@ -2867,6 +2867,56 @@ function showResults() {
   }
 }
 window.showResults = showResults;
+(function initUpgradeCards(){
+  const st = window._nbvAssessment || {};
+  const company =
+    st.company ||
+    st.companyName ||
+    (st.lead && (st.lead.company || st.lead.companyName)) ||
+    "";
+
+  const companyEl = document.getElementById("nbvCompanyName");
+  if (companyEl) companyEl.textContent = company ? company : "your company";
+
+  const selectedEl = document.getElementById("nbvSelectedPackage");
+  const cards = Array.from(document.querySelectorAll(".nbv-card"));
+
+  function setSelected(pkg) {
+    window._nbvAssessment = window._nbvAssessment || {};
+    window._nbvAssessment.selectedPackage = pkg;
+
+    if (selectedEl) selectedEl.textContent = pkg ? pkg.replaceAll("_"," ").toUpperCase() : "None";
+
+    // subtle visual selection
+    cards.forEach(c => c.style.outline = "");
+    const active = cards.find(c => c.dataset.package === pkg);
+    if (active) active.style.outline = "3px solid rgba(0,0,0,0.18)";
+  }
+
+  async function handleUpgradeCheckout(pkg, price) {
+    // Placeholder for Stripe later
+    // Here you can: open a modal, show "Coming next", or collect additional info
+    console.log("Selected package:", pkg, "price:", price);
+    alert(`Selected: ${pkg}\nPrice: $${price}\n\nNext step: We'll connect this to Stripe Checkout.`);
+  }
+
+  cards.forEach(card => {
+    const btn = card.querySelector(".nbv-card__btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      const pkg = card.dataset.package;
+      const price = Number(card.dataset.price || 0);
+
+      setSelected(pkg);
+      handleUpgradeCheckout(pkg, price);
+    });
+  });
+
+  // Optional: default highlight popular card
+  setSelected("");
+})();
+
 /* =========================
    7) Upgrade handler
    ========================= */
