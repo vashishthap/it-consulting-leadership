@@ -2753,12 +2753,16 @@ document.addEventListener("DOMContentLoaded", () => {
   bindTabs();
   bindSmoothScroll();
 
- // ===== Expose functions for inline onclick handlers =====
-window.startAssessment = window.startAssessment || startAssessment;
-window.closeAssessment = window.closeAssessment || closeAssessment;
-window.startQuestions = window.startQuestions || startQuestions;
-window.previousQuestion = window.previousQuestion || previousQuestion;
+// ===============================
+// Make inline onclick handlers work
+// ===============================
+window.startAssessment   = window.startAssessment   || startAssessment;
+window.closeAssessment   = window.closeAssessment   || closeAssessment;
+window.startQuestions    = window.startQuestions    || startQuestions;
+window.previousQuestion  = window.previousQuestion  || previousQuestion;
 window.restartAssessment = window.restartAssessment || restartAssessment;
-window.showResults = window.showResults || showResults;
+window.showResults       = window.showResults       || showResults;
+window.calculateROI      = window.calculateROI      || calculateROI;
+
 });
 </script>
