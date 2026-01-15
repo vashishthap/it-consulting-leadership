@@ -1738,10 +1738,10 @@
               ← Back
             </button>
 
-            <button type="button" onclick="closeAssessment()"
-              style="margin-left:auto; padding:.9rem 1.2rem; border-radius: 14px; border: none; background: rgba(255,255,255,0.08); color:#fff; font-weight:900; cursor:pointer;">
-              Exit
-            </button>
+              <button type="button" id="startAssessmentBtn"
+                style="padding: 1.5rem 3rem; background: var(--gradient-accent); border: none; border-radius: 50px; color: white; font-weight: 900; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 40px rgba(255, 51, 102, 0.4);">
+                Start Free Assessment Now →
+              </button>
           </div>
         </div>
 
@@ -2757,7 +2757,14 @@ window.showResults = showResults;
    8) Init
    ========================= */
 document.addEventListener("DOMContentLoaded", () => {
-  bindTabs();
+ const startBtn = document.getElementById("startAssessmentBtn");
+if (startBtn) {
+  startBtn.addEventListener("click", () => {
+    if (typeof window.startAssessment === "function") window.startAssessment();
+    else console.error("startAssessment is not available on window");
+  });
+}
+      bindTabs();
   bindSmoothScroll();
 
 // ===============================
