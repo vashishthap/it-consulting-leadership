@@ -2333,7 +2333,7 @@ window.questions = questions; // make available if needed elsewhere
 
 // Open modal (buttons call startAssessment())
 function startAssessment() {
-  const st = window._nbvAssessment;
+ const st = window._nbvAssessment || (window._nbvAssessment = {});
   st.currentQuestionIndex = 0;
   st.answers = {};
   st.userData = {};
