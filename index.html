@@ -2105,10 +2105,17 @@ function calculateROI() {
 
   const newRevenue = revenue * 0.1;
   const investment = Math.min(200000, Math.max(50000, revenue * 0.03));
-  const netROI = investment > 0 ? ((totalSavings + newRevenue - investment) / investment * 100).toFixed(0) : "0";
-  const payback = totalSavings > 0 ? (investment / (totalSavings / 12)).toFixed(1) : "N/A";
+  const netROI =
+    investment > 0
+      ? (((totalSavings + newRevenue - investment) / investment) * 100).toFixed(0)
+      : "0";
+  const payback =
+    totalSavings > 0 ? (investment / (totalSavings / 12)).toFixed(1) : "N/A";
 
-  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = v;
+  };
 
   set("savings", "$" + Math.round(totalSavings).toLocaleString());
   set("desk-savings", "$" + Math.round(deskSavings).toLocaleString());
@@ -2119,11 +2126,11 @@ function calculateROI() {
   set("net-roi", netROI + "%");
   set("payback", payback);
 
-  lts = document.getElementById("roiResults");
-  if (results) results.style.display = "block";
+  // Show results block
+  const roiResults = document.getElementById("roiResults");
+  if (roiResults) roiResults.style.display = "block";
 }
 window.calculateROI = calculateROI;
-
 /* =========================
    4) Assessment Questions (20)
    5 pillars: Strategy, Data, Technology, People, Governance
@@ -2754,7 +2761,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindSmoothScroll();
 
 // ===============================
-// Make inline onclick handlers work
+// Ensure inline onclick handlers always work (immediate export)
 // ===============================
 window.startAssessment   = window.startAssessment   || startAssessment;
 window.closeAssessment   = window.closeAssessment   || closeAssessment;
@@ -2763,6 +2770,5 @@ window.previousQuestion  = window.previousQuestion  || previousQuestion;
 window.restartAssessment = window.restartAssessment || restartAssessment;
 window.showResults       = window.showResults       || showResults;
 window.calculateROI      = window.calculateROI      || calculateROI;
-
 });
 </script>
