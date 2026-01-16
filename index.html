@@ -1900,14 +1900,14 @@
     };
 
     /* Zoho config */
-    window.ZOHO_W2L = window.ZOHO_W2L || {
-      endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
-      xnQsjsdp: "e33aad4bf37b084e183fdf14b8cfa80a1e5e23c83557d84070c1daeaeb9bd362",
-      xmIwtLD: "6fb00fd876fe13687ff5a183eaabcffc40d0ac2b49d9f27355afb17ad109330dec2849768843aabc47935ba77065a882",
-      actionType: "TGVhZHM=",
-      returnURL: "https://nothingbutvalue.com/thank-you.html",
-      zc_gad: ""
-    };
+   window.ZOHO_W2L = window.ZOHO_W2L || {
+  endpoint: "https://crm.zoho.eu/crm/WebToLeadForm",
+  xnQsjsdp: "1e3626881d0dfa8d549933cc412dc1450f472c120160f447feb744b5f88ee13d",
+  xmIwtLD: "9210a35322d973bbe66e872524ae8f8f52f80d465ccef5dcef573e32cdf3e3f6ac67a1aa8639db26c592017bbd81a123",
+  actionType: "TGVhZHM=",
+  returnURL: "https://vashishthap.github.io/it-consulting-leadership/thank-you.html",
+  zc_gad: ""
+};
 
     function postToZohoLead(fields) {
       const cfg = window.ZOHO_W2L;
@@ -1972,6 +1972,7 @@
   const u = userData || {};
   const scorePct = Math.round(Number(overallScore || 0));
   const score10 = Math.round(scorePct / 10);
+  const supportLink = "https://buy.stripe.com/test_5kQ7sE9O3fpZ3BAdrQaZi00";
 
   // ---- Weakest pillar ----
   const entries = Object.entries(pillarAverages || {});
@@ -2070,6 +2071,7 @@ or revisit your assessment results page.
     "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
     "LEADCF4": weakestText,                 // Weakest Pillar + Tip
     "LEADCF5": premiumCTA                   // Premium CTA
+    "LEADCF6": supportLink                  // Payment link 
   };
 
   // Mandatory check (matches your Zoho form)
