@@ -1972,7 +1972,6 @@
   const u = userData || {};
   const scorePct = Math.round(Number(overallScore || 0));
   const score10 = Math.round(scorePct / 10);
-  const supportLink = "https://buy.stripe.com/test_5kQ7sE9O3fpZ3BAdrQaZi00";
 
   // ---- Weakest pillar ----
   const entries = Object.entries(pillarAverages || {});
@@ -2071,7 +2070,6 @@ or revisit your assessment results page.
     "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
     "LEADCF4": weakestText,                 // Weakest Pillar + Tip
     "LEADCF5": premiumCTA                   // Premium CTA
-    "LEADCF6": supportLink                  // Payment link 
   };
 
   // Mandatory check (matches your Zoho form)
@@ -3042,6 +3040,5 @@ if (mount) {
           window.showResults = window.showResults || showResults;
           window.calculateROI = window.calculateROI || calculateROI;
         });
-
 
 </script>
