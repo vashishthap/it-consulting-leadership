@@ -2020,13 +2020,33 @@
     : `Overall: ${bandTitle}\n\n${bandText}`.trim();
 
   // ---- Premium CTA block (email-friendly) ----
-  const premiumCTA =
-    "🎁 Upgrade options:\n" +
-    "• Premium Report — $97 (15-page tailored report + roadmap + ROI use cases + benchmarking)\n" +
-    "• Premium + Consult — $297 (Premium report + 60-min strategy call) ⚡ Limited: 4 slots/month\n" +
-    "• Enterprise — $997+ (Team workshop + tailored transformation plan)\n\n" +
-    "Reply to this email with “Premium” or “Consult” to upgrade, or revisit the results page.";
+ const premiumCTA = `
+────────────────────────
+🚀 Upgrade Options (Optional)
+────────────────────────
 
+💎 Premium Report — $97
+• 15-page tailored AI readiness report
+• 90-day transformation roadmap
+• ROI-driven use cases
+• Industry benchmarking
+
+⭐ Premium + Consult — $297
+• Everything in Premium
+• 60-minute 1:1 strategy session
+• Priority recommendations
+⚡ Limited to 4 slots per month
+
+🏢 Enterprise Package — $997+
+• Leadership workshop
+• Stakeholder alignment
+• Fully tailored transformation plan
+
+👉 To upgrade:
+Reply to this email with “Premium” or “Consult”,
+or revisit your assessment results page.
+`.trim();
+     
   // ---- Details block (keep for your internal context / Zoho record) ----
   const details =
     `Role: ${u.role || "-"}\n` +
