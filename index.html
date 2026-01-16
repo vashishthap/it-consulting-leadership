@@ -1968,13 +1968,31 @@
     }
     window.postToZohoLead = postToZohoLead;
 
-    function sendToZohoCRM(userData, overallScore, pillarAverages, reportType) {
+   function sendToZohoCRM(userData, overallScore, pillarAverages, reportType, insights) {
       const u = userData || {};
       const fields = {
         "Last Name": u.name || "Website Visitor",
         "Email": u.email || "",
         "Company": u.company || "",
-        "Description": "AI goals / aspirations (Assessment)",
+        "Description": `
+          AI Readiness Assessment Summary
+          
+          Overall Score: ${overallScore || 0}%
+          
+          Assessment Level:
+          ${(insights && insights.headline) || ""}
+          
+          Key Insight:
+          ${(insights && insights.summary) || ""}
+          
+          Primary Recommendation:
+          ${(insights && insights.nextSteps) || ""}
+          
+          ${(insights && insights.pillarInsight) || ""}
+          
+          Selected Package:
+          ${reportType || "Free 1-Page Summary"}
+          `.trim(),
         "LEADCF51": String(overallScore || 0),
         "LEADCF2": reportType || "Free 1-Page Summary",
         "LEADCF1": `Role: ${u.role || "-"}\nOverall Score: ${overallScore || 0}%\nPillars: ${JSON.stringify(pillarAverages || {})}`
@@ -2520,7 +2538,64 @@ window.bindTabs = bindTabs;
           showStep("email");
         }
         window.restartAssessment = restartAssessment;
+function getScoreInsights(overallScore, pillarAverages = {}) {
+  let headline = "";
+  let summary = "";
+  let nextSteps = "";
 
+  if (overallScore < 30) {
+    headline = "Early-Stage AI Readiness";
+    summary =
+      "Your organization is at the beginning of its AI journey. Most foundational elements — strategy, data, and operating model — are still emerging.";
+    nextSteps =
+      "The biggest opportunity is to avoid ad-hoc AI experiments and instead focus on building a clear strategy, prioritised use cases, and basic data readiness.";
+  } else if (overallScore < 50) {
+    headline = "Building AI Foundations";
+    summary =
+      "You have started laying the groundwork for AI, but capabilities are uneven across the organisation.";
+    nextSteps =
+      "Short-term gains will come from sharpening use-case prioritisation, improving data access, and assigning clear executive ownership.";
+  } else if (overallScore < 70) {
+    headline = "Progressing Well with AI";
+    summary =
+      "You have solid AI foundations and early execution capability. Some teams are already seeing value.";
+    nextSteps =
+      "The focus now should be scaling successful pilots, strengthening governance, and improving operational integration to unlock enterprise-level ROI.";
+  } else if (overallScore < 85) {
+    headline = "Advanced AI Maturity";
+    summary =
+      "Your organisation demonstrates strong AI capability across most pillars and is well positioned for advanced use cases.";
+    nextSteps =
+      "At this stage, optimisation, automation, and AI-driven decisioning will deliver disproportionate returns.";
+  } else {
+    headline = "AI Leader";
+    summary =
+      "You are operating at an advanced level of AI maturity with strong strategy, execution, and governance.";
+    nextSteps =
+      "The opportunity now is continuous optimisation, competitive differentiation, and embedding AI into core business models.";
+  }
+
+  // Optional: highlight weakest pillar
+  let weakestPillar = null;
+  let weakestScore = 101;
+  Object.entries(pillarAverages).forEach(([pillar, score]) => {
+    if (score < weakestScore) {
+      weakestScore = score;
+      weakestPillar = pillar;
+    }
+  });
+
+  const pillarInsight = weakestPillar
+    ? `Your lowest-scoring pillar is ${weakestPillar}, which represents the fastest opportunity for improvement and ROI.`
+    : "";
+
+  return {
+    headline,
+    summary,
+    nextSteps,
+    pillarInsight
+  };
+}
         /* =========================
            6) Results + Zoho submission
            ========================= */
@@ -2572,6 +2647,9 @@ window.bindTabs = bindTabs;
 
           st.lastOverallScore = overallScore;
           st.lastPillarAverages = pillarAverages;
+          const insights = getScoreInsights(overallScore, pillarAverages);
+          st.scoreInsights = insights;
+
 
           // Readiness bands
           let readinessLevel = "Getting Started";
