@@ -1969,42 +1969,99 @@
     window.postToZohoLead = postToZohoLead;
 
    function sendToZohoCRM(userData, overallScore, pillarAverages, reportType, insights) {
-      const u = userData || {};
-      const fields = {
-        "Last Name": u.name || "Website Visitor",
-        "Email": u.email || "",
-        "Company": u.company || "",
-        "Description": `
-          AI Readiness Assessment Summary
-          
-          Overall Score: ${overallScore || 0}%
-          
-          Assessment Level:
-          ${(insights && insights.headline) || ""}
-          
-          Key Insight:
-          ${(insights && insights.summary) || ""}
-          
-          Primary Recommendation:
-          ${(insights && insights.nextSteps) || ""}
-          
-          ${(insights && insights.pillarInsight) || ""}
-          
-          Selected Package:
-          ${reportType || "Free 1-Page Summary"}
-          `.trim(),
-        "LEADCF51": String(overallScore || 0),
-        "LEADCF2": reportType || "Free 1-Page Summary",
-        "LEADCF1": `Role: ${u.role || "-"}\nOverall Score: ${overallScore || 0}%\nPillars: ${JSON.stringify(pillarAverages || {})}`
-      };
+  const u = userData || {};
+  const scorePct = Math.round(Number(overallScore || 0));
+  const score10 = Math.round(scorePct / 10);
 
-      if (!fields["Last Name"] || !fields["Email"] || !fields["Company"] || !fields["Description"]) {
-        console.error("[Zoho] Missing mandatory fields:", fields);
-        return false;
-      }
-      return postToZohoLead(fields);
-    }
-    window.sendToZohoCRM = sendToZohoCRM;
+  // ---- Weakest pillar ----
+  const entries = Object.entries(pillarAverages || {});
+  entries.sort((a, b) => (a[1] ?? 999) - (b[1] ?? 999));
+  const weakestPillar = entries.length ? entries[0][0] : "";
+  const weakestScore = entries.length ? entries[0][1] : "";
+
+  const tipMap = {
+    Strategy: "Tip: pick 2–3 priority use cases, assign an executive owner, and track KPIs weekly.",
+    Data: "Tip: improve data access + quality for 1–2 core domains and add basic monitoring.",
+    Technology: "Tip: standardize deployment + monitoring and integrate AI into core workflows (CRM/support/ops).",
+    People: "Tip: build adoption with champions + training and protect delivery time for a cross-functional squad.",
+    Governance: "Tip: set lightweight guardrails for privacy/security/risk and define an approval + review cadence."
+  };
+
+  const weakestText = weakestPillar
+    ? `Weakest pillar: ${weakestPillar} (${weakestScore}%). ${tipMap[weakestPillar] || ""}`
+    : "Weakest pillar: N/A";
+
+  // ---- Score-based summary paragraph ----
+  let bandTitle = "Getting Started";
+  let bandText =
+    "You’re at the early stage of AI readiness. The biggest wins typically come from strengthening foundations while shipping 1–2 high-impact use cases into production quickly.";
+
+  if (scorePct >= 30 && scorePct < 50) {
+    bandTitle = "Building Foundation";
+    bandText =
+      "You have some AI basics in place, but core capabilities need strengthening. Focus on 1–2 prioritized use cases, clear KPIs, and better data access to accelerate ROI.";
+  } else if (scorePct >= 50 && scorePct < 70) {
+    bandTitle = "Progressing Well";
+    bandText =
+      "You have solid foundations and are making good progress. Next, standardize delivery (MLOps/LLMOps), scale adoption, and track ROI consistently across a use-case portfolio.";
+  } else if (scorePct >= 70 && scorePct < 85) {
+    bandTitle = "Advanced";
+    bandText =
+      "You are well-positioned for advanced implementations. The highest value is scaling safely: deeper workflow automation, stronger risk controls, and cross-team rollout with ROI tracking.";
+  } else if (scorePct >= 85) {
+    bandTitle = "AI Leader";
+    bandText =
+      "You’re operating at a leader level. The next frontier is compounding ROI through scale: cost controls, robust governance, and expanding AI across products and departments.";
+  }
+
+  // Prefer your existing insights if passed in, otherwise use the band text
+  const summaryText = (insights && (insights.summary || insights.headline))
+    ? `${insights.headline ? insights.headline + "\n\n" : ""}${insights.summary ? insights.summary : ""}`.trim()
+    : `Overall: ${bandTitle}\n\n${bandText}`.trim();
+
+  // ---- Premium CTA block (email-friendly) ----
+  const premiumCTA =
+    "🎁 Upgrade options:\n" +
+    "• Premium Report — $97 (15-page tailored report + roadmap + ROI use cases + benchmarking)\n" +
+    "• Premium + Consult — $297 (Premium report + 60-min strategy call) ⚡ Limited: 4 slots/month\n" +
+    "• Enterprise — $997+ (Team workshop + tailored transformation plan)\n\n" +
+    "Reply to this email with “Premium” or “Consult” to upgrade, or revisit the results page.";
+
+  // ---- Details block (keep for your internal context / Zoho record) ----
+  const details =
+    `Role: ${u.role || "-"}\n` +
+    `Overall Score: ${scorePct}% (${score10}/10)\n` +
+    `Pillars: ${JSON.stringify(pillarAverages || {})}\n` +
+    (insights && insights.nextSteps ? `Next steps: ${insights.nextSteps}\n` : "") +
+    (insights && insights.pillarInsight ? `Pillar insight: ${insights.pillarInsight}\n` : "") +
+    `Selected Package: ${reportType || "Free 1-Page Summary"}`;
+
+  const fields = {
+    "Last Name": u.name || "Website Visitor",
+    "Email": u.email || "",
+    "Company": u.company || "",
+    "Description": details,                 // safe fallback: always accessible in templates
+    "LEADCF2": reportType || "Free 1-Page Summary",
+
+    // From your webform source:
+    "LEADCF51": String(score10),            // AI Readiness Score (/10) — matches your "/10" template format
+    "LEADCF52": String(scorePct),           // AI Readiness Score (Percent)
+
+    "LEADCF1": details,                     // Assessment Details
+    "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
+    "LEADCF4": weakestText,                 // Weakest Pillar + Tip
+    "LEADCF5": premiumCTA                   // Premium CTA
+  };
+
+  // Mandatory check (matches your Zoho form)
+  if (!fields["Last Name"] || !fields["Email"] || !fields["Company"] || !fields["Description"]) {
+    console.error("[Zoho] Missing mandatory fields:", fields);
+    return false;
+  }
+
+  return postToZohoLead(fields);
+}
+window.sendToZohoCRM = sendToZohoCRM;
 
     /* Theme overrides (safe, modal only) */
     (function injectAssessmentTheme() {
