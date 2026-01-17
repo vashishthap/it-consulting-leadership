@@ -1968,7 +1968,7 @@
     }
     window.postToZohoLead = postToZohoLead;
 
-   function sendToZohoCRM(userData, overallScore, pillarAverages, reportType, insights) {
+  function sendToZohoCRM(userData, overallScore, pillarAverages, reportType, insights) {
   const u = userData || {};
   const scorePct = Math.round(Number(overallScore || 0));
   const score10 = Math.round(scorePct / 10);
@@ -2018,7 +2018,7 @@
   const summaryText = (insights && (insights.summary || insights.headline))
     ? `${insights.headline ? insights.headline + "\n\n" : ""}${insights.summary ? insights.summary : ""}`.trim()
     : `Overall: ${bandTitle}\n\n${bandText}`.trim();
-
+ const stripeSupportLink = "https://buy.stripe.com/test_5kQ7sE9O3fpZ3BAdrQaZi00";
   // ---- Premium CTA block (email-friendly) ----
  const premiumCTA = `
 
