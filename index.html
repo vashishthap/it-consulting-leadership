@@ -2066,11 +2066,22 @@ or revisit your assessment results page.
     "LEADCF51": String(score10),            // AI Readiness Score (/10) — matches your "/10" template format
     "LEADCF52": String(scorePct),           // AI Readiness Score (Percent)
 
-    "LEADCF1": details,                     // Assessment Details
-    "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
-    "LEADCF4": weakestText,                 // Weakest Pillar + Tip
-    "LEADCF5": premiumCTA,                   // Premium CTA
-    "LEADCF6": stripeSupportLink             // Stripe Link
+            const formatPillarsForEmail = (pillars = {}) => {
+          return Object.entries(pillars)
+            .map(([name, score]) => `• ${name}: ${score}%`)
+            .join("\n");
+        };
+        
+        fields["LEADCF1"] = `
+        AI Readiness Assessment – Detailed Breakdown                   
+        Pillar Scores:
+        ${formatPillarsForEmail(pillarAverages)}
+        `.trim();
+
+      "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
+      "LEADCF4": weakestText,                 // Weakest Pillar + Tip
+      "LEADCF5": premiumCTA,                   // Premium CTA
+      "LEADCF6": stripeSupportLink             // Stripe Link
   };
 
   // Mandatory check (matches your Zoho form)
