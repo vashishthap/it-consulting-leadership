@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- CACHE_BUSTER: 2026-01-17-01 -->
+  <!-- CACHE_BUSTER: 2026-01-17-01a -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -2045,6 +2045,17 @@
 Reply to this email with “Premium” or “Consult”,
 or revisit your assessment results page.
 `.trim();
+ const formatPillarsForEmail = (pillars = {}) => {
+     return Object.entries(pillars)
+     .map(([name, score]) => `• ${name}: ${score}%`)
+       .join("\n");
+        };
+        
+        fields["LEADCF1"] = `
+        AI Readiness Assessment – Detailed Breakdown                   
+        Pillar Scores:
+        ${formatPillarsForEmail(pillarAverages)}
+        `.trim();
      
   // ---- Details block (keep for your internal context / Zoho record) ----
   const details =
@@ -2065,23 +2076,11 @@ or revisit your assessment results page.
     // From your webform source:
     "LEADCF51": String(score10),            // AI Readiness Score (/10) — matches your "/10" template format
     "LEADCF52": String(scorePct),           // AI Readiness Score (Percent)
-
-            const formatPillarsForEmail = (pillars = {}) => {
-          return Object.entries(pillars)
-            .map(([name, score]) => `• ${name}: ${score}%`)
-            .join("\n");
-        };
-        
-        fields["LEADCF1"] = `
-        AI Readiness Assessment – Detailed Breakdown                   
-        Pillar Scores:
-        ${formatPillarsForEmail(pillarAverages)}
-        `.trim();
-
-      "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
-      "LEADCF4": weakestText,                 // Weakest Pillar + Tip
-      "LEADCF5": premiumCTA,                   // Premium CTA
-      "LEADCF6": stripeSupportLink             // Stripe Link
+     "LEADCF1": assessment details,         // 
+     "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
+     "LEADCF4": weakestText,                 // Weakest Pillar + Tip
+     "LEADCF5": premiumCTA,                   // Premium CTA
+     "LEADCF6": stripeSupportLink             // Stripe Link
   };
 
   // Mandatory check (matches your Zoho form)
