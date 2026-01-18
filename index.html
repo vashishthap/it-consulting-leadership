@@ -1997,6 +1997,16 @@
         .join("\n")}`
     : "Pillar scores: N/A";
 
+  // ---------- Pillar explainer (goes into Assessment Summary) ----------
+  const pillarExplainerBlock = `
+How to read your AI readiness pillars:
+• Strategy — clarity of AI vision, use-case prioritisation, and executive ownership.
+• Data — availability, quality, and accessibility of data needed to power AI.
+• Technology — platforms, tooling, and integration into core workflows.
+• People — skills, adoption, and organisational readiness to use AI effectively.
+• Governance — controls for risk, privacy, security, and responsible AI use.
+  `.trim();
+
   // ---------- Weakest pillar ----------
   const entries = pillarRows
     .filter((p) => p.pct !== null)
@@ -2041,15 +2051,22 @@
       "You’re operating at a leader level. The next frontier is compounding ROI through scale: cost controls, robust governance, and expanding AI across products and departments.";
   }
 
-  // ---------- Assessment Summary (LEADCF3) now includes pillar breakdown ----------
+  // Prefer your existing insights if passed in, otherwise use the band text
   const baseSummary =
     insights && (insights.summary || insights.headline)
       ? `${insights.headline ? insights.headline + "\n\n" : ""}${insights.summary ? insights.summary : ""}`.trim()
       : `Overall: ${bandTitle}\n\n${bandText}`.trim();
 
-  const summaryText = `${baseSummary}\n\n${pillarBreakdownBlock}`.trim();
+  // ---------- Assessment Summary (LEADCF3) includes explainer + pillar scores ----------
+  const summaryText = `
+${baseSummary}
 
-  // ---------- Stripe link + Premium CTA field (optional for other templates) ----------
+${pillarExplainerBlock}
+
+${pillarBreakdownBlock}
+  `.trim();
+
+  // ---------- Stripe link + Premium CTA (optional field for other templates) ----------
   const stripeSupportLink = "https://buy.stripe.com/test_5kQ7sE9O3fpZ3BAdrQaZi00";
 
   const premiumCTA = `
@@ -2073,7 +2090,7 @@ Reply with: Premium, Premium + Consult, or Enterprise
 Upgrade link: ${stripeSupportLink}
   `.trim();
 
-  // ---------- Details for Zoho record ----------
+  // ---------- Details (internal context / Zoho record) ----------
   const details =
     `Role: ${u.role || "-"}\n` +
     `Overall Score: ${scorePct}% (${score10}/10)\n` +
@@ -2083,22 +2100,23 @@ Upgrade link: ${stripeSupportLink}
     (insights && insights.pillarInsight ? `Pillar insight: ${insights.pillarInsight}\n` : "") +
     `Selected Package: ${reportType || "Free 1-Page Summary"}`;
 
+  // ---------- Zoho fields ----------
   const fields = {
-    "Last Name": u.name || "Website Visitor",
-    "Email": u.email || "",
-    "Company": u.company || "",
+    "Last Name": (u.name || "Website Visitor").trim(),
+    "Email": (u.email || "").trim(),
+    "Company": (u.company || "").trim(),
     "Description": details,
-    "LEADCF2": reportType || "Free 1-Page Summary",
 
-    // custom fields
-    "LEADCF51": String(score10),
-    "LEADCF52": String(scorePct),
-    "LEADCF3": summaryText,     // Assessment Summary + Pillars
-    "LEADCF4": weakestText,     // Weakest Pillar + Tip
-    "LEADCF5": premiumCTA,      // optional use in email templates
-    "LEADCF6": stripeSupportLink
+    "LEADCF2": reportType || "Free 1-Page Summary",
+    "LEADCF51": String(score10),        // AI Readiness Score (/10)
+    "LEADCF52": String(scorePct),       // AI Readiness Score (%)
+    "LEADCF3": summaryText,             // Assessment Summary (includes pillar explainer + scores)
+    "LEADCF4": weakestText,             // Weakest Pillar + Tip
+    "LEADCF5": premiumCTA,              // Premium CTA (optional)
+    "LEADCF6": stripeSupportLink         // Stripe Link
   };
 
+  // Mandatory check (matches your Zoho form)
   if (!fields["Last Name"] || !fields["Email"] || !fields["Company"] || !fields["Description"]) {
     console.error("[Zoho] Missing mandatory fields:", fields);
     return false;
