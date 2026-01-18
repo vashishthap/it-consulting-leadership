@@ -1973,8 +1973,35 @@
   const scorePct = Math.round(Number(overallScore || 0));
   const score10 = Math.round(scorePct / 10);
 
-  // ---- Weakest pillar ----
-  const entries = Object.entries(pillarAverages || {});
+  // ---------- Pillar formatting (email-friendly) ----------
+  const order = ["Strategy", "Data", "Technology", "People", "Governance"];
+  const pa = pillarAverages || {};
+
+  const toPct = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? Math.round(n) : null;
+  };
+
+  // Prefer standard order, but gracefully handle any keys
+  let pillarRows = order
+    .filter((k) => Object.prototype.hasOwnProperty.call(pa, k))
+    .map((k) => ({ key: k, pct: toPct(pa[k]) }));
+
+  if (!pillarRows.length) {
+    pillarRows = Object.entries(pa).map(([k, v]) => ({ key: k, pct: toPct(v) }));
+  }
+
+  const pillarBreakdownBlock = pillarRows.length
+    ? `Pillar scores:\n${pillarRows
+        .map((p) => `• ${p.key}: ${p.pct === null ? "-" : `${p.pct}%`}`)
+        .join("\n")}`
+    : "Pillar scores: N/A";
+
+  // ---------- Weakest pillar ----------
+  const entries = pillarRows
+    .filter((p) => p.pct !== null)
+    .map((p) => [p.key, p.pct]);
+
   entries.sort((a, b) => (a[1] ?? 999) - (b[1] ?? 999));
   const weakestPillar = entries.length ? entries[0][0] : "";
   const weakestScore = entries.length ? entries[0][1] : "";
@@ -1988,10 +2015,10 @@
   };
 
   const weakestText = weakestPillar
-    ? `Weakest pillar: ${weakestPillar} (${weakestScore}%). ${tipMap[weakestPillar] || ""}`
+    ? `Weakest pillar: ${weakestPillar} (${weakestScore}%). ${tipMap[weakestPillar] || ""}`.trim()
     : "Weakest pillar: N/A";
 
-  // ---- Score-based summary paragraph ----
+  // ---------- Score band summary ----------
   let bandTitle = "Getting Started";
   let bandText =
     "You’re at the early stage of AI readiness. The biggest wins typically come from strengthening foundations while shipping 1–2 high-impact use cases into production quickly.";
@@ -2014,42 +2041,44 @@
       "You’re operating at a leader level. The next frontier is compounding ROI through scale: cost controls, robust governance, and expanding AI across products and departments.";
   }
 
-  // Prefer your existing insights if passed in, otherwise use the band text
-  const summaryText = (insights && (insights.summary || insights.headline))
-    ? `${insights.headline ? insights.headline + "\n\n" : ""}${insights.summary ? insights.summary : ""}`.trim()
-    : `Overall: ${bandTitle}\n\n${bandText}`.trim();
- const stripeSupportLink = "https://buy.stripe.com/test_5kQ7sE9O3fpZ3BAdrQaZi00";
-  // ---- Premium CTA block (email-friendly) ----
- const premiumCTA = `
+  // ---------- Assessment Summary (LEADCF3) now includes pillar breakdown ----------
+  const baseSummary =
+    insights && (insights.summary || insights.headline)
+      ? `${insights.headline ? insights.headline + "\n\n" : ""}${insights.summary ? insights.summary : ""}`.trim()
+      : `Overall: ${bandTitle}\n\n${bandText}`.trim();
 
-⭐Secure your AI-driven future with exclusive upgrades - Reply to this email with “Premium” or “Premiun+ Consult” or "Enterprise
+  const summaryText = `${baseSummary}\n\n${pillarBreakdownBlock}`.trim();
 
-⭐⭐Upgrade to Premium Report — $97
+  // ---------- Stripe link + Premium CTA field (optional for other templates) ----------
+  const stripeSupportLink = "https://buy.stripe.com/test_5kQ7sE9O3fpZ3BAdrQaZi00";
+
+  const premiumCTA = `
+⭐ Secure your AI-driven future with exclusive upgrades.
+Reply with: Premium, Premium + Consult, or Enterprise
+
+⭐⭐ Premium Report — $97
 • 15-page tailored AI readiness report
 • 90-day transformation roadmap
 • ROI-driven use cases
 • Industry benchmarking
 
-⭐⭐⭐ Premium Report + Consult — $297
+⭐⭐⭐ Premium + Consult — $297
 • Everything in Premium
 • 60-minute 1:1 strategy session
-• Priority recommendations
 ⚡ Limited to 4 slots per month
 
-⭐⭐⭐⭐ Enterprise Package — $997+
-• Leadership workshop
-• Stakeholder alignment
-• Fully tailored transformation plan
+⭐⭐⭐⭐ Enterprise — $997+
+• Leadership workshop + tailored transformation plan
 
-⚡⚡To upgrade:
-Reply to this email OR just
-`.trim();
-    
-  // ---- Details block (keep for your internal context / Zoho record) ----
+Upgrade link: ${stripeSupportLink}
+  `.trim();
+
+  // ---------- Details for Zoho record ----------
   const details =
     `Role: ${u.role || "-"}\n` +
     `Overall Score: ${scorePct}% (${score10}/10)\n` +
-    `Pillars: ${JSON.stringify(pillarAverages || {})}\n` +
+    `${pillarBreakdownBlock}\n` +
+    `${weakestText}\n` +
     (insights && insights.nextSteps ? `Next steps: ${insights.nextSteps}\n` : "") +
     (insights && insights.pillarInsight ? `Pillar insight: ${insights.pillarInsight}\n` : "") +
     `Selected Package: ${reportType || "Free 1-Page Summary"}`;
@@ -2058,19 +2087,18 @@ Reply to this email OR just
     "Last Name": u.name || "Website Visitor",
     "Email": u.email || "",
     "Company": u.company || "",
-    "Description": details,                 // safe fallback: always accessible in templates
+    "Description": details,
     "LEADCF2": reportType || "Free 1-Page Summary",
 
-    // From your webform source:
-    "LEADCF51": String(score10),            // AI Readiness Score (/10) — matches your "/10" template format
-    "LEADCF52": String(scorePct),           // AI Readiness Score (Percent)
-    "LEADCF3": summaryText,                 // Assessment Summary (score-based / insights)
-    "LEADCF4": weakestText,                 // Weakest Pillar + Tip
-    "LEADCF5": premiumCTA,                   // Premium CTA
-     "LEADCF6": stripeSupportLink             // Stripe Link
+    // custom fields
+    "LEADCF51": String(score10),
+    "LEADCF52": String(scorePct),
+    "LEADCF3": summaryText,     // Assessment Summary + Pillars
+    "LEADCF4": weakestText,     // Weakest Pillar + Tip
+    "LEADCF5": premiumCTA,      // optional use in email templates
+    "LEADCF6": stripeSupportLink
   };
 
-  // Mandatory check (matches your Zoho form)
   if (!fields["Last Name"] || !fields["Email"] || !fields["Company"] || !fields["Description"]) {
     console.error("[Zoho] Missing mandatory fields:", fields);
     return false;
@@ -2078,8 +2106,8 @@ Reply to this email OR just
 
   return postToZohoLead(fields);
 }
-window.sendToZohoCRM = sendToZohoCRM;
 
+window.sendToZohoCRM = sendToZohoCRM;
     /* Theme overrides (safe, modal only) */
     (function injectAssessmentTheme() {
       if (document.getElementById("nbvAssessmentTheme")) return;
