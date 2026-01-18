@@ -2049,7 +2049,16 @@
         .join("\n")}`
     : "Pillar scores: N/A";
 
-  // ---------- Pillar explainer (goes into Assessment Summary) ----------
+  const pillarSentencesBlock = Object.entries(st.lastPillarAverages || {})
+  .map(([pillar, score]) => {
+    const sentence = getPillarActionSentence(pillar, score);
+    return sentence
+      ? `• ${pillar} (${Math.round(score)}%) — ${sentence}`
+      : "";
+  })
+  .filter(Boolean)
+  .join("\n");
+    // ---------- Pillar explainer (goes into Assessment Summary) ----------
   const pillarExplainerBlock = `
 How to read your AI readiness pillars:
 • Strategy — clarity of AI vision, use-case prioritisation, and executive ownership.
