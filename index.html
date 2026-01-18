@@ -1974,6 +1974,52 @@
     }
     window.postToZohoLead = postToZohoLead;
 
+   function getPillarActionSentence(pillar, score) {
+  const s = Math.round(Number(score || 0));
+
+  const bands = {
+    Strategy: [
+      { max: 29, text: "AI efforts lack clear direction—define a focused AI vision and assign executive ownership." },
+      { max: 49, text: "Strategy is emerging but unfocused—prioritise 1–2 business-critical AI use cases." },
+      { max: 69, text: "Foundations exist—tighten alignment to business KPIs and formalise ownership." },
+      { max: 84, text: "Strategy is strong—scale AI across functions with a clear value roadmap." },
+      { max: 100, text: "Strategy is mature—optimise ROI across the AI portfolio and refine priorities continuously." }
+    ],
+    Data: [
+      { max: 29, text: "Data is fragmented—focus first on access and quality for one core dataset." },
+      { max: 49, text: "Data is usable but inconsistent—standardise ownership and quality controls." },
+      { max: 69, text: "Core data is reliable—expand coverage and introduce monitoring." },
+      { max: 84, text: "Data foundations are strong—enable cross-domain and near-real-time use." },
+      { max: 100, text: "Data is AI-ready—optimise pipelines for scale and advanced models." }
+    ],
+    Technology: [
+      { max: 29, text: "Technology is ad-hoc—standardise AI platforms and environments." },
+      { max: 49, text: "Tools exist in silos—integrate AI into core business systems." },
+      { max: 69, text: "Platforms are established—improve automation and reliability." },
+      { max: 84, text: "Technology is scalable—optimise performance and cost." },
+      { max: 100, text: "Technology is advanced—focus on innovation and efficiency gains." }
+    ],
+    People: [
+      { max: 29, text: "Skills and adoption are limited—build basic AI awareness and champions." },
+      { max: 49, text: "Interest exists but confidence is low—invest in role-based AI training." },
+      { max: 69, text: "Teams are capable—formalise roles and protect delivery time." },
+      { max: 84, text: "Adoption is strong—scale best practices across teams." },
+      { max: 100, text: "People are AI-fluent—focus on leadership and continuous upskilling." }
+    ],
+    Governance: [
+      { max: 29, text: "Controls are missing—define baseline rules for privacy, risk, and security." },
+      { max: 49, text: "Governance is informal—introduce clear approval and review processes." },
+      { max: 69, text: "Guardrails exist—strengthen monitoring and accountability." },
+      { max: 84, text: "Governance is robust—enable faster, safer AI scaling." },
+      { max: 100, text: "Governance is mature—optimise speed without increasing risk." }
+    ]
+  };
+
+  const rules = bands[pillar];
+  if (!rules) return "";
+
+  return rules.find(b => s <= b.max)?.text || "";
+}
   function sendToZohoCRM(userData, overallScore, pillarAverages, reportType, insights) {
   const u = userData || {};
   const scorePct = Math.round(Number(overallScore || 0));
