@@ -2049,11 +2049,11 @@
         .join("\n")}`
     : "Pillar scores: N/A";
 
-  const pillarSentencesBlock = Object.entries(st.lastPillarAverages || {})
+ const pillarSentencesBlock = Object.entries(pillarAverages || {})
   .map(([pillar, score]) => {
     const sentence = getPillarActionSentence(pillar, score);
     return sentence
-      ? `• ${pillar} (${Math.round(score)}%) — ${sentence}`
+      ? `• ${pillar} (${Math.round(Number(score) || 0)}%) — ${sentence}`
       : "";
   })
   .filter(Boolean)
