@@ -2119,17 +2119,16 @@ How to read your AI readiness pillars:
       : `Overall: ${bandTitle}\n\n${bandText}`.trim();
 
   // ---------- Assessment Summary (LEADCF3) includes explainer + pillar scores ----------
-  const summaryText = `
+ const summaryText = `
 ${baseSummary}
 
 ${pillarExplainerBlock}
 
+${pillarBreakdownBlock}
+
 What your AI readiness scores mean — and what to focus on next:
 ${pillarSentencesBlock}
-
-${pillarBreakdownBlock}
-  `.trim();
-
+`.trim();
   // ---------- Stripe link + Premium CTA (optional field for other templates) ----------
   const stripeSupportLink = "https://buy.stripe.com/test_5kQ7sE9O3fpZ3BAdrQaZi00";
 
