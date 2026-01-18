@@ -2862,15 +2862,13 @@ function getScoreInsights(overallScore, pillarAverages = {}) {
               </div>
             </div>
           `;
-          // ===============================
+// ===============================
 // Upgrade packages (RESULTS ONLY)
 // ===============================
-const companyName =
-  st.userData?.company ||
-  st.company ||
-  st.companyName ||
-  (st.lead && (st.lead.company || st.lead.companyName)) ||
-  "";
+const safeCompanyName =
+  (typeof companyName === "string" && companyName.trim())
+    ? companyName.trim()
+    : "your company";
 
 const upgradeHTML = `
   <section id="upgradeSection" class="nbv-upgrade-dark">
@@ -2878,17 +2876,17 @@ const upgradeHTML = `
       <div class="nbv-upgrade-dark__badge">🎁 Upgrade</div>
       <h2 class="nbv-upgrade-dark__title">Upgrade to a Premium Report</h2>
       <p class="nbv-upgrade-dark__subtitle">
-        Get a detailed 15-page analysis tailored to
-        <span class="nbv-upgrade-dark__company">${companyName || "your company"}</span>.
+        Get a detailed 15-page analysis with actionable insights tailored to
+        <span class="nbv-upgrade-dark__company">${safeCompanyName}</span>.
       </p>
     </div>
 
     <ul class="nbv-upgrade-dark__bullets">
-      <li><strong>90-Day Transformation Roadmap</strong></li>
-      <li><strong>Prioritised Use Cases with ROI</strong></li>
-      <li><strong>Industry Benchmarking</strong></li>
-      <li><strong>Implementation Timeline & Budget</strong></li>
-      <li><strong>Risk Analysis & Mitigation</strong></li>
+      <li><strong>Custom 90-Day Transformation Roadmap</strong> — step-by-step implementation plan</li>
+      <li><strong>Prioritized Use Cases with ROI Projections</strong> — identify quick wins</li>
+      <li><strong>Industry Benchmarking</strong> — see how you compare to peers</li>
+      <li><strong>Implementation Timeline &amp; Budget</strong> — realistic resource planning</li>
+      <li><strong>Risk Analysis &amp; Mitigation Strategies</strong> — avoid common pitfalls</li>
     </ul>
 
     <div class="nbv-upgrade-dark__grid">
@@ -2897,7 +2895,8 @@ const upgradeHTML = `
           <div class="nbv-upcard__name">Premium Report</div>
           <div class="nbv-upcard__price">$97</div>
         </div>
-        <button class="nbv-upcard__btn">Get Premium Report</button>
+        <div class="nbv-upcard__desc">15-page tailored report + roadmap + ROI use cases.</div>
+        <button class="nbv-upcard__btn" type="button">Email me Premium</button>
       </div>
 
       <div class="nbv-upcard nbv-upcard--popular" data-package="premium_consult" data-price="297">
@@ -2906,16 +2905,23 @@ const upgradeHTML = `
           <div class="nbv-upcard__name">Premium + Consult</div>
           <div class="nbv-upcard__price">$297</div>
         </div>
-        <button class="nbv-upcard__btn nbv-upcard__btn--primary">Get Premium + Consult</button>
+        <div class="nbv-upcard__desc">Premium report + 60-min strategy call.</div>
+        <div class="nbv-upcard__note">⚡ Only <strong>4</strong> premium + consult slots available this month</div>
+        <button class="nbv-upcard__btn nbv-upcard__btn--primary" type="button">Email me Premium + Consult</button>
       </div>
 
       <div class="nbv-upcard" data-package="enterprise" data-price="997">
         <div class="nbv-upcard__top">
-          <div class="nbv-upcard__name">Enterprise</div>
+          <div class="nbv-upcard__name">Enterprise Package</div>
           <div class="nbv-upcard__price">$997+</div>
         </div>
-        <button class="nbv-upcard__btn">Discuss Enterprise</button>
+        <div class="nbv-upcard__desc">Team workshop + tailored transformation plan.</div>
+        <button class="nbv-upcard__btn" type="button">Email about Enterprise</button>
       </div>
+    </div>
+
+    <div class="nbv-upgrade-dark__footer">
+      <div>Selected: <strong id="nbvSelectedPackage">None</strong></div>
     </div>
   </section>
 `;
@@ -2924,8 +2930,112 @@ const upgradeHTML = `
 const mount = document.getElementById("nbvUpgradeMount");
 if (mount) {
   mount.innerHTML = upgradeHTML;
-} else {
+} else if (typeof resultsContainer !== "undefined" && resultsContainer) {
   resultsContainer.insertAdjacentHTML("beforeend", upgradeHTML);
+} else {
+  console.warn("nbvUpgradeMount not found and resultsContainer not available.");
+}
+
+// ------------------------------
+// Open prefilled upgrade email
+// ------------------------------
+function nbvOpenUpgradeEmail(pkgKey, price) {
+  const u = st.userData || {};
+  const scorePct = Math.round(Number(st.lastOverallScore || 0));
+  const score10 = Math.round(scorePct / 10);
+  const pillars = st.lastPillarAverages || {};
+
+  const packages = {
+    premium: {
+      label: "Premium Report",
+      price: "$97",
+      includes: [
+        "15-page tailored AI readiness report",
+        "90-day transformation roadmap",
+        "ROI-driven use cases",
+        "Industry benchmarking"
+      ]
+    },
+    premium_consult: {
+      label: "Premium + Consult",
+      price: "$297",
+      includes: [
+        "Everything in Premium",
+        "60-minute 1:1 strategy session",
+        "Priority recommendations",
+        "Limited to 4 slots per month"
+      ]
+    },
+    enterprise: {
+      label: "Enterprise Package",
+      price: "$997+",
+      includes: [
+        "Leadership workshop",
+        "Stakeholder alignment",
+        "Fully tailored transformation plan"
+      ]
+    }
+  };
+
+  const p = packages[pkgKey] || packages.premium;
+
+  const pillarLine =
+    Object.keys(pillars).length
+      ? Object.entries(pillars)
+          .map(([k, v]) => `${k}: ${Math.round(Number(v) || 0)}%`)
+          .join(" | ")
+      : "N/A";
+
+  const to = "value.advisor@nothingbutvalue.com";
+  const subject = `Upgrade Request: ${p.label} (${p.price}) — ${u.company || safeCompanyName}`;
+
+  const body = `
+Hi Nothing But Value team,
+
+I'd like to upgrade to: ${p.label} (${p.price})
+
+Included:
+${p.includes.map(x => `- ${x}`).join("\n")}
+
+My details:
+- Name: ${u.name || ""}
+- Email: ${u.email || ""}
+- Company: ${u.company || safeCompanyName}
+- AI Readiness Score: ${scorePct}% (${score10}/10)
+- Pillars: ${pillarLine}
+
+Please confirm next steps and send the payment link.
+
+Thanks,
+${u.name || ""}
+  `.trim();
+
+  const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+}
+
+// Delegate clicks (prevents double-binding) — attach ONCE
+if (!st._upgradeClickBound) {
+  st._upgradeClickBound = true;
+
+  resultsContainer.addEventListener("click", (e) => {
+    const btn = e.target.closest(".nbv-upcard__btn");
+    if (!btn) return;
+
+    const card = btn.closest(".nbv-upcard");
+    if (!card) return;
+
+    const pkg = card.dataset.package || "";
+    const price = card.dataset.price || "";
+
+    st.selectedPackage = pkg;
+    st.selectedPrice = price;
+
+    const selectedEl = document.getElementById("nbvSelectedPackage");
+    if (selectedEl) selectedEl.textContent = pkg.replaceAll("_", " ").toUpperCase();
+
+    nbvOpenUpgradeEmail(pkg, price);
+  });
 }
 
           // Prefill results form
