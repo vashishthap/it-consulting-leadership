@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Value Snapshot | Nothing But Value</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nbv-bg: #020617;
+      --nbv-card: #020617;
+      --nbv-border: #1e293b;
+      --nbv-green: #22c55e;
+      --nbv-green-soft: #16a34a;
+      --nbv-text: #e5e7eb;
+      --nbv-muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 0% 0%, #0f172a 0, #020617 40%, #000 100%);
+      color: var(--nbv-text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 24px;
+      padding: 28px 24px 24px;
+      background: radial-gradient(circle at 100% 0%, rgba(34,197,94,0.18), transparent 55%), #020617;
+      border: 1px solid rgba(148,163,184,0.3);
+      box-shadow: 0 30px 80px rgba(15,23,42,0.8);
+    }
+
+    .header {
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 11px;
+      color: var(--nbv-muted);
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      margin: 0 0 6px 0;
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #f9fafb, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--nbv-muted);
+      max-width: 380px;
+    }
+
+    .card {
+      background: rgba(15,23,42,0.95);
+      border-radius: 18px;
+      border: 1px solid rgba(30,64,175,0.45);
+      padding: 18px 18px 20px;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .label-row label {
+      color: #cbd5f5;
+      font-weight: 500;
+    }
+
+    .val-display {
+      color: var(--nbv-green);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .input-block {
+      margin-bottom: 16px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--nbv-muted);
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    input[type=range] {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 999px;
+      background: #111827;
+    }
+
+    input[type=range]::-moz-range-track {
+      height: 4px;
+      border-radius: 999px;
+      background: #111827;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--nbv-green);
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.2);
+      margin-top: -7px;
+      cursor: pointer;
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--nbv-green);
+      border: none;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.2);
+      cursor: pointer;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--nbv-muted);
+    }
+
+    .pill strong {
+      color: var(--nbv-green);
+      font-weight: 600;
+    }
+
+    .cta-main {
+      margin-top: 10px;
+    }
+
+    .btn-main {
+      width: 100%;
+      border-radius: 999px;
+      border: none;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--nbv-green), #4ade80);
+      color: #001b0a;
+      box-shadow: 0 12px 35px rgba(34,197,94,0.45);
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(34,197,94,0.5);
+    }
+
+    .note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--nbv-muted);
+      text-align: center;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 40;
+    }
+
+    .modal-backdrop.active { display: flex; }
+
+    .modal {
+      width: 100%;
+      max-width: 440px;
+      background: radial-gradient(circle at 10% 0%, rgba(34,197,94,0.12), transparent 55%), #020617;
+      border-radius: 22px;
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 22px 22px 20px;
+      box-shadow: 0 24px 70px rgba(15,23,42,0.9);
+      position: relative;
+      animation: popIn 0.15s ease-out;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: transparent;
+      color: var(--nbv-muted);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--nbv-muted);
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .modal-big {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .modal-sub {
+      font-size: 12px;
+      color: var(--nbv-muted);
+      margin-bottom: 14px;
+    }
+
+    .modal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .modal-row span {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .modal-insight {
+      margin-top: 10px;
+      font-size: 12px;
+      padding: 10px 10px;
+      border-radius: 12px;
+      background: rgba(15,23,42,0.8);
+      border: 1px dashed rgba(148,163,184,0.5);
+    }
+
+    .modal-cta {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .btn-modal {
+      border-radius: 999px;
+      border: none;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--nbv-green), #4ade80);
+      color: #00120a;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .modal-footnote {
+      font-size: 11px;
+      color: var(--nbv-muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="shell">
+    <div class="header">
+      <div class="eyebrow">Nothing But Value · AI Operators</div>
+      <h1>AI Value Snapshot for SME Teams</h1>
+      <p class="subtitle">Three quick sliders. One sharp estimate of how much value you’re leaving on the table.</p>
+    </div>
+
+    <div class="card">
+      <div class="input-block">
+        <div class="label-row">
+          <label>Team size</label>
+          <span class="val-display" id="teamLabel">25 people</span>
+        </div>
+        <input type="range" id="team" min="5" max="250" step="5" value="25">
+      </div>
+
+      <div class="input-block">
+        <div class="label-row">
+          <label>Average annual salary</label>
+          <span class="val-display" id="salaryLabel">£45,000</span>
+        </div>
+        <input type="range" id="salary" min="30000" max="120000" step="5000" value="45000">
+      </div>
+
+      <div class="input-block">
+        <div class="label-row">
+          <label>Manual / repetitive work</label>
+          <span class="val-display" id="gapLabel">Moderate · 20%</span>
+        </div>
+        <input type="range" id="gap" min="10" max="40" step="5" value="20">
+        <div class="hint">Roughly what share of time is spent on low‑value tasks across the team.</div>
+      </div>
+
+      <div class="pill-row">
+        <div class="pill">Best for teams between <strong>15–150</strong> people</div>
+        <div class="pill">Assumes realistic AI automation of <strong>60–75%</strong> of waste</div>
+      </div>
+
+      <div class="cta-main">
+        <button class="btn-main" id="openModal">See my AI value gap →</button>
+        <div class="note">Takes 2 seconds. Live estimate, no email required.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="backdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="closeModal" aria-label="Close">×</button>
+      <div class="modal-tag">AI value snapshot</div>
+      <div class="modal-title">Here’s what AI could unlock for you</div>
+
+      <div class="modal-big" id="modalMoney">£0</div>
+      <div class="modal-sub">Year‑1 value available if you stop running everything manually.</div>
+
+      <div class="modal-row">
+        <div>Hours you could win back / month</div>
+        <div><span id="modalHours">0</span> hrs</div>
+      </div>
+      <div class="modal-row">
+        <div>AI Value Score</div>
+        <div><span id="modalScore">0</span> / 100 · <span id="modalProfile">–</span></div>
+      </div>
+
+      <div class="modal-insight" id="modalInsight">
+        For a team of X, your biggest upside is automating repetitive internal workflows. This is where we usually unlock ROI in 6–8 weeks.
+      </div>
+
+      <div class="modal-cta">
+        <a href="https://nothingbutvalue.com/#contact" target="_blank" class="btn-modal">
+          Book a 15‑min AI Value call →
+        </a>
+        <div class="modal-footnote">We’ll map this snapshot into a concrete 6–8 week roadmap for your business.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const team = document.getElementById('team');
+    const salary = document.getElementById('salary');
+    const gap = document.getElementById('gap');
+
+    const teamLabel = document.getElementById('teamLabel');
+    const salaryLabel = document.getElementById('salaryLabel');
+    const gapLabel = document.getElementById('gapLabel');
+
+    const backdrop = document.getElementById('backdrop');
+    const openModalBtn = document.getElementById('openModal');
+    const closeModalBtn = document.getElementById('closeModal');
+
+    const modalMoney = document.getElementById('modalMoney');
+    const modalHours = document.getElementById('modalHours');
+    const modalScore = document.getElementById('modalScore');
+    const modalProfile = document.getElementById('modalProfile');
+    const modalInsight = document.getElementById('modalInsight');
+
+    const fmtMoney = new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+      maximumFractionDigits: 0
+    });
+
+    function describeGap(v) {
+      if (v <= 15) return 'Light · ' + v + '%';
+      if (v <= 25) return 'Moderate · ' + v + '%';
+      if (v <= 35) return 'Heavy · ' + v + '%';
+      return 'Critical · ' + v + '%';
+    }
+
+    function recalc() {
+      const t = parseInt(team.value, 10);
+      const s = parseInt(salary.value, 10);
+      const g = parseInt(gap.value, 10);
+
+      teamLabel.textContent = t + ' people';
+      salaryLabel.textContent = fmtMoney.format(s);
+      gapLabel.textContent = describeGap(g);
+
+      const totalWasteMoney = t * s * (g / 100);
+      const captureRate = 0.7;
+      const valueUnlock = totalWasteMoney * captureRate;
+
+      const hoursPerYear = 1920;
+      const totalWasteHours = t * hoursPerYear * (g / 100);
+      const hoursSavedPerMonth = (totalWasteHours * captureRate) / 12;
+
+      const scoreRaw = valueUnlock / (250 * 60000);
+      const score = Math.max(5, Math.min(100, Math.round(scoreRaw * 100)));
+
+      let profile;
+      if (score < 35) profile = 'AI Skeptic';
+      else if (score < 65) profile = 'AI Experimenter';
+      else profile = 'AI Operator in waiting';
+
+      return { t, s, g, valueUnlock, hoursSavedPerMonth, score, profile };
+    }
+
+    function openModal() {
+      const snapshot = recalc();
+      modalMoney.textContent = fmtMoney.format(snapshot.valueUnlock);
+      modalHours.textContent = Math.round(snapshot.hoursSavedPerMonth).toLocaleString();
+      modalScore.textContent = snapshot.score;
+      modalProfile.textContent = snapshot.profile;
+
+      if (snapshot.t < 20) {
+        modalInsight.textContent =
+          'With a lean team of ' + snapshot.t +
+          ', the fastest win is using AI to clone your best sales and ops people. We typically start with outreach, follow‑ups and internal documentation so you grow without extra headcount.';
+      } else if (snapshot.t <= 80) {
+        modalInsight.textContent =
+          'You are in the classic “scale‑up squeeze”. The biggest upside is automating repetitive internal workflows and customer interactions — where we routinely see 6–8 week payback for SME teams like yours.';
+      } else {
+        modalInsight.textContent =
+          'At your scale, small efficiency gains compound. The play is to treat AI as an internal platform across Strategy, Data, Tech, People and Governance — this is exactly what we implement as AI operators, not just advisors.';
+      }
+
+      backdrop.classList.add('active');
+    }
+
+    function closeModal() {
+      backdrop.classList.remove('active');
+    }
+
+    team.addEventListener('input', recalc);
+    salary.addEventListener('input', recalc);
+    gap.addEventListener('input', recalc);
+
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    recalc();
+  </script>
+</body>
+</html>
