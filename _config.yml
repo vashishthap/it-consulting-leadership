@@ -1,8 +1,8 @@
 # Site settings
 title: "Nothing But Value"
 description: "Fortune 500 AI Expertise for SME IT Services"
-url: "https://vashishthap.github.io"
-baseurl: "/it-consulting-leadership"
+url: "https://www.nothingbutvalue.com"
+baseurl: ""
 
 # Build settings
 markdown: kramdown

@@ -29,4 +29,4 @@ User-agent: Google-Extended
 Allow: /
 
 # Sitemap location
-Sitemap: https://vashishthap.github.io/it-consulting-leadership/sitemap.xml
+Sitemap: https://www.nothingbutvalue.com/sitemap.xml
