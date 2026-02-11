@@ -754,12 +754,13 @@
         return;
       }
 
-      // Submit to Zoho CRM — exact same fields as assessment
+      // Submit to Zoho CRM with distinct masterclass fields
       postToZohoLead({
         'Last Name': name,
         'Email': email,
         'Company': company,
-        'Description': 'Masterclass signup — AI Transformation for SMEs: From Strategy to Execution',
+        'Lead Source': 'Masterclass Signup',
+        'Description': 'Source: Free Video Masterclass — AI Transformation for SMEs: From Strategy to Execution\n\nThis lead signed up for the free 5-part video masterclass. They are interested in learning about AI strategy, quick wins, pilot frameworks, and scaling AI.\n\nSuggested follow-up: Send masterclass access link, then follow up in 3-5 days with assessment offer.',
         'LEADCF2': 'Masterclass Signup'
       });
 
