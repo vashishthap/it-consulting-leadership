@@ -1,6 +1,6 @@
 /* ============================================================
    Nothing But Value — Design System v2
-   Light theme • Indigo brand (#4F46E5) • Plus Jakarta Sans
+   Light theme • Green + Blue brand • Plus Jakarta Sans
    Aligned with AI Career Copilot & AI Voice Agent sites
    ============================================================ */
 
@@ -8,12 +8,12 @@
 
 /* ---- 1. OVERRIDE CSS VARIABLES TO LIGHT THEME ---- */
 :root {
-  /* Brand — Indigo (distinct from Career Copilot blue & Voice Agent teal) */
-  --primary:        #4F46E5;
-  --primary-dark:   #4338CA;
-  --primary-light:  #EEF2FF;
-  --secondary:      #7C3AED;
-  --accent:         #6366F1;
+  /* Brand — Forest Green + Deep Navy Blue */
+  --primary:        #0D6B3E;
+  --primary-dark:   #085C34;
+  --primary-light:  #D1FAE5;
+  --secondary:      #1E3A8A;
+  --accent:         #2563EB;
   --success:        #059669;
   --warning:        #D97706;
 
@@ -32,9 +32,9 @@
   --border-medium:  rgba(0, 0, 0, 0.12);
 
   /* Gradients — indigo palette */
-  --gradient-primary: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-  --gradient-accent:  linear-gradient(135deg, #4338CA 0%, #4F46E5 100%);
-  --gradient-success: linear-gradient(135deg, #059669 0%, #4F46E5 100%);
+  --gradient-primary: linear-gradient(135deg, #0D6B3E 0%, #1E3A8A 100%);
+  --gradient-accent:  linear-gradient(135deg, #085C34 0%, #0D6B3E 100%);
+  --gradient-success: linear-gradient(135deg, #059669 0%, #0D6B3E 100%);
 }
 
 /* ---- 2. BASE FONT ---- */
@@ -74,7 +74,7 @@ header *, nav * {
 
 /* ---- 4. HERO SECTION ---- */
 .hero, #top {
-  background: linear-gradient(160deg, #EEF2FF 0%, #F8F9FB 55%, #F3F0FF 100%) !important;
+  background: linear-gradient(160deg, #ECFDF5 0%, #F8F9FB 55%, #EFF6FF 100%) !important;
 }
 
 .hero::before, #top::before,
