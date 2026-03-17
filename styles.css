@@ -1,0 +1,221 @@
+/* ============================================================
+   Nothing But Value — Design System v2
+   Light theme • Indigo brand (#4F46E5) • Plus Jakarta Sans
+   Aligned with AI Career Copilot & AI Voice Agent sites
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* ---- 1. OVERRIDE CSS VARIABLES TO LIGHT THEME ---- */
+:root {
+  /* Brand — Indigo (distinct from Career Copilot blue & Voice Agent teal) */
+  --primary:        #4F46E5;
+  --primary-dark:   #4338CA;
+  --primary-light:  #EEF2FF;
+  --secondary:      #7C3AED;
+  --accent:         #6366F1;
+  --success:        #059669;
+  --warning:        #D97706;
+
+  /* Backgrounds — were near-black, now light */
+  --dark:           #F8F9FB;
+  --dark-alt:       #EFF1F5;
+  --dark-card:      #FFFFFF;
+
+  /* Text — were white on dark, now dark on light */
+  --text:           #111827;
+  --text-muted:     #6B7280;
+  --text-subtle:    #9CA3AF;
+
+  /* Borders */
+  --border:         rgba(0, 0, 0, 0.08);
+  --border-medium:  rgba(0, 0, 0, 0.12);
+
+  /* Gradients — indigo palette */
+  --gradient-primary: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  --gradient-accent:  linear-gradient(135deg, #4338CA 0%, #4F46E5 100%);
+  --gradient-success: linear-gradient(135deg, #059669 0%, #4F46E5 100%);
+}
+
+/* ---- 2. BASE FONT ---- */
+*, *::before, *::after {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+body {
+  background-color: var(--dark) !important;
+  color: var(--text) !important;
+}
+
+/* ---- 3. HEADER & NAV — hardcoded dark, force light ---- */
+header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.06) !important;
+}
+
+header *, nav * {
+  color: var(--text) !important;
+}
+
+.nav-links a, .nav-links a:visited {
+  color: #4B5563 !important;
+}
+
+.nav-links a:hover {
+  color: var(--primary) !important;
+}
+
+.hamburger span {
+  background: var(--text) !important;
+}
+
+/* ---- 4. HERO SECTION ---- */
+.hero, #top {
+  background: linear-gradient(160deg, #EEF2FF 0%, #F8F9FB 55%, #F3F0FF 100%) !important;
+}
+
+.hero::before, #top::before,
+.hero::after, #top::after {
+  opacity: 0.06 !important;
+}
+
+/* ---- 5. BUTTONS ---- */
+.btn-primary, .mobile-cta {
+  background: var(--gradient-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3) !important;
+}
+
+.btn-primary:hover, .mobile-cta:hover {
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-secondary {
+  background: transparent !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+}
+
+.btn-secondary:hover {
+  background: var(--primary-light) !important;
+}
+
+.sticky-cta-btn {
+  background: var(--gradient-primary) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+/* ---- 6. CARDS ---- */
+[class*="card"], [class*="-card"], [class*="card-"] {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+  color: var(--text) !important;
+}
+
+[class*="card"] h2, [class*="card"] h3, [class*="card"] h4,
+[class*="card"] p, [class*="card"] li {
+  color: var(--text) !important;
+}
+
+[class*="card"] p, [class*="card"] li {
+  color: var(--text-muted) !important;
+}
+
+/* ---- 7. GRADIENT TEXT — update to indigo ---- */
+.gradient-text, [class*="gradient-text"],
+.text-gradient, [class*="text-gradient"] {
+  background: var(--gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ---- 8. BADGES ---- */
+.badge, [class*="badge"] {
+  background: var(--primary-light) !important;
+  color: var(--primary) !important;
+  border: 1px solid rgba(79, 70, 229, 0.15) !important;
+}
+
+/* ---- 9. ICON WRAPPERS ---- */
+[class*="icon-wrap"], [class*="icon-bg"], [class*="icon-box"] {
+  background: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+/* ---- 10. STAT / METRIC NUMBERS ---- */
+[class*="stat-num"], [class*="stat-val"], [class*="counter"],
+[class*="metric-val"], [class*="roi-num"] {
+  background: var(--gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ---- 11. STEP / PROCESS CIRCLES ---- */
+[class*="step-num"], [class*="step-icon"],
+[class*="timeline-dot"], [class*="process-num"] {
+  background: var(--gradient-primary) !important;
+  color: #fff !important;
+}
+
+/* ---- 12. FOOTER ---- */
+footer, .footer, [class*="footer"] {
+  background: #111827 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+footer a, .footer a {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+footer a:hover, .footer a:hover {
+  color: #fff !important;
+}
+
+/* ---- 13. FORMS ---- */
+input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]),
+textarea, select {
+  background: #fff !important;
+  border: 1.5px solid var(--border-medium) !important;
+  color: var(--text) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
+  outline: none !important;
+}
+
+/* ---- 14. MOBILE NAV ---- */
+.mobile-menu, [class*="mobile-nav"],
+.nav-links.active, .nav-links.open {
+  background: #fff !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ---- 15. LOGO ---- */
+.logo-text, .logo-title {
+  color: var(--primary) !important;
+}
+
+/* ---- 16. SCROLLBAR ---- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--dark-alt); }
+::-webkit-scrollbar-thumb { background: #C7D2FE; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ---- 17. SELECTION ---- */
+::selection {
+  background: rgba(79, 70, 229, 0.15);
+  color: var(--primary-dark);
+}
