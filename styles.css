@@ -168,13 +168,13 @@ header *, nav * {
 
 /* ---- 12. FOOTER ---- */
 footer, .footer, [class*="footer"] {
-  background: #111827 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  color: rgba(255, 255, 255, 0.65) !important;
+  background: linear-gradient(180deg,#0f172a 0%,#111827 100%) !important;
+  border-top: 3px solid #0D6B3E !important;
+  color: rgba(255, 255, 255, 0.88) !important;
 }
 
 footer a, .footer a {
-  color: rgba(255, 255, 255, 0.65) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
 }
 
 footer a:hover, .footer a:hover {
